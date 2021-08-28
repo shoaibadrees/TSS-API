@@ -1,0 +1,400 @@
+﻿.event-select .eventallocation label {
+    padding: 5px 0px;
+    width: 34%;
+    float: left;
+    text-align: left;
+}
+
+.event-select .eventallocation select {
+    padding: 5px 0px;
+    width: 60%;
+    float: left;
+}
+
+.event-select .allocation label {
+    padding: 5px 0px;
+    width: 50%;
+    float: left;
+}
+
+.event-select .allocation select {
+    padding: 5px 0px;
+    width: 50%;
+    float: left;
+}
+
+.rotate {
+    display: block;
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    width: 55px;
+}
+
+.vertical {
+    writing-mode: tb-rl;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+    white-space: nowrap;
+    display: block;
+    bottom: 0;
+    width: 20px;
+    height: 20px;
+}
+
+/*.vertical-text {
+                transform: rotate(90deg);
+                transform-origin: left top 0;
+                display:block;
+            }*/
+
+.vertical-text {
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083); /* IE6,IE7 */
+    -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0.083)"; /* IE8 */
+    -moz-transform: rotate(-90.0deg); /* FF3.5+ */
+    -ms-transform: rotate(-90.0deg); /* IE9+ */
+    -o-transform: rotate(-90.0deg); /* Opera 10.5 */
+    -webkit-transform: rotate(-90.0deg); /* Safari 3.1+, Chrome */
+    transform: rotate(-90.0deg); /* Standard */
+    display: inline-block;
+    width: 52px;
+}
+
+.resource-allocation {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+    .resource-allocation th {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 700;
+        color: #515e68;
+        text-transform: uppercase;
+        font-size: 13px;
+        border-right: solid 1px #4a4a4a;
+        text-align: center;
+        padding: 16px 0;
+        text-wrap: none;
+    }
+
+    .resource-allocation td {
+        font-weight: 600;
+        padding: 11px 0;
+        text-align: center;
+    }
+
+    .resource-allocation th.sort-col {
+        background: url(/Content/images/sort_desc.gif) no-repeat right;
+        padding-right: 12px;
+    }
+
+    .resource-allocation th, .resource-allocation td {
+        border-right: solid 1px #4a4a4a !important;
+    }
+
+.table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+    border: none;
+}
+
+.resource-allocation tr {
+    height: 33px;
+}
+
+    .resource-allocation tr.selected {
+        background: #b1dfff;
+    }
+
+    .resource-allocation tr:nth-child(2) td {
+        background: #cdd6db;
+        color: #885500;
+    }
+
+    .resource-allocation tr.table-sbhead {
+        border-bottom: solid 2px #49565e;
+        height: auto;
+    }
+
+        .resource-allocation tr.table-sbhead td {
+            font-size: 10px;
+            padding: 5px 0px 3px 0px;
+            font-weight: 700;
+        }
+
+.resource-allocation td.sub-col, .resource-allocation th.sub-col {
+    border-right: solid 1px #c6c6c6 !important;
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead6 {
+    border-left: solid 1px black;
+    /*text-wrap:normal;*/
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead7 {
+    border-left: solid 1px black;
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead8 {
+    background: #ffcc01;
+    outline-width: 10px;
+    line-height: 6px;
+    font-weight: bolder;
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead9 {
+    background: #cfccff;
+    outline-width: 10px;
+    line-height: 6px;
+    font-weight: bolder;
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead10 {
+    background: #bdf0b0;
+    outline-width: 10px;
+    line-height: 6px;
+    font-weight: bolder;
+}
+
+.resource-allocation tr.table-sbhead th.table-sbhead11 {
+    background: #b1e2f0;
+    outline-width: 10px;
+    line-height: 6px;
+    font-weight: bolder;
+}
+
+
+
+
+.resource-allocation tr.table-sbhead td.table-sbhead1 {
+    background: #fad74f;
+    border-top: solid 1px #7c7c7c;
+    text-wrap: none;
+    line-height: 65px;
+}
+
+.resource-allocation tr.table-sbhead td.table-sbhead2 {
+    background: #fde27a;
+    border-top: solid 1px #7c7c7c;
+    text-wrap: none;
+    line-height: 65px;
+}
+
+.resource-allocation tr.table-sbhead td.table-sbhead3 {
+    background: #feea9e;
+    border-top: solid 1px #7c7c7c;
+    text-wrap: none;
+    line-height: 65px;
+}
+
+.resource-allocation tr.table-sbhead td.table-sbhead4 {
+    background: #fef5d2;
+    border-top: solid 1px #7c7c7c;
+    line-height: 65px;
+}
+
+.resource-allocation tr.table-sbhead td.table-sbhead5 {
+    background: #fef7de;
+    border-top: solid 1px #7c7c7c;
+    line-height: 65px;
+}
+
+.resource-allocation td.summary-col {
+    font-size: 10px;
+    padding: 4px 0 4px 4px;
+    color: #72858f !important;
+    text-align: left;
+}
+
+.resource-allocation td select, .resource-allocation td select option {
+    background: none;
+    border: none;
+    height: 22px;
+    margin: auto;
+    padding: 0;
+}
+
+.resource-allocation td input.datepicker {
+    height: 22px;
+    width: 120px;
+    padding: 0px;
+    background: url(/Content/images/calendar-ico.png) no-repeat right;
+    border: none;
+}
+
+.resource-allocation td.darkYellow-col, .resource-allocation td.lightYellow-col {
+    background: #fe9c15;
+    font-size: 13px !important;
+    line-height: 11px;
+}
+
+.resource-allocation td.lightYellow-col {
+    background: #fff1b9;
+}
+
+.resource-allocation {
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+
+    .resource-allocation .table-condensed {
+        width: 1000px;
+    }
+
+.other-actions-menu .navbar ul li a.restoration {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -2px -648px;
+}
+
+.other-actions-menu .navbar ul li:hover a.restoration {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -52px -648px;
+}
+
+.restorationselected {
+    background-color: #23343e !important;
+}
+
+    .restorationselected a {
+        background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -52px -648px !important;
+        color: #c8e0ed !important;
+    }
+
+
+.other-actions-menu .navbar ul li a.prestaging {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -2px -457px;
+}
+
+.other-actions-menu .navbar ul li:hover a.prestaging {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -52px -457px;
+}
+
+.prestagingselected {
+    background-color: #23343e !important;
+}
+
+    .prestagingselected a {
+        background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -52px -457px !important;
+        color: #c8e0ed !important;
+    }
+
+.other-actions-menu .navbar ul li a.matchbegin {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -1px -692px;
+}
+
+.other-actions-menu .navbar ul li:hover a.matchbegin {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -51px -692px;
+}
+
+.other-actions-menu .navbar ul li a.add {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -1px -62px;
+}
+
+.other-actions-menu .navbar ul li:hover a.add {
+    background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -51px -62px;
+}
+
+.toggle-menu-main .main-menu ul li ul li ul {
+    min-height: 214px;
+}
+
+.other-actions-menu .navbar ul li a.match-btn {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -490px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.match-btn {
+    background-position: -51px -490px;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li a.allocation-complete-btn {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -528px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.allocation-complete-btn {
+    background-position: -51px -528px;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li a.matching-complete-btn {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -569px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.matching-complete-btn {
+    background-position: -52px -569px;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li a.matching-undo {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -607px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.matching-undo {
+    background-position: -51px -607px;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li a.matching-recall {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -729px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.matching-recall {
+    background-position: -51px -729px;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li a.matching-release {
+    background: url(/Content/images/other-action-menu-icons-2.png) -1px -769px no-repeat;
+    padding-top: 30px;
+}
+
+.other-actions-menu .navbar ul li:hover a.matching-release {
+    background-position: -51px -769px;
+    padding-top: 30px;
+}
+
+
+.disableactionitem {
+    background-color: #92A5B0 !important;
+}
+
+.disableactionitem a{
+    color: #C8DEEC !important;
+    cursor: default;
+}
+
+.disableactionitem a span{
+    cursor: default !important;
+}
+
+.disableprestaging, .disableprestaging:hover{
+   background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -2px -457px !important;
+}
+
+.disablerestoration, .disablerestoration:hover{
+     background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -2px -648px !important;
+}
+
+.disablematchbegin, .disablematchbegin:hover{
+   background: url(/Content/images/other-action-menu-icons-2.png) no-repeat -1px -692px !important;
+}
+
+.disable-match-btn, .disable-match-btn:hover{
+  background: url(/Content/images/other-action-menu-icons-2.png) -1px -490px no-repeat !important;
+}
+
+.disable-allocation-complete-btn, .disable-allocation-complete-btn:hover{
+ background: url(/Content/images/other-action-menu-icons-2.png) -1px -528px no-repeat !important;
+}
+
+.disable-matching-complete-btn, .disable-matching-complete-btn:hover{
+   background: url(/Content/images/other-action-menu-icons-2.png) -1px -569px no-repeat !important;
+}
+
+.hightlightcell {
+    background-color: #B6ECAA !important;
+}

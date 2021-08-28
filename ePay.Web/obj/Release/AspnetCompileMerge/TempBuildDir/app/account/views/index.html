@@ -1,0 +1,208 @@
+﻿<script type="text/javascript" language="JavaScript">
+
+
+</script>
+<div class="container-fluid login-screen" ng-controller="LoginController">
+    <div class="row-fluid  login-container">
+        <div class="col-md-6 col-lg-6  logo-contr">
+            <img src="Content/images/logo-client.png"/>
+        </div>
+        <div class="col-md-6 col-lg-6 login-box">
+            <form ng-submit="login()">
+                <div id="loginView" ng-if="!loginForm.forgetLoginView">
+                    <div class="login-contr">
+                        <label class="error" ng-if="loginForm.hasError">{{loginForm.errorMessage}}</label>
+                        <div class="form-group">
+                            <label for="username">USERNAME</label>
+                            <input type="text" class="form-control" id="username" maxlength="12" placeholder="Please enter Username." ng-model="loginForm.username" ng-click="loginForm.hasError = false;HideNotification(); " />
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Please enter Password." ng-model="loginForm.password" ng-click="loginForm.hasError = false;HideNotification(); " />
+                        </div>
+                        <div class="col-sm-12 login-but">
+                            <a ng-click="ForgetPassword()">I can't access my account!</a>
+                            <button id="btnLogin" type="submit" class="btn k-button">Login</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="forgetLoginView" ng-if="loginForm.forgetLoginView">
+                    <div class="login-contr">
+                        <label class="error" ng-if="loginForm.hasError">{{loginForm.errorMessage}}</label>
+                        <div class="form-group" id="emailSuccess" ng-if="loginForm.emailSent">
+                            <label>
+                                <span style="color: #adcfce; font-size: 8pt;">EMAIL SENT!</span><br />
+                                <span>CHECK YOUR INBOX</span><br />
+                                <span style="color: #adcfce; font-size: 8pt;text-transform:lowercase;">{{lostUser.EMAIL_ADDRESS}}</span><br />
+                            </label>
+                        </div>
+                        <div class="form-group" ng-if="!loginForm.emailSent">
+                            <label class="instruction">Your account particulars will be emailed to you. Please fill in the details below!</label>
+                            <label>SECURITY QUESTION</label>
+                            <select id="ddlSecQuestion" class="form-control" style="width:100%;" ng-model="loginForm.SECURITY_QUESTION"
+                                    ng-change="loginForm.hasError = false;HideNotification(); ">
+                                <option value="-1" selected>Select a Security Question.</option>
+                                <option value="1">What is your mother’s maiden Name?</option>
+                                <option value="2">Which city were you born in?</option>
+                                <option value="3">In what city or town does your nearest sibling live?</option>
+                                <option value="4">What was your first pet’s name?</option>
+                            </select>
+                        </div>
+                        <div class="form-group" ng-if="!loginForm.emailSent">
+                            <label>ANSWER</label>
+                            <input type="text" class="form-control" placeholder="Please enter Answer." ng-model="loginForm.ANSWER" ng-click="loginForm.hasError = false;HideNotification(); " maxlength="50" />
+                        </div>
+                        <div class="col-sm-12 login-but">
+                            <a style="font-family: Oswald;" ng-click="loginForm.forgetLoginView = false;loginForm.hasError = false;loginForm.emailSent = false;loginForm.inProgress = false;HideNotification();">LOGIN VIEW</a>
+                            <button id="btnSend" ng-if="!loginForm.emailSent" class="btn k-button"
+                                    ng-disabled="loginForm.ANSWER == '' || loginForm.SECURITY_QUESTION == '-1'"
+                                    ng-click="SendPassword()">
+                                Send
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<style>
+    
+    .login-contr * {
+        vertical-align: middle;
+        font-family: 'Source Sans Pro';
+    }
+
+    #loginView .error, #forgetLoginView .error {
+        text-transform: none;
+        border: none;
+        white-space: pre-wrap;
+        padding-left: 12px;
+        margin: -30px -30px 10px -30px;
+        background-color: #f86464;
+        color: #ffffff;
+        height: 40px;
+        text-align: center;
+        font-size: 9pt;
+        font-weight: bold;
+        vertical-align: middle;
+        max-width: 200%;
+        width: 333px;
+    }
+
+    #forgetLoginView .error {
+        margin: -20px -20px 10px -20px;
+    }
+
+    #forgetLoginView .login-contr {
+        color: #11716F;
+        background-color: #cad7d6;
+        min-height: 254px;
+        padding: 20px;
+    }
+
+    #forgetLoginView select, #forgetLoginView input {
+        color: #11716F;
+    }
+
+    .login-contr a {
+        color: #0e736f;
+        padding-right: 12px;
+        cursor: pointer;
+        font-weight: bold;
+        text-decoration: underline;
+        text-transform: none;
+    }
+
+    .instruction {
+        text-transform: none;
+        font-size: 9pt;
+        text-align: center;
+        color: #0e736f;
+    }
+
+    #forgetLoginView button {
+        color: #ffffff;
+        background-color: #144e49;
+        border: solid 1px #cad7d6;
+    }
+
+    #forgetLoginView .form-control {
+        color: #0e736f;
+        border: solid 1px #9fabab;
+    }
+
+    #emailSuccess {
+        text-align: center;
+        height: 160px;
+        padding-top: 65px;
+    }
+
+        #emailSuccess label {
+            background-color: #0e736f;
+            color: #ffffff;
+            width: 200px;
+            border-radius: 25px;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 13px;
+            padding: 5px;
+        }
+
+    .emailSuccess:after {
+        margin-bottom: 100px;
+    }
+</style>
+
+<style type="text/css">
+    @media only screen and (max-width: 800px) {
+        .login-box {
+            margin-top: 3%;
+        }
+    }
+    @media only screen and (max-width: 800px) and (orientation:landscape) {
+        .ngdialog.ngdialog-theme-default {
+            padding-top: 10%;
+        }
+        .logo-contr img {
+            width: 76px;
+            height: 70px;
+        }
+    }
+    @media only screen and (min-width: 801px) {
+        .login-container {
+            left: 40% !important;
+        }
+    }
+    #loginView, #forgetLoginView {
+        min-width:335px;
+        max-width: 335px;
+    }
+
+    .login-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        min-width: 335px;
+        -webkit-transform: translate(-50%,-50%);
+        -moz-transform: translate(-50%,-50%);
+        -o-transform: translate(-50%,-50%);
+    }
+</style>
+<!--[if lt IE 9]>
+<style>
+    .login-container{
+        position: relative;
+        top: 0;
+        left: 0;
+        margin-top:12%;
+    }
+    .logo-contr{
+        width:40%;
+    }
+    .login-box{
+        width:60%;
+    }
+</style>
+<![endif]-->

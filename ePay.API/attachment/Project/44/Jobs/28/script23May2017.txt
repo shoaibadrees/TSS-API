@@ -1,0 +1,235 @@
+
+
+-----5/22/2017
+---------------
+
+
+
+ALTER PROCEDURE [dbo].[proc_PROJECT_ATTACHMENTSLoadAll]
+@p_projectIDs as varchar(max) = 'All',
+@p_attachmentTypeIDs as varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		P.[HYLAN_PROJECT_ID],
+		NULL as JOB_FILE_NUMBER,
+		NULL as PERMIT_NUMBER,
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		(U.[LAST_NAME] + ', ' + U.[FIRST_NAME]) AS [USER],
+		PA.[PROJECT_ID],
+		A.[IS_DELETED],
+		A.[LOCK_COUNTER]
+	FROM [PROJECT_ATTACHMENTS] AS PA
+	JOIN [ATTACHMENTS] AS A ON PA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [PROJECTS] AS P ON PA.Project_Id = P.Project_Id
+	JOIN [USERS] AS	 U ON A.MODIFIED_BY = U.USER_ID
+	WHERE A.[IS_DELETED] = 0
+    AND ( isNull(@p_projectIDs,'All') = 'All' or CAST(isNull(PA.[PROJECT_ID],-1) AS VARCHAR) in (  Select item from dbo.split(@p_projectIDs,',')  ) )
+	AND (isNull(@p_attachmentTypeIDs,'All') = 'All' or  CHARINDEX('Project', @p_attachmentTypeIDs)>0 )
+
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+go
+---------------
+
+ALTER PROCEDURE [dbo].[proc_JOB_ATTACHMENTSLoadAll]
+@p_projectIDs varchar(max) = 'All',
+@p_attachmentTypeIDs varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		P.[HYLAN_PROJECT_ID],
+		P.[PROJECT_ID],
+		J.[JOB_FILE_NUMBER],
+		NULL as PERMIT_NUMBER,
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		(U.[LAST_NAME] + ', ' + U.[FIRST_NAME]) AS [USER],
+		JA.[JOB_ID],
+		A.[IS_DELETED],
+		A.[LOCK_COUNTER]
+	FROM [JOB_ATTACHMENTS] AS JA
+	JOIN [ATTACHMENTS] AS A ON JA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [JOBS] AS J ON JA.JOB_Id = J.JOB_Id
+	JOIN [PROJECTS] AS P ON P.PROJECT_ID = J.PROJECT_ID
+	JOIN [USERS] AS	 U ON A.MODIFIED_BY = U.USER_ID
+	
+	WHERE A.[IS_DELETED] = 0
+	AND (isNull(@p_projectIDs,'All') = 'All' or CAST(isNUll(P.[PROJECT_ID],-1) AS VARCHAR) in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_attachmentTypeIDs,'All') = 'All' or  CHARINDEX('Job', @p_attachmentTypeIDs)>0 )
+		
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+go
+
+------------
+ALTER PROCEDURE [dbo].[proc_PERMIT_ATTACHMENTSLoadAll]
+@p_projectIDs varchar(max) = 'All',
+@p_attachmentTypeIDs varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		case when P.[HYLAN_PROJECT_ID] is null then 'Unknown' else P.[HYLAN_PROJECT_ID] end [HYLAN_PROJECT_ID],
+		 P.[PROJECT_ID],
+		case when J.[JOB_FILE_NUMBER] is null then -1 else J.[JOB_FILE_NUMBER] end [JOB_FILE_NUMBER],
+		PT.[DOT_TRACKING_NUMBER] AS PERMIT_NUMBER,
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		(U.[LAST_NAME] + ', ' + U.[FIRST_NAME]) AS [USER],
+		J.[JOB_ID],
+		PT.[PERMIT_ID],
+		A.[IS_DELETED],
+		A.[LOCK_COUNTER]
+	FROM [PERMIT_ATTACHMENTS] AS PA
+	JOIN [ATTACHMENTS] AS A ON PA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [PERMITS] AS PT ON PA.PERMIT_ID = PT.PERMIT_ID
+	left JOIN [JOBS] AS J ON J.JOB_ID = PT.JOB_ID
+	left JOIN [PROJECTS] AS P ON P.PROJECT_ID = J.PROJECT_ID
+	JOIN [USERS] AS	 U ON A.MODIFIED_BY = U.USER_ID
+	
+	WHERE A.[IS_DELETED] = 0
+	AND (isNull(@p_projectIDs,'All') = 'All' or CAST(isNUll(P.[PROJECT_ID],-1) AS VARCHAR) in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_attachmentTypeIDs,'All') = 'All' or  CHARINDEX('Permit', @p_attachmentTypeIDs)>0 )
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+-----------
+-----5/23/2017
+------------
+
+
+ALTER PROCEDURE [dbo].[proc_PERMITSLoadDashboard]
+@p_projectIDs varchar(max) = 'All',
+@p_permitStatusIDs varchar(max) = 'All',
+@p_clientIDs varchar(max) = 'All',
+@p_jobIDs varchar(max) = 'All',
+@p_submitedStartDt varchar(20) = 'All',
+@p_submitedEndDt varchar(20) = 'All'
+
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	Declare @p_submitedStartDt1 as date = null
+	Declare @p_submitedEndDt1 as date = null
+
+	if(@p_submitedStartDt != 'All') set @p_submitedStartDt1 = cast(@p_submitedStartDt as date)
+	if(@p_submitedEndDt != 'All') set @p_submitedEndDt1 = cast(@p_submitedEndDt as date)
+
+		SELECT [PERMIT_ID]
+		  ,ISNULL([PERMITS].[PROJECT_ID] ,-1) [PROJECT_ID]
+		  ,ISNULL(PROJECTS.HYLAN_PROJECT_ID, 'Unknown') HYLAN_PROJECT_ID
+		  ,ISNULL(PERMITS.JOB_ID, -1) JOB_ID
+		  ,ISNULL(cast(JOBS.[JOB_FILE_NUMBER] as varchar) ,'Unknown')  [JOB_FILE_NUMBER] 
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[CLIENT] ELSE COMPANIES.COMPANY_NAME END AS CLIENT
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[POLE_LOCATION]	   ELSE JOBS.[POLE_LOCATION]	END  [POLE_LOCATION]	
+		  ,[PERMITS].[DOT_TRACKING_NUMBER]
+		  ,[PERMITS].PERMIT_NUMBER_TEXT PERMIT_NUMBER_TEXT
+		  ,[PERMITS].[SEGMENT]
+		  ,[PERMITS].[SUBMITTED_DATE]
+		  ,[PERMITS].[ISSUED_DATE]
+		  ,[PERMITS].[VALID_DATE]
+		  ,[PERMITS].[EXPIRES_DATE]
+		  ,[PERMITS].[REJECTED_DATE]
+		  ,case When IsNull([PERMITS].[STIPULATION_DAY],0) = 0 then 'No' ELSE 'Yes' End STIPULATION_DAY1
+		  ,case When IsNull([PERMITS].[STIPULATION_NIGHT],0) = 0 then 'No' ELSE 'Yes' End [STIPULATION_NIGHT1]
+		  ,case When IsNull([PERMITS].[STIPULATION_WEEKEND],0) = 0 then 'No' ELSE 'Yes' End [STIPULATION_WEEKEND1]
+		  ,case When IsNull([PERMITS].[IS_PROTECTED_STREET],'N') = 'N' then 'No' ELSE 'Yes' End [IS_PROTECTED_STREET1]
+		  ,[PERMITS].[STIPULATIONS_OTHER]
+
+
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Pending' Then 'Yes' Else 'No' END PENDING_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Active' or dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Expiring 5 Days' Then 'Yes' Else 'No' END ACTIVE_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Expired' Then 'Yes' Else 'No' END EXPIRED_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Expiring 5 Days' Then 'Yes' Else 'No' END EXPIRING_5DAYS_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'On-Hold' Then 'Yes' Else 'No' END ON_HOLD_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Request Extension' Then 'Yes' Else 'No' END REQUEST_EXTENSION_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Pending' Then 'Yes' Else 'No' END  IS_REQUEST_RENEWAL_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Request Renewal' Then 'Yes' Else 'No' END  PENDING_STATUS
+			,CASE WHEN dbo.fGetPermitStatusName(PERMITS.PERMIT_ID) = 'Rejected' Then 'Yes' Else 'No' END REJECTED_STATUS
+
+		
+	  FROM [dbo].[PERMITS]
+	  LEFT JOIN [LOOK_UPS] Lu_PermitStatus ON ([PERMITS].[PERMIT_STATUS] = Lu_PermitStatus.[LOOK_UP_ID])
+	  LEFT JOIN PERMIT_TYPES PermitNames on (PermitNames.PERMIT_TYPE_ID = [PERMITS].[PERMIT_TYPE])
+	  LEFT JOIN LOOK_UPS Lu_PermitCategories ON (PermitNames.PERMIT_CATEGORY = Lu_PermitCategories.[LOOK_UP_ID])
+	  LEFT JOIN JOBS ON (JOBS.JOB_ID = PERMITS.JOB_ID)
+	  LEFT JOIN PROJECTS ON (PROJECTS.PROJECT_ID = PERMITS.PROJECT_ID)
+	  LEFT JOIN COMPANIES ON (COMPANIES.COMPANY_ID = PROJECTS.CLIENT)
+	  LEFT JOIN [LOOK_UPS] Lu_RejectedReasons ON ([PERMITS].REJECTED_REASON = Lu_RejectedReasons.[LOOK_UP_ID])
+	  LEFT JOIN vPermitsSummary ON (vPermitsSummary.PROJECT_ID = [PERMITS].PROJECT_ID AND vPermitsSummary.JOB_ID =[PERMITS].JOB_ID )
+
+	  WHERE
+	  	    (isNull(@p_projectIDs,'All') = 'All' or CAST(isNull( [PERMITS].[PROJECT_ID],-1) AS VARCHAR) in (Select item from dbo.split(@p_projectIDs,',') ) )
+		AND (isNull(@p_permitStatusIDs,'All') = 'All' or CAST( [PERMITS].PERMIT_STATUS AS VARCHAR) in (Select item from dbo.split(@p_permitStatusIDs,',') ) )
+		AND (isNull(@p_clientIDs,'All') = 'All' or CAST( [PROJECTS].CLIENT AS VARCHAR) in (Select item from dbo.split(@p_clientIDs,',') ) )
+		AND (isNull(@p_jobIDs,'All') = 'All' or CAST( [PERMITS].JOB_ID AS VARCHAR) in (Select item from dbo.split(@p_jobIDs,',') ) )	
+		AND( 
+		        (@p_submitedStartDt = 'All'  or [PERMITS].SUBMITTED_DATE >=  @p_submitedStartDt1 )
+				and 
+				(@p_submitedEndDt = 'All'  or [PERMITS].SUBMITTED_DATE <=  @p_submitedEndDt1 )		
+		)
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+go
+
+------------------

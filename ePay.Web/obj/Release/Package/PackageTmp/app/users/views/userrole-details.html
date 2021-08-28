@@ -1,0 +1,517 @@
+﻿<style type="text/css">
+    .navbar-nav > li {
+        margin-left: 20px !important;
+    }
+
+    .pageTitle {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-weight: 400;
+        font-size: 15px;
+        color: #7b7b7b;
+        line-height: 26px;
+    }
+
+        .pageTitle label {
+            color: #b5b5b5;
+        }
+
+    #permissionsContainer {
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 100%;
+    }
+
+        #permissionsContainer * {
+            padding: 0;
+            margin: 0;
+            vertical-align: middle;
+            margin-left: 7px;
+        }
+
+    #tblPermissions {
+        /*width: 800px;*/
+        width: 100%;
+        font-size: 13px;
+    }
+
+        #tblPermissions tr.separator {
+            height: 15px;
+        }
+
+        #tblPermissions tr.alternate {
+            background: #f5f5f5;
+        }
+
+        #tblPermissions td.col1 {
+            width: 40%;
+        }
+
+        #tblPermissions td.col2,
+        #tblPermissions td.col3,
+        #tblPermissions td.col4 {
+            width: 20%;
+        }
+
+        #tblPermissions td.borderAll {
+            border: 1px solid #b9b9b9;
+        }
+
+        #tblPermissions td.borderTop {
+            border-top: 1px solid #b9b9b9;
+        }
+
+        #tblPermissions td.borderRight {
+            border-right: 1px solid #b9b9b9;
+        }
+
+        #tblPermissions td.borderRightDark {
+            border-right: 1px solid #4a4a4a;
+        }
+
+        #tblPermissions td.borderBottom {
+            border-bottom: 1px solid #b9b9b9;
+        }
+
+        #tblPermissions td.borderLeft {
+            border-left: 1px solid #b9b9b9;
+        }
+
+        #tblPermissions td {
+            padding: 7px;
+            line-height: 16px;
+            text-align: center;
+        }
+
+            #tblPermissions td.title {
+                padding-left: 22px;
+                text-align: left;
+            }
+
+        #tblPermissions .headerRow {
+            line-height: 30px;
+            color: #50450f;
+            font-family: 'Source Sans Pro';
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        #tblPermissions .header1 {
+            background: #fece0a;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        #tblPermissions .header2 {
+            background: #fceaff;
+        }
+
+        #tblPermissions .header3 {
+            background: #e8c5ef;
+        }
+
+        #tblPermissions .header4 {
+            background: #fee378;
+        }
+
+        #tblPermissions .header5 {
+            background: #fff7d2;
+        }
+
+    tbody.specialfuncgrp tr:last-child td {
+        border-bottom: dotted 2px #b9b9b9 !important;
+    }
+    #btnCancel:hover {
+
+     text-decoration: none !important; 
+
+}
+</style>
+<div class="col-sm-12 no-padding ng-scope">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 col-md-12 col-lg-12 main-head clear">
+        <div class="no-padding"><span>USER ROLE </span>PERMISSIONS</div>
+    </div>
+
+    <div class="clearfix visible-sm-block"></div>
+    <div class="clearfix visible-md-block"></div>
+    <div class="clearfix visible-lg-block"></div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12 nav-buttons clear" style="margin-bottom: 10px;">
+        <div id="navbar" class="navbar-collapse collapse" style="padding-left: 7px;">
+            <span class="pageTitle">
+                <label>ROLE NAME:</label>
+                {{ROLE.ROLE_NAME}}</span>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="k-button k-button-icontext" id="btnCancel" ng-click="cancel()">
+                        <span class="k-icon k-update k-i-arrow-left"></span>
+                    Back
+                    </a>
+
+                </li>
+                <li ng-show="AllowToEdit">
+                    <a class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="save()">
+                        <span class="k-icon k-i-check"></span>
+                        Save
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="clearfix visible-sm-block"></div>
+    <div class="clearfix visible-md-block"></div>
+    <div class="clearfix visible-lg-block"></div>
+
+    <div class="col-sm-12 col-md-12 col-lg-12" id="permissionsContainer">
+        <table id="tblPermissions" onclick="ViewEditAccessChange();">
+
+            <tr class="headerRow">
+                <td class="header header1 borderAll borderRightDark">View/Edit Access to Screens
+                </td>
+                <td class="header header2 borderAll borderRightDark">View Access
+                </td>
+                <td class="header header3 borderAll text-center">Edit Access
+                </td>
+            </tr>
+
+          
+
+            <tr  data-type="view_edit_access" data-screen="2" >
+                <td class="borderLeft borderRightDark title">Manage Projects</td>
+
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="alternate" data-type="view_edit_access" data-screen="17" >
+                <td class="borderLeft borderRightDark title">Projects Notes</td>
+
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr  data-type="view_edit_access" data-screen="13" >
+                <td class="borderLeft borderBottom borderRightDark title">Project Attachments</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="view_edit_access" data-screen="12">
+                <td class="borderLeft borderBottom borderRightDark title">Manage Attachments</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+            <tr data-type="view_edit_access" data-screen="3" >
+                <td class="borderLeft borderRightDark title">Manage Jobs</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="alternate" data-type="view_edit_access" data-screen="18" >
+                <td class="borderLeft borderRightDark title">Job Notes</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr data-type="view_edit_access" data-screen="14" >
+                <td class="borderLeft borderBottom borderRightDark title">Job Attachments</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="alternate" data-type="view_edit_access" data-screen="4" >
+                <td class="borderLeft borderBottom borderRightDark title">Manage Tasks</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+          
+            <tr data-type="view_edit_access" data-screen="5" >
+                <td class="borderLeft borderRightDark title">Manage Permits</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="alternate" data-type="view_edit_access" data-screen="15" >
+                <td class="borderLeft borderBottom borderRightDark title">Permit Attachments</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr data-type="view_edit_access" data-screen="6" >
+                <td class="borderLeft borderBottom borderRightDark title">Manage Dailies</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+           
+            <tr class="alternate" data-type="view_edit_access" data-screen="8" >
+                <td class="borderLeft borderBottom borderRightDark title">Job Map</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+            <tr data-type="view_edit_access" data-screen="1">
+                <td class="borderLeft borderBottom borderRightDark title">Manage Clients</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+           
+            <tr class="alternate" data-type="view_edit_access" data-screen="10">
+                <td class="borderLeft borderRightDark title">Manage Roles</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+            <tr  data-type="view_edit_access" data-screen="20" >
+                <td class="borderLeft borderBottom borderRightDark title">Manage User Roles (Permissions)</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="alternate" data-type="view_edit_access" data-screen="9">
+                <td class="borderLeft borderRightDark title">Manage Users</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-view-type="ALL" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-edit-type="ALL" />
+                </td>
+            </tr>
+
+            <tr class="headerRow">
+                <td class="header header1 borderAll borderRightDark">Special Functions
+                </td>
+                <td colspan="2" class="header header2 borderAll borderRightDark">Access
+                </td>
+            </tr>
+
+            <tbody class="specialfuncgrp">
+
+              
+
+                <tr data-type="special_function"  data-screen="9" data-function="2">
+                    <td class="borderLeft borderBottom borderRightDark title">Manage Users-Reset Password</td>
+                    <td colspan="2" class="borderRight">
+                        <input type="checkbox" data-access-type="ALL" />
+                    </td>
+                </tr>
+
+                <tr class="alternate" data-type="special_function"  data-screen="3" data-function="1">
+                    <td class="borderLeft borderBottom borderRightDark title">Delete Job</td>
+                    <td colspan="2" class="borderRight">
+                        <input type="checkbox" data-access-type="ALL" />
+                    </td>
+                </tr>
+                <tr class="alternate" data-type="special_function" data-screen="6" data-function="1">
+                    <td class="borderLeft borderBottom borderRightDark title">Delete Daily</td>
+                    <td colspan="2" class="borderRight">
+                        <input type="checkbox" data-access-type="ALL" />
+                    </td>
+                </tr>
+            </tbody>
+
+            <!--  <tr class="separator"></tr>
+            <tr class="headerRow">
+                <td colspan="2" class="header header1 borderAll borderRightDark">
+                    Notifications
+                </td>
+                <td class="header header4 borderAll borderRightDark">
+                    NRE Event
+                </td>
+                <td class="header header5 borderAll text-center">
+                    RMAG Event
+                </td>
+            </tr>
+            <tr data-type="notification"  data-notification="63">
+                <td colspan="2" class="borderLeft borderRightDark title">Communication Scheduler (ability to send)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="notification"  data-notification="55">
+                <td colspan="2" class="borderLeft borderRightDark title">Event Creation (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr data-type="notification"  data-notification="56">
+                <td colspan="2" class="borderLeft borderRightDark title">Calculated Allocation Completed (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="notification"  data-notification="59">
+                <td colspan="2" class="borderLeft borderRightDark title">Calculation Run (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr data-type="notification"  data-notification="60">
+                <td colspan="2" class="borderLeft borderRightDark title">Matching Complete (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="notification"  data-notification="61">
+                <td colspan="2" class="borderLeft borderRightDark title">Event Closure/Deletion (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr data-type="notification"  data-notification="57">
+                <td colspan="2" class="borderLeft borderRightDark title">Confirmed/Adjusted Allocations (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="notification"  data-notification="71">
+                <td colspan="2" class="borderLeft borderRightDark title">Release Resources (ability to receive)</td>
+                <td class="borderRightDark">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr data-type="notification"  data-notification="72">
+                <td colspan="2" class="borderLeft borderRightDark title">Recall Resources (ability to receive)</td>
+                <td class="borderRightDark borderBottom">
+                    <input type="checkbox" data-access-type="NRE" />
+                </td>
+                <td class="borderRight borderBottom">
+                    <input type="checkbox" data-access-type="RMAG" />
+                </td>
+            </tr>
+            <tr class="alternate" data-type="notification"  data-notification="62">
+                <td colspan="2" class="borderLeft borderRightDark borderBottom title">User Profile/Credentials Change (ability to receive)</td>
+                <td colspan="2" class="borderRight borderBottom">
+                    <input type="checkbox" data-access-type="ALL" />
+                </td>
+            </tr>-->
+
+            <tr class="headerRow">
+                <td class="header header1 borderAll borderRightDark">Dashboards
+                </td>
+                <td colspan="2" class="header header2 borderAll borderRightDark">Access
+                </td>
+            </tr>
+
+            <!--<tr data-type="Dashboard" data-report="1" data-screen="7" >
+                <td class="borderLeft borderRightDark title">Executive Dashboard</td>
+                <td class="borderRightDark" colspan="2">
+                    <input type="checkbox" data-access-type="ALL" />
+
+                </td>
+            </tr>-->
+            <tr  data-type="dashboard" data-screen="21">
+                <td class="borderLeft borderBottom borderRightDark title">Task Matrix Dashboard</td>
+                <td class="borderRightDark borderBottom" colspan="2">
+                    <input type="checkbox" data-access-type="ALL" />
+                </td>
+               
+            </tr>
+            <tr class="alternate" data-type="dashboard" data-screen="22">
+                <td class="borderLeft borderBottom borderRightDark title">Task On-Hold Dashboard</td>
+                <td class="borderRightDark borderBottom" colspan="2">
+                    <input type="checkbox" data-access-type="ALL" />
+                </td>
+
+            </tr>
+            <tr  data-type="dashboard" data-screen="7">
+                <td class="borderLeft borderBottom borderRightDark title">Permit Dashboard</td>
+                <td class="borderRightDark borderBottom" colspan="2">
+                    <input type="checkbox" data-access-type="ALL"  />
+                </td>
+                
+            </tr>
+
+           <!-- <tr class="alternate" data-type="report" data-report="2" data-screen="14" >
+                <td class="borderLeft borderRightDark borderBottom title">Pre-Formatted Reports</td>
+                <td class="borderRightDark" colspan="2">
+                    <input type="checkbox" data-access-type="ALL" />
+
+                </td>
+            </tr>-->
+        </table>
+    </div>
+</div>

@@ -1,0 +1,182 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>DAILIES</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+       <div class="col-sm-12 col-md-12 col-lg-12">
+          <div class="col-sm-6 col-md-6 col-lg-6" style="padding-right:0px">
+             <div class="col-sm-6 col-md-5 col-lg-5">
+                <label class="control-label nopadding">Project ID</label>
+                <div id="divMultiSelProjects"
+                     options="MSProjects.options"
+                     selected-model="MSProjects.selectedList"
+                     extra-settings="MSProjects.settings"
+                     events="MSProjects.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+
+             </div>
+             <div class="col-sm-6 col-md-4 col-lg-4">
+                <label id ="lblDailyType" class="control-label nopadding">Daily Type</label>
+                <div id="divMultiSelDailyTypes"
+                     options="MSDailyTypes.options"
+                     selected-model="MSDailyTypes.selectedList"
+                     extra-settings="MSDailyTypes.settings"
+                     events="MSDailyTypes.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+             </div>
+             <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding" id="lblFilterRmag">Status</label>
+                <div id="divMultiSelDailyStatus"
+                     options="MSDailyStatus.options"
+                     selected-model="MSDailyStatus.selectedList"
+                     extra-settings="MSDailyStatus.settings"
+                     events="MSDailyStatus.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+             </div>
+          </div>
+          <div class="col-sm-6 col-md-6 col-lg-6" style="padding-left:0px">
+             <div class="col-sm-6 col-md-4 col-lg-4">
+                <label id="lblStartDate" class="control-label nopadding">Start Work Date</label>
+
+                <input id="dpDailyStartDate" ng-model="DailyStartDate" ng-change="dateChange()" />
+                <script type="text/javascript">
+                    $("#dpDailyStartDate").kendoMaskedDatePicker();
+                </script>
+             </div>
+             <div class="col-sm-6 col-md-4 col-lg-4">
+                <label id ="lblEndDate" class="control-label nopadding">End Work Date</label>
+                <input id="dpDailyEndDate" ng-model="DailyEndDate" ng-change="dateChange()" />
+                <script type="text/javascript">
+                    $("#dpDailyEndDate").kendoMaskedDatePicker();
+                </script>
+             </div>
+             <div class="col-sm-6 col-md-4 col-lg-4 pull-right">
+                <label class="control-label nopadding" id="lblReset">&nbsp;</label>
+                <div class="nav-buttons clear">
+                   <div id="navbar" class="navbar-collapse collapse">
+                      <ul class="nav navbar-nav navbar-right">
+                         <li><a ng-click="ResetFilter()" style="width:100%;">Reset Filters</a></li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+   </div>
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+<script>
+    var labelActualColor = '#3f3f3f';
+    var btnExportLocation_mouseleave= function(){
+        var lblStartDate = $('#lblStartDate');
+        var lblDailyType = $('#lblDailyType');
+        lblStartDate.css("color", labelActualColor);
+        lblDailyType.css("color", labelActualColor);
+    };
+    var btnExportLocation_onmouseover= function() {
+        var newColor = '#fe9c15';
+        var lblStartDate = $('#lblStartDate');
+        var lblDailyType = $('#lblDailyType');
+        //var labelActualColor = '#3f3f3f';//lblStartDate.style.color
+        lblStartDate.css("color", newColor);
+        lblDailyType.css("color", newColor);
+    };
+
+    var onMouseOver_HourlyReport = function() {
+        var newColor = '#fe9c15';
+        var lblStartDate = $('#lblStartDate');
+        var lblEndDate = $('#lblEndDate');
+        var lblDailyType = $('#lblDailyType');
+        //$scope.labelActualColor = '#3f3f3f';//lblStartDate.style.color
+        lblStartDate.css("color", newColor);
+        lblEndDate.css("color", newColor);
+        lblDailyType.css("color", newColor);
+    }
+
+    var onMouseLeave_HourlyReport = function() {
+        var lblStartDate = $('#lblStartDate');
+        var lblEndDate = $('#lblEndDate');
+        var lblDailyType = $('#lblDailyType');
+        lblStartDate.css("color", labelActualColor);
+        lblEndDate.css("color", labelActualColor);
+        lblDailyType.css("color", labelActualColor);
+    }
+</script>
+<style>
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top:-10px!important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content:none;
+    }
+
+      /*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-----------*/
+    div.k-grid-header-locked table th:nth-child(6) {
+        border-right-width: 1px !important;
+    }     
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+</style>

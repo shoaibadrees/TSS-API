@@ -1,0 +1,80 @@
+
+------7/28/2017
+----------------
+CREATE TABLE [dbo].[EMAIL_GROUPS](
+	[GROUP_ID] [int] IDENTITY(1,1) NOT NULL,
+	[GROUP_TITLE] [varchar](50) NOT NULL,
+	[CLIENT_ID] [int] NULL,
+	[EMAILS] [varchar](max) NOT NULL,
+	[IS_ACTIVE] [bit] NOT NULL,
+ CONSTRAINT [PK_EMAIL_GROUPS] PRIMARY KEY CLUSTERED 
+(
+	[GROUP_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+ALTER TABLE [dbo].[EMAIL_GROUPS]  WITH CHECK ADD  CONSTRAINT [FK_EMAIL_GROUPS_COMPANIES] FOREIGN KEY([CLIENT_ID])
+REFERENCES [dbo].[COMPANIES] ([COMPANY_ID])
+GO
+ALTER TABLE [dbo].[EMAIL_GROUPS] CHECK CONSTRAINT [FK_EMAIL_GROUPS_COMPANIES]
+GO
+
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[EMAIL_GROUPS] ON 
+
+GO
+INSERT [dbo].[EMAIL_GROUPS] ([GROUP_ID], [GROUP_TITLE], [CLIENT_ID], [EMAILS], [IS_ACTIVE]) VALUES (1, N'Charter', NULL, N'dhavens@HYLANGROUP.com;drubino@HYLANGROUP.com;DWilliams@HYLANGROUP.com;cwalker@HYLANGROUP.com;jgioia@hylangroup.com;hmcdonald@HYLANGROUP.com;jstaggard@HYLANGROUP.com;jrauber@HYLANGROUP.com;vvickers@HYLANGROUP.com;jdileojr@hylangroup.com;', 1)
+GO
+INSERT [dbo].[EMAIL_GROUPS] ([GROUP_ID], [GROUP_TITLE], [CLIENT_ID], [EMAILS], [IS_ACTIVE]) VALUES (2, N'Extenet', NULL, N'Mallen@HYLANGROUP.com;mdublynn@HYLANGROUP.com;cwalker@HYLANGROUP.com;jstaggard@HYLANGROUP.com;cwalker@HYLANGROUP.com;jrauber@HYLANGROUP.com;vvickers@HYLANGROUP.com;jdileojr@hylangroup.com;nbland@HYLANGROUP.com;', 1)
+GO
+INSERT [dbo].[EMAIL_GROUPS] ([GROUP_ID], [GROUP_TITLE], [CLIENT_ID], [EMAILS], [IS_ACTIVE]) VALUES (5, N'Mobilitie', NULL, N'rbowers@hylangroup.com;dzakharchenko@hylangroup.com;jstaggard@HYLANGROUP.com;Mallen@HYLANGROUP.com;cwalker@HYLANGROUP.com;jrauber@HYLANGROUP.com;vvickers@HYLANGROUP.com;jdileojr@hylangroup.com;nbland@HYLANGROUP.com;', 1)
+GO
+INSERT [dbo].[EMAIL_GROUPS] ([GROUP_ID], [GROUP_TITLE], [CLIENT_ID], [EMAILS], [IS_ACTIVE]) VALUES (6, N'Crown Castle', NULL, N'dzakharchenko@hylangroup.com;fforte@HYLANGROUP.com;jstaggard@HYLANGROUP.com;caste@HYLANGROUP.com;Svadola@HYLANGROUP.com;Mallen@HYLANGROUP.com;cwalker@HYLANGROUP.com;jrauber@HYLANGROUP.com;vvickers@HYLANGROUP.comjdileojr@hylangroup.com;nbland@HYLANGROUP.com;', 1)
+GO
+INSERT [dbo].[EMAIL_GROUPS] ([GROUP_ID], [GROUP_TITLE], [CLIENT_ID], [EMAILS], [IS_ACTIVE]) VALUES (7, N'Other', NULL, N'cvaldes@HYLANGROUP.com;CManna@HYLANGROUP.com;jrauber@HYLANGROUP.com;vvickers@HYLANGROUP.comjdileojr@hylangroup.com;', 1)
+GO
+SET IDENTITY_INSERT [dbo].[EMAIL_GROUPS] OFF
+GO
+
+/****** Object:  StoredProcedure [dbo].[proc_EMAIL_GROUPS_Select]    Script Date: 7/28/2017 5:50:34 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+Create procedure [dbo].[proc_EMAIL_GROUPS_Select]
+@ClientName as varchar(50) = null
+as 
+Begin
+	SET NOCOUNT ON
+	DECLARE @Err int
+	Declare @RowsCount as int = 0
+
+	Select @RowsCount = COUNT(*) FROM EMAIL_GROUPS 
+	LEFT OUTER JOIN COMPANIES ON (COMPANIES.COMPANY_ID = EMAIL_GROUPS.CLIENT_ID)
+	WHERE EMAIL_GROUPS.IS_ACTIVE = 1 AND COMPANY_NAME = @ClientName
+
+	IF(@RowsCount >0)
+	BEGIN
+		Select EMAILS FROM EMAIL_GROUPS 
+		LEFT OUTER JOIN COMPANIES ON (COMPANIES.COMPANY_ID = EMAIL_GROUPS.CLIENT_ID)
+		WHERE EMAIL_GROUPS.IS_ACTIVE = 1 AND COMPANY_NAME = @ClientName
+	END 
+	ELSE
+	BEGIN 
+		Select EMAILS FROM EMAIL_GROUPS 	
+		WHERE EMAIL_GROUPS.IS_ACTIVE = 1 AND GROUP_TITLE = 'Other'
+	END
+
+
+	SET @Err = @@Error
+	RETURN @Err
+
+End
+GO
+-------------
+
+

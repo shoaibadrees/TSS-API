@@ -1,0 +1,277 @@
+﻿<script src="../../../Scripts/bootstrap-tagsinput.min.js"></script>
+
+<form id="frmMessageIndex">
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close" src="/Content/images/close.png" />
+        </div>
+        <!-- Header -->
+        <div class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-6 col-md-4 col-lg-4 no-padding"><img style="vertical-align:inherit;margin-right:10px;" src="/Content/images/schedular_icon.png" alt="">SCHEDULE<span> MEETING</span></div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-6 col-md-4 col-lg-4 no-padding HeadNote"><sup><img src="/Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.</div>
+            <div class="col-sm-6 col-md-4 col-lg-4 pull-right top-search no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a id="btnCancel" ng-click="closeDialog()"><span class="k-icon k-update  k-i-close"></span>Close</a></li>
+                            <li>
+                                <a class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="sendEmail()">
+                                    <span class="k-icon k-update"></span>
+                                    Send
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear">
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">Event</label></div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <select id="ddlEvents" class="form-control" ng-model="Message.EVENT_ID" ng-change="showTimeZone()">
+                    <option ng-repeat="x in Events" title="{{x.EVENT_NAME}}" value="{{x.EVENT_ID}}" ng-selected="{{x.EVENT_ID == Message.EVENT_ID}}">{{x.EVENT_NAME}}</option>
+                </select>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label">Conference Call/Access Code</label></div>
+            <div class="col-sm-8 col-md-4 col-lg-4"><input type="text" class="form-control" maxlength="50" ng-model="Message.ACCESS_CODE" ng-click="HideNotification()" /></div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">RMAG</label></div>
+            <div class="col-sm-8 col-md-10 col-lg-10">
+                <div id="divMultiSelRMAG" ng-dropdown-multiselect="" options="rmagOptions" selected-model="objSelectedRMAGs" extra-settings="rmagSettings" events="rmagEvents" checkboxes="true"></div>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label">Company</label></div>
+            <div class="col-sm-8 col-md-10 col-lg-10">
+                <div id="divMultiSelCompany" ng-dropdown-multiselect="" options="companyOptions" selected-model="objSelectedCompanies" extra-settings="companySettings" events="companyEvents" checkboxes="true"></div>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label">Purpose of Call</label></div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <select id="ddlPurpose" class="form-control" ng-model="Message.PURPOSE_ID" ng-change="HideNotification()">
+                    <option value="-1" selected></option>
+                    <option ng-repeat="x in callPurposeOptions" value="{{x.LOOK_UP_ID}}">{{x.LU_NAME}}</option>
+                </select>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label">Date/Time of Call</label></div>
+            <div class="col-sm-8 col-md-4 col-lg-4">
+                <input type="text" id="callOnDateTimePicker" class="form-control;pull-left" ng-model="Message.CALL_ON" ng-change="HideNotification()" />
+                <script>
+                    $("#callOnDateTimePicker").kendoDateTimePicker({
+                        timeFormat: "HH:mm",
+                        format: "MM/dd/yyyy HH:mm",
+                        interval: 15
+                    });
+                </script>
+                <label id="lblTimeZone" class="control-label;pull-left">{{SelectedEventTimeZone}}</label>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding"><sup><img src="../../../Content/images/red_asterisk.png" /></sup>Delivery Method</label></div>
+            <div class="col-sm-8 col-md-4 col-lg-4 CheckBox">
+                <input type="checkbox" class="control-label nopadding" checked disabled="disabled" /><label>Email</label>
+                <input type="checkbox" class="control-label nopadding" disabled="disabled" /><label>Text</label>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear" style="border-bottom:none;">
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding"><sup><img src="../../../Content/images/red_asterisk.png" /></sup>Email To</label></div>
+            <div class="col-sm-8 col-md-10 col-lg-10">
+                <textarea id="emailTo" class="form-control Required" ng-model="Message.RECIPIENTS" required cols="40" rows="4"></textarea>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">Subject</label></div>
+            <div class="col-sm-8 col-md-10 col-lg-10"><input type="text" class="form-control Background2" maxlength="140" ng-model="Message.SUBJECT" ng-click="HideNotification()" /></div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">Message</label></div>
+            <div class="col-sm-8 col-md-10 col-lg-10">
+                <textarea id="textAreaMessage" class="form-control Background2" maxlength="1000" ng-model="Message.CONTENTS" cols="40" rows="8" ng-click="HideNotification()"></textarea>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-2 col-lg-2"></div>
+            <div class="col-sm-8 col-md-10 col-lg-10 CheckBox">
+                <input id="ipAppendSenderID" type="checkbox" />
+                <label> Append sender ID, email and cell number to message </label>
+            </div>
+        </div>
+    </div>
+    <!-- Following is a dummy element which is used to get the scope with the generic method -->
+    <div id="responsive-tables-popup" style="display: none;"></div>
+</form>
+<style>
+    .ngdialog-content {
+        width: 80% !important;
+        height: 100%;
+        background: #ffffff !important;
+        padding: 0px !important;
+        overflow-y: auto;
+    }
+
+    .section-inner-margin {
+        margin: 0px;
+        margin-bottom: 8px;
+    }
+
+    .ngdialog-theme-default.ngdialog {
+        padding-top: 40px;
+        padding-bottom: 45px;
+    }
+
+    .k-picker-wrap {
+        height: 34px;
+    }
+
+    #callOnDateTimePicker {
+        height: 31px;
+    }
+
+    .form-control, .ng-isolate-scope * {
+        border-radius: 0px;
+    }
+
+    .Background2 {
+        background-color: #f0f0f0;
+    }
+
+    .CheckBox {
+        vertical-align: middle;
+    }
+
+        .CheckBox label {
+            margin: 0px 10px 0px 0px;
+            padding: 0px;
+        }
+
+        .CheckBox * {
+            vertical-align: middle;
+        }
+
+        .CheckBox input {
+            padding: 0px;
+            margin: 0px 5px 0px 0px;
+        }
+
+    #textAreaMessage {
+        resize: none;
+        background-color: #ffffff !important;
+        display: block;
+        height: auto !important;
+    }
+
+    #emailTo * {
+        vertical-align: central !important;
+    }
+
+    .bootstrap-tagsinput {
+        background-color: #FDDFE1;
+        width: 100% !important;
+        min-width: 100% !important;
+        margin-bottom: 0px;
+        overflow: auto;
+        max-height: 60px !important;
+        margin-bottom: 10px;
+    }
+
+        .bootstrap-tagsinput span.label {
+            color: #2e2e2e;
+            font-size: 10pt;
+            padding-bottom: 0em !important;
+        }
+
+        .bootstrap-tagsinput span.label-info {
+            background-color: lightyellow;
+        }
+
+    div.tooltip-inner {
+        max-width: 550px;
+        background-color: #FBFCA9;
+        color: black;
+        border: solid 1px #AAAD07;
+    }
+
+    .tooltip.bottom .tooltip-arrow {
+        display: none;
+        border-bottom-color: #FBFCA9;
+    }
+
+    .dropdown-menu > li > a {
+        white-space: normal;
+    }
+
+    #divMultiSelCompany .dropdown-menu.dropdown-menu-form > li div.checkbox > label {
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        -ms-word-break: break-all;
+        word-break: break-all;
+    }
+
+    @media only screen and (min-width : 768px) {
+        .dialog-header {
+            height: 75px;
+        }
+
+        .HeadNote {
+            text-align: left;
+        }
+
+        .main-head .nav-buttons {
+            margin-top: -30px;
+        }
+
+        .bootstrap-tagsinput {
+            max-height: 200px !important;
+        }
+    }
+
+    @media only screen and (min-width : 992px) {
+        .dialog-header {
+            height: 45px;
+        }
+
+        .HeadNote {
+            text-align: right;
+        }
+
+        .main-head .nav-buttons {
+            margin-top: auto;
+        }
+
+        .bootstrap-tagsinput {
+            max-height: 100px !important;
+        }
+    }
+</style>

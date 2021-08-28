@@ -1,0 +1,7 @@
+D:\RODTFS\Hylan\nMart.Common\bin\Debug\Hylan.Common.dll
+D:\RODTFS\Hylan\nMart.Common\bin\Debug\Hylan.Common.pdb
+D:\RODTFS\Hylan\nMart.Common\bin\Debug\Newtonsoft.Json.dll
+D:\RODTFS\Hylan\nMart.Common\bin\Debug\Newtonsoft.Json.xml
+D:\RODTFS\Hylan\nMart.Common\obj\Debug\Hylan.Common.dll
+D:\RODTFS\Hylan\nMart.Common\obj\Debug\Hylan.Common.pdb
+D:\RODTFS\Hylan\nMart.Common\obj\Debug\Hylan.Common.csprojResolveAssemblyReference.cache

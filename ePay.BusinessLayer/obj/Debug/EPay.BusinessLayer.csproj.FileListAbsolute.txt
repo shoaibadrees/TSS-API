@@ -1,0 +1,161 @@
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.BusinessLayer.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.BusinessLayer.pdb
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\EPPlus.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.Common.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.DAL.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\MigraDoc.DocumentObjectModel.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\MigraDoc.Rendering.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\NPOI.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\NPOI.OOXML.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\PdfSharp.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\PdfSharp.Charting.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\NPOI.OpenXml4Net.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.Common.pdb
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Hylan.DAL.pdb
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\EPPlus.xml
+D:\Projects\ePay\nMart.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\ePay\nMart.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojResolveAssemblyReference.cache
+D:\Projects\ePay\nMart.BusinessLayer\obj\Debug\Hylan.BusinessLayer.dll
+D:\Projects\ePay\nMart.BusinessLayer\obj\Debug\Hylan.BusinessLayer.pdb
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\MigraDoc.DocumentObjectModel.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\MigraDoc.Rendering.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\NPOI.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OOXML.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\PdfSharp.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\PdfSharp.Charting.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OpenXmlFormats.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OpenXml4Net.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+D:\Projects\ePay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+D:\Projects\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\MigraDoc.DocumentObjectModel.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\MigraDoc.Rendering.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\NPOI.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OOXML.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\PdfSharp.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\PdfSharp.Charting.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\ICSharpCode.SharpZipLib.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OpenXmlFormats.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\NPOI.OpenXml4Net.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+E:\saqib\ePay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+E:\saqib\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojAssemblyReference.cache
+E:\saqib\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CoreCompileInputs.cache
+E:\saqib\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CopyComplete
+E:\saqib\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+E:\saqib\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+D:\Projects\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CoreCompileInputs.cache
+D:\Projects\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojAssemblyReference.cache
+D:\Projects\ePay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CopyComplete
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+D:\Angular project\Epay\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+D:\Angular project\Epay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojResolveAssemblyReference.cache
+D:\Angular project\Epay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+D:\Angular project\Epay\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojResolveAssemblyReference.cache
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+E:\Projects\TSS angular\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.BusinessLayer.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.DAL.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPPlus.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.Common.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPay.DAL.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\EPPlus.xml
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\bin\Debug\Newtonsoft.Json.xml
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csprojAssemblyReference.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CoreCompileInputs.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.csproj.CopyComplete
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.BusinessLayer\obj\Debug\EPay.BusinessLayer.pdb

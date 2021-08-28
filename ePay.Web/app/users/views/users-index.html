@@ -1,0 +1,87 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>USERS</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">User Name</label>
+                <input type="text" name="txtUserName" class="form-control" maxlength="12" style="width:100%" value="" ng-model="filters.USER_NAME.value" ng-change="applyFilter(filters.USER_NAME.name, 'filters.USER_NAME.value')" />
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding" id="lblFilterRmag">Last Name</label>
+                <input type="text" class="form-control" value="" maxlength="30" ng-model="filters.LAST_NAME.value" ng-change="applyFilter(filters.LAST_NAME.name, 'filters.LAST_NAME.value')" />
+
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">User Role</label>
+                <select id="ddlRoles" class="form-control" ng-model="filters.ROLE.value" ng-change="applyFilter(filters.ROLE.name, 'filters.ROLE.value')">
+                    <option value="0"> All </option>
+                    <option ng-repeat="role in RolesDS" title="{{role.ROLE_NAME}}" value="{{role.ROLE_NAME}}">{{role.ROLE_NAME}}</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Company</label>
+                <input type="text" class="form-control" ng-model="filters.USER_COMPANIES_NAMES.value" maxlength="50" ng-change="applyFilter(filters.USER_COMPANIES_NAMES.name, 'filters.USER_COMPANIES_NAMES.value')" />
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3" style="margin-bottom:5px;">
+                <label class="control-label nopadding" id="lblFilterRmag">Status</label>
+                <select id="ddlUserStatus" class="form-control" ng-model="filters.STATUS.value" ng-change="applyFilter(filters.STATUS.name, 'filters.STATUS.value')">
+                    <option value="0"> All </option>
+                    <option value="Y" title="Active">Active</option>
+                    <option value="N" title="Inactive">Inactive</option>
+                </select>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3">
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right resetFilterTopMargin">
+                            <li><a ng-click="ResetFilter()" >Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!--<div class="col-sm-12 col-md-12 col-lg-12">
+        </div>-->
+    </div>
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+<style>
+
+    .k-dropdown .k-input, .k-selectbox .k-input {
+        background: white;
+        background-color: white;
+    }
+</style>

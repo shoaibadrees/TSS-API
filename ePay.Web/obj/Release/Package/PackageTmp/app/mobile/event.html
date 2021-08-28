@@ -1,0 +1,915 @@
+﻿<div data-role="view" data-title="Events" data-layout="default" id="eventView" data-init="InitView"
+     data-show="ShowView" data-before-show="onBeforeShowView" data-before-hide="onBeforeHideView" data-cache="false">
+    <header data-role="header">
+        <div id="navBar" data-role="navbar" class="NavBar Shadow">
+            <a id="navBackButton" data-role="button" class="button backbutton" style="display: none;" onclick="EventDetailViewBackClick(this);"></a>
+            <a id="navAppDrawer" data-role="button" data-rel="drawer" href="#applicationDrawer" class="button menubutton"></a>
+            <span data-role="view-title"></span>
+            <span id="pullCount"></span>
+            <a id="btnAdd" data-align="right" data-role="button" class="button addbutton" onclick="btnAdd_Click();"></a>
+            <a id="btnFilter" data-align="right" data-rel="actionsheet" data-role="button" href="#filterOps" class="button grpbutton"></a>
+            <a id="btnShowFilterView" data-align="right" href="#searchFilterView" data-role="button" class="button searchbutton"></a>
+            <a id="btnEdit" data-align="right" data-role="button" class="button editbutton hide" onclick="btnEdit_Click();"></a>
+        </div>
+        <div class="searchcontainer">
+            <input type="text" id="search" class="search" placeholder="Filter here" onkeyup="activateSearchFilter();" />
+        </div>
+        <div style="background-color: white !important; display: none;" id="divSelectedGroup">
+            <div style="font-size: 9pt; padding: 5px; padding-left: 10px; text-transform: uppercase;">
+                <label style="color: #A4A4A4;">Grouped By</label>
+                <label id="lblSelectedGroup" style="color: #898989; font-weight: bold;"></label>
+            </div>
+        </div>
+        <div data-role="popover" id="filterOps" data-popup='{"width": "20em"}'>
+            <div data-role="view">
+                <ul data-role="listview" data-click="GroupItemClick">
+                    <li id="eventType" data-field="EVENT_TYPE.LU_NAME">Event Type</li>
+                    <li id="eventTimeZone" data-field="TIME_ZONE.LU_NAME">Time Zone</li>
+                    <li id="eventEmergencyType" data-field="EMERGENCY_TYPE.LU_NAME">Storm / Emergency Type</li>
+                    <li id="eventStatus" data-field="STATUS.LU_NAME">Event Status</li>
+                    <li id="liListView" data-field="liListView">None</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <ul id="listView" class="lv-main" data-role="listview" data-template="listViewTemplate"></ul>
+    <script id="listViewTemplate" type="text/x-kendo-template">
+        #if (data.hasChildren) { #
+        <div class="List-View">
+            <a class="TeamLinks" onclick="EventViewClick('${EVENT_ID}');">
+                <div class="heading1 Section1 ${EVENT_TYPE.LU_NAME}">${EVENT_TYPE.LU_NAME}</div>
+                <div style="width: 95%;" class="heading1">
+                    <label class="heading1"> #= MakeEventName(data) # </label> <br />
+                    <!--<label class="heading2">#= getTimeZoneSpecificDate(data, 'START_DATE') # (${STATUS.LU_NAME})</label>-->
+                    <label class="heading2">${STATUS.LU_NAME}</label>
+                </div>
+                <div><img src="images/rightarrow.png" class="RightArrow" /></div>
+            </a>
+        </div>
+        # } else { #
+        <div class="lv-detail">
+            <div class="lv-detail-label">Event Name</div>
+            <div class="lv-detail-value">#= MakeEventName(data) #</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Event Start Date/Time</div>
+            <div class="lv-detail-value">#= getTimeZoneSpecificDate(data, 'START_DATE') + GetTimeZonePostFix(TIME_ZONE.LU_NAME) #</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Event Type</div>
+            <div class="lv-detail-value">#= FormatText(data.EVENT_TYPE.LU_NAME)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Time Zone</div>
+            <div class="lv-detail-value">#= FormatText(data.TIME_ZONE.LU_NAME)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Storm / Emergency Type</div>
+            <div class="lv-detail-value">#= FormatText(data.EMERGENCY_TYPE.LU_NAME)#</div>
+            <div class="lv-detail-label">Event Description</div>
+            <div class="lv-detail-value">#= FormatText(data.OTHER_DESCRIPTION)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Storm / Emergency Name</div>
+            <div class="lv-detail-value">#= FormatText(data.EMERGENCY_NAME)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Requested by RMAG</div>
+            <div class="lv-detail-value">#= FormatText(data.EVENTS_REQ_BY_RMAGS_NAMES)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Requested by Clients</div>
+            <div class="lv-detail-value">#= FormatText(data.EVENTS_REQ_BY_COMPANIES_NAMES)#</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />Event Status</div>
+            <div class="lv-detail-value">#= FormatText(data.STATUS.LU_NAME)#</div>
+            #if (data.STATUS.LOOK_UP_ID == "40") { #
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" />EVENT CLOSE COMMENTS</div>
+            <div class="lv-detail-value">#= FormatText(data.CLOSED_COMMENTS)#</div>
+            <div class="lv-detail-label">Event Closed Date/Time</div>
+            <div class="lv-detail-value">#= getTimeZoneSpecificDate(data, 'CLOSED_ON') + GetTimeZonePostFix(TIME_ZONE.LU_NAME) #</div>
+            <div class="lv-detail-label">Event Closed BY</div>
+            <div class="lv-detail-value">#= FormatText(data.MODIFIED_NAME)#</div>
+            # } #
+            <div class="lv-detail-label">Event Created By</div>
+            <div class="lv-detail-value">#= FormatText(data.CREATED_NAME)#</div>
+            <div class="lv-detail-label">Event Created Date/Time</div>
+            <div class="lv-detail-value">#= getTimeZoneSpecificDate(data, 'CREATED_ON') + GetTimeZonePostFix(TIME_ZONE.LU_NAME) #</div>
+            <!--<div class="lv-detail-label">Event Invite</div>
+            <div class="lv-detail-value">${INVITE}</div>-->
+        </div>
+        # } #
+    </script>
+    <script type="text/javascript">
+        var lastSearchedData = [];
+        var groupBy = null;
+        var lastSelectedGroup = undefined;
+        var eventDTO = new DTO();
+        var filterColumns = [
+               { field: "EVENT_NAME", operator: FilterOperatores.contains },
+               { field: "EVENT_TYPE.LU_NAME", operator: FilterOperatores.contains },
+               { field: "STATUS.LU_NAME", operator: FilterOperatores.contains }
+               //{ field: "START_DATE", type: 'date', operator: FilterOperatores.contains },
+               //{ field: "TIME_ZONE.LU_NAME", operator: FilterOperatores.contains },
+               //{ field: "EMERGENCY_TYPE.LU_NAME", operator: FilterOperatores.contains },
+               //{ field: "OTHER_DESCRIPTION", operator: FilterOperatores.contains },
+               //{ field: "EMERGENCY_NAME", operator: FilterOperatores.contains },
+               //{ field: "EVENTS_REQ_BY_RMAGS_NAMES", operator: FilterOperatores.contains },
+               //{ field: "EVENTS_REQ_BY_COMPANIES_NAMES", operator: FilterOperatores.contains },
+               //{ field: "CLOSED_COMMENTS", operator: FilterOperatores.contains },
+               //{ field: "MODIFIED_NAME", operator: FilterOperatores.contains },
+               //{ field: "CREATED_NAME", operator: FilterOperatores.contains },
+               //{ field: "CLOSED_ON", type: 'date', operator: FilterOperatores.contains },
+               //{ field: "CREATED_ON", type: 'date', operator: FilterOperatores.contains }
+        ];
+        var searchParameters = MakeSearchParameters();
+        function MakeSearchParameters() {
+            return {
+                eventType: "0",
+                statusType: "0",
+                reqRmag: "",
+                reqComp: ""
+            };
+        }
+
+        function FormatText(text) {
+            if (text == null || text == "")
+                return "";
+            return text;
+        }
+        function FormatHtml(text) {
+            if (text == null || text == "")
+                return "";
+            var tokens = text.split(",");
+            var html = "";
+            $.each(tokens, function (index, item) {
+                if (item != '') {
+                    html += '<span class="taginput">' + item + '</span>';
+                }
+            });
+            return html;
+        }
+
+        function ResetDTO() {
+            eventDTO = new DTO();
+        }
+        function AddFilters(paramObj) {
+            paramObj.eventType = searchParameters.eventType;
+            paramObj.statusType = searchParameters.statusType;
+            paramObj.reqRmag = searchParameters.reqRmag;
+            paramObj.reqComp = searchParameters.reqComp;
+        }
+        function EventViewClick(id) {
+            eventDTO.sender = 'eventView';
+            eventDTO.id = id;
+            app.navigate('#eventView');
+        }
+        function EventDetailViewBackClick(sender) {
+            eventDTO.sender = 'eventDetailView';
+            eventDTO.id = null;
+            app.navigate('#:back');
+        }
+        function ShowView(e) {
+            pageConfig = null;
+            SearchParams.pageType = "";
+            RemovePullToRefresh();
+            if (app.options.prevView == "#searchFilterView")
+                return;
+            var parentID = eventDTO.id;
+            var from = 'self';
+            if (parentID == undefined) {
+                e.view.options.title = "Events";
+            }
+            else {
+                e.view.options.title = "Event Detail";
+                lvMainVisible = false;
+            }
+            if (eventDTO.sender)
+                from = eventDTO.sender;
+            FetchSearchResults(parentID, from);
+            if (groupBy != null && parentID == undefined) {
+                GroupChange(groupBy);
+            }
+            $("[data-role=popover]").find("li").removeClass("selected-item");
+            $("[data-role=popover] li:last").addClass("selected-item");
+
+            var hasEditPerm = Globals.CheckEditPermission(Globals.Screens.MANAGE_EVENTS.ID);
+            if (hasEditPerm == false) {
+                $("#btnAdd").css("visibility", "hidden");
+                $("#btnAdd").addClass("hide");
+            }
+            if (parentID) {
+                $("#btnEdit").css("visibility", "visible");
+                var curEvent = GetObjectById(parentID, lastSearchedData);
+                if (hasEditPerm == false ||
+                    curEvent.STATUS.LOOK_UP_ID == '40') { // Closed Event
+                    $("#btnEdit").css("visibility", "hidden");
+                }
+            }
+        }
+        function searchClick(e) {
+            $("#search").val("");
+            searchParameters.eventType = $('#ddlEventType').val();
+            searchParameters.statusType = $('#ddlEventStatus').val();
+            searchParameters.reqRmag = $('#ipRmag').val();
+            searchParameters.reqComp = $('#ipCompany').val();
+            app.navigate('#:back');
+            FetchSearchResults(null, "search");
+        }
+        function btnReset_Click(e) {
+            searchParameters = MakeSearchParameters();
+            ApplyRolesOnEventTypeDropDown();
+            $("#ddlEventType").data("kendoDropDownList").value(searchParameters.eventType);
+            $("#ddlEventStatus").data("kendoDropDownList").value(searchParameters.statusType);
+            $('#ipRmag').val(searchParameters.reqRmag);
+            $('#ipCompany').val(searchParameters.reqComp);
+            FetchSearchResults(null, "search");
+        }
+        function FetchSearchResults(id, sender) {
+            if ($("#listView").data("kendoMobileListView") != undefined) {
+                $("#listView").data("kendoMobileListView").setDataSource(undefined)
+                $("#listView").data("kendoMobileListView").destroy();
+            }
+            if (id) {
+                ToggleTopSection(false);
+                var api = "Events/Get";
+                var parameters = { "id": id };
+                Globals.Get(api, parameters, false).then(function (result) {
+                    if (result != null && result.objResult != null) {
+                        var tempArray = [];
+                        var curDate = new Date();
+                        result.objResult.TIMEZONE_START_DATE = kendo.toString(result.objResult.START_DATE, 'MM/dd/yyyy  HH:mm:ss.sss');
+                        result.objResult.TIMEZONE_MODIFIED_ON = kendo.toString(curDate, 'MM/dd/yyyy  HH:mm:ss.sss');
+                        result.objResult.TIMEZONE_CLOSED_DATE = kendo.toString(TimeZoneSpecificDate(curDate, result.objResult.TIME_ZONE.LU_NAME, false), 'MM/dd/yyyy HH:mm:ss.sss') + GetTimeZonePostFix(result.objResult.TIME_ZONE.LU_NAME);
+                        tempArray.push(result.objResult)
+
+                        UpdateLocalSearchedData(id, result.objResult);
+
+                        var eventDetailsDS = new kendo.data.HierarchicalDataSource({
+                            data: tempArray,
+                            schema: {
+                                model: {
+                                    id: "EVENT_ID",
+                                    hasChildren: false
+                                }
+                            }
+                        });
+                        if ($("#listView").kendoMobileListView) {
+                            $("#listView").kendoMobileListView({
+                                dataSource: eventDetailsDS,
+                                pullToRefresh: false,
+                                appendOnRefresh: false,
+                                template: kendo.template($("#listViewTemplate").text()),
+                            });
+                        }
+                    }
+                }).fail(onError);
+                $("#btnEdit").css("visibility", "visible");
+                var curEvent = GetObjectById(id, lastSearchedData);
+                if (curEvent && Globals.CheckEditPermission(Globals.Screens.MANAGE_EVENTS.ID) == false ||
+                    curEvent.STATUS.LOOK_UP_ID == '40') { // Closed Event
+                    $("#btnEdit").css("visibility", "hidden");
+                }
+            }
+            else {
+                ToggleTopSection(true);
+                var eventDS = new kendo.data.HierarchicalDataSource({
+                    serverPaging: true, // enable server paging,
+                    serverGrouping: false,
+                    serverFiltering: false,
+                    pageSize: listPageSize,
+                    transport: {
+                        read: function (options) {
+                            if (eventTypeDS.length == 0) {
+                                options.success([]);
+                                popupNotification.show("You don't have the access to view either NRE or RMAG events. Please contact your Administrator.", notifyType.INFO);
+                                return false;
+                            }
+                            var skip = $("#listView").data('kendoMobileListView').dataSource.view().length;
+                            var pageSize = options.data.pageSize;
+
+                            if (lastSearchedData != null && lastSearchedData.length > 0) {
+                                if (eventDTO.sender == "eventView" || eventDTO.sender == "eventDetailView" ||
+                                    eventDTO.sender == "update" || eventDTO.sender == "add") {
+                                    ResetDTO();
+                                    pageSize = lastSearchedData.length;
+                                    if (sender == "add") {
+                                        pageSize++;
+                                    }
+                                    else {
+                                        options.success(lastSearchedData);
+                                        return;
+                                    }
+                                }
+                                else
+                                    skip = lastSearchedData.length;
+                            }
+                            ResetDTO();
+                            var parameters = {
+                                "pageSize": pageSize,
+                                "skip": skip
+                            };
+                            if (sender == "search") {
+                                parameters.pageSize = options.data.pageSize;
+                                parameters.skip = 0;
+                                lastSearchedData = [];
+                            }
+                            AddFilters(parameters);
+                            var api = "Events/GetAllCustom";
+                            Globals.Get(api, parameters, false).then(function (result) {
+                                if (result != null) {
+                                    if (result != null && result.pagedData != null) {
+                                        $("#listView li").remove();
+                                        $(result.pagedData).each(function (index, item) {
+                                            lastSearchedData.push(item);
+                                        });
+                                        lastSearchedData = SortByDateDesc(lastSearchedData);
+                                        options.success(lastSearchedData);
+                                        DisplayPulledCounts(result.total);
+                                        if (lastSelectedGroup != undefined) {
+                                            GroupChange(lastSelectedGroup);
+                                        }
+                                        if ($("#search").val() != '') {
+                                            activateSearchFilter();
+                                        }
+                                    }
+                                    if (result.emptyEventDC != null) {
+                                        var curDate = new Date();
+                                        result.emptyEventDC.TIMEZONE_START_DATE = kendo.toString(curDate, 'MM/dd/yyyy  HH:mm:ss.sss');
+                                        result.emptyEventDC.TIMEZONE_MODIFIED_ON = kendo.toString(curDate, 'MM/dd/yyyy  HH:mm:ss.sss');
+                                        emptyEventDC = result.emptyEventDC;
+                                    }
+                                }
+                            }).fail(onError)
+                                .done(function () {
+                                    sender = "self";
+                                });
+                        }
+                    },
+                    schema: {
+                        model: {
+                            id: "EVENT_ID",
+                            hasChildren: true
+                        }
+                    },
+                    requestEnd: function (e) {
+
+                    }
+                });
+                if ($("#listView").kendoMobileListView) {
+                    $("#listView").kendoMobileListView({
+                        dataSource: eventDS,
+                        pullToRefresh: true,
+                        appendOnRefresh: true,
+                        template: kendo.template($("#listViewTemplate").text()),
+                    });
+                }
+            }
+        }
+        function SortByDateDesc(data) {
+            if (data && data != null) {
+                data = _.sortBy(data, function (event) {
+                    return -moment(event.START_DATE).toDate().getTime();
+                });
+            }
+            return data;
+        }
+        function GetOfflineDS(groupBy) {
+            var offlineDS = null;
+            if (lastSearchedData && lastSearchedData != null) {
+                lastSearchedData = SortByDateDesc(lastSearchedData);
+                offlineDS = new kendo.data.HierarchicalDataSource({
+                    data: lastSearchedData,
+                    group: groupBy,
+                    sort: {
+                        field: "START_DATE",
+                        dir: "desc"
+                    },
+                    schema: {
+                        model: {
+                            id: "EVENT_ID",
+                            hasChildren: true
+                        }
+                    }
+                });
+            }
+            return offlineDS;
+        }
+        function UpdateLocalSearchedData(id, updatedObj) {
+            if (lastSearchedData != null && updatedObj) {
+                $.each(lastSearchedData, function (index, item) {
+                    if (item.EVENT_ID == id) {
+                        lastSearchedData[index] = updatedObj;
+                        return false;
+                    }
+                });
+            }
+        }
+        function GetObjectById(primKey, collection) {
+            return _.find(collection, function (event) { return event.EVENT_ID == primKey; });
+        }
+        //# sourceURL=dynamicScript1.js
+    </script>
+</div>
+
+<div data-role="view" data-title="Search" id="searchFilterView" data-show="ShowSearchView" data-init="InitView">
+    <header data-role="header">
+        <div data-role="navbar" id="searchNavBar" class="NavBar Shadow">
+            <a id="filterBack" data-role="button" class="button backbutton" onclick="globalBackButtonClick();"></a>
+            <span data-role="view-title">Search</span>
+            <a id="btnReset" data-align="right" data-role="button" class="button resetbutton" onclick="btnReset_Click();"></a>
+            <a data-align="right" data-role="button" id="btnSearchResult" onclick="searchClick()" class="button donebutton">Done</a>
+        </div>
+    </header>
+    <div class="searchGroup SidePaddings">
+        <label class="heading2 heading4" id="lblTeamLead">Event Type</label><br />
+        <select id="ddlEventType" style="width:100%;"></select>
+    </div>
+    <div class="searchGroup SidePaddings">
+        <label class="heading2 heading4" id="lblTeamLead">Event Status</label><br />
+        <select id="ddlEventStatus" style="width:100%;"></select>
+    </div>
+    <div class="searchGroup SidePaddings">
+        <label class="heading2 heading4" id="lblCompany">RMAG</label>
+        <input id="ipRmag" type="text" class="heading2" maxlength="50" />
+    </div>
+    <div class="searchGroup SidePaddings">
+        <label class="heading2 heading4" id="lblCompany">Company</label>
+        <input id="ipCompany" type="text" class="heading2" maxlength="50" />
+    </div>
+    <script type="text/javascript">
+        function ShowSearchView(e) {
+            $("#ddlEventType").data("kendoDropDownList").value(searchParameters.eventType);
+            $("#ddlEventStatus").data("kendoDropDownList").value(searchParameters.statusType);
+            $('#ipRmag').val(searchParameters.reqRmag);
+            $('#ipCompany').val(searchParameters.reqComp);
+        }
+
+    </script>
+</div>
+
+
+
+<div data-role="view" data-title="Edit Event" id="updateView" data-show="ShowUpdateView" data-init="InitView">
+    <header data-role="header">
+        <div id="navBar" data-role="navbar" class="NavBar Shadow">
+            <a id="navBackButton2" data-role="button" class="button backbutton" onclick="EditViewBackClick(this);"></a>
+            <span data-role="view-title">Edit Event</span>
+            <a id="btnSave" data-align="right" data-role="button" class="button savebutton" onclick="btnSave_Click()"></a>
+        </div>
+    </header>
+    <div id="tabstrip" class="TabStrip"></div>
+    <ul id="updateListView" class="lv-main" data-role="listview" data-template="updateViewTemplate"></ul>
+    <div id="divFooterNavigation"></div>
+    <script id="updateViewTemplate" type="text/x-kendo-template">
+        <div data-step="1">
+            <div class="lv-detail-label" data-bind="invisible:newEvent"><label>Event Name</label></div>
+            <div class="lv-detail-value" data-bind="invisible:newEvent">${eventDC.EVENT_NAME}</div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Event Start Date/Time</label></div>
+            <div class="lv-detail-value">
+                <input id="ipStartDate" name="Event Start Date/Time" type="text" placeholder="MM/dd/yyyy HH:mm"
+                       data-required-field='required' data-bind="value:eventDC.START_DATE" data-rule-message="#= Globals.InvalidDateTimeMessage #" />
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Event Type</label></div>
+            <div class="lv-detail-value">
+                <select id="selEventType" data-role="dropdownlist" name="Event Type"
+                        data-bind="value: eventDC.EVENT_TYPE.LOOK_UP_ID,source: luEvent_Type,events:{change:onEventTypeChange}"
+                        data-text-field="LU_NAME"
+                        data-value-field="LOOK_UP_ID" data-required-field='required'></select>
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Time Zone</label></div>
+            <div class="lv-detail-value">
+                <select id="selTimeZone" data-role="dropdownlist" name="Time Zone"
+                        data-bind="value: eventDC.TIME_ZONE.LOOK_UP_ID,source: luTime_Zone,events:{change:onTimeZoneChange}"
+                        data-text-field="LU_NAME"
+                        data-value-field="LOOK_UP_ID" data-required-field='required'></select>
+            </div>
+            <div class="lv-detail-label">
+                <img src="images/red_asterisk.png" /><label>Storm / Emergency Type</label>
+            </div>
+            <div class="lv-detail-value">
+                <select id="selEmergencyType" data-role="dropdownlist" name="Storm / Emergency Type"
+                        data-bind="value: eventDC.EMERGENCY_TYPE.LOOK_UP_ID,source: luEmergency_Type, events:{change:onEmergencyTypeChange}"
+                        data-text-field="LU_NAME"
+                        data-value-field="LOOK_UP_ID" data-required-field='required'></select>
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Storm / Emergency Name</label></div>
+            <div class="lv-detail-value">
+                <input id="ipEmergencyName" data-bind="value:eventDC.EMERGENCY_NAME" data-required-field='required' name="Storm / Emergency Name" maxlength="30" />
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Requested by RMAG</label></div>
+            <div class="lv-detail-value">
+                <select id="selRmag" data-role="dropdownlist" name="Requested by RMAG"
+                        data-bind="invisible:IfNreEvent,disabled:IfNreEvent,value: eventDC.RMAG.RMAG_ID,source: RMAGS,events:{change:onRMAGChange}"
+                        data-text-field="RMAG_NAME"
+                        data-value-field="RMAG_ID" data-required-field='required'></select>
+
+                <select id="selRmagNRE" data-role="multiselect" name="Requested by RMAG"
+                        data-bind="visible:IfNreEvent,enabled:IfNreEvent,value: eventDC.EVENTS_REQ_BY_RMAGS,source: RMAGS,events:{change:onRMAGChange}"
+                        data-text-field="RMAG_NAME"
+                        data-value-field="RMAG_ID" data-required-field='required' data-auto-close="false"></select>
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Requested by Clients</label></div>
+            <div class="lv-detail-value">
+                <select id="selCompany" data-role="multiselect" name="Requested by Clients"
+                        data-bind="value: eventDC.EVENTS_REQ_BY_COMPANIES,source: COMPANIES,events:{change:onCompanyChange}"
+                        data-text-field="COMPANY_NAME"
+                        data-value-field="COMPANY_ID" data-required-field='required' data-auto-close="false"></select>
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" /><label>Event Status</label></div>
+            <div class="lv-detail-value">
+                <select id="selEventStatus" data-role="dropdownlist" name="Event Status"
+                        data-bind="value: eventDC.STATUS.LOOK_UP_ID,source: luEvent_Staus,events:{change:onEventStatusChange}"
+                        data-text-field="LU_NAME"
+                        data-value-field="LOOK_UP_ID" data-required-field='required'></select>
+            </div>
+            <div class="lv-detail-label"><img src="images/red_asterisk.png" data-bind="visible:IfEventClosed" /><label>Event Close Comments</label></div>
+            <div class="lv-detail-value">
+                <input id="ipCloseComments" data-required-field='required'
+                       data-bind="value:eventDC.CLOSED_COMMENTS,enabled:IfEventClosed" name="Event Close Comments" maxlength="100" />
+            </div>
+            <div class="lv-detail-label" data-bind="visible:newEvent"><label>Event Description</label></div>
+            <div class="lv-detail-value" data-bind="visible:newEvent">
+                <input id="ipOtherDescription" data-bind="value:eventDC.OTHER_DESCRIPTION" />
+            </div>
+        </div>
+        <div data-step="2">
+            <div class="lv-detail-label"><label>Event Description</label></div>
+            <div class="lv-detail-value">
+                <input id="ipOtherDescription" data-bind="value:eventDC.OTHER_DESCRIPTION" maxlength="250" />
+            </div>
+            <!--<div class="lv-detail-label"><label>Event Closed Date/Time</label></div>
+            <div class="lv-detail-value">
+                #= getTimeZoneSpecificDate(data.eventDC, 'CLOSED_ON') #
+            </div>
+            <div class="lv-detail-label"><label>Event Closed BY</label></div>
+            <div class="lv-detail-value">${eventDC.MODIFIED_NAME}</div>-->
+            <div class="lv-detail-label"><label>Event Created By</label></div>
+            <div class="lv-detail-value">${eventDC.CREATED_NAME}</div>
+            <div class="lv-detail-label"><label>Event Created Date/Time</label></div>
+            <div class="lv-detail-value">#= getTimeZoneSpecificDate(data.eventDC, 'CREATED_ON') + GetTimeZonePostFix(data.eventDC.TIME_ZONE.LU_NAME)#</div>
+            <!--<div class="lv-detail-label"><label>Event Invite</label></div>
+            <div class="lv-detail-value">${eventDC.INVITE}</div>-->
+        </div>
+    </script>
+    <script type="text/javascript">
+        var RMAGS = [];
+        var viewModel = null;
+        var COMPANIES = [];
+        var emptyEventDC = null;
+        var isChanged = false;
+        Globals.GetRMAGS(false).then(function (result) {
+            RMAGS = result.objResultList;
+        });
+        var allowedEventStatusDS = Globals._lookUps[Globals.LookUpTypes.EVENT_STATUS];
+        var closeEventPerm = Globals.GetSpecificPermission(Globals.Screens.MANAGE_EVENTS.ID, "SPECIAL_FUNCTION",
+            Globals.Screens.MANAGE_EVENTS.SPECIAL_FUNCTION.CLOSE_EVENT_ID);
+        if (closeEventPerm && (closeEventPerm.VIEW_ACCESS_NRE == false && closeEventPerm.VIEW_ACCESS_RMAG == false)) {
+            allowedEventStatusDS = _.reject(allowedEventStatusDS, function (event) { return event.LU_NAME == "Closed"; });
+        }
+        var tempSt = JSON.parse(JSON.stringify(allowedEventStatusDS));;
+        tempSt.splice(0, 0, { LU_NAME: "All", LOOK_UP_ID: "0" });
+        $("#ddlEventStatus").kendoDropDownList({
+            dataTextField: "LU_NAME",
+            dataValueField: "LOOK_UP_ID",
+            dataSource: {
+                data: tempSt
+            }
+        });
+        var eventTypeDS = ApplyRolesOnEventTypeDropDown();
+        $("#ddlEventType").kendoDropDownList({
+            dataTextField: "LU_NAME",
+            dataValueField: "LOOK_UP_ID",
+            dataSource: {
+                data: eventTypeDS
+            }
+        });
+        function ApplyRolesOnEventTypeDropDown() {
+            var eventTypeDS = Globals._lookUps[Globals.LookUpTypes.EVENT_TYPE];
+            var perm = Globals.GetSpecificPermission(Globals.Screens.MANAGE_EVENTS.ID, "VIEW_EDIT_ACCESS", 0);
+            if (perm) {
+                if (perm.VIEW_ACCESS_RMAG == false)
+                    eventTypeDS = _.reject(eventTypeDS, function (eventType) { return eventType.LOOK_UP_ID == "23"; });
+
+                if (perm.VIEW_ACCESS_NRE == false)
+                    eventTypeDS = _.reject(eventTypeDS, function (eventType) { return eventType.LOOK_UP_ID == "22"; });
+            }
+            var tempType = JSON.parse(JSON.stringify(eventTypeDS));
+            if (eventTypeDS.length > 1) {
+                tempType.splice(0, 0, { LU_NAME: "All", LOOK_UP_ID: "0" });
+            }
+            else {
+                if (eventTypeDS.length > 0) {
+                    searchParameters.eventType = eventTypeDS[0].LOOK_UP_ID;
+                }
+            }
+            return tempType;
+        }
+        function CheckCloseEventSpecFunc(eventTypeId) {
+            var eventStatusDS = Globals._lookUps[Globals.LookUpTypes.EVENT_STATUS];
+            if (closeEventPerm) {
+                if ((eventTypeId == '22' && closeEventPerm.VIEW_ACCESS_NRE == false) ||
+                    (eventTypeId == '23' && closeEventPerm.VIEW_ACCESS_RMAG == false)) {
+                    var closeStatus = "40";
+                    eventStatusDS = _.reject(eventStatusDS, function (status) { return status.LOOK_UP_ID == closeStatus; });
+                }
+            }
+            return eventStatusDS;
+        }
+        function EditViewBackClick() {
+            var goBack = true;
+            if (isChanged == true) {
+                goBack = confirm(Globals.ChangesLostMessage);
+            }
+            if (goBack == true) {
+                eventDTO.sender = 'eventDetailView';
+                app.navigate('#:back');
+            }
+        }
+        function GetViewModel(eventId) {
+            var selectedEvent = GetObjectById(eventId, lastSearchedData);
+            if (eventId) {
+                selectedEvent = GetObjectById(eventId, lastSearchedData);
+                selectedEvent.START_DATE = ConvertFromUTCToLocal(selectedEvent.START_DATE);
+            }
+            else {
+                selectedEvent = emptyEventDC;
+                selectedEvent.START_DATE = GetDefaultDateTimePickerValue();
+                selectedEvent.CREATED_ON = selectedEvent.START_DATE;
+            }
+
+            var rmagIds = [];
+            if (selectedEvent.EVENT_TYPE.LOOK_UP_ID == "22") {
+                rmagIds = selectedEvent.EVENTS_REQ_BY_RMAGS;
+            }
+            else {
+                rmagIds.push(parseInt(selectedEvent.RMAG.RMAG_ID));
+            }
+
+            Globals.GetCompaniesByRmags(rmagIds).then(function (result) {
+                COMPANIES = result.objResultList;
+            });
+            function CheckIFNreEvent(luId) {
+                if (luId == "22")
+                    return true;
+                return false;
+            }
+            var eventClosed = (selectedEvent.STATUS.LOOK_UP_ID == "40");
+            viewModel = kendo.observable({
+                newEvent: (eventId == undefined || eventId == null || eventId == "0"),
+                eventDC: selectedEvent,
+                luEvent_Staus: CheckCloseEventSpecFunc(selectedEvent.EVENT_TYPE.LOOK_UP_ID),
+                luEvent_Type: eventTypeDS,
+                luTime_Zone: Globals._lookUps[Globals.LookUpTypes.TIME_ZONE],
+                luEmergency_Type: Globals._lookUps[Globals.LookUpTypes.EMERGENCY_TYPE],
+                IfEventClosed: eventClosed,
+                IfNreEvent: CheckIFNreEvent(selectedEvent.EVENT_TYPE.LOOK_UP_ID),
+                RMAGS: RMAGS,
+                COMPANIES: COMPANIES,
+                onEventTypeChange: function (e) {
+                    var eventDC = this.get("eventDC");
+                    eventDC.EVENT_TYPE.LU_NAME = $("#selEventType").data("kendoDropDownList").text();
+                    selectedEvent.EVENT_TYPE.LOOK_UP_ID = $("#selEventType").data("kendoDropDownList").value();
+
+
+
+                    eventDC.EVENTS_REQ_BY_RMAGS = [];
+                    eventDC.EVENTS_REQ_BY_RMAGS_NAMES = '';
+                    $("#selRmagNRE").val([]);
+                    $("#selRmag").data("kendoDropDownList").value(0);
+
+
+                    eventDC.EVENTS_REQ_BY_COMPANIES = [];
+                    eventDC.EVENTS_REQ_BY_COMPANIES_NAMES = "";
+                    this.set("eventDC.EVENTS_REQ_BY_COMPANIES", []);
+                    this.set("eventDC.EVENTS_REQ_BY_COMPANIES_NAMES", '');
+                    $("#selCompany").val([]);
+
+                    if (e.sender._old == '22') { // NRE Event selected
+                        $("#selTimeZone").data("kendoDropDownList").value('18');
+                        eventDC.TIME_ZONE.LU_NAME = 'Eastern';
+                        eventDC.TIME_ZONE.LU_TYPE = 'TIME_ZONE';
+                        eventDC.TIME_ZONE.LOOK_UP_ID = 18;
+                        this.set("IfNreEvent", true);
+                    }
+                    else {
+                        this.set("IfNreEvent", false);
+                        this.set("eventDC.RMAG.RMAG_ID", 0);
+                    }
+                    var statusDS = CheckCloseEventSpecFunc(e.sender._old);
+                    this.set("luEvent_Staus", statusDS);
+
+                    if (this.get('IfEventClosed') == true) {
+                        var closeStatusObj = _.find(statusDS, function (status) { return status.LOOK_UP_ID == "40"; });
+                        if (closeStatusObj == undefined)
+                            this.set('IfEventClosed', false);
+                    }
+                },
+                onTimeZoneChange: function (e) {
+                    var eventDC = this.get("eventDC");
+                    eventDC.TIME_ZONE.LU_NAME = $("#selTimeZone").data("kendoDropDownList").text();
+                },
+                onEmergencyTypeChange: function (e) {
+                    var eventDC = this.get("eventDC");
+                    eventDC.EMERGENCY_TYPE.LU_NAME = $("#selEmergencyType").data("kendoDropDownList").text();
+                },
+                onEventStatusChange: function (e) {
+                    this.set('IfEventClosed', (e.sender._old == "40"));
+                    var eventDC = this.get("eventDC");
+                    eventDC.STATUS.LU_NAME = $("#selEventStatus").data("kendoDropDownList").text();
+                },
+                onRMAGChange: function (e) {
+                    var viewModelRef = this;
+                    var eventDC = this.get("eventDC");
+                    var rmagIds = [];
+                    if (selectedEvent.EVENT_TYPE.LOOK_UP_ID == "22") {
+                        rmagIds = $("#selRmagNRE").data("kendoMultiSelect").value();
+                    }
+                    else {
+                        rmagIds.push(parseInt($("#selRmag").data("kendoDropDownList").value()));
+                    }
+
+                    eventDC.EVENTS_REQ_BY_RMAGS = rmagIds;
+                    eventDC.EVENTS_REQ_BY_RMAGS_NAMES = '';
+
+                    if (rmagIds != null && rmagIds.length > 0 && RMAGS.length > 0) {
+                        $.each(RMAGS, function (index, item) {
+                            if (rmagIds.indexOf(item.RMAG_ID) >= 0) {
+                                if (selectedEvent.EVENT_TYPE.LOOK_UP_ID == "22") {
+                                    eventDC.EVENTS_REQ_BY_RMAGS_NAMES += item.RMAG_NAME + ',';
+                                    eventDC.RMAG.RMAG_ID = item.RMAG_ID;
+                                }
+                                else {
+                                    eventDC.RMAG.RMAG_NAME = item.RMAG_NAME;
+                                    eventDC.RMAG.RMAG_ID = item.RMAG_ID;
+                                    return false;
+                                }
+                            }
+                        });
+                        Globals.GetCompaniesByRmags(rmagIds).then(function (result) {
+                            COMPANIES = result.objResultList;
+                            viewModelRef.set('COMPANIES', COMPANIES);
+                        });
+                    }
+                    else {
+                        COMPANIES = [];
+                        viewModelRef.set('COMPANIES', COMPANIES);
+                        eventDC.EVENTS_REQ_BY_COMPANIES = [];
+                        eventDC.EVENTS_REQ_BY_COMPANIES_NAMES = '';
+                        $("#selCompany").data("kendoMultiSelect").value([]);
+                    }
+
+                },
+                onCompanyChange: function (e) {
+                    var compIds = $("#selCompany").val();
+                    var eventDC = this.get("eventDC");
+                    eventDC.EVENTS_REQ_BY_COMPANIES = compIds;
+                    eventDC.EVENTS_REQ_BY_COMPANIES_NAMES = '';
+                    if (compIds.length > 0 && COMPANIES.length > 0) {
+                        $.each(COMPANIES, function (index, item) {
+                            if (compIds.indexOf(item.COMPANY_ID) >= 0) {
+                                eventDC.EVENTS_REQ_BY_COMPANIES_NAMES += item.COMPANY_NAME + ',';
+                            }
+                        });
+                    }
+                }
+            });
+            viewModel.bind("change", function (e) {
+                isChanged = true;
+            });
+            return viewModel;
+        }
+        function ShowUpdateView(e) {
+            // e.view.options.title = e.view.params.viewTitle;
+            if (eventDTO.param.title && eventDTO.param.title != null && eventDTO.param.title != "") {
+                e.view.options.title = eventDTO.param.title;
+            }
+            isChanged = false;
+        }
+        function PrepareUpdateView(eventId) {
+            viewModel = null;
+            var stepTabsDS = [
+                { ID: eventId, stepTitle: "Step 1", stepIndex: 1 },
+                { ID: eventId, stepTitle: "Step 2", stepIndex: 2 }
+            ];
+            $("#tabstrip").kendoTabStrip().data("kendoTabStrip").destroy();
+            $("#tabstrip").kendoTabStrip({
+                animation: false,
+                select: function (e) {
+                    var tabInd = $(e.item).index();
+                    var selectedTabObj = this.dataSource.at(tabInd);
+                    if (viewModel == null) {
+                        viewModel = GetViewModel(selectedTabObj.ID);
+                    }
+                    if ($(e.contentElement).html().trim() == $(e.item).text()) {
+                        var template = kendo.template($("#updateViewTemplate").html());
+                        $(e.contentElement).html(template(viewModel));
+                        kendo.bind(e.contentElement, viewModel);
+                    }
+                    SetFooterNavigationVisibility(tabInd);
+                    $("#tabstrip-" + (tabInd + 1) + " > div").not("[data-step='" + (tabInd + 1) + "']").addClass('hide');
+                    $("#ipStartDate").kendoDateTimePicker({
+                        timeFormat: "HH:mm",
+                        format: "MM/dd/yyyy HH:mm",
+                        interval: 60,
+                        readonly: "readonly",
+                        change: function (e) {
+                            if (this.value() != null) {
+                                var selectedDate = this.value();
+                                var curDate = new Date();
+                                if (selectedDate.getHours() == 0 && selectedDate.getMinutes() == 0) {
+                                    selectedDate.setHours(curDate.getHours());
+                                    selectedDate.setMinutes(curDate.getMinutes());
+                                }
+                                this.value(selectedDate);
+                            }
+                        }
+                    });
+                    $("input, select").on("click", function (e) {
+                        popupNotification.hide();
+                    });
+                },
+                dataTextField: "stepTitle",
+                dataContentField: "stepTitle",
+                dataSource: stepTabsDS
+            });
+            $("#tabstrip").getKendoTabStrip().select(0);
+            if (eventId == undefined || eventId == null || eventId == "0") {
+                $("#tabstrip li.k-item").hide();
+            }
+        }
+        function btnAdd_Click() {
+            PrepareUpdateView();
+            eventDTO.sender = 'eventView';
+            eventDTO.id = undefined;
+            eventDTO.param.title = "Add New Event";
+            app.navigate('#updateView');
+        }
+        function btnEdit_Click() {
+            PrepareUpdateView(eventDTO.id);
+            eventDTO.sender = 'eventDetailView';
+            eventDTO.id = eventDTO.id;
+            eventDTO.param.title = "Edit Event";
+            app.navigate('#updateView');
+            $("#divFooterNavigation").html(Templates.List.footer_navigation);
+        }
+
+        function btnSave_Click() {
+            if (isChanged == false) {
+                popupNotification.show(Globals.NoChanges, notifyType.INFO);
+                $(".lv-detail-value").on("click", function (e) {
+                    popupNotification.hide();
+                });
+                return false;
+            }
+            var validateAll = Validate();
+            if (validateAll.result) {
+                $(".HighlightReqField").removeClass("HighlightReqField");
+                var api = "Events/UpdateEvent";
+                var updatedEvent = viewModel.get("eventDC");
+
+                updatedEvent.TIMEZONE_MODIFIED_ON = moment.utc().format('MM/DD/YYYY HH:mm:ss.sss');
+                updatedEvent.TIMEZONE_START_DATE = ConvertToUTCFormat(updatedEvent.START_DATE);
+                if (Globals.CurrentUser && Globals.CurrentUser.USER_ID && Globals.CurrentUser.USER_NAME) {
+                    updatedEvent.MODIFIED_BY = Globals.CurrentUser.USER_ID;
+                    updatedEvent.MODIFIED_NAME = Globals.CurrentUser.USER_NAME;
+
+                    if (updatedEvent.EVENT_ID == '' || updatedEvent.EVENT_ID == '0') { // New Event
+                        api = "Events/AddEvent";
+                        updatedEvent.CREATED_BY = Globals.CurrentUser.USER_ID;
+                    }
+                }
+                if (updatedEvent.STATUS.LOOK_UP_ID == '40') { // Closed Event
+                    updatedEvent.TIMEZONE_CLOSED_DATE = kendo.toString(TimeZoneSpecificDate(new Date(), updatedEvent.TIME_ZONE.LU_NAME, false), 'MM/dd/yyyy HH:mm:ss.sss') + GetTimeZonePostFix(updatedEvent.TIME_ZONE.LU_NAME);
+                }
+                Globals.Post(api, JSON.stringify(updatedEvent), false).then(function (result) {
+                    isChanged = false;
+                    if (result.objResult && result.objResult != null) {
+                        UpdateLocalSearchedData(result.objResult.EVENT_ID, result.objResult);
+                        eventDTO.sender = "update";
+                    }
+                    else {
+                        if (result > 0) {
+                            var NewEventid = result;
+                            Globals.sendEmail("Events", "EventCreation", NewEventid);
+                            eventDTO.sender = "add";
+                        }
+                    }
+                    eventDTO.id = null;
+                    app.navigate('#eventView?from=save');
+                    popupNotification.show(Globals.SaveMessage, notifyType.SUCCESS);
+                }).fail(function (e) {
+                    if (e.responseText && e.responseText.indexOf("Record(s) could not be updated since it has been edited by another user") > -1) {
+                        eventDTO.id = null;
+                        HandleConcurrencyError(e, updatedEvent.EVENT_ID, "Events/Get", "#eventView?from=eventDetailView");
+                    }
+                    onError(e);
+                });
+            }
+            else {
+                $("#tabstrip").getKendoTabStrip().select(0);
+                //if (validateAll.summary != '') {
+                //    $('.k-invalid-msg').hide();
+                //    popupNotification.show(validateAll.summary, notifyType.ERROR);
+                //}
+                popupNotification.show(validateAll.getMessage(), notifyType.ERROR);
+            }
+        }
+        //# sourceURL=dynamicScript2.js
+    </script>
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,473 @@
+﻿<form id="formJobModal" name="form.formJobModal" novalidate>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close disabled" src="Content/images/close.png" class="" />
+        </div>
+        <!-- Header -->
+        <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-4 col-md-4 col-lg-4 no-padding">{{ScreenTitle}} <span>JOB</span></div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-5 col-md-4 col-lg-4 no-padding HeadNote">
+                <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 pull-right no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="k-button k-button-icontext" id="btnCancel" style="text-decoration:none" ng-click="closeDialog(ngDialogData.JOB_ID)">
+                                    <span class="k-icon k-update  k-i-close"></span>
+                                    Close
+                                </button>
+                            </li>
+                            <li ng-show="AllowToEdit">
+                                <button type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="PostData(form.formJobModal)" ng-disabled="!AllowToEdit">
+                                    <span class="k-icon k-update  k-i-check"></span>
+                                    Save
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear" ng-disabled="!AllowToEdit">
+
+            <!----row start---->
+            <!--first block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label nopadding"><sup><img src="Content/images/red_asterisk.png" /></sup>Project ID</label>
+                <select id="ddlProjectId" hylan-control-validation hylancontrolname="ProjectId" hylancontrollabel="Project ID" name="ddlProjectId" class="form-control" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.PROJECT_ID, form.formJobModal.ddlProjectId)}"
+                        required ng-model="jobDCModel.PROJECT_ID" ng-init="jobDCModel.PROJECT_ID = jobDCModel.PROJECT_ID !== 0 ? jobDCModel.PROJECT_ID : null" ng-options="x.PROJECT_ID as x.HYLAN_PROJECT_ID 
+                    for x in DSProjects" ng-change="DataChanged()" ng-click="ChangeStart()">
+                    <option value="">-- Select Project ID --</option>
+                </select>
+                <!--<p ng-show="commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.PROJECT_ID, form.formJobModal.ddlProjectId)" class="help-block">Project is required</p>-->
+            </div>
+            
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" id="divJobFileNo" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Job File Number</label>
+                <input name="txtJobNumber" 
+                       hylan-control-validation hylancontrolname="JobNumber" 
+                       hylancontrollabel="Job File Number" 
+                       duplicate-record-check type="text" 
+                       ng-pattern ="/^\d{4}[a-zA-Z]{0,1}$/" class="form-control event-select" 
+                       ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal, form.formJobModal.txtJobNumber) }"
+                       ng-model="jobDCModel.JOB_FILE_NUMBER" 
+                       required ng-click="ChangeStart()" 
+                       ng-change="ValidateDuplicateRecord(form.formJobModal.txtJobNumber, '')" />              
+            </div>
+
+            <!--<div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">ZIP</label>
+                <input name="txtZip" 
+                hylan-control-validation 
+                hylancontrolname="Zip" 
+                hylancontrollabel="ZIP" 
+                positive-number-only type="text" 
+                class="form-control event-select" 
+                ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtZip) }"
+                       ng-model="jobDCModel.ZIP" ng-maxlength="5" ng-minlength="5" ng-click="ChangeStart()" />
+              
+            </div>-->
+           
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">CJ #</label>
+                <input name="txtCJNumber" id="txtCJNumber" hylan-control-validation hylancontrolname="CJNumber" hylancontrollabel="CJ #" type="text" class="form-control event-select" 
+                       ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtCJNumber) }"
+                       ng-model="jobDCModel.CJ_NUMBER"  ng-maxlength="8" ng-minlength="8" ng-click="ChangeStart()" />
+            </div>
+           <!--<script>
+              $(document).ready(function () {
+                 $('#txtCJNumber').keyup(function () {//use mouseout
+                    if ($(this).val().indexOf('C') == 0) {
+                       $(this).val($(this).val());
+                    } else {
+                       $(this).val("CJ" + $(this).val());
+                    }
+                 });
+              });
+            </script>-->
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">DID #</label>
+                <input name="txtDIDNumber" id="txtDIDNumber"  hylan-control-validation hylancontrolname="DIDNumber" hylancontrollabel="DID #" type="text" class="form-control event-select" 
+                       ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtDIDNumber) }"
+                       ng-model="jobDCModel.DID_NUMBER" ng-focus ="txtDIDNumber_Focus()" ng-blur="txtDIDNumber_FocusOut()" ng-maxlength="10" ng-minlength="10" ng-click="ChangeStart()" />
+            </div>
+           <script>
+              $(document).ready(function () {
+                 $('#txtDIDNumber').keyup(function (event) {//use mouseout
+                    //alert(event.keyCode);
+                    if ($(this).val().substring(0, 3) == "DID") {
+                       $(this).val($(this).val());
+                       //alert('1: '+ $(this).val())
+                    } else if ($(this).val().substring(0, 2) == "DI") {
+                       if (event.keyCode == 8 || event.keyCode == 48) {
+                          $(this).val("DID");
+                       }
+                       else {
+                          var totalString = $(this).val().replace('DI', 'DID');
+                          $(this).val(totalString);
+                       }
+                       //alert('2: '+ $(this).val())
+                    }
+                    else if ($(this).val().substring(0, 1) == "D") {
+                       if (event.keyCode == 8 || event.keyCode == 48) {
+                          $(this).val("DID");
+                       }
+                       else {
+                          var totalString = $(this).val().replace('D', 'DID');
+
+                          $(this).val(totalString);
+                       }
+                    }
+                    else {
+                       $(this).val("DID" + $(this).val());
+                       //alert('4: '+ $(this).val())
+                    }
+                 });
+              });
+          </script>
+
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Node ID1</label>
+                <input name="txtNodeID1" hylan-control-validation hylancontrolname="NodeID1" hylancontrollabel="Node ID1" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal, form.formJobModal.txtNodeID1) }"
+                       ng-model="jobDCModel.NODE_ID1" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal, form.formJobModal.txtNodeID1)" class="help-block">Value too long</p>-->
+            </div>
+           
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Node ID2</label>
+                <input name="txtNodeID2" hylan-control-validation hylancontrolname="NodeID2" hylancontrollabel="Node ID2" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal, form.formJobModal.txtNodeID2) }"
+                       ng-model="jobDCModel.NODE_ID2" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtNodeID2)" class="help-block">Value too long</p>-->
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Node ID3</label>
+                <input name="txtNodeID3" hylan-control-validation hylancontrolname="NodeID3" hylancontrollabel="Node ID3" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtNodeID3) }" 
+                       ng-model="jobDCModel.NODE_ID3" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal, form.formJobModal.txtNodeID3)" class="help-block">Value too long</p>-->
+            </div>
+
+
+           
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">HUB</label>
+                <input name="txtHub" hylan-control-validation hylancontrolname="Hub" hylancontrollabel="HUB" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal, form.formJobModal.txtNodeID3) }"
+                       ng-model="jobDCModel.HUB" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal, form.formJobModal.txtNodeID3)" class="help-block">Value too long</p>-->
+            </div>
+           
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">HYLAN PM</label>
+                <select name="ddlHylanPM" class="form-control" ng-model="jobDCModel.HYLAN_PM" ng-options="x.USER_ID as (x.LAST_NAME+', '+x.FIRST_NAME)
+                    for x in DSAdminUsers" ng-change="HideNotification()" ng-click="ChangeStart()">
+                    <option value="">-- Select Hylan PM --</option>
+                </select>
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+           
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Street Address</label>
+                <input name="txtStreetAddress" hylan-control-validation hylancontrolname="StreetAddress" hylancontrollabel="Street Address" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal, form.formJobModal.txtStreetAddress) }"
+                       ng-model="jobDCModel.STREET_ADDRESS" required ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesRequired(form.formJobModal, form.formJobModal.txtStreetAddress)" class="help-block">Street address is required</p>
+                <p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal, form.formJobModal.txtStreetAddress)" class="help-block">Value too long</p>-->
+            </div>
+
+           
+            <!----row end---->
+            <!----row start---->
+            <!--first block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>City</label>
+                <input name="txtCity" hylan-control-validation hylancontrolname="City" hylancontrollabel="City" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtCity) }"
+                       ng-model="jobDCModel.CITY" required ng-maxlength="50" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesRequired(form.formJobModal, form.formJobModal.txtCity)" class="help-block">City is required</p>
+                <p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal, form.formJobModal.txtCity)" class="help-block">Value too long</p>-->
+            </div>
+
+         
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>State</label>
+                <select name="ddlState" hylan-control-validation hylancontrolname="State" hylancontrollabel="State" class="form-control" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.STATE, form.formJobModal.ddlState)}"
+                        ng-model="jobDCModel.STATE" ng-init="jobDCModel.STATE = jobDCModel.STATE !== 0 ? jobDCModel.STATE : null"
+                        ng-options="x.ST_STATE as x.ST_STATE
+                    for x in DSStates" ng-change="HideNotification()" ng-click="ChangeStart()" required>
+                    <option value="">-- Select State --</option>
+                </select>
+                <!--<p ng-show="commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.STATE, form.formJobModal.ddlState)" class="help-block">State is required</p>-->
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">ZIP</label>
+                <input name="txtZip" hylan-control-validation hylancontrolname="Zip" hylancontrollabel="ZIP" positive-number-only type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtZip) }"
+                       ng-model="jobDCModel.ZIP" ng-maxlength="5" ng-minlength="5" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtZip)" class="help-block">Value too long</p>-->
+            </div>
+            
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Latitude</label>
+                <input name="txtLatitude" hylan-control-validation hylancontrolname="Latitude" hylancontrollabel="Latitude" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtLatitude) }"
+                       ng-model="jobDCModel.LAT" ng-maxlength="50" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtLatitude)" class="help-block">Value too long</p>-->
+            </div>
+          
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Longitude</label>
+                <input name="txtLongitude" hylan-control-validation hylancontrolname="Longitude" hylancontrollabel="Longitude" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtLongitude) }"
+                       ng-model="jobDCModel.LONG" ng-maxlength="50" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtLongitude)" class="help-block">Value too long</p>-->
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+          
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Pole Location</label>
+                <input name="txtPoleLocation" hylan-control-validation hylancontrolname="Location" hylancontrollabel="Pole Location" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtPoleLocation) }"
+                       ng-model="jobDCModel.POLE_LOCATION" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtPoleLocation)" class="help-block">Value too long</p>-->
+            </div>
+           
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">DOITT NTP Status</label>
+                <select name="ddlDOITTStatus" class="form-control" ng-model="jobDCModel.DOITT_NTP_STATUS"
+                        ng-options="x.LOOK_UP_ID as x.LU_NAME
+                    for x in doittNTPStatusLU" ng-change="ChangeStart()" ng-click="ChangeStart()">
+                    <option value="">-- Select DOITT NTP Status --</option>
+                </select>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">DOITT NTP Granted date</label>
+                <input type="text" id="calDoittNtpGrantedDate" name="calDoittNtpGrantedDate" class="form-control;pull-left"
+                        is-valid-date-check hylan-control-validation hylancontrolname="DoittNtpGrantedDate" hylancontrollabel="DOITT NTP Granted date"
+                        ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formJobModal, form.formJobModal.calDoittNtpGrantedDate, jobDCModel.DOITT_NTP_GRANTED_DATE ) }"                          
+                        ng-model="jobDCModel.DOITT_NTP_GRANTED_DATE" ng-change="ChangeStart()" ng-click="ChangeStart()" />
+                <script>
+                    $(document).ready(function () {
+                        $("#calDoittNtpGrantedDate").kendoMaskedDatePicker();
+                    });
+                </script>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Job Category</label>
+                <select name="ddlJobCategory" class="form-control" ng-model="jobDCModel.JOB_CATEGORY"
+                        ng-options="x.LOOK_UP_ID as x.LU_NAME
+                    for x in jobCategoryLU" ng-change="ChangeStart()" ng-click="ChangeStart()">
+                    <option value="">-- Select Job Category --</option>
+                </select>
+            </div>
+
+          
+            <!--2nd block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Job Status</label>
+                <select name="ddlJobStatus" hylan-control-validation hylancontrolname="JobStatus" hylancontrollabel="Job Status" class="form-control" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.JOB_STATUS, form.formJobModal.ddlJobStatus)}"
+                        ng-model="jobDCModel.JOB_STATUS" ng-init="jobDCModel.JOB_STATUS = jobDCModel.JOB_STATUS !== 0 ? jobDCModel.JOB_STATUS : null"
+                        ng-options="x.LOOK_UP_ID as x.LU_NAME
+                    for x in jobStatusLU" ng-change="HideNotification()" required ng-click="ChangeStart()">
+                    <option selected value="">-- Select Job Status --</option>
+                </select>
+                <!--<p ng-show="commonValidationService.ValidateDropDown(form.formJobModal, jobDCModel.JOB_STATUS, form.formJobModal.ddlJobStatus)" class="help-block">Job Status is required</p>-->
+            </div>
+
+            
+            <!----row end---->
+            <!----row start---->
+            <!--first block-- -->
+
+           
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">
+                    <div class="col-sm-1 col-md-1 col-lg-1 no-padding" ng-if="jobDCModel.JOB_STATUS===9">
+                        <sup><img src="Content/images/red_asterisk.png" /></sup>
+                    </div>
+                    On-Hold Reason
+                </label>
+                <input name="txtOnHoldReason" hylan-control-validation hylancontrolname="OnHoldReason" hylancontrollabel="On-Hold Reason" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxesBasedOnDropDown(form.formJobModal.txtOnHoldReason, form.formJobModal.ddlJobStatus, 9) }"
+                       ng-model="jobDCModel.ON_HOLD_REASON" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtOnHoldReason)" class="help-block">Value too long</p>-->
+            </div>
+           
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Client PM</label>
+                <input name="txtClientPM" hylan-control-validation hylancontrolname="ClientPM" hylancontrollabel="Client PM" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtClientPM) }"
+                       ng-model="jobDCModel.CLIENT_PM" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtClientPM)" class="help-block">Value too long</p>-->
+            </div>
+           
+            <!----row end---->
+            <!----row start---->
+            <!--first block-- -->
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Number of Submitted Permits</label>
+                <input name="txtSubmittedPermits" hylan-control-validation hylancontrolname="SubmittedPermits" hylancontrollabel="Number of Submitted Permits" positive-number-only type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtSubmittedPermits) }"
+                       ng-model="jobDCModel.NUMBER_OF_SUBMITTED_PERMITS" ng-maxlength="3" ng-click="ChangeStart()" maxlength="3" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtSubmittedPermits)" class="help-block">Value too long</p>-->
+            </div>
+
+       
+            <!--2nd block-- -->
+           
+            <div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtPermitNotes) }">
+                <label class="control-label">Permit Notes</label>
+                <input name="txtPermitNotes" hylan-control-validation hylancontrolname="PermitNotes" hylancontrollabel="Permit Notes" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtPermitNotes) }"
+                       ng-model="jobDCModel.PERMIT_NOTES" ng-maxlength="250" ng-click="ChangeStart()" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesLength(form.formJobModal,form.formJobModal.txtPermitNotes)" class="help-block">Value too long</p>-->
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Punchlist Complete</label>
+                <select id="ddlPunchListCompleted" name="ddlPunchListCompleted" class="form-control" ng-model="jobDCModel.PUNCHLIST_COMPLETE" ng-change="HideNotification()" ng-click="ChangeStart()">
+                    <option value="">-- Select Punchlist Complete --</option>
+                    <option value="Y">Yes</option>
+                    <option value="N">No</option>
+                </select>
+            </div>
+                        
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Punchlist Submitted Date</label>
+                <input type="text" id="calPunchlistSubmittedDate" name="calPunchlistSubmittedDate" class="form-control;pull-left"
+                        is-valid-date-check hylan-control-validation hylancontrolname="PunchlistSubmittedDate" hylancontrollabel="Punchlist Submitted Date"
+                        ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formJobModal, form.formJobModal.calPunchlistSubmittedDate, jobDCModel.PUNCHLIST_SUBMITTED_DATE ) }"                           
+                        ng-model="jobDCModel.PUNCHLIST_SUBMITTED_DATE" ng-change="ChangeStart()" ng-click="ChangeStart()" />
+                <script>
+                    $("#calPunchlistSubmittedDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Client Approval Date</label>
+                <input type="text" id="calClientApprovalDate" name="calClientApprovalDate" class="form-control;pull-left"                       
+                        is-valid-date-check hylan-control-validation hylancontrolname="ClientApprovalDate" hylancontrollabel="Client Approval Date"
+                        ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formJobModal, form.formJobModal.calClientApprovalDate, jobDCModel.CLIENT_APPROVAL_DATE ) }"                          
+                        ng-model="jobDCModel.CLIENT_APPROVAL_DATE" ng-change="ChangeStart()" ng-click="ChangeStart()" />
+                <script>
+                    $("#calClientApprovalDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Priority</label>
+                <input name="txtPriority" hylan-control-validation hylancontrolname="Priority" hylancontrollabel="Priority" type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formJobModal,form.formJobModal.txtPriority) }"
+                       ng-model="jobDCModel.PRIORITY" ng-maxlength="800" ng-click="ChangeStart()" />
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">PO Number</label>
+                <input type="text" class="form-control event-select" ng-model="jobDCModel.PO_NUMBER" maxlength="50" ng-change="ChangeStart()"  />
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">PO Amount</label>
+                <input name="txtPOAmount"
+                       hylan-control-validation hylancontrolname="TrackRevenue"
+                       hylancontrollabel="Track Revenue"
+                       type="text"
+                       class="form-control event-select"
+                       format-amount-input
+                       maxlength="14"                      
+                       ng-model="jobDCModel.PO_AMOUNT"
+                       ng-change="ChangeStart()" />
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Invoice Date</label>
+                <input type="text" id="calInvoiceDate" name="calInvoiceDate" class="form-control;pull-left"
+                       is-valid-date-check hylan-control-validation hylancontrolname="InvoiceDate" hylancontrollabel="Invoice Date"
+                       ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formJobModal, form.formJobModal.calInvoiceDate, jobDCModel.INVOICE_DATE ) }"
+                       ng-model="jobDCModel.INVOICE_DATE" ng-change="ChangeStart()" ng-click="ChangeStart()" />
+                <script>
+                    $("#calInvoiceDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+           
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Invoice Amount</label>
+                <input name="txtInvoiceAmount"
+                       hylan-control-validation hylancontrolname="InvoiceAmount"
+                       hylancontrollabel="Invoice Amount"
+                       type="text"
+                       class="form-control event-select"
+                       format-amount-input
+                       maxlength="14"
+                       ng-model="jobDCModel.INVOICE_AMOUNT"
+                       ng-change="ChangeStart()" />
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+               
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            <!----row end---->
+        </div>
+    </div>
+</form>
+
+
+

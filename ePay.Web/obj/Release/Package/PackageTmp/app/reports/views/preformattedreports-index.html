@@ -1,0 +1,213 @@
+﻿<div class="row no-padding" id="preFrmtRpt">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 col-md-12 col-lg-12 main-head clear">
+        <div class="col-sm-4 col-md-4 col-lg-4 no-padding">PRE FORMATTED <span>REPORTS</span></div>
+        <div class="col-sm-8 col-md-8 col-lg-8 pull-right ReportType">
+            <label><input id="rptNumbers" type="radio" name="rptType" value="NUMBERS" checked ng-click="ChangeReportType('NUMBERS')" />OUTAGE NUMBERS REPORT</label>
+            <label><input id="rptCases" type="radio" name="rptType" value="CASES" ng-click="ChangeReportType('CASES')" />OUTAGE CASES REPORT</label>
+            <label><input id="rptResources" type="radio" name="rptType" value="RESOURCES" ng-click="ChangeReportType('RESOURCES')" />RESOURCE REPORT</label>
+        </div>
+    </div>
+
+    <div class="clearfix visible-sm-block"></div>
+    <div class="clearfix visible-md-block"></div>
+    <div class="clearfix visible-lg-block"></div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-2 col-md-1 col-lg-1">
+            <label class="control-label nopadding">Event</label>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <select id="ddlEvents" class="form-control" ng-model="selectedEventId" ng-change="EventChange()">
+                <option ng-repeat="x in Events" title="{{x.EVENT_NAME}}" value="{{x.EVENT_ID}}" ng-selected="{{x.EVENT_ID == selectedEventId}}">{{x.EVENT_NAME}}</option>
+            </select>
+        </div>
+        <div class="col-sm-2 col-md-1 col-lg-1">
+            <label class="control-label nopadding">Snapshot</label>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <select id="ddlSnapshots" kendo-drop-down-list ng-model="SnapShotDS.SNAPSHOT_DATE"
+                    k-data-text-field="'SNAPSHOT_DATE_WITH_TIMEZONE'"
+                    k-data-value-field="'SNAPSHOT_DATE'"
+                    k-data-source="SnapShotDS"
+                    ng-change="GenerateReport()"
+                    ng-click="HideNotification()" style="width:100%;"></select>
+        </div>
+
+        <div class="clearfix visible-sm-block"></div>
+
+        <div class="col-sm-2 col-md-1 col-lg-1">
+            <label class="control-label nopadding" id="lblFilterRmag">RMAG</label>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <select id="ddlRMAGS" kendo-drop-down-list ng-model="RmagsDS.RMAG_ID"
+                    k-data-text-field="'RMAG_NAME'"
+                    k-data-value-field="'RMAG_ID'"
+                    k-data-source="RmagsDS"
+                    ng-change="rmagFilterChange(RmagsDS.RMAG_ID)"
+                    ng-click="HideNotification()" style="width:100%;"></select>
+        </div>
+
+        <div class="clearfix visible-md-block"></div>
+
+        <div class="col-sm-2 col-md-1 col-lg-1">
+            <label class="control-label nopadding">Company</label>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+            <select id="ddlCompanies" kendo-drop-down-list ng-model="CompaniesDS.COMPANY_ID"
+                    k-data-text-field="'COMPANY_NAME'"
+                    k-data-value-field="'COMPANY_ID'"
+                    k-data-source="CompaniesDS"
+                    ng-change="GenerateReport()"
+                    ng-click="HideNotification()" style="width:100%;"></select>
+        </div>
+
+        <div class="clearfix visible-sm-block"></div>
+        <div class="clearfix visible-lg-block"></div>
+
+        <div class="col-sm-12 col-md-8 col-lg-12">
+            <div class="nav-buttons clear">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-click="ResetFilter()">Reset Filters</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix visible-sm-block"></div>
+    <div class="clearfix visible-md-block"></div>
+    <div class="clearfix visible-lg-block"></div>
+
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 col-md-12 col-lg-12 no-padding clear" style="overflow-x:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions" style="margin-bottom:10px;"></div>
+        <div id="chartSection" style="overflow:auto;">
+            <div id="totalChart" class="col-sm-6" style="height:100%;width:49%;" ng-if="currentReport == 'NUMBERS'"></div>
+            <div id="pctChart" class="col-sm-6" style="height: 100%;width:49%;" ng-if="currentReport == 'NUMBERS'"></div>
+            <div id="caseChart" style="height: 100%;width:99%;" ng-if="currentReport == 'CASES'"></div>
+            <div ng-if="currentReport == 'RESOURCES'" ng-controller="ResourceReportController">
+                <table id="sumTable" cellpadding="0" cellspacing="0" border="0">
+                    <thead>
+                        <tr>
+                            <th style="text-align: left; padding-left: 10px; background-color: #F0F0F0; ">ACQUIRED RESOURCE TYPE</th>
+                            <th>DISTRIBUTION</th>
+                            <th>TRANSMISSION</th>
+                            <th>DAMAGE</th>
+                            <th>TREE</th>
+                            <th>SUBSTATION</th>
+                            <th>NET UG</th>
+                        </tr>
+                    </thead>
+                    <tbody id="resourceSummary"></tbody>
+                </table>
+                <div id="gridAlloc" kendo-grid="grid" k-options="gridOptionsAlloc"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .SummaryRow {
+        background-color: #ebebeb;
+        text-align: left;
+        font-weight: bold;
+    }
+
+        .SummaryRow td {
+            /*text-align: right !important;*/
+            font-size: 12px !important;
+        }
+
+    #sumTable th {
+        font-size: 9pt;
+        border: none !important;
+        padding-left: 10px;
+        padding-right: 10px;
+        line-height: 0px;
+        background-color: #F8F8F8;
+    }
+
+    .GidLayout {
+        table-layout: auto !important;
+    }
+
+    .k-grid-header th.k-header > .k-link {
+        font-size: 8pt;
+    }
+
+    .k-grid-header {
+        border-top: solid 1px #b9b9b9;
+    }
+
+    .k-grid-content {
+        border-bottom: 1px solid #b9b9b9;
+    }
+
+    .ReportType {
+        text-align: right;
+        font-size: 12pt;
+    }
+
+        .ReportType label {
+            color: #7b7b7b;
+            font-size: 10pt;
+            padding-right: 5px;
+        }
+
+            .ReportType label input {
+                margin-right: 5px;
+            }
+
+    .ReportHeader {
+        font-weight: bold;
+        background-image: none !important;
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+
+    .ReportHeader1 {
+        background-color: #fe9c15 !important;
+    }
+
+    .ReportHeader2 {
+        background-color: #ffffff !important;
+    }
+
+    .AllocLabel {
+        width: 50%;
+        margin-bottom: 0px;
+    }
+
+    .AllocLabelLeft {
+        float: left;
+        text-align: left;
+    }
+
+    .AllocLabelRight {
+        float: right;
+        text-align: right;
+    }
+
+    .k-dropdown-wrap {
+        background-image: none !important;
+        background-color: #ffffff !important;
+    }
+
+        .k-dropdown-wrap:hover {
+            border-color: #C5C5C5 !important;
+        }
+
+    .rowspan2 {
+        vertical-align: middle !important;
+    }
+
+    div.k-grid-content table td {
+        line-height: 12px !important;
+        font-size: 12px !important;
+    }
+
+    select {
+        width: 100%;
+    }
+</style>

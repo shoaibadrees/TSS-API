@@ -1,0 +1,67 @@
+﻿<form id="frmNotes" name="form.formNotes" novalidate style="overflow:hidden;margin:5px;" ng-submit="PostData(form.formNotes)">
+    <div id="window" style="overflow:hidden">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close" src="Content/images/close.png"/>
+        </div>
+        <!-- Header -->
+        <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-4 col-md-4 col-lg-4 no-padding">{{ScreenTitle}} <span>NOTES</span></div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-5 col-md-4 col-lg-4 no-padding HeadNote">
+                <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 pull-right no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button type="button" class="k-button k-button-icontext" style="text-decoration:none" id="btnCancel" ng-click="closeModalWindow(form.formNotes)">
+                                    <span class="k-icon k-update  k-i-close"></span>
+                                    Close
+                                </button>
+                            </li>
+                            <li ng-show="AllowToEdit">
+                                <button type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" value="submit"  ng-show="AllowToEdit">
+                                    <span class="k-icon k-update k-i-check"></span>
+                                    Save
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="vertical-align:middle">
+                <div>&nbsp;</div>
+                <div ng-if="ngDialogData.SCREEN_ID == 2 || ngDialogData.SCREEN_ID == 3" class="short-div alert-danger text-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5><b>Project ID:</b>{{ngDialogData.HYLAN_PROJECT_ID}}</h5>
+                </div>
+                <div ng-if="ngDialogData.SCREEN_ID == 3" class="short-div alert-warning text-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h5><b>Job File Number: </b>{{ngDialogData.JOB_NUMBER_ID || ngDialogData.JOB_FILE_NUMBER || "Unknown"}}</h5>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <div class="col-sm-2 col-md-2 col-lg-2" style="text-align:left;float:left;margin-left:0px !important;padding-left:0px !important;">
+                    <label class="control-label" style="text-align:left;float:left;margin-left:0px !important;padding-left:0px !important;"><sup><img src="Content/images/red_asterisk.png" /></sup>Notes</label>
+                </div>
+
+                <div class="form-group" >
+                    <textarea id="textAreaNotes" name="textAreaNotes" hylan-control-validation hylancontrolname="Notes" hylancontrollabel="Notes"
+                              style="height: 80px !important; overflow: hidden;"
+                              class="form-control" ng-change="ChangeStart()"
+                              ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxesNotesOnly(form.formNotes, form.formNotes.textAreaNotes) }"
+                              ng-maxlength="1000" ng-model="NoteDCModel.NOTES"
+                              cols="70" rows="8" required ng-disabled="!AllowToEdit"></textarea>
+                    <!--<p ng-show="commonValidationService.ValidateTextBoxesRequired(form.formNotes, form.formNotes.textAreaNotes)" class="help-block">Note field is required</p>-->
+                </div>
+            </div>
+        </div>
+        </div>
+   
+        <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden">
+            <div id="gridnotes" kendo-grid="gridnotes" k-options="gridOptions"></div>
+        </div>
+</form>

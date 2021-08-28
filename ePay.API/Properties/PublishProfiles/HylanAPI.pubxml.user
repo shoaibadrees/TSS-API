@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\HylanPublishedWebService</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="Areas/HelpPage/HelpPage.css">
+      <publishTime>03/20/2017 19:48:55</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/Api.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ApiGroup.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/HelpPageApiModel.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/ImageSample.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/InvalidSample.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Parameters.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/Samples.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/DisplayTemplates/TextSample.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Help/Index.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Shared/_Layout.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/Web.config">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="Areas/HelpPage/Views/_ViewStart.cshtml">
+      <publishTime>03/20/2017 19:48:56</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>03/20/2017 19:51:49</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.compiled">
+      <publishTime>11/14/2017 18:32:41</publishTime>
+    </File>
+    <File Include="bin/App_global.asax.dll">
+      <publishTime>11/14/2017 18:32:41</publishTime>
+    </File>
+    <File Include="bin/EPPlus.dll">
+      <publishTime>10/08/2017 22:48:52</publishTime>
+    </File>
+    <File Include="bin/Hylan.API.dll">
+      <publishTime>11/14/2017 18:24:20</publishTime>
+    </File>
+    <File Include="bin/Hylan.BusinessLayer.dll">
+      <publishTime>11/14/2017 18:24:19</publishTime>
+    </File>
+    <File Include="bin/Hylan.Common.dll">
+      <publishTime>11/14/2017 18:24:19</publishTime>
+    </File>
+    <File Include="bin/Hylan.DAL.dll">
+      <publishTime>11/14/2017 18:24:19</publishTime>
+    </File>
+    <File Include="bin/ICSharpCode.SharpZipLib.dll">
+      <publishTime>03/20/2017 19:53:19</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Common.dll">
+      <publishTime>03/20/2017 19:52:45</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Data.dll">
+      <publishTime>03/20/2017 19:52:45</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll">
+      <publishTime>03/20/2017 19:52:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll">
+      <publishTime>03/20/2017 19:52:45</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll">
+      <publishTime>03/20/2017 19:52:44</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.EnterpriseLibrary.Logging.dll">
+      <publishTime>03/20/2017 19:52:46</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.ObjectBuilder2.dll">
+      <publishTime>03/20/2017 19:52:47</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>03/20/2017 19:52:46</publishTime>
+    </File>
+    <File Include="bin/MigraDoc.DocumentObjectModel.dll">
+      <publishTime>03/20/2017 19:53:24</publishTime>
+    </File>
+    <File Include="bin/MigraDoc.Rendering.dll">
+      <publishTime>03/20/2017 19:53:22</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/20/2017 19:52:59</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>03/20/2017 19:53:48</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>03/20/2017 19:53:25</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>03/20/2017 19:53:19</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>03/20/2017 19:53:45</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.Charting.dll">
+      <publishTime>03/20/2017 19:53:26</publishTime>
+    </File>
+    <File Include="bin/PdfSharp.dll">
+      <publishTime>03/20/2017 19:53:44</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>03/20/2017 19:52:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>03/20/2017 19:52:01</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>03/20/2017 19:52:41</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Cors.dll">
+      <publishTime>03/20/2017 19:52:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>03/20/2017 19:52:35</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>03/20/2017 19:52:39</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>03/20/2017 19:52:14</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>03/20/2017 19:52:28</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>03/20/2017 19:52:20</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Deployment.dll">
+      <publishTime>03/20/2017 19:52:40</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.dll">
+      <publishTime>03/20/2017 19:52:42</publishTime>
+    </File>
+    <File Include="bin/System.Web.WebPages.Razor.dll">
+      <publishTime>03/20/2017 19:52:40</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>03/20/2017 19:53:46</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.css.map">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-grid.min.css.map">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.css.map">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap-reboot.min.css.map">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css.map">
+      <publishTime>03/20/2017 19:48:59</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css.map">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>03/20/2017 19:48:57</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>03/20/2017 19:48:55</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>10/25/2017 17:13:48</publishTime>
+    </File>
+    <File Include="PrecompiledApp.config">
+      <publishTime>11/14/2017 18:32:33</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>03/20/2017 19:48:59</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.js">
+      <publishTime>06/15/2017 17:26:36</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.js">
+      <publishTime>03/20/2017 19:48:59</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.min.map">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.js">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/jquery-3.1.1.slim.min.map">
+      <publishTime>03/20/2017 19:49:02</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.8.3.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/respond.matchmedia.addListener.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/respond.matchmedia.addListener.min.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>03/20/2017 19:49:00</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>03/20/2017 19:48:59</publishTime>
+    </File>
+    <File Include="Views/Home/Index.cshtml">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Views/Shared/Error.cshtml">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Views/Shared/_Layout.cshtml">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Views/Web.config">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Views/_ViewStart.cshtml">
+      <publishTime>03/20/2017 19:49:01</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>10/30/2017 21:06:12</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

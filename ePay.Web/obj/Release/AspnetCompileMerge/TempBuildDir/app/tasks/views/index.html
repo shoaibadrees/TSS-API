@@ -1,0 +1,914 @@
+﻿<form>
+    <div class="col-sm-12 no-padding">
+        <!-- Header -->
+        <div class="col-sm-12 main-head clear">
+            <div class="col-sm-3 no-padding">{{vm.ScreenTitle}} <span>TASKS</span></div>
+
+            <!--<div class="col-sm-4 no-padding HeadNote">
+                <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+            </div>-->
+            <div class="col-sm-4 col-md-3  nav-buttons pull-right no-padding">
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li id="liButtonBar">
+                            <!--<a class="k-button k-button-icontext" ui-sref="{{vm.JOB.BACK_STATE}}" ui-sref-opts="{reload: true}">
+                                <span class="k-icon k-update k-i-arrow-left"></span>Back
+                            </a>-->
+                            <a class="k-button k-button-icontext" ng-click="vm.BackButton()">
+                                <span class="k-icon k-update k-i-arrow-left"></span>Back
+                            </a>
+                            </li>
+                        <li ng-show="AllowToEdit">
+                            <a class="k-button k-button-icontext k-grid-save-changes" ng-show="AllowToEdit"
+                               id="btnSave" ng-click="vm.PostData()">
+                                <span class="k-icon k-update k-i-check"></span>Save
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 event-select tasks-top-section clear">
+            <div class="col-sm-3 col-md-3 col-lg-3"><label class="control-label nopadding">PROJECT ID:<span>{{vm.JOB.HYLAN_PROJECT_ID}}</span></label></div>
+            <div class="col-sm-3 col-md-3 col-lg-3"><label class="control-label nopadding">JOB FILE NUMBER:<span>{{vm.JOB.JOB_FILE_NUMBER}}</span></label></div>
+        </div>
+
+        <div id="CardsContainer" class="col-sm-12 col-md-12 col-lg-12 no-padding scroll-pane" ng-disabled="!AllowToEdit">
+            <div id="MasonryGrid">
+                <div id="Card{{vm.TasksType.CONTINUITY_ZERO}}" class="Card Shadow" ng-class="{'SavedCard': vm.ContinuityZeroModel.TASK_ID > 0}"  data-sort="{{vm.TasksType.CONTINUITY_ZERO}}">
+                    <div id="CardHeader{{vm.TasksType.CONTINUITY_ZERO}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.CONTINUITY_ZERO)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.ContinuityZeroModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.ContinuityZeroModel,vm.TasksType.CONTINUITY_ZERO)"></button>
+                        <span class="CARD_NAME">{{vm.ContinuityZeroModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast Date</label> </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.ContinuityZeroModel.EST_COMPLETION_DATE" ng-change="vm.Changed(vm.ContinuityZeroModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.ContinuityZeroModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.ContinuityZeroModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Party Responsible</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-model="vm.ContinuityZeroModel.PARTY_RESPONSIBLE" ng-change="vm.Changed(vm.ContinuityZeroModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height1" ng-model="vm.ContinuityZeroModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.ContinuityZeroModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.UG_MISC}}" class="Card Shadow" ng-class="{'SavedCard': vm.UgMiscModel.TASK_ID > 0}" data-sort="{{vm.TasksType.UG_MISC}}">
+                    <div id="CardHeader{{vm.TasksType.UG_MISC}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.UG_MISC)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.UgMiscModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.UgMiscModel,vm.TasksType.UG_MISC)"></button>
+                        <span class="CARD_NAME">{{vm.UgMiscModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.UgMiscModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.UgMiscModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.UgMiscModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.UgMiscModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.UgMiscModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.UgMiscModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.UgMiscModel) && (vm.UgMiscModel.ON_HOLD_OTHER == null || vm.UgMiscModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.UgMiscModel)}"
+                                           ng-model="vm.UgMiscModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.UgMiscModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height1" ng-model="vm.UgMiscModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.UgMiscModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.AC_POWER_POLE}}" class="Card Shadow" ng-class="{'SavedCard': vm.AcPowerPoleModel.TASK_ID > 0}" data-sort="{{vm.TasksType.AC_POWER_POLE}}">
+                    <div id="CardHeader{{vm.TasksType.AC_POWER_POLE}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.AC_POWER_POLE)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.AcPowerPoleModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.AcPowerPoleModel,vm.TasksType.AC_POWER_POLE)"></button>
+                        <span class="CARD_NAME">{{vm.AcPowerPoleModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.AcPowerPoleModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.AcPowerPoleModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.AcPowerPoleModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.AcPowerPoleModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.AcPowerPoleModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.AcPowerPoleModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.AcPowerPoleModel) && (vm.AcPowerPoleModel.ON_HOLD_OTHER == null || vm.AcPowerPoleModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.AcPowerPoleModel)}"
+                                           ng-model="vm.AcPowerPoleModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.AcPowerPoleModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height1" ng-model="vm.AcPowerPoleModel.NOTES" cols="20" rows="4" maxlength="1000" maxlength="1000" ng-change="vm.Changed(vm.AcPowerPoleModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Card{{vm.TasksType.FOUNDATION_WORK}}" class="Card card-col2 Shadow" ng-class="{'SavedCard': vm.FoundationWorkModel.TASK_ID > 0}" data-sort="{{vm.TasksType.FOUNDATION_WORK}}">
+                    <div id="CardHeader{{vm.TasksType.FOUNDATION_WORK}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.FOUNDATION_WORK)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.FoundationWorkModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.FoundationWorkModel,vm.TasksType.FOUNDATION_WORK)"></button>
+                        <span class="CARD_NAME">{{vm.FoundationWorkModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Type</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FoundationWorkModel.FOUNDATION_WORK_TYPE"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FOUNDATION_WORK_TYPE'" ng-change="vm.Changed(vm.FoundationWorkModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast Start Date</label> </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.FoundationWorkModel.EST_START_DATE" ng-change="vm.Changed(vm.FoundationWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Start Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FoundationWorkModel.ACT_START_DATE" ng-change="vm.Changed(vm.FoundationWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">ConEd Ticket Number</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-model="vm.FoundationWorkModel.CONED_TICKET_NUMBER" ng-change="vm.Changed(vm.FoundationWorkModel)" />
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FoundationWorkModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.FoundationWorkModel, this)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.FoundationWorkModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.FoundationWorkModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.FoundationWorkModel) && (vm.FoundationWorkModel.ON_HOLD_OTHER == null || vm.FoundationWorkModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.FoundationWorkModel)}"
+                                           ng-model="vm.FoundationWorkModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.FoundationWorkModel)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FoundationWorkModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.FoundationWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height3" ng-model="vm.FoundationWorkModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.FoundationWorkModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.POWER_DIG}}" class="Card card-col2 Shadow" ng-class="{'SavedCard': vm.PowerDigModel.TASK_ID > 0}" data-sort="{{vm.TasksType.POWER_DIG}}">
+                    <div id="CardHeader{{vm.TasksType.POWER_DIG}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.POWER_DIG)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.PowerDigModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.PowerDigModel,vm.TasksType.POWER_DIG)"></button>
+                        <span class="CARD_NAME">{{vm.PowerDigModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast Start Date</label> </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.PowerDigModel.EST_START_DATE" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Start Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PowerDigModel.ACT_START_DATE" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Length</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="5" min="0" positive-number-only
+                                           ng-model="vm.PowerDigModel.ACT_LENGTH" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Estimated Length</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="5" min="0" positive-number-only
+                                           ng-model="vm.PowerDigModel.EST_LENGTH" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.PowerDigModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.PowerDigModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.PowerDigModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.PowerDigModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.PowerDigModel) && (vm.PowerDigModel.ON_HOLD_OTHER == null || vm.PowerDigModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.PowerDigModel)}"
+                                           ng-model="vm.PowerDigModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PowerDigModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.PowerDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height3" ng-model="vm.PowerDigModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.PowerDigModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.POLE_WORK}}" class="Card card-col2 Shadow" ng-class="{'SavedCard': vm.PoleWorkModel.TASK_ID > 0}" data-sort="{{vm.TasksType.POLE_WORK}}">
+                    <div id="CardHeader{{vm.TasksType.POLE_WORK}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.POLE_WORK)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.PoleWorkModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.PoleWorkModel,vm.TasksType.POLE_WORK)"></button>
+                        <span class="CARD_NAME">{{vm.PoleWorkModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Type</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.PoleWorkModel.POLE_WORK_TYPE"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'POLE_WORK_TYPE'" ng-change="vm.Changed(vm.PoleWorkModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast Start Date</label> </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.PoleWorkModel.EST_START_DATE" ng-change="vm.Changed(vm.PoleWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Start Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PoleWorkModel.ACT_START_DATE" ng-change="vm.Changed(vm.PoleWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.PoleWorkModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.PoleWorkModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.PoleWorkModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.PoleWorkModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.PoleWorkModel) && (vm.PoleWorkModel.ON_HOLD_OTHER == null || vm.PoleWorkModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.PoleWorkModel)}"
+                                           ng-model="vm.PoleWorkModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.PoleWorkModel)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PoleWorkModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.PoleWorkModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height3" ng-model="vm.PoleWorkModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.PoleWorkModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.SHROUD_ANTENA}}" class="Card card-col2 Shadow" ng-class="{'SavedCard': vm.ShroudAntenaModel.TASK_ID > 0}" data-sort="{{vm.TasksType.SHROUD_ANTENA}}">
+                    <div id="CardHeader{{vm.TasksType.SHROUD_ANTENA}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.SHROUD_ANTENA)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.ShroudAntenaModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.ShroudAntenaModel,vm.TasksType.SHROUD_ANTENA)"></button>
+                        <span class="CARD_NAME">{{vm.ShroudAntenaModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="control-label checkboxdiv">
+                                        <input type="checkbox" ng-model="vm.ShroudAntenaModel.SHROUD_INSTALLED"
+                                               data-ng-true-value="'Y'" data-ng-false-value="'N'"
+                                               ng-click="vm.Changed(vm.ShroudAntenaModel)" />
+                                        <label>Shroud Installed</label><br />
+                                        <input type="checkbox" ng-model="vm.ShroudAntenaModel.ANTENA_INSTALLED"
+                                               data-ng-true-value="'Y'" data-ng-false-value="'N'"
+                                               ng-click="vm.Changed(vm.ShroudAntenaModel)" />
+                                        <label>Antenna Installed</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast  Start Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.ShroudAntenaModel.EST_START_DATE" ng-change="vm.Changed(vm.ShroudAntenaModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Ion Serial number</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="50"
+                                           ng-model="vm.ShroudAntenaModel.ION_SERIAL_NUMBER" ng-change="vm.Changed(vm.ShroudAntenaModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Shroud Serial Number</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="50"
+                                           ng-model="vm.ShroudAntenaModel.SHROUD_SERIAL_NUMBER" ng-change="vm.Changed(vm.ShroudAntenaModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.ShroudAntenaModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.ShroudAntenaModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.ShroudAntenaModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.ShroudAntenaModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.ShroudAntenaModel) && (vm.ShroudAntenaModel.ON_HOLD_OTHER == null || vm.ShroudAntenaModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.ShroudAntenaModel)}"
+                                           ng-model="vm.ShroudAntenaModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.ShroudAntenaModel)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.ShroudAntenaModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.ShroudAntenaModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height3" ng-model="vm.ShroudAntenaModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.ShroudAntenaModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Card{{vm.TasksType.FIBER_PULL}}" class="Card Shadow" ng-class="{'SavedCard': vm.FiberPullModel.TASK_ID > 0}" data-sort="{{vm.TasksType.FIBER_PULL}}">
+                    <div id="CardHeader{{vm.TasksType.FIBER_PULL}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.FIBER_PULL)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.FiberPullModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.FiberPullModel,vm.TasksType.FIBER_PULL)"></button>
+                        <span class="CARD_NAME">{{vm.FiberPullModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Type</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberPullModel.FIBER_TYPE"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FIBER_TYPE'" ng-change="vm.Changed(vm.FiberPullModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Lateral/Node Tail</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberPullModel.FIBER_OPTIC_POSITION"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FIBER_OPTIC_POSITION'" ng-change="vm.Changed(vm.FiberPullModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FiberPullModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.FiberPullModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberPullModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.FiberPullModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.FiberPullModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.FiberPullModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.FiberPullModel) && (vm.FiberPullModel.ON_HOLD_OTHER == null || vm.FiberPullModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.FiberPullModel)}"
+                                           ng-model="vm.FiberPullModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.FiberPullModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height2" ng-model="vm.FiberPullModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.FiberPullModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.FIBER_SPLICE}}" class="Card Shadow" ng-class="{'SavedCard': vm.FiberSpliceModel.TASK_ID > 0}" data-sort="{{vm.TasksType.FIBER_SPLICE}}">
+                    <div id="CardHeader{{vm.TasksType.FIBER_SPLICE}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.FIBER_SPLICE)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.FiberSpliceModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.FiberSpliceModel,vm.TasksType.FIBER_SPLICE)"></button>
+                        <span class="CARD_NAME">{{vm.FiberSpliceModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Type</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberSpliceModel.FIBER_TYPE"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FIBER_TYPE'" ng-change="vm.Changed(vm.FiberSpliceModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FiberSpliceModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.FiberSpliceModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Light Test to Client</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FiberSpliceModel.LIGHT_TEST_CLIENT_DATE" ng-change="vm.Changed(vm.FiberSpliceModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberSpliceModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.FiberSpliceModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.FiberSpliceModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.FiberSpliceModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.FiberSpliceModel) && (vm.FiberSpliceModel.ON_HOLD_OTHER == null || vm.FiberSpliceModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.FiberSpliceModel)}"
+                                           ng-model="vm.FiberSpliceModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.FiberSpliceModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height2" ng-model="vm.FiberSpliceModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.FiberSpliceModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="Card{{vm.TasksType.PIM_SWEEP}}" class="Card Shadow" ng-class="{'SavedCard': vm.PimSweepModel.TASK_ID > 0}" data-sort="{{vm.TasksType.PIM_SWEEP}}">
+                    <div id="CardHeader{{vm.TasksType.PIM_SWEEP}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.PIM_SWEEP)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.PimSweepModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.PimSweepModel,vm.TasksType.PIM_SWEEP)"></button>
+                        <span class="CARD_NAME">{{vm.PimSweepModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PimSweepModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.PimSweepModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Submitted Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PimSweepModel.SUBMITTED_DATE" ng-change="vm.Changed(vm.PimSweepModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Client's Approval Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.PimSweepModel.CLIENT_APPROVAL_DATE" ng-change="vm.Changed(vm.PimSweepModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.PimSweepModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.PimSweepModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.PimSweepModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.PimSweepModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.PimSweepModel) && (vm.PimSweepModel.ON_HOLD_OTHER == null || vm.PimSweepModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.PimSweepModel)}"
+                                           ng-model="vm.PimSweepModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.PimSweepModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height2" ng-model="vm.PimSweepModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.PimSweepModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="Card{{vm.TasksType.FIBER_DIG}}" class="Card card-col2 Shadow" ng-class="{'SavedCard': vm.PoleWorkModel.TASK_ID > 0}" data-sort="{{vm.TasksType.FIBER_DIG}}">
+                    <div id="CardHeader{{vm.TasksType.FIBER_DIG}}" class="CardHeader">
+                        <button class="CardToggler CardCollapsedIcon" ng-click="vm.ToggleCardView(this,vm.TasksType.FIBER_DIG)"></button>
+                        <button class="CardSelector CardUnselectedIcon" ng-model="vm.PoleWorkModel.REQUIRED"
+                                ng-click="vm.ToggleRequired(vm.FiberDigModel,vm.TasksType.FIBER_DIG)"></button>
+                        <span class="CARD_NAME">{{vm.FiberDigModel.TASK_NAME}}</span>
+                    </div>
+                    <div class="CardContents">
+                        <div class="overlay"><div class="ajax-loader"></div></div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Type</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberDigModel.FIBER_DIG_TYPE"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FIBER_DIG_TYPE'" ng-change="vm.Changed(vm.FiberDigModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Forecast Start Date</label> </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control-week-off" onkeydown="return false;"
+                                           ng-model="vm.FiberDigModel.EST_START_DATE" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Estimated Length</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="5" min="0" positive-number-only
+                                           ng-model="vm.FiberDigModel.EST_LENGTH" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Length</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="5" min="0" positive-number-only
+                                           ng-model="vm.FiberDigModel.ACT_LENGTH" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Reason For Hold</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberDigModel.ON_HOLD_REASON" data-select-type="TASK_HOLD_REASON"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'TASK_HOLD_REASON'" ng-change="vm.Changed(vm.FiberDigModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <sup ng-show="vm.CheckOnHoldReason(vm.FiberDigModel)"><img src="Content/images/red_asterisk.png" /></sup>
+                                    <label class="control-label">Other Reason</label>
+                                </div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="form-control" maxlength="250"
+                                           ng-disabled="!vm.CheckOnHoldReason(vm.FiberDigModel)"
+                                           ng-class="{'Required': vm.CheckOnHoldReason(vm.FiberDigModel) && (vm.FiberDigModel.ON_HOLD_OTHER == null || vm.FiberDigModel.ON_HOLD_OTHER == ''), 'Disabled': !vm.CheckOnHoldReason(vm.FiberDigModel)}"
+                                           ng-model="vm.FiberDigModel.ON_HOLD_OTHER" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Vault</label> </div>
+                                <div class="col-lg-12">
+                                    <select class="form-control" ng-model="vm.FiberDigModel.FIBER_DIG_VAULT"
+                                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME
+                                    for lu in vm.LookUp | filter:lu.LU_TYPE = 'FIBER_DIG_VAULT'" ng-change="vm.Changed(vm.FiberDigModel)">
+                                        <option value=""> </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Start Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FiberDigModel.ACT_START_DATE" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Actual Completion Date</label></div>
+                                <div class="col-lg-12">
+                                    <input type="text" class="date-control"
+                                           ng-model="vm.FiberDigModel.ACT_COMPLETION_DATE" ng-change="vm.Changed(vm.FiberDigModel)" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12"><label class="control-label">Notes</label></div>
+                                <div class="col-lg-12">
+                                    <textarea class="form-control Height1" ng-model="vm.FiberDigModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="vm.Changed(vm.FiberDigModel)"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    var masonryContainerId = '#MasonryGrid';
+    var masnoryGrid = null;
+    $(document).ready(function () {
+        $(".date-control,.date-control-week-off").attr("title", "MM/dd/yyyy");
+        $(".date-control").kendoMaskedDatePicker();
+        $(".date-control-week-off").kendoDatePicker({
+            format: "MM/dd/yyyy",
+            disableDates: ["sa", "tu", "we", "th", "fr", "su"]
+        });
+        InitMasnory(false);
+    });
+    function setScrollPaneHeight() {
+        var windowHeight = $(window).height();
+        $('#CardsContainer').height(windowHeight - 75);
+    }
+    function InitMasnory(callReloadMasnory, scrollToElem) {
+        if ($(masonryContainerId).masonry != undefined) {
+            masnoryGrid = $(masonryContainerId).masonry({
+                columnWidth: 10,
+                itemSelector: '.Card',
+                isAnimated: !Modernizr.csstransitions,
+                transitionDuration: '0.2s',
+                percentPosition: false,
+            });
+            $(window).resize(function ($) {
+                ReloadMasonryStructure();
+            });
+            if (callReloadMasnory == true) {
+                ReloadMasonryStructure();
+            }
+            if (scrollToElem) {
+                $('#' + scrollToElem)[0].scrollIntoView();
+            }
+        }
+    }
+    function ReloadMasonryStructure() {
+        if ($(masonryContainerId).masonry) {
+            $(function msnry() {
+                var columns = 3,
+                    setColumns = function () { columns = $(window).width() > 640 ? 3 : $(window).width() > 320 ? 2 : 1; };
+                setColumns();
+                $(window).resize(setColumns);
+                var $container = $(masonryContainerId).masonry();
+            });
+        }
+        setScrollPaneHeight();
+    }
+
+
+</script>
+
+<style type="text/css">
+    .GlobalButtons{
+        display:none;
+    }
+    .checkboxdiv * {
+        vertical-align: middle !important;
+    }
+
+    .checkboxdiv label {
+        padding-top: 5px;
+        padding-left: 5px;
+    }
+
+    label {
+        margin-bottom: 0px !important;
+        text-transform: uppercase;
+    }
+
+    .tasks-top-section {
+        background: #677077 !important;
+    }
+
+        .tasks-top-section .control-label {
+            color: #ffffff;
+        }
+    .tasks-top-section span {
+        margin-left:20px;
+    }
+    .event-select {
+        margin-bottom: 0px;
+    }
+
+        .event-select label {
+            padding-top: 0px;
+        }
+
+    .date-control, .date-control-week-off {
+        width: 100%;
+    }
+
+    .form-control {
+        height: 26px !important;
+    }
+
+    #liButtonBar a {
+        display: inline-block !important;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .main-head .nav-buttons {
+            margin-top: 0px;
+        }
+    }
+    .Height1{
+        height:125px !important;
+    }
+    .Height2{
+        height:35px !important;
+    }
+    .Height3 {
+        height:213px !important;
+    }
+    .Card:last-child {
+        margin-bottom:15px !important;
+    }
+</style>

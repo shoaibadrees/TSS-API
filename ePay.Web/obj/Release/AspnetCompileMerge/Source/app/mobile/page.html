@@ -1,0 +1,646 @@
+﻿<div data-role="view" data-title="Responses" data-layout="default" id="responseView" data-init="InitView"
+     data-show="ShowView" data-before-show="onBeforeShowView" data-before-hide="onBeforeHideView" data-cache="false">
+    <header data-role="header">
+        <div id="navBar" data-role="navbar" class="NavBar Shadow">
+            <a id="navBackButton" data-role="button" class="button backbutton" data-button-type="back" style="display: none;" onclick="lastClickedButton = 'back'; app.navigate('#:back');"></a>
+            <a id="navAppDrawer" data-role="button" data-button-type="drawer" data-rel="drawer" href="#applicationDrawer" class="button menubutton"></a>
+            <span id="spnViewTitle" data-role="view-title"></span>
+            <label id="pullCount"></label>
+            <a id="btnAdd" data-align="right" data-role="button" data-button-type="add" class="button addbutton" data-click="btnAdd_Click_page"></a>
+            <a id="btnFilter" data-align="right" data-rel="actionsheet" data-role="button" data-button-type="filter" href="#filterOps" class="button grpbutton"></a>
+            <a id="btnShowFilterView" data-align="right" href="#searchFilterView" data-role="button" data-button-type="search" class="button searchbutton"></a>
+            <a id="btnEdit" data-align="right" data-role="button" data-button-type="edit" class="button editbutton" data-click="btnEdit_Click_page"></a>
+            <a id="btnDelete" data-align="right" data-role="button" data-button-type="delete" class="button deletebutton" data-click="btnDelete_Click_page"></a>
+        </div>
+        <div class="titlecontainer">
+            <label id="lblEventName"></label>
+        </div>
+        <div class="searchcontainer">
+            <input type="text" id="search" class="search" placeholder="Filter here" onkeyup="activateSearchFilter();" />
+        </div>
+        <div style="background-color: white !important; display: none;" id="divSelectedGroup">
+            <div style="font-size: 9pt; padding: 5px; padding-left: 10px; text-transform: uppercase;">
+                <label style="color: #A4A4A4;">Grouped By</label>
+                <label id="lblSelectedGroup" style="color: #898989; font-weight: bold;"></label>
+            </div>
+        </div>
+        <div data-role="popover" id="filterOps" data-popup='{"width": "20em"}'>
+            <div data-role="view">
+                <ul id="groupList" data-role="listview" data-click="GroupItemClick"></ul>
+            </div>
+        </div>
+    </header>
+    <ul id="listView" class="lv-main" data-role="listview"></ul>
+</div>
+
+<div data-role="view" data-title="Search" id="searchFilterView" data-show="onSearchShow" data-init="InitView">
+    <header data-role="header">
+        <div data-role="navbar" id="searchNavBar" class="NavBar Shadow">
+            <a id="filterBack" data-button-type="back" data-role="button" class="button backbutton" onclick="lastClickedButton = 'back'; globalBackButtonClick();"></a>
+            <span data-role="view-title">Search</span>
+            <a id="btnReset" data-align="right" data-role="button" data-button-type="reset" class="button resetbutton" data-click="btnReset_Click_Page"></a>
+            <a id="btnSearchResult" data-role="button" data-button-type="searchresult" data-align="right" class="button donebutton" onclick="lastClickedButton = 'search'; btnSearchClick_page();">
+                Done
+            </a>
+        </div>
+    </header>
+    <div id="searchTemplate"></div>
+</div>
+
+<div data-role="view" data-title="" id="updateView" data-show="onUpdateViewShow" data-init="InitView">
+    <header data-role="header">
+        <div id="navBar" data-role="navbar" class="NavBar Shadow">
+            <a id="navBackButton_UpdateView" data-button-type="back" data-role="button" class="button backbutton" onclick="btnBack_Click_UpdateView();"></a>
+            <span data-role="view-title"></span>
+            <a id="btnSave" data-align="right" data-role="button" class="button savebutton" data-click="btnSave_Click_page"></a>
+        </div>
+    </header>
+    <div id="tabstripResponse" class="TabStrip"></div>
+    <div id="divFooterNavigation"></div>
+
+
+    <script id="pageRoutines" type="text/javascript">
+        var lastSearchedData = [];
+        var groupBy = null;
+        var lastSelectedGroup = undefined;
+        var lastClickedButton = "";
+        var EventsDS = null;
+        var confirmBackDialog = $("<div />").kendoWindow({
+            title: "Confirm",
+            resizable: false,
+            modal: true,
+            width: "90%",
+            content: {
+                template: '<div class="k-content">' + Globals.ChangesLostMessage + '<div style="text-align:right;padding:4px;"><a class="button-new delete-cancel" onclick="confirmBackDialog.data(\'kendoWindow\').close();">Cancel</a>&nbsp;<a class="button-new red delete-confirm" onclick="confirmBackDialog.data(\'kendoWindow\').close();app.navigate(\'\\#:back\');">Ok</a></div></div>'
+            }
+        });
+
+        function ShowView(e) {
+            pageConfig = nMartPageConfig.build(e.view.params.type);
+            nmartPage = new nMartPage(pageConfig);
+            if (SearchParams.pageType != pageConfig.pageType) {
+                SearchParams.pageType = pageConfig.pageType;
+                SearchParams.purge();
+
+                BindEventsDropDown();
+                
+                if (!EventsDS || EventsDS.length == 0) {
+                    ////popupNotification.show("You don't have any Active event.", "error");
+                    return;
+                }
+                var lastSelectedEvent = getCachedItem(CachedKeys.SELECTED_EVENT);
+                setCachedItem(CachedKeys.SELECTED_EVENT, EventsDS[0]);
+                if (lastSelectedEvent) {
+                    var existInPageEventsDS = _.find(EventsDS, function (elem) { return elem.EVENT_ID == lastSelectedEvent.EVENT_ID });
+                    if (existInPageEventsDS)
+                        setCachedItem(CachedKeys.SELECTED_EVENT, existInPageEventsDS);
+                }
+                lastSearchedData = [];
+                groupBy = null;
+                lastSelectedGroup = undefined;
+                lastClickedButton = "";
+                $("#lblSelectedGroup").html("");
+                $("#divSelectedGroup").hide();
+                $("#search").val("");
+                SearchParams.data.COMPANY_NAME = "";
+                $("#ipCompany").val(SearchParams.data.COMPANY_NAME);
+            }
+            SearchParams.refresh(getCachedItem(CachedKeys.SELECTED_EVENT), "event");
+
+            RemovePullToRefresh();
+            var parentID = e.view.params.parent;
+            if (!SearchParams.data.EventID) {
+                popupNotification.show("You don't have any Active event.", "error");
+                return;
+            }
+            if (parentID == undefined) {
+                if (e.view.options)
+                    e.view.options.title = pageConfig.pageType;
+                else
+                    $("#spnViewTitle").text(pageConfig.pageType);
+                $("#groupList").html(kendo.render(pageConfig.templates.GROUP_ITEMS, pageConfig.groupColumns));
+                $("#searchTemplate").replaceWith(pageConfig.templates.SEARCH);
+            }
+            else {
+                e.view.options.title = pageConfig.pageType + " Detail";
+            }
+
+            if (lastClickedButton == "search")
+                FetchSearchResults(parentID, "search");
+            else
+                FetchSearchResults(parentID, null);
+
+            if (groupBy != null && parentID == undefined) {
+                GroupChange(groupBy);
+            }
+
+            SetSelectedGroupItem('');
+            $("#lblEventName").text(SearchParams.data.EventName);
+
+            /** GENERAL EDIT ACCESS ROLES **/
+            if (pageConfig && nmartPage &&
+                nmartPage.UserCompaniesList && nmartPage.UserCompaniesList.COMPANY) {
+                var e = { model: { USER_COMPANIES: nmartPage.UserCompaniesList.COMPANY } };
+                var allowEdit = Globals.HasGenEditAccess(pageConfig.genEditAccessType, e, pageConfig.screenID);
+                if (allowEdit == false || Globals.CheckEditPermission(pageConfig.screenID) == false) {
+                    $("#btnEdit").css("visibility", "hidden");
+                    $("#btnDelete").css("visibility", "hidden");
+                    $("#btnAdd").css("visibility", "hidden");
+                }
+            }
+            /** END **/
+            $("input[type=text]").on("blur", function () {
+                app.scroller().reset();
+            });
+        }
+
+        function onSearchShow() {
+            nmartPage.showLoading(true);
+            setTimeout(function () {
+                var ddlStatus = $("#ddlStatus_search").data("kendoDropDownList");
+                var ddlCalculationRun = $("#ddlCalculationRun").data("kendoDropDownList");
+                
+                BindEventsDropDown();
+                
+                if (!ddlStatus || ddlStatus.dataSource.data().length == 0) {
+                    var statusDS = Globals.GetLookUp(Globals.LookUpTypes.REQUESTS_STATUS, false).slice();
+                    statusDS.splice(0, 0, { LU_NAME: "All", LOOK_UP_ID: "" });
+                    $("#ddlStatus_search").kendoDropDownList({
+                        dataTextField: "LU_NAME",
+                        dataValueField: "LOOK_UP_ID",
+                        dataSource: statusDS,
+                        value: SearchParams.data.Status,
+                    });
+                   
+                }
+                else {
+                    ddlStatus.value(SearchParams.data.Status);
+                }
+
+                if (!ddlCalculationRun || ddlCalculationRun.dataSource.data().length == 0)
+                    BindCalculationRunDropdown();
+                else
+                    ddlCalculationRun.value(SearchParams.data.CalculationRun);
+
+                nmartPage.showLoading(false);
+            }, 1000);
+        }
+
+        function onUpdateViewShow(e) {
+            e.view.options.title = e.view.params.action + " " + pageConfig.pageType;
+            $("#divFooterNavigation").html(pageConfig.templates.FOOTER_NAVIGATION);
+            setTimeout(function () {
+                nmartPage.createViewModel().then(function (data) {
+                    nmartPage.viewModel = data;
+                    $("#tabstripResponse").getKendoTabStrip().select(0);
+                }, function (e) {
+                    nmartPage.showLoading(false);
+                    onError(e);
+                });
+            }, 1000);
+        }
+
+        function btnSearchClick_page(e) {
+            $("#search").val("");
+            app.navigate('#:back');
+            $("#lblEventName").text(SearchParams.data.EventName);
+        }
+
+        function btnReset_Click_Page(e) {
+            SearchParams.data.Status = 1;
+            SearchParams.data.CalculationRun = "";
+            SearchParams.data.COMPANY_NAME = '';
+            SearchParams.isResetPressed = true;
+            $("#ddlStatus_search").data("kendoDropDownList").value(SearchParams.data.Status);
+            $("#ddlCalculationRun").data("kendoDropDownList").value(SearchParams.data.CalculationRun);
+            $("#ipCompany").val(SearchParams.data.COMPANY_NAME);
+            e.preventDefault();
+        }
+
+        function btnAdd_Click_page(e) {
+            lastClickedButton = $("#btnAdd").data("button-type");
+            setCachedItem(CachedKeys.SELECTED_ENTITY_OBJECT, getCachedItem(CachedKeys.EMPTY_ENTITY_OBJECT));
+            PrepareUpdateView_Response('Add New');
+        }
+
+        function btnEdit_Click_page(e) {
+            lastClickedButton = 'edit';
+            PrepareUpdateView_Response('Edit');
+        }
+
+        function btnSave_Click_page(e) {
+            if (nmartPage.viewModel.isChanged == false) {
+                popupNotification.show(Globals.NoChanges, notifyType.INFO);
+                return false;
+            }
+            var validateAll = nmartPage.validate();
+            if (validateAll.result) {
+                if (nmartPage.config.pageType == "Request") {
+                    var objDirty = nmartPage.viewModel.get("requestDC");
+                    objDirty.EVENT_ID = getCachedItem(CachedKeys.SELECTED_EVENT).EVENT_ID;
+                    nmartPage.checkDuplicateRequest(objDirty).then(function (data) {
+                        if (data)
+                            popupNotification.show("Please select another Company, each Company can only enter one request", notifyType.ERROR);
+                        else {
+                            $(".HighlightReqField").removeClass("HighlightReqField");
+                            nmartPage.save();
+                        }
+                    });
+                }
+                else {
+                    $(".HighlightReqField").removeClass("HighlightReqField");
+                    nmartPage.save();
+                }
+            }
+            else {
+                $("#tabstripResponse").getKendoTabStrip().select(0);
+                popupNotification.show(validateAll.getMessage(), notifyType.ERROR);
+            }
+        }
+
+        function btnBack_Click_UpdateView() {
+            lastClickedButton = $("#navBackButton_UpdateView").data("button-type");
+            if (nmartPage.viewModel.isChanged)
+                confirmBackDialog.data("kendoWindow").center().open();
+            else
+                app.navigate('#:back');
+        }
+
+        function btnDelete_Click_page(e) {
+            lastClickedButton = $("#navBackButton_UpdateView").data("button-type");
+            ConfirmDelete();
+        }
+
+        function onTabStripSelect(e) {
+            var stepIndex = $(e.item).index();
+            if ($(e.contentElement).html().trim() == $(e.item).text()) {
+                var template = kendo.template(pageConfig.templates["STEP" + (stepIndex + 1)]);
+                $(e.contentElement).html(template(nmartPage.viewModel));
+                kendo.bind(e.contentElement, nmartPage.viewModel);
+                nmartPage.createControls();
+                if (!nmartPage.defaultsApplied) {
+                    nmartPage.setDefaults();
+                    SetRMAGLabel();
+                }
+                nmartPage.showLoading(false);
+            }
+            SetFooterNavigationVisibility(stepIndex);
+        }
+
+
+        function onSwipeItem(e) {
+            if ($("#btnDelete").css("visibility") != "hidden") {
+                var sender = $(e.sender.element[0]);
+                var objID = sender.data("object-id");
+                var objToDelete = GetObjectById(objID, lastSearchedData);
+                ConfirmDelete(objToDelete);
+            }
+        }
+
+        function onTapItem(e) {
+            var sender = $(e.sender.element[0]);
+            sender.css("background-color", "#f3f3f3");
+            var objID = sender.data("object-id");
+            app.navigate("#responseView?parent=" + objID + "&type=" + pageConfig.pageType);
+        }
+
+        function onHoldItem(e) {
+            // alert('swipe ' + e.direction);
+        }
+
+        function GetObjectById(primKey, collection) {
+            return _.find(collection, function (item) {
+                return item[pageConfig.schema.modelIDColumn] == primKey;
+            });
+        }
+
+        function ConfirmDelete(obj) {
+            var objToDelete = obj ? obj : getCachedItem(CachedKeys.SELECTED_ENTITY_OBJECT);
+            if (objToDelete) {
+                var status = objToDelete.STATUS?  objToDelete.STATUS.LOOK_UP_ID : objToDelete.STATUS_LU.LOOK_UP_ID;
+                if (!VerifyPermission('Delete', status, objToDelete))
+                    return;
+                ShowDeleteDialog(objToDelete);
+            }
+        }
+
+        function ShowDeleteDialog(obj) {
+            var delInfo = "Company: " + (obj.COMPANY.COMPANY_NAME).replace(/#/gi, "\\#") + "<br/> \
+                       RMAG: " + obj.COMPANY.RMAG.RMAG_NAME + "<br/> \
+                       Status: " + (obj.STATUS ? obj.STATUS.LU_NAME : obj.STATUS_LU.LU_NAME) + "<br/> \
+                       Last Updated Date/Time: "+ checkDateNull(getTimeZoneSpecificDate(obj, 'MODIFIED_ON'), GetTimeZonePostFix(obj.EVENT_TIME_ZONE_NAME));
+            var template = '<div class="k-content">Are you sure you want to delete following record? <br/> ' + delInfo + ' \
+                            <div style="text-align:right;padding:4px;"><a class="button-new delete-cancel">No</a>&nbsp;<a class="button-new red delete-confirm">Yes</a></div> \
+                        </div>';
+            var dialog = $("<div />").kendoWindow({
+                title: "Confirm Delete",
+                resizable: false,
+                modal: true,
+                width: "90%",
+                content: {
+                    template: template
+                }
+            });
+            dialog.data("kendoWindow").center().open();
+            dialog.find(".delete-confirm, .delete-cancel")
+               .click(function () {
+                   if ($(this).hasClass("delete-confirm")) {
+                       lastClickedButton = "delete";
+                       nmartPage.delete(obj);
+                       var listView = $("#listView").data("kendoMobileListView");
+                       if (listView.dataSource.options.schema.model.hasChildren)
+                           ShowView({ view: { params: { type: pageConfig.pageType } } });
+                       else
+                           app.navigate('#responseView?type=' + nmartPage.config.pageType);
+                       popupNotification.show(Globals.SaveMessage, notifyType.SUCCESS);
+                   }
+                   dialog.data("kendoWindow").close().destroy();
+               });
+        }
+
+        function FetchSearchResults(id, sender) {
+            var listView = $("#listView").data("kendoMobileListView");
+            if (listView) {
+                listView.setDataSource(undefined);
+                listView.destroy();
+            }
+            if (id) {
+                ToggleTopSection(false);
+                var optionSuccess = true;
+                var responseDetailDS = new kendo.data.HierarchicalDataSource();
+                if (lastClickedButton == "back")
+                    responseDetailDS.add(getCachedItem(CachedKeys.SELECTED_ENTITY_OBJECT));
+                else {
+                    var parameters = { "id": id };
+                    var api = pageConfig.schema.entity + "/Get";
+                    Globals.Get(api, parameters, false).then(function (result) {
+                        if (result != null && result.objResult != null) {
+                            if (CheckRecordDeleted(id, result.objResult)) {
+                                optionSuccess = false;
+                                return;
+                            }
+                            UpdateLocalSearchedData(id, result.objResult);
+                            setCachedItem(CachedKeys.SELECTED_ENTITY_OBJECT, result.objResult);
+                            responseDetailDS.add(result.objResult);
+                        }
+                    }).fail(onError);
+                }
+                if (optionSuccess)
+                    $("#listView").kendoMobileListView({
+                        dataSource: responseDetailDS,
+                        pullToRefresh: false,
+                        appendOnRefresh: false,
+                        template: kendo.template(pageConfig.templates.DETAIL)
+                    });
+                lastClickedButton = "";
+                SetRMAGLabel();
+            }
+            else {
+                ToggleTopSection(true);
+                var responseDS = new kendo.data.HierarchicalDataSource({
+                    serverPaging: true, // enable server paging,
+                    serverGrouping: false,
+                    serverFiltering: false,
+                    pageSize: listPageSize,
+                    transport: {
+                        read: function (options) {
+                            if ((lastClickedButton == "back" || lastClickedButton == "edit" || lastClickedButton == "deleteConcurrency") && !SearchParams.isResetPressed) {
+                                options.success(lastSearchedData);
+                                DisplayPulledCounts(lastSearchedData.length, lastSearchedData.length);
+                            }
+                            else {
+                                var skip = 0;
+                                var listView = $("#listView").data('kendoMobileListView');
+                                var pageSize = options.data.pageSize;
+                                if (lastSearchedData != null && lastSearchedData.length > 0)
+                                    skip = lastSearchedData.length;
+                                else
+                                    skip = listView ? listView.dataSource.view().length : 0;
+                                if (lastClickedButton == "add")
+                                    pageSize++;
+                                if (lastClickedButton == "delete")
+                                    pageSize = 1;
+
+                                var parameters = {
+                                    "EVENT_ID": SearchParams.data.EventID,
+                                    "pageSize": pageSize,
+                                    "skip": skip,
+                                    "status": SearchParams.data.Status,
+                                    "Calculation_Run": SearchParams.data.CalculationRun,
+                                    "COMPANY_NAME": SearchParams.data.COMPANY_NAME
+                                };
+                                if (sender == "search") {
+                                    var ddlEvents = $("#ddlEvents").data("kendoDropDownList");
+                                    parameters.EVENT_ID = ddlEvents.value();
+                                    parameters.pageSize = options.data.pageSize;
+                                    parameters.skip = 0;
+                                    parameters.status = $("#ddlStatus_search").val();
+                                    parameters.Calculation_Run = $("#ddlCalculationRun").val();
+                                    parameters.COMPANY_NAME = $("#ipCompany").val();
+                                    lastSearchedData = [];
+                                    setCachedItem(CachedKeys.SELECTED_EVENT, _.find(ddlEvents.dataSource.data(), function (elem) { return elem.EVENT_ID == ddlEvents.value() }));
+                                    SearchParams.refresh(parameters, "search");
+                                    SearchParams.refresh(getCachedItem(CachedKeys.SELECTED_EVENT), "event");
+                                }
+
+                                var apiUrl = pageConfig.schema.entity + "/GetAllCustom";
+                                Globals.Get(apiUrl, parameters, false).then(function (result) {
+                                    if (result != null && result.pagedData != null) {
+                                        $(result.pagedData).each(function (index, item) {
+                                            lastSearchedData.unshift(item);
+                                        });
+                                        options.success(lastSearchedData);
+                                        if (lastSelectedGroup != undefined)
+                                            GroupChange(lastSelectedGroup);
+
+                                        if ($("#search").val() != '')
+                                            activateSearchFilter();
+                                    }
+                                    setCachedItem(CachedKeys.EMPTY_ENTITY_OBJECT, result.emptyDC);
+                                    DisplayPulledCounts(result.total, lastSearchedData.length);
+                                    apiUrl = "";
+                                }).fail(onError)
+                                    .done(function () {
+                                        sender = "self";
+                                    });
+                            }
+                            lastClickedButton = "";
+                            SearchParams.isResetPressed = false;
+                        }
+                    },
+                    sort: {
+                        field: pageConfig.schema.defaultSortColumn,
+                        dir: "desc"
+                    },
+                    schema: {
+                        model: {
+                            id: pageConfig.schema.modelIDColumn,
+                            hasChildren: true
+                        }
+                    },
+                });
+
+                $("#listView").kendoMobileListView({
+                    dataSource: responseDS,
+                    pullToRefresh: true,
+                    appendOnRefresh: false,
+                    template: kendo.template(pageConfig.templates.LIST)
+                });
+
+            }
+        }
+
+        function UpdateLocalSearchedData(id, updatedObj) {
+            if (lastSearchedData != null && updatedObj) {
+                $.each(lastSearchedData, function (index, item) {
+                    if (item[pageConfig.schema.modelIDColumn] == id) {
+                        lastSearchedData[index] = updatedObj;
+                        return false;
+                    }
+                });
+            }
+        }
+
+        function DeleteLocalSearchedData(id) {
+            if (lastSearchedData != null) {
+                $.each(lastSearchedData, function (index, item) {
+                    if (item[pageConfig.schema.modelIDColumn] == id) {
+                        lastSearchedData.splice(index, 1);
+                        return false;
+                    }
+                });
+            }
+        }
+
+        function CheckRecordDeleted(id, item) {
+            if (item && item[pageConfig.schema.modelIDColumn] == 0) {
+                lastClickedButton = "deleteConcurrency";
+                DeleteLocalSearchedData(id);
+                app.navigate('#responseView?type=' + pageConfig.pageType);
+                popupNotification.show("Record has been deleted by another user. Data has been refreshed.", notifyType.ERROR);
+                return true;
+            }
+            return false;
+        }
+
+        function PrepareUpdateView_Response(action) {
+            if (action == "Edit") {
+                var objToEdit = getCachedItem(CachedKeys.SELECTED_ENTITY_OBJECT);
+                var status = objToEdit.STATUS.LOOK_UP_ID || objToEdit.STATUS_LU.LOOK_UP_ID;
+                if (!VerifyPermission('Edit', status, objToEdit))
+                    return;
+            }
+            if ($("#tabstripResponse").getKendoTabStrip())
+                $("#tabstripResponse").getKendoTabStrip().destroy();
+            $("#tabstripResponse").kendoTabStrip({
+                select: onTabStripSelect,
+                dataTextField: "stepTitle",
+                dataContentField: "stepTitle",
+                dataSource: pageConfig.steps
+            });
+            nmartPage.showLoading(true);
+            app.navigate('#updateView?action=' + action);
+        }
+
+        function VerifyPermission(action, status, obj) {
+            if (status == 2) { //--Allocated
+                popupNotification.show(action == "Edit" ? Globals.AllocationAlertEdit : Globals.AllocationAlert, notifyType.ERROR);
+                return false;
+            }
+            var allowEdit = Globals.HasGenEditAccess(pageConfig.genEditAccessType, {
+                model: {
+                    USER_COMPANIES: nmartPage.UserCompaniesList.COMPANY,
+                    RMAG_ID: obj.RMAG_ID,
+                    COMPANY_ID: obj.COMPANY_ID
+                }
+            }, pageConfig.screenID);
+            if (allowEdit == false) {
+                popupNotification.show("You are not associated with Company or RMAG.", notifyType.ERROR);
+                return false;
+            }
+            return true;
+        }
+
+        //function BindEventsDropDown() {
+        //    nmartPage.showLoading(true);
+        //    EventsDS = null;
+        //    Globals.GetAllEventsofLoggedUser(false, pageConfig.screenID).then(function (result) {
+        //        result.objResultList = ChangeEventName(result.objResultList);
+        //        EventsDS = result.objResultList;
+        //        if (EventsDS.length > 0) {
+        //            ////setCachedItem(CachedKeys.SELECTED_EVENT, JSON.stringify(EventsDS[0]));
+        //            $("#ddlEvents").kendoDropDownList({
+        //                dataTextField: "EVENT_NAME",
+        //                dataValueField: "EVENT_ID",
+        //                dataSource: EventsDS,
+        //                value: SearchParams.data.EventID,
+        //                change: function (e) {
+        //                    BindCalculationRunDropdown();
+        //                }
+        //            });
+        //        }
+        //        nmartPage.showLoading(false);
+        //    }).fail(function (e) { nmartPage.showLoading(false); onError(e) });
+        //}
+        //function BindCalculationRunDropdown() {
+        //    nmartPage.showLoading(true);
+        //    Globals.GetCalculationRun($("#ddlEvents").val(), 'Y').then(function (result) {//-- only event_id req. sec param is obsolete
+        //        var calculationrunobjs = [];
+        //        for (var i = 0; i < result.objResultList.length; i++) {
+        //            var objCalculationRun = { EVENT_ID: 0, CALCULATION_RUN: '', TIME_ZONE_CALCULATION_RUN: '' };
+        //            objCalculationRun.EVENT_ID = SearchParams.data.EventID;
+        //            objCalculationRun.CALCULATION_RUN = result.objResultList[i].CALCULATION_RUN;
+        //            objCalculationRun.TIME_ZONE_CALCULATION_RUN = kendo.toString(TimeZoneSpecificDate(new Date(moment(result.objResultList[i].CALCULATION_RUN, moment.ISO_8601)), SearchParams.data.EventTimeZone, result.objResultList[i].DST_APPLIED_CALCULATION_RUN), 'MM/dd/yyyy HH:mm:ss.sss') + GetTimeZonePostFix(SearchParams.data.EventTimeZone);
+        //            calculationrunobjs.push(objCalculationRun);
+        //        }
+        //        calculationrunobjs.splice(0, 0, { EVENT_ID: 0, TIME_ZONE_CALCULATION_RUN: " ", CALCULATION_RUN: "" });
+        //        $("#ddlCalculationRun").kendoDropDownList({
+        //            dataTextField: "TIME_ZONE_CALCULATION_RUN",
+        //            dataValueField: "CALCULATION_RUN",
+        //            dataSource: calculationrunobjs,
+        //            value: SearchParams.data.CalculationRun
+        //        });
+        //        nmartPage.showLoading(false);
+        //    }).fail(function (e) { nmartPage.showLoading(false); onError(e) });
+        //}
+
+        function GetOfflineDS(groupBy) {
+            var dir = "desc";
+            if (groupBy == "liListView")
+                dir = "desc";
+            var offlineDS = null;
+            if (lastSearchedData && lastSearchedData != null) {
+                offlineDS = new kendo.data.HierarchicalDataSource({
+                    data: lastSearchedData,
+                    group: groupBy,
+                    sort: {
+                        field: pageConfig.schema.defaultSortColumn,
+                        dir: dir
+                    },
+                    schema: {
+                        model: {
+                            id: pageConfig.schema.modelIDColumn,
+                            hasChildren: true
+                        }
+                    }
+                });
+            }
+            return offlineDS;
+        }
+
+        function SetRMAGLabel() {
+            $("#lblRMAG").text("RMAG");
+            $("#lblRMAGEdit").text("RMAG");
+            var selEvent = getCachedItem(CachedKeys.SELECTED_EVENT);
+            if (selEvent) {
+                if (selEvent.EVENT_TYPE.LU_NAME == "NRE") {
+                    $("#lblRMAG").text("HOME RMAG");
+                    $("#lblRMAGEdit").text("HOME RMAG");
+                }
+            }
+        }
+
+        //# sourceURL=dynamicScript.js
+    </script>
+
+</div>

@@ -1,0 +1,262 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">PERMITS <span>DASHBOARD</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Client</label>
+                <div id="divMSClients"
+                     options="MSClients.options"
+                     selected-model="MSClients.selectedList"
+                     extra-settings="MSClients.settings"
+                     events="MSClients.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Project ID</label>
+                <div id="divMultiSelProjects"
+                     options="MSProjects.options"
+                     selected-model="MSProjects.selectedList"
+                     extra-settings="MSProjects.settings"
+                     events="MSProjects.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Start Date</label>
+                <input id="txtStartDate" ng-model="submitedStartDt" ng-change="startDateChange()" />
+                <script type="text/javascript">
+                    $("#txtStartDate").kendoMaskedDatePicker();
+                    $("#txtStartDate").val((new Date()).toString());
+                </script>
+
+            </div>
+
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">End Date</label>
+                <input id="txtEndDate" ng-model="submitedEndDt" ng-change="endDateChange()"  />
+                <script type="text/javascript">
+                    $("#txtEndDate").kendoMaskedDatePicker();
+                    $("#txtEndDate").val((new Date()).toString());
+                </script>
+
+            </div>
+
+
+            <!--<div class="clearfix visible-sm-block"></div>-->
+
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">&nbsp;</label>
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a ng-click="ResetFilter()">Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+
+    </div>
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+<style>
+    form.k-filter-menu.k-popup.k-group.k-reset.k-state-border-up {
+        font-family: 'Source Sans Pro Regular', sans-serif !important;
+    }
+
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top: -10px !important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content: none;
+    }
+</style>
+
+<style type="text/css">
+    /*.k-grid-toolbar {
+        display: none !important;
+    }*/
+
+    /*.summary-table {
+        position: absolute;
+        top: -162px;
+        border-radius: 2px;
+        font-family: "Source Sans Pro", sans-serif !important;
+        font-size: 12px;
+        width: 97% !important;
+        margin: 10px 10px 0px 10px !important;
+    }
+
+        .summary-table, .summary-table thead tr td, .summary-table tbody tr td {
+            border: 1px solid #d5d5d5;
+            border-left: none;
+        }
+
+            .summary-table tbody tr td {
+                border-top: none;
+            }
+
+            .summary-table tbody tr:nth-child(odd) td {
+                background-color: #FDFFF7;
+            }
+
+            .summary-table tbody tr:nth-child(even) td {
+                background-color: #F7FBFB;
+            }
+
+    .summary-cell {
+        background-color: #000000 !important;
+        color: #ffffff;
+    }
+
+
+
+    .summary-table td {
+        padding: 3px !important;
+    }
+
+     .summary-table thead td {
+        font-family: "Source Sans Pro Bold", sans-serif !important;
+        text-transform: uppercase;
+        text-align: center !important;
+    }*/
+
+    /*.completed, .pending, .notneeded, .onhold {
+        font-family: "Source Sans Pro Bold", sans-serif !important;
+        text-transform: uppercase;
+        text-align: left !important;
+        background-color: #677077 !important;
+        color: #ffffff;
+    }
+
+   
+    #completedTR td, #pendingTR td, #notNeededTR td, #onHoldTR td {
+        text-align: center;
+    }*/
+
+  div.k-grid-header-wrap table th[data-title="Permit Area"],
+  div.k-grid-header-wrap table th[data-title="Dates"],
+  div.k-grid-header-wrap table th[data-title="Permit Status"],
+  div.k-grid-header-wrap table th[data-title="Stipulations"]
+  {
+    background: white !important;
+    height: 18px !important;
+    border-bottom: solid 1px #c6c6c6 !important;
+    vertical-align: middle;
+    border-top-style:solid;
+    border-top-width:3px;
+  }
+
+     
+    div.k-grid-header-wrap table th[data-title="Permit Area"] {
+        border-top-color: #D9D9DB !important;
+        
+    }
+
+
+    div.k-grid-header-wrap table th[data-title="Dates"] {
+        border-top-color: #F7F2C5;
+    }
+
+    div.k-grid-header-wrap table th[data-title="Permit Status"] {
+        border-top-color: #F8E5D6;
+    }
+
+
+    div.k-grid-header-wrap table th[data-title="Stipulations"] {
+        border-top-color: #F8F9B5;
+    }
+
+    /*div.k-grid-header-wrap table th[data-title="AC Power To Pole"],
+    div.k-grid-header-wrap table th[data-title="Shroud/Antenna"],
+    div.k-grid-header-wrap table th[data-title="PIM'S & Sweeps"] {
+        border-top-color: #E8F7C5;
+    }*/
+
+    
+/*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-------------*/
+    /*.k-filter-row th*/
+    div.k-grid-header-locked table th:nth-child(7),
+    div.k-grid-header-wrap table th:nth-child(4),
+    div.k-grid-header-wrap table th:nth-child(9),
+    div.k-grid-header-wrap table th:nth-child(17) {
+        border-right-width: 1px !important;
+    }
+     
+
+    /*-----date filters--------*/
+    /*span.k-widget.k-datepicker.k-header {
+        width:100px !important;
+    }
+
+    span.k-widget.k-dropdown.k-header.k-dropdown-operator {
+        right:0px;
+    }*/
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+
+</style>

@@ -1,0 +1,98 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>CLIENTS</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Client Name</label>
+                <input type="text" class="form-control" maxlength="50" value="" ng-model="filters.COMPANY_NAME.value" ng-change="applyFilter(filters.COMPANY_NAME.name, 'filters.COMPANY_NAME.value')" />
+
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Primary Contact Name</label>
+                <input type="text" class="form-control" maxlength="60" value="" ng-model="filters.PRIMARY_CONTACT_NAME.value" ng-change="applyFilter(filters.PRIMARY_CONTACT_NAME.name, 'filtersPRIMARY_CONTACT_NAME.value')" />
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding" id="lblFilterRmag">Status</label>
+                <select id="ddlStatus" class="form-control" ng-model="filters.STATUS.value" ng-change="applyFilter(filters.STATUS.name, 'filters.STATUS.value')">
+                    <option value="0"> All </option>
+                    <option value="Y" title="Active">Active</option>
+                    <option value="N" title="Inactive">Inactive</option>
+                </select>
+            </div>      
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">&nbsp;</label>
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a ng-click="clearFilters()">Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>      
+        </div>
+    </div>
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+
+
+<style>
+    .ngdialog-content {
+        background: #ffffff !important;
+        padding: 0px !important;
+        overflow-y: auto;
+    }
+
+    .no-left-border {
+        border-left: 0px !important;
+    }
+
+    .k-dropdown .k-input, .k-selectbox .k-input {
+        background: white;
+        background-color: white;
+    }
+
+     /*-------------for filters settings ----------*/
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-----------*/
+    div.k-grid-header-locked table th:nth-child(2) {
+        border-right-width: 1px !important;
+    }     
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+
+</style>
+

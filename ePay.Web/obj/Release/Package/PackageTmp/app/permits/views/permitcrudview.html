@@ -1,0 +1,603 @@
+﻿<form id="formPermitModal" name="form.formPermitModal" novalidate>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close disabled" src="Content/images/close.png" />
+        </div>
+        <!-- Header -->
+        <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-3 col-md-3 col-lg-3 no-padding">{{ScreenTitle}} <span>PERMIT</span></div>
+            <div class="col-sm-5 col-md-5 col-lg-5 no-padding HeadNote">
+                <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3 pull-right no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="k-button k-button-icontext" id="btnCancel" style="text-decoration:none" ng-click="closeDialog()">
+                                    <span class="k-icon k-update  k-i-close"></span>
+                                    Close
+                                </button>
+                            </li>
+                            <li ng-show="ngDialogData.PERMIT_ID > 0 && AllowToEdit">
+                                <button type="submit" class="k-button k-button-icontext" id="btnRepeat" ng-click="Repeat()">
+                                    <span class="k-icon k-update k-i-reload"></span>
+                                    Repeat
+                                </button>
+                            </li>
+                            <li ng-show="AllowToEdit">
+                                <button type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="ValidateAndPostData(form.formPermitModal, true)" ng-show="AllowToEdit">
+                                    <span class="k-icon k-update  k-i-check"></span>
+                                    Save
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 event-select daily-top-section clear" ng-disabled="!AllowToEdit">
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Project ID</label>
+                <select id="ddlProjectId" hylan-control-validation hylancontrolname="ProjectId" hylancontrollabel="Project ID" name="ddlProjectId" class="form-control" required
+                        ng-model="permitDCModel.PROJECT_ID"
+                        ng-init="permitDCModel.PROJECT_ID = permitDCModel.PROJECT_ID !== 0 ? permitDCModel.PROJECT_ID : null"
+                        ng-options="x.PROJECT_ID as x.HYLAN_PROJECT_ID for x in DSProjects"
+                        ng-change="ChangeStart();FillJobFileNumberDropDown();"
+                        ng-disabled="!FirstPageSelected" ng-class="{'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.PROJECT_ID, form.formPermitModal.ddlProjectId),'Disabled':!FirstPageSelected}">
+                    <option value="">-- Select Project ID --</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Job File Number</label>
+                <select id="ddlJobFileNumber" hylan-control-validation hylancontrolname="JobFileNumber" hylancontrollabel="Job File Number"
+                        name="ddlJobFileNumber" class="form-control" required 
+                        ng-model="permitDCModel.JOB_ID"
+                        ng-disabled="!FirstPageSelected" ng-class="{'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.JOB_ID, form.formPermitModal.ddlJobFileNumber) ,'Disabled':!FirstPageSelected}"
+                        ng-options="JFN.VALUE as JFN.TEXT for JFN in DSJobFileNumbers"
+                        ng-change="ChangeStart();OnChangeJobFileNumber();">
+                    <option value="">-- Select Job File Number --</option>
+                </select>
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4" id="divDotTrackingNo"  >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>DOT Tracking #</label>
+                <input  id="txtDotTrackingNumber"  
+                       name="txtDotTrackingNumber"
+                       hylan-control-validation
+                       hylancontrolname="DotTrackingNumber" 
+                       hylancontrollabel="DOT Tracking #"
+                       type="text" class="form-control" required
+                       ng-model="permitDCModel.DOT_TRACKING_NUMBER" ng-maxlength="250" ng-change="ChangeStart()"                       
+                       ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtDotTrackingNumber)}" />
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 page-toolbar clear" ng-disabled="!AllowToEdit">
+            <div class="col-sm-1 col-md-1 col-lg-1 no-padding">
+                <div id="backButton" class="pull-left back-button hide" ng-click="ValidateAndPostData(form.formPermitModal, false, 'back');">Back</div>
+            </div>
+            <div class="col-sm-10 col-md-10 col-lg-10 no-padding">
+                <ul class="progress-indicator" style="margin-left:150px;margin-right:150px;">
+                    <span class="line"></span>
+                    <li id="li-page1" class="active-page" ng-click="ValidateAndPostData(form.formPermitModal, false, '', 'page1');">
+                        <span class="bubble"></span>Job & Permit Details
+                    </li>                    
+                    <li id="li-page2" ng-click="ValidateAndPostData(form.formPermitModal, false, '', 'page2');">
+                        <span class="bubble"></span>
+                        <span class="page-title">Other Details</span>
+                        <span class="page-info"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-sm-1 col-md-1 col-lg-1 no-padding">
+                <div id="nextButton" class="pull-right next-button" ng-click="ValidateAndPostData(form.formPermitModal, false,'next');">Next</div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear no-padding" id="pageSection" ng-disabled="!AllowToEdit">
+            <div id="page1" data-page-title="Job & Permit Details"  class="col-sm-12 col-md-12 col-lg-12 no-padding">
+                
+                <!------dot tracking no ----------->
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Client</label>
+                    <input name="txtClient"
+                           ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtClient),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Client" hylancontrollabel="Client" type="text" class="form-control event-select" ng-model="permitDCModel.CLIENT"
+                           ng-required="!DisableJobDetails"
+                           ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+                <!--<div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Street Address</label>
+
+                    <input name="txtStreetAddress" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtStreetAddress),'Disabled': DisableJobDetails }"
+                           hylan-control-validation hylancontrolname="StreetAddress" hylancontrollabel="Street Address" type="text" class="form-control event-select" ng-model="permitDCModel.STREET_ADDRESS"
+                           ng-required="!DisableJobDetails"
+                           ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>-->
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Node ID1</label>
+                    <input name="txtNodeID1"
+                           ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtNodeID1),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="NodeID1" hylancontrollabel="Node ID1" type="text" class="form-control event-select" ng-model="permitDCModel.NODE_ID1" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Submitted Date</label>
+                    <input name="txtSubmittedDate" hylan-control-validation hylancontrolname="SubmittedDate" hylancontrollabel="Submitted Date" type="text" required
+                     ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formPermitModal, form.formPermitModal.txtSubmittedDate,permitDCModel.SUBMITTED_DATE) || commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtSubmittedDate) }"
+                       is-valid-date-check    id="txtSubmittedDate" ng-model="permitDCModel.SUBMITTED_DATE" ng-change="ChangeStart();" />
+                    <script>
+                        $("#txtSubmittedDate").kendoMaskedDatePicker();
+                    </script>
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Node ID2</label>
+                    <input name="txtNodeID2" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtNodeID2),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="NodeID2" hylancontrollabel="Node ID2" type="text" class="form-control event-select" ng-model="permitDCModel.NODE_ID2" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+                
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Node ID3</label>
+                    <input name="txtNodeID3" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtNodeID3),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="NodeID3" hylancontrollabel="Node ID3" type="text" class="form-control event-select" ng-model="permitDCModel.NODE_ID3" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Permit Status</label>
+                    <select id="ddlPermitStatus" hylan-control-validation hylancontrolname="PermitStatus" hylancontrollabel="Permit Status" name="ddlPermitStatus" class="form-control" required
+                            ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.PERMIT_STATUS, form.formPermitModal.ddlPermitStatus)}"
+                            ng-model="permitDCModel.PERMIT_STATUS"
+                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME for lu in permitStatusOptions"
+                            ng-change="PermitStatusChange();ChangeStart()">
+                        <option value="">-- Select Permit Status --</option><!--ng-init="permitDCModel.PERMIT_STATUS = permitDCModel.PERMIT_STATUS !== 0 ? permitDCModel.PERMIT_STATUS : null"-->
+                    </select>
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">HUB</label>
+                    <input name="txtHub" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtHub),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Hub" hylancontrollabel="HUB" type="text" class="form-control event-select" ng-model="permitDCModel.HUB" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+                <!--<div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">HYLAN PM</label>
+                    <select name="ddlHylanPM" ng-disabled="DisableJobDetails" ng-class="{'Disabled': DisableJobDetails}"
+                            class="form-control" ng-model="permitDCModel.HYLAN_PM" ng-options="x.USER_ID as (x.LAST_NAME+', '+x.FIRST_NAME)
+                    for x in DSAdminUsers" ng-change="ChangeStart()">
+                        <option value="">-- Select Hylan PM --</option>
+                    </select>
+                </div>-->
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Hylan PM</label>
+                    <select name="ddlHylanPM" ng-disabled="DisableJobDetails" ng-class="{'Disabled': DisableJobDetails}"
+                            class="form-control" ng-model="permitDCModel.HYLAN_PM" ng-options="x.USER_ID as (x.LAST_NAME+', '+x.FIRST_NAME)
+                    for x in DSAdminUsers" ng-change="ChangeStart()">
+                        <option value="">-- Select Hylan PM --</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Permit #</label>
+                    <input name="txtPermitNumberText" id="txtPermitNumberText" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtPermitNumberText) }"
+                           hylan-control-validation hylancontrolname="PermitNumberText" hylancontrollabel="Permit #" type="text" class="form-control event-select" ng-model="permitDCModel.PERMIT_NUMBER_TEXT" ng-maxlength="25" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Street Address</label>
+
+                    <input name="txtStreetAddress" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtStreetAddress),'Disabled': DisableJobDetails }"
+                            hylan-control-validation hylancontrolname="StreetAddress" hylancontrollabel="Street Address" type="text" class="form-control event-select" ng-model="permitDCModel.STREET_ADDRESS"
+                            ng-required="!DisableJobDetails"
+                            ng-maxlength="250" ng-change="ChangeStart()" />                 
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>City</label>
+                    <input name="txtCity" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtCity),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="City" hylancontrollabel="City" type="text" class="form-control event-select" ng-model="permitDCModel.CITY" ng-required="!DisableJobDetails" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4"  >
+                    <label class="control-label">Permit Type / Description</label>
+                    <div id="divPermitType" class="col-sm-12 col-md-12 col-lg-12" style="padding:0px;">
+                        <div  style="width:20%;padding:0px; float:left">
+                            <input name="txtPermitType" ng-blur="IsValidPermitType()" style="border-right: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;margin-bottom: 0px;"
+                                   ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtPermitType) }"
+                                   hylan-control-validation hylancontrolname="PermitType" hylancontrollabel="Permit Type / Description" type="text" class="form-control event-select"
+                                    ng-model="permitDCModel.PERMIT_TYPE" ng-minlength="4" ng-maxlength="4" ng-change="PermitType_Change()" />
+                            <!--<input name="txtPermitType" ng-blur="IsValidPermitType()" id="txtPermitType" style="width: 100%;"
+            hylan-control-validation hylancontrolname="PermitType" type="text" class="form-control event-select" ng-model="permitDCModel.PERMIT_TYPE" ng-minlength="4" ng-maxlength="4" ng-change="PermitType_Change()" />-->
+
+                        </div>
+                        <div style="width:80%;padding:0px;float:left"><!--ng-class="{'Disabled': true}" ng-disabled="true"-->
+                            <select id="ddlPERMIT_DESCRIPTION"   style="border-left: 0px;border-top-left-radius: 0px;border-bottom-left-radius: 0px;    -webkit-appearance: none;margin-bottom: 0px; "
+                                    hylan-control-validation  name="ddlPERMIT_DESCRIPTION" class="form-control"
+                                    ng-model="permitDCModel.PERMIT_TYPE"
+                                    ng-options="lu.PERMIT_TYPE_ID as lu.DESCRIPTION for lu in permitTypesOptions"
+                                    ng-change="PermitType_Change()">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                        <script>
+                            /*
+                            $(document).ready(function () {
+                                //debugger;
+                                var data = null;
+                                Globals.GetPermitTypesWithCode().then(function (response) {
+                                    data = response.objResultList;
+
+                                });
+                                debugger;
+                                //create AutoComplete UI component
+                                $("#txtPermitType").kendoAutoComplete({
+                                    dataTextField: "DESCRIPTION",
+                                    minLength: 1,
+                                    dataSource:data,
+                                    filter: "startswith",
+                                    placeholder: "-- Select Permit Type --",
+                                    select: ontxtPermitType_Select
+                                });
+                                function ontxtPermitType_Select(e) {
+
+                                        var dataItem = this.dataItem(e.item.index());
+                                        alert(kendo.stringify(dataItem));
+                                }
+                            });
+                           */
+                        </script>
+
+
+                    </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>State</label>
+                    <select name="ddlState" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.STATE, form.formPermitModal.ddlState),'Disabled': DisableJobDetails}" 
+                            hylan-control-validation hylancontrolname="State" hylancontrollabel="State" class="form-control" ng-model="permitDCModel.STATE" ng-init="permitDCModel.STATE = permitDCModel.STATE !== 0 ? permitDCModel.STATE : null"
+                            ng-options="x.ST_STATE as x.ST_STATE
+                    for x in DSStates" ng-change="ChangeStart()" ng-required="!DisableJobDetails">
+                        <option value="">-- Select State --</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">ZIP</label>
+                    <input name="txtZip" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtZip),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Zip" hylancontrollabel="ZIP" positive-number-only type="text" class="form-control event-select" ng-model="permitDCModel.ZIP" ng-maxlength="5" ng-minlength="5"  ng-change="ChangeStart()" />
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Permit Category </label>
+                    <select id="ddlPERMIT_CATEGORY" ng-disabled="true" ng-class="{'Disabled': true}"
+                            hylan-control-validation hylancontrolname="PERMIT_CATEGORY" hylancontrollabel="Permit Category" name="ddlPERMIT_CATEGORY" class="form-control"
+                            ng-model="permitDCModel.PERMIT_CATEGORY"
+                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME for lu in permitCategoryOptions"
+                            ng-change="ChangeStart()">
+                        <option value="">-- Select Permit Category --</option>
+                    </select>
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Latitude</label>
+                    <input name="txtLatitude" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtLatitude),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Latitude" hylancontrollabel="Latitude" type="text" class="form-control event-select" ng-model="permitDCModel.LAT" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Longitude</label>
+                    <input name="txtLongitude" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtLongitude),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Longitude" hylancontrollabel="Longitude" type="text" class="form-control event-select" ng-model="permitDCModel.LONG" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+
+                <!--<div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Permit Description </label>
+                    <select id="ddlPERMIT_DESCRIPTION" ng-disabled="true" ng-class="{'Disabled': true}"
+                            hylan-control-validation hylancontrolname="PERMIT_DESCRIPTION" name="ddlPERMIT_DESCRIPTION" class="form-control"
+                            ng-model="permitDCModel.PERMIT_TYPE"
+                            ng-options="lu.PERMIT_TYPE_ID as lu.DESCRIPTION for lu in permitTypesOptions"
+                            ng-change="ChangeStart()">
+                        <option value="">-- Select Permit Description --</option>
+                    </select>
+                </div>-->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Expires Date</label>
+              
+                    <input name="txtExpiresDate" id="txtExpiresDate" hylan-control-validation hylancontrolname="ExpiresDate" hylancontrollabel="Expires Date" type="text"
+                           class="date-control" 
+                           ng-model="permitDCModel.EXPIRES_DATE" ng-change="IsValidDate('txtExpiresDate');PermitStatusChange();ChangeStart();" ng-required='IsExpiresDateRequired' /> 
+
+                    <script>
+                        $("#txtExpiresDate").kendoMaskedDatePicker();
+                    </script>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Pole Location</label>
+                    <input name="txtPoleLocation" ng-disabled="DisableJobDetails" ng-class="{'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtPoleLocation),'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="Location" hylancontrollabel="Pole Location" type="text" class="form-control event-select" ng-model="permitDCModel.POLE_LOCATION" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Rejected Date</label>
+                    <input name="txtRejectedDate" id="txtRejectedDate" hylan-control-validation hylancontrolname="RejectedDate" hylancontrollabel="Rejected Date" type="text" 
+                           class="date-control"
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtRejectedDate)}" 
+                           ng-model="permitDCModel.REJECTED_DATE" ng-change="IsValidDate('txtRejectedDate');PermitStatusChange();ChangeStart();" ng-required='IsRejectedStatus' />
+                    <script>
+                        $("#txtRejectedDate").kendoMaskedDatePicker();
+                    </script>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Rejected Reason</label>
+                    <select id="ddlRejectedReason" hylan-control-validation hylancontrolname="RejectedReason" hylancontrollabel="Rejected Reason" name="ddlRejectedReason" class="form-control"                            
+                            ng-model="permitDCModel.REJECTED_REASON"
+                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME for lu in rejectedReasonOptions"
+                            ng-change="PermitStatusChange();ChangeStart()"
+                            ng-required='IsRejectedStatus'>  <!--ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.REJECTED_REASON, form.formPermitModal.ddlRejectedReason)}"-->
+                        <option value="">-- Select Rejected Reason --</option><!--ng-init="permitDCModel.PERMIT_STATUS = permitDCModel.PERMIT_STATUS !== 0 ? permitDCModel.PERMIT_STATUS : null"-->
+                    </select>
+                </div>
+               <!----------notes------>             
+               
+            </div>
+
+            <div id="page2" data-page-title="Other Details" class="col-sm-12 col-md-12 col-lg-12 hide">
+                
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Protected Street</label><br />
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="permitDCModel.IS_PROTECTED_STREET"
+                                   data-ng-true-value="'Y'" data-ng-false-value="'N'"
+                                   ng-click="ChangeStart()"
+                                   hylan-control-validation hylancontrolname="ProtectedSteet" hylancontrollabel="Protected Street" style="margin-bottom:5px;" />
+                            Yes
+                        </label>
+                    </div>
+                </div>
+                
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <!--ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtNodeID3) }"-->
+
+                    <label class="control-label">Stipulation</label><br />
+                    <div class="group">
+                        <label>
+                            <input type="checkbox" ng-model="permitDCModel.STIPULATION_DAY"                                 
+                                   ng-click="ChangeStart()"
+                                   style="margin-bottom:5px;" />
+                            Day
+                        </label>
+                        <label style="margin-left:15px;">
+                            <input type="checkbox" ng-model="permitDCModel.STIPULATION_NIGHT"
+                                   ng-click="ChangeStart()"
+                                   style="margin-bottom:5px;" />
+                            Night
+                        </label>
+                        <label style="margin-left:15px;">
+                            <input type="checkbox" ng-model="permitDCModel.STIPULATION_WEEKEND"
+                                   ng-click="ChangeStart()"
+                                   style="margin-bottom:5px;" />
+                            Weekend
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Other Stipulations</label>
+                    <input name="txtOtherStipulations"
+                           hylan-control-validation hylancontrolname="OtherStipulations" hylancontrollabel="Other Stipulations" type="text" class="form-control event-select"
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtOtherStipulations) }"
+                           ng-model="permitDCModel.STIPULATIONS_OTHER" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Segment/Block</label>
+                    <input name="txtSegment"
+                           hylan-control-validation hylancontrolname="Segment" hylancontrollabel="Segment/Block" type="text" class="form-control event-select" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtSegment) }"
+                           ng-model="permitDCModel.SEGMENT" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Markout Start Date</label>
+                    <input name="txtMarkoutStartDate" id="txtMarkoutStartDate" hylan-control-validation hylancontrolname="MarkoutStartDate" hylancontrollabel="Markout Start Date" type="text"
+                           class="date-control" ng-model="permitDCModel.MARKOUT_START_DATE" ng-maxlength="10" ng-change="IsValidDate('txtMarkoutStartDate');ChangeStart();" />
+                    <script>
+                        $("#txtMarkoutStartDate").kendoMaskedDatePicker();
+                    </script>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Markout End Date</label>
+                    <input name="txtMarkoutEndDate" id="txtMarkoutEndDate" hylan-control-validation hylancontrolname="MarkoutEndDate" hylancontrollabel="Markout End Date" type="text"
+                           class="date-control" ng-model="permitDCModel.MARKOUT_END_DATE" ng-maxlength="10" ng-change="IsValidDate('txtMarkoutEndDate');ChangeStart();" />
+                    <script>
+                        $("#txtMarkoutEndDate").kendoMaskedDatePicker();
+                    </script>
+                </div>
+
+                
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+
+                <div class="col-sm-4 col-md-4 col-lg-4" >
+                    <label class="control-label">Issued Date</label>
+                    <input id="txtIssuedDate" name="txtIssuedDate" hylan-control-validation hylancontrolname="IssuedDate" hylancontrollabel="Issued Date" type="text"
+                           class="date-control" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtIssuedDate)}"
+                           ng-model="permitDCModel.ISSUED_DATE" ng-maxlength="10" ng-change="IsValidDate('txtIssuedDate');ChangeStart();"   />
+                    <script>
+                        $("#txtIssuedDate").kendoMaskedDatePicker();
+                    </script>
+
+                </div><!---->
+                <!--<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtDotTrackingNumber) }">
+    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>DOT Tracking #</label>
+    <input name="txtDotTrackingNumber"
+           hylan-control-validation hylancontrolname="DotTrackingNumber" required type="text" class="form-control event-select"
+           ng-model="permitDCModel.DOT_TRACKING_NUMBER" ng-maxlength="250" ng-change="ChangeStart()" />
+    </div>-->
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label class="control-label">Valid Date</label>
+                    <input name="txtValidDate" id="txtValidDate" hylan-control-validation hylancontrolname="ValidDate" hylancontrollabel="Valid Date" type="text"
+                           class="date-control" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtValidDate)}"
+                           ng-model="permitDCModel.VALID_DATE" ng-maxlength="10" ng-change="IsValidDate('txtValidDate');ChangeStart();" />
+                    <script>
+                        $("#txtValidDate").kendoMaskedDatePicker();
+                    </script>
+
+                </div>
+               
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+                <!--------rejected date---->
+                <div class="col-sm-8 col-md-8 col-lg-8">
+                    <label class="control-label">Notes</label>
+                    <textarea class="form-control Height1" style="margin-bottom:-3px;" ng-model="permitDCModel.NOTES" cols="20" rows="4" maxlength="1000" ng-change="ChangeStart()"></textarea>
+                </div>  
+                <!--<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtRejectedReason) }">
+                    <label class="control-label">Rejected Reason</label>
+                    <input name="txtRejectedReason"
+                           hylan-control-validation hylancontrolname="RejectedReason" type="text" class="form-control event-select" ng-model="permitDCModel.REJECTED_REASON" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>-->
+                
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+                <!------------------------->
+            </div>
+        </div>
+    </div>
+    <style>
+        .Height1 {
+            height: 45px !important;
+        }
+
+        .nav-buttons {
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+
+        .date-control {
+            width: 100%;
+        }
+
+        .form-control {
+            font-size: 12px;
+            padding-top:0px;
+            padding-bottom:0px;
+        }
+
+
+        .main-head {
+            margin-bottom: 0px;
+            height: 46px;
+        }
+
+
+        label {
+            margin-bottom: 2px;
+        }
+
+        .SummaryRow td {
+            background-color: #F0FFF0;
+        }
+
+        #pageSection .lightYellow-col {
+            border-top-width: 1px !important;
+        }
+
+        #pageSection .k-grid-toolbar {
+            border-bottom-width: 1px !important;
+        }
+
+        #pageSection .k-grid tr:last-child td {
+            border-bottom-width: 1px !important;
+        }
+
+        #pageSection a.k-pager-first, #pageSection a.k-pager-last {
+            display: none !important;
+        }
+
+        .right-border {
+            border-right-width: 1px !important;
+        }
+
+        .contert-number input {
+            border: 1px solid #b6bbc0 !important;
+        }
+
+        /*#divPermitType span{
+            width:100%;
+        
+        }
+        #divPermitType span span{
+            text-align:right;
+        
+        }*/
+        #txtPermitType {
+            height: 17px !important;
+            padding-top: 4px !important;
+        }
+
+        
+
+      
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(window).resize(function () {
+                var curPageId = $("#pageSection > div:visible").attr("id");
+                $("#pageSection #" + curPageId + " .k-grid").height(CalculateGridHeight());
+            });
+        });
+        function CalculateGridHeight() {
+            var gridHeight = 0;
+            var curPageId = $("#pageSection > div:visible").attr("id");
+
+            var mainHeadHeight = $(".main-head").height();
+            var topSectionHeight = $(".daily-top-section").height();
+            var pageToolbarHeight = $(".page-toolbar").height();
+            var gridToolbarHeight = $("#" + curPageId + " .k-grid-toolbar").height();
+            if ($(".ngdialog-content")[0] && $(".ngdialog-content")[0].clientHeight)
+                gridHeight = $(".ngdialog-content")[0].clientHeight - (mainHeadHeight + topSectionHeight + pageToolbarHeight + gridToolbarHeight)
+            gridHeight -= 35;
+
+            return gridHeight;
+        }
+    </script>
+</form>

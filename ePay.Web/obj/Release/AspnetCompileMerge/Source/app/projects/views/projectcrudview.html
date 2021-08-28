@@ -1,0 +1,201 @@
+﻿<form id="formProjectModal" name="form.formProjectModal" novalidate>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close" src="Content/images/close.png" />
+        </div>
+        <!-- Header -->
+        <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-4 col-md-4 col-lg-4 no-padding">{{ScreenTitle}} <span>PROJECT</span></div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-5 col-md-4 col-lg-4 no-padding HeadNote">
+                <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4 pull-right no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <button class="k-button k-button-icontext" id="btnCancel" style="text-decoration:none" ng-click="closeDialog(ngDialogData.ID)">
+                                    <span class="k-icon k-update  k-i-close"></span>
+                                    Close
+                                </button>
+                            </li>
+                            <li ng-show="AllowToEdit">
+                                <button type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="PostData(form.formProjectModal)" ng-show="AllowToEdit" >
+                                    <span class="k-icon k-update k-i-check"></span>
+                                    Save
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear">
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label nopadding">Project ID</label>
+            <label class="ReadOnlyText" >{{projectDCModel.HYLAN_PROJECT_ID}}</label>
+            </div>
+
+           
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label">Hylan Job Number</label>
+                <input name="txtJobNumber" hylan-control-validation hylancontrolname="JobNumber" hylancontrollabel="Hylan Job Number" positive-number-only type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formProjectModal, form.formProjectModal.txtJobNumber) }"
+                       ng-model="projectDCModel.HYLAN_JOB_NUMBER" ng-maxlength="3" ng-minlength="3"  ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+            </div>
+
+          
+
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Project/Bid Name</label>
+                <input name="txtProjectName" hylan-control-validation duplicate-record-check hylancontrolname="ProjectName" hylancontrollabel="Project/Bid Name"  type="text" class="form-control event-select" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formProjectModal, form.formProjectModal.txtProjectName) }"
+                       ng-model="projectDCModel.PROJECT_BID_NAME" required ng-maxlength="50" ng-change="ValidateDuplicateRecord(form.formProjectModal.txtProjectName, '')" ng-disabled="!AllowToEdit" />
+                <!--<p ng-show="commonValidationService.ValidateTextBoxesRequired(form.formProjectModal, form.formProjectModal.txtprojectName)" class="help-block">Project name is required</p>
+                <p ng-show="commonValidationService.ValidateTextBoxesLength(form.formProjectModal, form.formProjectModal.txtprojectName)" class="help-block">Value too long</p>-->
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Client</label>
+                <select id="ddlPurpose" hylan-control-validation hylancontrolname="Purpose" hylancontrollabel="Client" name="ddlPurpose" class="form-control" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formProjectModal, projectDCModel.CLIENT, form.formProjectModal.ddlPurpose) } "
+                        ng-model="projectDCModel.CLIENT" ng-init="projectDCModel.CLIENT = projectDCModel.CLIENT !== 0 ? projectDCModel.CLIENT : null" ng-change="DataChanged()" ng-disabled="!AllowToEdit"
+                        required ng-options="x.COMPANY_ID as x.COMPANY_NAME for x in _ClientsDS">
+                    <option value="">-- Select Client --</option>
+                </select>
+                <!--<p ng-show="commonValidationService.ValidateDropDown(form.formProjectModal, projectDCModel.CLIENT, form.formProjectModal.ddlPurpose)" class="help-block">Client is required</p>-->
+            </div>
+
+
+            <div class="col-sm-4 col-md-4 col-lg-4" >
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Project Status</label>
+                <select id="ddlProjectStatus" hylan-control-validation hylancontrolname="ProjectStatus" hylancontrollabel="Project Status" name="ddlProjectStatus" class="form-control" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formProjectModal, projectDCModel.PROJECT_STATUS, form.formProjectModal.ddlProjectStatus)}"
+                        ng-model="projectDCModel.PROJECT_STATUS" ng-init="projectDCModel.PROJECT_STATUS = projectDCModel.PROJECT_STATUS !== 0 ? projectDCModel.PROJECT_STATUS : null" ng-change="DataChanged()" ng-disabled="!AllowToEdit"
+                        required ng-options="x.LOOK_UP_ID as x.LU_NAME for x in ProjectStatusDS">
+                    <option value="">-- Select Project Status --</option>
+                </select>
+                <!--<p ng-show="commonValidationService.ValidateDropDown(form.formProjectModal, projectDCModel.PROJECT_STATUS, form.formProjectModal.ddlProjectStatus)" class="help-block">Project is required</p>-->
+            </div>
+
+         
+            <div class="col-sm-4 col-md-4 col-lg-4" ng-disabled="!AllowToEdit">
+                <label class="control-label">Tentative Start Date</label>
+                <input type="text" id="calTentStartDate" name="calTentStartDate"
+                       class="form-control;pull-left"
+                       is-valid-date-check hylan-control-validation hylancontrolname="TentStartDate" hylancontrollabel="Tentative Start Date"
+                       ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calTentStartDate, projectDCModel.TENTATIVE_PROJECT_START_DATE ) }"
+                       ng-model="projectDCModel.TENTATIVE_PROJECT_START_DATE" 
+                       ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+                <script>
+                    $("#calTentStartDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Actual Start Date</label>
+                <input type="text" id="calActStartDate"  name="calActStartDate" class="form-control;pull-left"
+                       is-valid-date-check hylan-control-validation hylancontrolname="ActStartDate" hylancontrollabel="Actual Start Date"
+                       ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calActStartDate, projectDCModel.ACTUAL_PROJECT_START_DATE ) }"
+                       ng-model="projectDCModel.ACTUAL_PROJECT_START_DATE" ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+                <script>
+                    $("#calActStartDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+          
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Projected End Date</label>
+                <input type="text" id="calTentEndDate" name="calTentEndDate" class="form-control;pull-left"
+                       is-valid-date-check hylan-control-validation hylancontrolname="TentEndDate" hylancontrollabel="Projected End Date"
+                       ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calTentEndDate, projectDCModel.PROJECTED_END_DATE ) }"                       
+                        ng-model="projectDCModel.PROJECTED_END_DATE" ng-change="DataChanged()"  ng-disabled="!AllowToEdit" />
+                <script>
+                    $("#calTentEndDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+          
+
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Actual Close Date</label>
+                <input type="text" id="calActCloseDate" name="calActCloseDate" class="form-control;pull-left"
+                       is-valid-date-check hylan-control-validation hylancontrolname="ActCloseDate" hylancontrollabel="Actual Close Date"
+                       ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calActCloseDate, projectDCModel.ACTUAL_PROJECT_CLOSE_DATE ) }"                                              
+                        ng-model="projectDCModel.ACTUAL_PROJECT_CLOSE_DATE" ng-change="DataChanged()" ng-disabled="!AllowToEdit"/>
+                <script>
+                    $("#calActCloseDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+
+            
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Bid Date</label>
+                <input type="text" id="calBidDate" name="calBidDate" class="form-control;pull-left"
+                        is-valid-date-check hylan-control-validation hylancontrolname="BidDate" hylancontrollabel="Bid Date"
+                        ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calBidDate, projectDCModel.PROJECT_BID_DATE ) }"                       
+                        ng-model="projectDCModel.PROJECT_BID_DATE" ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+                <script>
+                    $("#calBidDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+           
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">Project Awarded</label>
+                <input type="text" id="calAwardedDate" name="calAwardedDate"  class="form-control;pull-left"
+                        is-valid-date-check hylan-control-validation hylancontrolname="AwardedDate" hylancontrollabel="Project Awarded"
+                        ng-class="{ 'has-error' :  commonValidationService.IsValidDateCheck(form.formProjectModal, form.formProjectModal.calAwardedDate, projectDCModel.PROJECT_AWARDED ) }"                                              
+                        ng-model="projectDCModel.PROJECT_AWARDED" ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+                <script>
+                    $("#calAwardedDate").kendoMaskedDatePicker();
+                </script>
+            </div>
+
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">PO Number</label>
+                <input type="text" class="form-control event-select" ng-model="projectDCModel.PO_NUMBER" maxlength="50" ng-change="DataChanged()" ng-disabled="!AllowToEdit" />
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+            <div class="col-sm-4 col-md-4 col-lg-4">     
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">     
+            </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+                <label class="control-label">PO Amount</label>
+                <input name="txtPOAmount"
+                       hylan-control-validation hylancontrolname="TrackRevenue"
+                       hylancontrollabel="Track Revenue"
+                       type="text"
+                       class="form-control event-select"
+                       format-amount-input
+                       maxlength="14"
+                       ng-disabled="!AllowToEdit" 
+                       ng-model="projectDCModel.PO_AMOUNT"
+                       ng-change="DataChanged()" />
+            </div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="clearfix visible-md-block"></div>
+            <div class="clearfix visible-lg-block"></div>
+        </div>
+    </div>
+</form>
+

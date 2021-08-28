@@ -1,0 +1,118 @@
+D:\Projects\ePay\nMart.DAL\bin\Debug\Hylan.DAL.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Hylan.DAL.pdb
+D:\Projects\ePay\nMart.DAL\bin\Debug\Hylan.Common.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Projects\ePay\nMart.DAL\bin\Debug\Hylan.Common.pdb
+D:\Projects\ePay\nMart.DAL\obj\Debug\EPay.DAL.csprojResolveAssemblyReference.cache
+D:\Projects\ePay\nMart.DAL\obj\Debug\Hylan.DAL.dll
+D:\Projects\ePay\nMart.DAL\obj\Debug\Hylan.DAL.pdb
+D:\Projects\ePay\ePay.DAL\bin\Debug\EPay.DAL.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\EPay.DAL.pdb
+D:\Projects\ePay\ePay.DAL\bin\Debug\EPay.Common.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Projects\ePay\ePay.DAL\bin\Debug\EPay.Common.pdb
+D:\Projects\ePay\ePay.DAL\obj\Debug\EPay.DAL.dll
+D:\Projects\ePay\ePay.DAL\obj\Debug\EPay.DAL.pdb
+E:\saqib\ePay\ePay.DAL\bin\Debug\EPay.DAL.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\EPay.DAL.pdb
+E:\saqib\ePay\ePay.DAL\bin\Debug\EPay.Common.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\saqib\ePay\ePay.DAL\bin\Debug\EPay.Common.pdb
+E:\saqib\ePay\ePay.DAL\obj\Debug\EPay.DAL.csprojAssemblyReference.cache
+E:\saqib\ePay\ePay.DAL\obj\Debug\EPay.DAL.csproj.CoreCompileInputs.cache
+E:\saqib\ePay\ePay.DAL\obj\Debug\EPay.DAL.csproj.CopyComplete
+E:\saqib\ePay\ePay.DAL\obj\Debug\EPay.DAL.dll
+E:\saqib\ePay\ePay.DAL\obj\Debug\EPay.DAL.pdb
+D:\Projects\ePay\ePay.DAL\obj\Debug\EPay.DAL.csproj.CoreCompileInputs.cache
+D:\Projects\ePay\ePay.DAL\obj\Debug\EPay.DAL.csprojAssemblyReference.cache
+D:\Projects\ePay\ePay.DAL\obj\Debug\EPay.DAL.csproj.CopyComplete
+D:\Angular project\Epay\ePay.DAL\bin\Debug\EPay.DAL.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\EPay.DAL.pdb
+D:\Angular project\Epay\ePay.DAL\bin\Debug\EPay.Common.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\Angular project\Epay\ePay.DAL\bin\Debug\EPay.Common.pdb
+D:\Angular project\Epay\ePay.DAL\obj\Debug\EPay.DAL.csprojResolveAssemblyReference.cache
+D:\Angular project\Epay\ePay.DAL\obj\Debug\EPay.DAL.dll
+D:\Angular project\Epay\ePay.DAL\obj\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\obj\Debug\EPay.DAL.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\obj\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.DAL\obj\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\obj\Debug\EPay.DAL.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\obj\Debug\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.DAL\obj\Debug\EPay.DAL.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\EPay.DAL.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\EPay.DAL.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\EPay.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\bin\Debug\EPay.Common.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.csprojResolveAssemblyReference.cache
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.dll
+E:\Projects\TSS angular\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\EPay.DAL.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\EPay.DAL.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\EPay.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\bin\Debug\EPay.Common.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.csprojAssemblyReference.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.csproj.CoreCompileInputs.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.csproj.CopyComplete
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.DAL\obj\Debug\EPay.DAL.pdb

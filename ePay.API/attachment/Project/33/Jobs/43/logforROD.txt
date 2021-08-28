@@ -1,0 +1,3112 @@
+
+email: mimran@macrosoftinc.com
+pwd: P@kist@n_01
+
+compmgmt.msc
+
+Basic grid settings : Shelveset BasicGridChanges 
+System.Data.SqlClient" connectionString="server=192.168.10.21\SQL2008;database=NMart_TC7;UID=sa;password=macrosoft
+
+<add name="nMartdb" providerName="System.Data.SqlClient" connectionString="server=192.168.10.21\SQL2008;database=HYLEN_QA_TC1;UID=sa;password=macrosoft"/>
+      <add name="nMartdbAdhoc" providerName="System.Data.SqlClient" connectionString="server=192.168.10.21\SQL2008;database=HYLEN_QA_TC1;UID=sa;password=macrosoft"/>
+  
+TFS: path: http://69.74.177.178:8080/tfs
+Server Name: vpn.macrosoftinc.com
+ 
+macrosoftinc\mkhan
+macro123
+-----------
+User name: macrosoftinc\mimran
+Password: MimranRod42
+
+-------------
+
+
+
+MimranRod42
+
+www.
+
+Core Folder
+===========
+Global.js
+---------
+All messags, lookup loadings server side generic requests
+API URL, Role, isIE
+dirtyField, SetStatusValue,checkEmptyValue,customnumericfield_iPad, customnumericfield_Android,customnumericfield
+
+call through Ajax
+	Global.Get orGlobal.Post, Globals.SecureGet, Globals.SecurePost
+
+Utility.js
+------------
+Grid relevent events go to Utility.js
+
+
+Common.js
+------------
+apiUrl
+gridPageSize
+gridPageSizes
+gridPageButtonCount
+showStackTracke
+exportAllPages
+
+
+baseController.js
+--------------
+used to load values in basic variables like , and to adjust the dashboard
+$rootScope.currentUser
+$rootScope.Screens it loads the menues items if not loaded yet
+$rootScope.ROLE 
+$rootScope.UserCompanies
+$state.current
+$scope.gridOptions
+$scope.GetBasicToolbar
+$state.current.views 
+$state.current.views.BodyContent
+$scope.openDialog 
+$scope.closeDialog
+$scope.handleDataBound
+$scope.logout
+etc
+
+
+
+GetSpecificPermission
+
+
+
+apiUrl
+gridPageSize
+gridPageSizes
+gridPageButtonCount
+showStackTracke
+exportAllPages
+
+-------------------------------------
+
+TEST_PERMISSION_TITLE
+
+I am muhammad Imran. 
+I have around 8 years of experience in .net 
+I had been working with ASICS team for the last 1 & half year.
+Yesterday I joined ROD team to work on Hylen .
+
+Himad shared a project with me EEI.
+today I spent most of the time in understanding the existing flow, 
+current code understanding and 
+I also spent time in watching some videos relevent with Angular JS.
+
+
+----
+New client name is Scana.
+Second 
+
+--------Project Name is Hylen-----------
+
+HYLEN_QA_TC1
+
+
+           { field: "EMERGENCY_TYPE.LU_NAME", 
+	   title: "<sup><img src='../../../Content/images/red_asterisk.png' /></sup>Storm / Emergency Type"
+	   , headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }
+	   , attributes: { "class": "contert-alpha GridBorder" },
+		 width: "200px",
+		 editor: emergencytypeDropDownEditor,
+		 template: "#=Globals.dirtyField(data,
+		'LU_NAME')# #:EMERGENCY_TYPE.LU_NAME#" },
+
+
+
+            { field: "USER_COMPANIES",
+ title: "<sup><img src='../../../Content/images/red_asterisk.png' /></sup>Company",
+ width: "250px",
+ headerAttributes: { "class": "sub-col no-left-border lightYellow-col",
+ "style": "white;1px solid #c6c6c6 !important;" },
+ attributes: { "class": "contert-alpha" },
+ editor: UserCompaniesEditor,
+ template: "#=Globals.dirtyField(data,
+'USER_COMPANIES')# #:USER_COMPANIES_NAMES#" },
+
+
+'COMPANY_ID', 'COMPANY_NAME'
+
+
+Latest back of source code
+New DB backup at server
+changed the lables.
+remove the filter RMAG on users screen
+
+
+RMAGS
+
+
+
+
+<add name="nMartdb" providerName="System.Data.SqlClient" connectionString="server=MACPAK-SYOUNAS\SQLSERVER2014;database=NMART_TC7;UID=sa;password=macrosoft"/>
+      <add name="nMartdbAdhoc" providerName="System.Data.SqlClient" connectionString="server=192.168.10.21\SQL2008;database=HYLEN_QA_TC1;UID=sa;password=macrosoft"/>
+-----------
+
+
+deleting duplicate companies 
+================================
+select user_ID,max(Company_ID) Company_ID into #tempUserCompanies from users_companies 
+group by user_ID 
+
+delete from users_companies
+
+insert into users_companies 
+select * from #tempUserCompanies 
+
+----------------
+var dataItem = $("#grid1").data("kendoGrid").dataItem($("#grid1").data("kendoGrid").select()[1]);
+ dataItem.set("USER_COMPANIES_NAMES", this.dataItem().toJSON().COMPANY_NAME);
+ dataItem.set("USER_COMPANIES_NAMES", this.dataItem().toJSON().COMPANY_NAME);
+
+
+ ---------------------
+
+
+app.js to set the title of tab bar.  Manage Clients
+global.js -> for Menue
+UserRoles 3 places ()
+disclaimer.html 
+CompaniesController.js error messages, title
+companiesService.js title: , contact no. 
+index.html , 
+eventsController  "Company(s) Selected", "Select Company(s)"
+mergeeventservice.js  title: "Company Name", title: "Company Contact Number"
+events\views\index.html(40):            <label class="control-label nopadding">Company</label>
+views\invite.html(44):                template: "<input type='checkbox' title='#= item.isdisabled== 1?'No Company Attached':''#'
+sidebar.html(54):                <p>Company</p>
+matchingcontroller.js(425):                message = 'Please select a requesting company from left panel and a responding company from right panel.';
+					message = 'please select a responding company from right panel.';
+matchlogcontroller.js(106):        { field: "REQUEST_COMPANY_NAME", title: "COMPANY NAME"
+					{ field: "REQUEST_COMPANY_CELLPHONE", title: "COMPANY PHONE #"
+					{ field: "RESPONSE_COMPANY_NAME", title: "CLIENT NAME"	
+matchlog\views\index.html(34):                <option value="Company" title="Company"> Company </option>
+js\mobile.templates.js(21):                '<div class="lv-detail-label"><img src="images/red_asterisk.png" />COMPANY RESPONDING RESOURCES</div>' +
+\mobile.templates.js(62):                '<div class="lv-detail-label">COMPANY \\/ NON\\-COMPANY</div>' +
+mobile\js\mobile.templates.js(337):      '<div class="heading1">Company Information</div>'
+				         '<div class="lv-detail-label">COMPANY PHONE \\#</div>' +
+					'<div class="heading1">COMPANY INFORMATION</div>' +
+					'<div class="lv-detail-label"><label>COMPANY PHONE \\#</label></div>
+app\mobile\page.html(243):                            popupNotification.show("Please select another Company, each Company
+						 popupNotification.show("You are not associated with Company or RMAG.", notifyType.ERROR)
+app\noniourequests\controllers\noniourequestscontroller.js(132):   Utility.Notify({ type: NOTIFYTYPE.WARNING, message: "Company Name '"
+						s/red_asterisk.png' /></sup>COMPANY NAME", locked: true, width: "200px"
+						 title: "COMPANY PHONE",
+						  input.attr("data-companynamemaxlength-msg", "Max. length for Company Name is 50.");
+llers\resourcereportcontroller.js(24):        { field: "COMPANY_NAME", title: "COMPANY"
+app\requests\controllers\requestscontroller.js(261):            { field: "COMPANY_CELLPHONE", title: "COMPANY PHONE #
+Web\app\requests\services\requestsservice.js(15):                        title: "Company Requesting Resources",
+controllers\responsescontroller.js(219):            { field: "IS_COMPANY.LU_NAME", title: "COMPANY / NON-COMPANY"
+services\responsesservice.js(14):                    COMPANY: { title: "Company 
+						input.attr("data-companynamemaxlength-msg", "Max. length for Company Name is 50.");
+app\responses\views\index.html(77):                <label class="control-label nopadding">Company / Non-Company</label>
+responses\views\index.html(112):                <li><a><img src="images/add-request-ico.png" width="17" height="17">ADD NEW COMPANY
+Controllers\AccountController.cs(34): 		string CompanyNames = "No Company Associated";
+
+----------
+
+Project Path
+E:\Projects\Hylen
+=============
+
+TFS Path :
+http://69.74.177.178:8080/tfs
+192.168.10.21\SQL2008;
+UID=sa;password=macrosoft
+
+------------------------------
+
+Tables and culumns need to be deleted 
+select * from [dbo].[RMAGS]
+select * from [dbo].[COMPANIES_RMAGS]
+select * from [dbo].[EVENTS_RMAGS]
+select * from [dbo].[MESSAGES_RMAGS]
+---------------------------------
+--Alter table [dbo].[COMPANIES] drop column [HOME_RMAG]
+--Alter table [dbo].[EVENTS_INVITATIONS] drop column [RMAG_ID]
+--Alter table [dbo].[MATCHING_REQUEST_COMPANIES] drop column [RMAG_ID]
+--Alter table [dbo].[MATCHING_RESPONSE_COMPANIES] drop column [MATCHING_RMAG_ID]
+--Alter table [dbo].[MRC_MATCHING_REQUEST_COMPANIES_SNAPSHOT] drop column [MATCHING_RMAG_ID],[RMAG_NAME]
+--Alter table [dbo].[MRC_MATCHING_RESPONSE_COMPANIES_SNAPSHOT] drop column [MATCHING_RMAG_ID]
+--Alter table [dbo].[NONIOU_REQUESTS] drop column [RMAG_ID]
+--Alter table [dbo].[REQUESTS] drop column [RMAG_ID]
+--Alter table [dbo].[RESPONSES] drop column [RMAG_ID]
+--Alter table [dbo].[RS_REQUEST_SNAPSHOT] drop column [RMAG_ID],[RMAG_NAME]
+--Alter table [dbo].[RS_RESPONSE_SNAPSHOT] drop column [RMAG_ID],[RMAG_NAME]
+
+-------------------------------
+--drop table [dbo].[COMPANIES_RMAGS]
+--drop table [dbo].[EVENTS_RMAGS]
+--drop table [dbo].[MESSAGES_RMAGS]
+--drop table [dbo].[RMAGS]
+
+--------------
+
+P@kist@n_01
+
+macro123
+
+
+
+server=192.168.10.21\SQL2008;database=HYLEN_QA_TC1;UID=sa;password=macrosoft
+server=192.168.10.21\SQL2008;database=HYLEN_QA_TC1;UID=sa;password=macrosoft
+
+
+{"The type initializer for 'Microsoft.Practices.EnterpriseLibrary.Common.Configuration.ObjectBuilder.EnterpriseLibraryFactory' threw an exception."}
+
+
+
+
+
+----------------------
+
+
+USE [NMART_TC7]
+GO
+/****** Object:  StoredProcedure [dbo].[proc_USERSLoadAll]    Script Date: 1/6/2017 12:05:30 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER PROCEDURE [dbo].[proc_USERSLoadAll]
+ @p_RMAG_ID INT=0
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT     
+		*, STUFF(  
+			(  
+			SELECT ',' + CONVERT(varchar(5), UC.COMPANY_ID)  
+			FROM USERS_COMPANIES UC 
+			WHERE USERS.[USER_ID] = UC.[USER_ID] 
+			FOR XML PATH ('')  
+			),1,1,'') COMPANIES,
+			*, STUFF(  
+			(  
+			SELECT ',' + CONVERT(varchar(5), COMP.HOME_RMAG)  
+			FROM COMPANIES COMP 
+			INNER JOIN USERS_COMPANIES UC ON UC.COMPANY_ID = COMP.COMPANY_ID
+			WHERE USERS.[USER_ID] = UC.[USER_ID] 
+			FOR XML PATH ('')  
+			),1,1,'') HOME_RMAGS
+	FROM
+	(
+		SELECT DISTINCT    
+			[USERS].[USER_ID], 
+			[USERS].[USER_NAME], 
+			[USERS].[PASSWORD], 
+			[USERS].[FIRST_NAME], 
+			[USERS].[LAST_NAME], 
+			[USERS].[ROLE_ID], 
+			[ROLES].[ROLE_NAME],
+			[USERS].[EMAIL_ADDRESS],
+			[USERS].[OFFICE_PHONE], 
+			[USERS].[MOBILE_PHONE], 
+			[USERS].[SECURITY_QUESTION], 
+			[USERS].[ANSWER], 
+			[USERS].[STATUS], 
+			[USERS].[CREATED_ON], 
+			[USERS].[CREATED_BY], 
+			[USERS].[MODIFIED_ON], 
+			[USERS].[MODIFIED_BY],
+			[USERS].[LOCK_COUNTER]
+		FROM         
+			[USERS] INNER JOIN
+			[ROLES] ON [USERS].[ROLE_ID] = [ROLES].[ROLE_ID]
+			INNER JOIN USERS_COMPANIES ON USERS.USER_ID=USERS_COMPANIES.USER_ID
+			--INNER JOIN COMPANIES_RMAGS ON USERS_COMPANIES.COMPANY_ID=COMPANIES_RMAGS.COMPANY_ID
+			--WHERE (CASE
+			--WHEN isnull(@P_RMAG_ID,0) <>0 AND COMPANIES_RMAGS.RMAG_ID=@P_RMAG_ID THEN 1
+			--WHEN @P_RMAG_ID=0 THEN 1
+			--END=1)
+	) USERS
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+
+----------
+The type initializer for 'Microsoft.Practices.EnterpriseLibrary.Common.Configuration.ObjectBuilder.EnterpriseLibraryFactory' threw an exception
+
+
+---------------
+1/6/2017
+select * from [dbo].[RMAGS]
+select * from [dbo].[COMPANIES_RMAGS]
+select * from [dbo].[EVENTS_RMAGS]
+select * from [dbo].[MESSAGES_RMAGS]
+---------------------------------
+--Alter table [dbo].[COMPANIES] drop column [HOME_RMAG]
+--Alter table [dbo].[EVENTS_INVITATIONS] drop column [RMAG_ID]
+--Alter table [dbo].[MATCHING_REQUEST_COMPANIES] drop column [RMAG_ID]
+--Alter table [dbo].[MATCHING_RESPONSE_COMPANIES] drop column [MATCHING_RMAG_ID]
+--Alter table [dbo].[MRC_MATCHING_REQUEST_COMPANIES_SNAPSHOT] drop column [MATCHING_RMAG_ID],[RMAG_NAME]
+--Alter table [dbo].[MRC_MATCHING_RESPONSE_COMPANIES_SNAPSHOT] drop column [MATCHING_RMAG_ID]
+--Alter table [dbo].[NONIOU_REQUESTS] drop column [RMAG_ID]
+--Alter table [dbo].[REQUESTS] drop column [RMAG_ID]
+--Alter table [dbo].[RESPONSES] drop column [RMAG_ID]
+--Alter table [dbo].[RS_REQUEST_SNAPSHOT] drop column [RMAG_ID],[RMAG_NAME]
+--Alter table [dbo].[RS_RESPONSE_SNAPSHOT] drop column [RMAG_ID],[RMAG_NAME]
+
+-------------------------------
+--drop table [dbo].[COMPANIES_RMAGS]
+--drop table [dbo].[EVENTS_RMAGS]
+--drop table [dbo].[MESSAGES_RMAGS]
+--drop table [dbo].[RMAGS]
+
+
+
+RMAG: 3, HOMERMAG: 4
+
+
+
+-------------
+
+homeRmagPermission is also deleted
+
+Mobile/texting phone #
+
+-------------
+After deleting [COMPANIES_RMAGS], settle the issue, 
+Also settle the issues during exporting files , 
+Labels are changed now . 
+settle the issue to export files 
+
+
+
+         <!--<input id="divMultiSelCompany" data-text-field="COMPANY_NAME" data-value-field="COMPANY_ID" options="companyOptions" extra-settings="companySettings" />-->
+
+
+---------
+
+drop down 
+<select id="ddlRoles" class="form-control" ng-model="filters.ROLE.value" ng-change="applyFilter(filters.ROLE.name, 'filters.ROLE.value')">
+<option value="0"> All </option>
+</select>
+
+
+
+var ddlRoles = $("#ddlRoles");
+            $.each(_RolesDS, function () {
+                ddlRoles.append($("<option title='" + this.ROLE_NAME + "' />").val(this.ROLE_NAME).text(this.ROLE_NAME));
+            });
+
+
+
+1/10/2017
+----------
+
+--deleting [COMPANIES_RMAGS], 
+--settle the issue, 
+--settle the issues during exporting files , 
+--Labels are changed now. 
+
+Menu
+Jobs\
+
+
+PROJECT ID	JOB FILE NUMBER	NODE ID 1	NODE ID 2	NODE ID 3	HUB	HYLAN PM	STREET ADDRESS	CITY	STATE	ZIP	LAT	LONG	POLE LOCATION	DOITT NTP STATUS	DOITT NTP GRANTED DATE	JOB CATEGORY	JOB STATUS	ON-HOLD REASON	CLIENT PM	JOB NOTES	NUMBER OF SUBMITTED PERMITS	PERMIT NOTES	TOTAL PERMITS	ACTIVE	EXPIRED	EXPIRING  5 DAYS	ON HOLD	REQUEST EXTENSION	REQUEST RENEWAL	PUNCHLIST COMPLETE
+
+
+
+ user-section high
+
+
+
+ <div class="col-sm-2">
+</div>
+<div class="col-sm-2 user-section"></div>
+
+---------
+
+select * from roles where role_name = 'admin'
+
+select * from [dbo].[ROLES_PERMISSIONS]
+where role_id = 17
+and permission_title like 'pre%'
+
+update roles_permissions
+set permission_title = 'Pre-Formatted Reports'
+where role_id = 17 and screen_id = 14 and permission_type_id = 2
+
+
+select * from [dbo].[ROLES_PERMISSIONS]
+where role_id = 17
+and permission_title like 'pre%'
+
+update roles_permissions
+set permission_title = 'Pre-Formatted Reports'
+where role_id = 17 and screen_id = 14 and permission_type_id = 2
+
+
+select * from screens 
+where screen_name like 'pre%'
+
+
+http://localhost:13919//Jobs/GetAll
+
+usersservice.js
+userscontroller.js
+
+
+
+  //.state('Jobs', {
+             //    url: '/Jobs',
+             //    views: {
+             //        'PageButtons': {
+             //            templateUrl: '/app/Jobs/views/menu.html'
+             //        },
+             //        'BodyContent': {
+             //            templateUrl: '/app/Jobs/views/index.html',
+             //            controller: 'JobsController'
+             //        }
+             //    },
+             //    title: 'Manage Jobs - NMART',
+             //    screenId: Globals.Screens.MANAGE_JOBS.ID
+             //})
+
+
+1st grid
+
+
+http://localhost:13919/Jobs//GetAll
+
+{ field: "PROJECT_ID", title: "<sup><img src='../../../Content/images/red_asterisk.png' /></sup>Project ID", width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+{ field: "PROJECT_ID",			title: "PROJECT ID"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "JOB_FILE_NUMBER",		title: "JOB FILE NUMBER"		, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "NODE_ID1",			title: "NODE ID1"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "NODE_ID2",			title: "NODE ID2"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "NODE_ID3",			title: "NODE ID3"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "HUB",				title: "HUB"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "HYLAN_PM",			title: "HYLAN PM"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "STREET_ADDRESS",		title: "STREET ADDRESS"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "CITY",			title: "CITY"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "STATE",			title: "STATE"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "ZIP",				title: "ZIP"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "LAT",				title: "LAT"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "LONG",			title: "LONG"				, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "POLE_LOCATION",		title: "POLE LOCATION"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "DOITT_NTP_STATUS",		title: "DOITT NTP STATUS"		, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "DOITT_NTP_GRANTED_DATE",	title: "DOITT NTP GRANTED DATE"		, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "JOB_CATEGORY",		title: "JOB CATEGORY"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "JOB_STATUS",			title: "JOB STATUS"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "ON_HOLD_REASON",		title: "ON HOLD REASON"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "CLIENT_PM",			title: "CLIENT PM"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "JOB_NOTES",			title: "JOB NOTES"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "NUMBER_OF_SUBMITTED_PERMITS", title: "NUMBER OF SUBMITTED PERMITS"	, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "PERMIT_NOTES",		title: "PERMIT NOTES"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "PUNCHLIST_COMPLETE",		title: "PUNCHLIST COMPLETE"		, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "PUNCHLIST_SUBMITTED_DATE",	title: "PUNCHLIST SUBMITTED DATE"	, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "CLIENT_APPROVAL_DATE",	title: "CLIENT APPROVAL DATE"		, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "CREATED_BY",			title: "CREATED BY"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "CREATED_ON",			title: "CREATED ON"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "MODIFIED_BY",			title: "MODIFIED BY"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "MODIFIED_ON",			title: "MODIFIED ON"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } },
+{ field: "LOCK_COUNTER",		title: "LOCK COUNTER"			, width: "200px", locked: true, headerAttributes: { "class": "sub-col darkYellow-col rowHeaderHeadYellow" }, attributes: { "class": "contert-alpha GridBorder" } }
+	
+
+
+
+---------------------
+
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+PROJECT ID                   PROJECT_ID		      
+              		      
+                   		      
+                     		      
+		      
+HUB                          			      
+HYLAN PM                     		      
+STREET ADDRESS               		      
+CITY                         			      
+STATE                        			      
+ZIP                          			      
+LAT                          			      
+LONG                         			      
+POLE LOCATION                		      
+DOITT NTP STATUS             	      
+DOITT NTP GRANTED DATE       	      
+JOB CATEGORY                 		      
+JOB STATUS                   		      
+ON HOLD REASON               		      
+CLIENT PM                    		      
+JOB NOTES                    		      
+NUMBER OF SUBMITTED PERMITS    
+
+PERMIT NOTES                 		      
+PUNCHLIST COMPLETE           	      
+
+PUNCHLIST SUBMITTED DATE           
+CLIENT APPROVAL DATE         
+
+CREATED BY                   CREATED_BY		      
+CREATED ON                   CREATED_ON		      
+MODIFIED BY                  MODIFIED_BY		      
+MODIFIED ON                  MODIFIED_ON		      
+LOCK COUNTER                 LOCK_COUNTER		      
+
+
+
+-------
+
+PROJECT ID
+JOB FILE NUMBER
+NODE ID1
+NODE ID2
+NODE ID3
+HUB
+HYLAN PM
+STREET ADDRESS
+CITY
+STATE
+ZIP
+LAT
+LONG
+POLE LOCATION
+DOITT NTP STATUS
+DOITT NTP GRANTED DATE
+JOB CATEGORY
+JOB STATUS
+ON HOLD REASON
+CLIENT PM
+JOB NOTES
+NUMBER OF SUBMITTED PERMITS
+PERMIT NOTES
+PUNCHLIST COMPLETE
+PUNCHLIST SUBMITTED DATE
+CLIENT APPROVAL DATE
+CREATED BY
+CREATED ON
+MODIFIED BY
+MODIFIED ON
+LOCK COUNTER
+
+---------------
+
+Manadatory check 
+<sup><img src="../../../Content/images/red_asterisk.png" /></sup>
+
+
+
+Globals.GetUserRoles(false).then(function (result) {
+            _RolesDS = result.objResultList;
+            var ddlRoles = $("#ddlRoles");
+            $.each(_RolesDS, function () {
+                ddlRoles.append($("<option />").val(this.ROLE_NAME).text(this.ROLE_NAME));
+            });
+        }).fail(onError);
+
+
+	Globals.GetStates()
+
+
+-------
+
+Need to define in global 
+DOITT_NTP_STATUS
+JOB_STATUS
+
+
+doittNTPStatusLU
+jobStatusLU
+jobCategoryLU
+states
+
+
+PROJECT_ID
+HYLAN_PROJECT_ID
+
+-----------------------
+1/13/2017
+ Shelveset JobsScreenChanges suc
+
+
+ HYLEN_QA_TC1
+
+
+
+ nMartApp.directive('convertToNumber', function () {
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function(val) {
+                return parseInt(val, 10);
+            });
+            ngModel.$formatters.push(function(val) {
+                return '' + val;
+            });
+        }
+    };
+});
+
+-----------
+
+Angular Documentation
+https://docs.angularjs.org/api/ng/input/input%5Bnumber%5D
+
+
+
+{ field: "", title: "", width: "80px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: NODE_ID1 == null ? '' : NODE_ID1#" },
+{ field: "", title: "", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" } },
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+PROJECT_ID
+HYLAN_PROJECT_ID
+HYLAN_JOB_NUMBER
+PROJECT_BID_NAME
+CLIENT
+PROJECT_STATUS
+TENTATIVE_PROJECT_START_DATE
+ACTUAL_PROJECT_START_DATE
+PROJECTED_END_DATE
+ACTUAL_PROJECT_CLOSE_DATE
+PROJECT_BID_DATE
+PROJECT_AWARDED
+BID_DOCUMENTS
+NOTES
+PO_NUMBER
+CREATED_ON
+CREATED_BY
+MODIFIED_ON
+MODIFIED_BY
+LOCK_COUNTER
+
+
+
+
+
+
+-------------
+
+
+PROJECT ID
+HYLAN PROJECT ID
+HYLAN JOB NUMBER
+PROJECT BID NAME
+CLIENT
+PROJECT STATUS
+TENTATIVE PROJECT START DATE
+ACTUAL PROJECT START DATE
+PROJECTED END DATE
+ACTUAL PROJECT CLOSE DATE
+PROJECT BID DATE
+PROJECT AWARDED
+BID DOCUMENTS
+NOTES
+PO NUMBER
+CREATED ON
+CREATED BY
+MODIFIED ON
+MODIFIED BY
+LOCK COUNTER
+
+
+-----------------------
+
+
+{ field: "PROJECT_ID", title: "PROJECT ID", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECT_ID == null ? '' : PROJECT_ID#" },
+{ field: "HYLAN_PROJECT_ID", title: "HYLAN PROJECT ID", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: HYLAN_PROJECT_ID == null ? '' : HYLAN_PROJECT_ID#" },
+{ field: "HYLAN_JOB_NUMBER", title: "HYLAN JOB NUMBER", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: HYLAN_JOB_NUMBER == null ? '' : HYLAN_JOB_NUMBER#" },
+{ field: "PROJECT_BID_NAME", title: "PROJECT BID NAME", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECT_BID_NAME == null ? '' : PROJECT_BID_NAME#" },
+{ field: "CLIENT", title: "CLIENT", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: CLIENT == null ? '' : CLIENT#" },
+{ field: "PROJECT_STATUS", title: "PROJECT STATUS", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECT_STATUS == null ? '' : PROJECT_STATUS#" },
+{ field: "TENTATIVE_PROJECT_START_DATE", title: "TENTATIVE PROJECT START DATE", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: TENTATIVE_PROJECT_START_DATE == null ? '' : TENTATIVE_PROJECT_START_DATE#" },
+{ field: "ACTUAL_PROJECT_START_DATE", title: "ACTUAL PROJECT START DATE", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: ACTUAL_PROJECT_START_DATE == null ? '' : ACTUAL_PROJECT_START_DATE#" },
+{ field: "PROJECTED_END_DATE", title: "PROJECTED END DATE", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECTED_END_DATE == null ? '' : PROJECTED_END_DATE#" },
+{ field: "ACTUAL_PROJECT_CLOSE_DATE", title: "ACTUAL PROJECT CLOSE DATE", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: ACTUAL_PROJECT_CLOSE_DATE == null ? '' : ACTUAL_PROJECT_CLOSE_DATE#" },
+{ field: "PROJECT_BID_DATE", title: "PROJECT BID DATE", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECT_BID_DATE == null ? '' : PROJECT_BID_DATE#" },
+{ field: "PROJECT_AWARDED", title: "PROJECT AWARDED", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PROJECT_AWARDED == null ? '' : PROJECT_AWARDED#" },
+{ field: "BID_DOCUMENTS", title: "BID DOCUMENTS", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: BID_DOCUMENTS == null ? '' : BID_DOCUMENTS#" },
+{ field: "NOTES", title: "NOTES", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: NOTES == null ? '' : NOTES#" },
+{ field: "PO_NUMBER", title: "PO NUMBER", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: PO_NUMBER == null ? '' : PO_NUMBER#" },
+{ field: "CREATED_ON", title: "CREATED ON", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: CREATED_ON == null ? '' : CREATED_ON#" },
+{ field: "CREATED_BY", title: "CREATED BY", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: CREATED_BY == null ? '' : CREATED_BY#" },
+{ field: "MODIFIED_ON", title: "MODIFIED ON", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: MODIFIED_ON == null ? '' : MODIFIED_ON#" },
+{ field: "MODIFIED_BY", title: "MODIFIED BY", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: MODIFIED_BY == null ? '' : MODIFIED_BY#" },
+{ field: "LOCK_COUNTER", title: "LOCK COUNTER", width: "200px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, template: "#: LOCK_COUNTER == null ? '' : LOCK_COUNTER#" },
+
+
+
+
+http://localhost:13919//Roles/LoadRoleDetails
+
+moment(CREATED_ON).format('MM/DD/YYYY HH:mm')
+
+
+Globals.GetCompanies(false).then(function (result) {
+            $scope.companyOptions = result.objResultList;
+            $scope.companySettings = {
+                externalIdProp: '',
+                idProp: 'COMPANY_ID',
+                displayProp: 'COMPANY_NAME',
+                enableSearch: true,
+                scrollable: true,
+                showCheckAll: false,
+                showUncheckAll: false,
+                smartButtonMaxItems: 5
+            };
+
+
+
+editable: {
+                confirmation: false
+            }
+
+
+---------
+Angular Documentation 
+https://docs.angularjs.org/api/ng/directive/select
+
+Kendo documentation 
+http://docs.telerik.com/kendo-ui/api/javascript/data/datasource
+
+
+
+required maxlength="5"  ng-change="DataChanged()"
+
+
+\\rod-application\wwwroot
+
+
+function validateData() {
+            if ($scope.jobDCModel.PROJECT_ID <= 0 || $scope.jobDCModel.JOB_FILE_NUMBER < 0  )
+            {
+                return false;
+            }
+            if (($scope.jobDCModel.STREET_ADDRESS == undefined || $scope.jobDCModel.STREET_ADDRESS == false)
+                || ($scope.jobDCModel.CITY ==  undefined ||  $scope.jobDCModel.CITY == false )||
+                ($scope.jobDCModel.STATE == undefined || $scope.jobDCModel.STATE == false) ||
+                ($scope.jobDCModel.ZIP == undefined || $scope.jobDCModel.ZIP == false))
+            {
+                return false;
+            }
+            if ($scope.jobDCModel.DOITT_NTP_STATUS == undefined || $scope.jobDCModel.DOITT_NTP_STATUS < 0)                
+            {
+                return false;
+            }
+            if ($scope.jobDCModel.JOB_STATUS == undefined || $scope.jobDCModel.JOB_STATUS == false)
+            {
+                return false;
+            }
+            if ($scope.jobDCModel.JOB_STATUS == 81 && ($scope.jobDCModel.ON_HOLD_REASON == undefined || $scope.jobDCModel.ON_HOLD_REASON == false)) {
+                return false;
+            }
+
+            return true;
+        }
+
+
+$scope.ngDialogData.ID = result;
+                        if($scope.ScreenTitle = "UPDATE")
+                            $scope.GetJobDetails($scope.ngDialogData.PROJECT_ID, $scope.ngDialogData.JOB_FILE_NUMBER);
+                        else
+                            $scope.GetJobDetails($scope.ngDialogData.PROJECT_ID, $scope.ngDialogData.JOB_FILE_NUMBER);
+  
+		   
+Attributes: { "style": "text-align: right;" }
+
+
+<script>
+                    $("#calTentStartDate").kendoDateTimePicker({
+                        timeFormat: "HH:mm",
+                        format: "MM/dd/yyyy HH:mm",
+                        interval: 15
+                    });
+                    if (/Android/.test(Globals.UserAgent) || /iPad/.test(Globals.UserAgent))
+                        $("#calTentStartDate").attr("readonly", "readonly");
+                </script>
+
+
+contert-alpha GridBorder
+contert-number GridBorder
+
+
+is there any place in the application where date control is used 
+
+
+jobDCModel.PUNCHLIST_COMPLETE
+jobDCModel.CLIENT_APPROVAL_DATE
+--------
+
+TENTATIVE_PROJECT_START_DATE
+ACTUAL_PROJECT_START_DATE
+PROJECTED_END_DATE
+ACTUAL_PROJECT_CLOSE_DATE
+PROJECT_BID_DATE
+
+
+--------
+
+ <script>
+                    $("#calPunchlistSubmittedDate").kendoDatePicker({
+                        format: "MM/dd/yyyy",
+                        interval: 15
+                    });
+                    if (/Android/.test(Globals.UserAgent) || /iPad/.test(Globals.UserAgent))
+                        $("#calPunchlistSubmittedDate").attr("readonly", "readonly");
+                </script>
+
+--------------
+Manage Clients: 
+Remove 'ADD RMAG' from the left panel----- ok
+Remove '*No of Customers from the grid
+Add Address field before City from the grid
+Status will be check-box in the grid
+Only freeze '*Client Name' column in the grid
+
+
+Manage Users: Status will be check-box in the grid
+Manage User Roles: Status will be check-box in the grid
+
+
+COMPANY_ADDRESS
+
+
+API Path :
+http://localhost:14000//Companies/GetAll
+
+
+-----------------
+
+Manage users
+	Make Company (not client)   --OK
+	Office Phone column is too narrow  -- OK
+Manage Client
+	Remove # of Customers  -- OK
+	Add Address  -- OK
+User Profile
+	Make Company (not client)  -- ok
+	Save not working   -- ok
+Manage Projects
+First column to be hidden
+Change “Hylan Project ID” to “Project ID” with hyperlink
+Project Awarded has time (remove)
+
+
+P@kist@n_08
+
+
+USER_COMPANY_ID
+
+
+dbCommandWrapper.AddInParameter("p_USER_COMPANY_ID", DbType.Int32, objUSER.USER_COMPANY_ID);
+
+objUSER.USER_COMPANY_ID = reader["USER_COMPANY_ID"] == DBNull.Value ? null : (int?)reader["USER_COMPANY_ID"];
+
+,
+	@p_USER_COMPANY_ID int
+
+
+"#: FormatDate(DOITT_NTP_GRANTED_DATE)#"
+
+
+
+Manage users
+	Make Company (not client)  
+	Office Phone column is too narrow  
+Manage Client
+	Remove # of Customers 
+	Add Address 
+	Make Company (not client)  
+	Save not working  
+Manage Projects
+First column to be hidden
+Change “Hylan Project ID” to “Project ID” with hyperlink
+Project Awarded has time (remove)
+
+
+-----------
+
+EEI company 
+http://192.168.10.22:8084\
+
+
+
+E:\Projects\TFS\EEI\EEI_WebAPI
+
+UI settings on all screens
+
+
+http://www.kendoui.io/kendo-ui/web/treeview/how-to/filter-out-search-results
+
+
+
+Assalam O Alikum
+Please see the following issues for 'Manage Jobs' screen so far:
+- Manage Jobs: Button label should be '+ Add Job' instead of 'Add Job' 
+
+- Add & Update Job: Labels should be 'Project ID', 'Lat', 'Long', 'DOITT NTP Status', 'On-Hold Reason' instead of 
+'Hylan Project ID', 'Latutude', 'Longitude', '*DOITT NTP Status', 'ON Hold Reason'
+
+Ans : I think 'Latutude', 'Longitude', 
+
+- Manage Jobs, Add & Update Job: 'Job Notes' should be hyperlink instead of text field with the format (# of notes) Date/time
+
+Ans: Naeem sb is working on Job Notes, link will be there as soon as Notes screen is completed
+
+- Caption should be '*Job File Number', '*Street Address', '*City', '*State', '*Job Status' instead of 'Job File Number', 
+'Street Address', 'City', 'State', 'Job Status' in the grid
+Ans: As this grid is ready only so start is not placed. 
+
+- Manage Jobs: 'Hylan PM', 'Total Permits', 'Active', 'Expired', 'Expiring 5 days', 'On hold', 'Request Extension', 'Request Renewal', 
+'Tasks' & 'Attachment' column is missing in the grid
+Ans: these columns are belong to other screens/tables, will be include after creation of other tables
+
+- Add & Update Job: 'Total Permits', 'Active', 'Expired', 'Expiring 5 days', 'On hold', 'Request Extension', 'Request Renewal', 
+'Tasks' & 'Attachment' column is missing in the grid
+
+Ans: these columns are belong to other screens/tables, will be include after creation of other tables
+
+- Add & Update Job: Message should be 'ERROR: Please enter On-Hold Reason.' instead of 'ERROR: Please provide mandatory 
+fields.' while clicking 'Save' button with Job Status 'On-Hold' & blank 'On-Hold Reason'
+
+- Add Job: Message 'ERROR: Please provide mandatory fields.' should be shown while clicking 'Save' button without 
+entering any mandatory field
+
+- Add & Update Job: Simple numeric control should shown instead of showing increment/decrement control for '*Job File Number'
+
+- Manage Jobs: Exception 'ERROR: (d.DOITT_NTP_GRANTED_DATE || "").toLowerCase is not a function' found while filtering data using global search filter
+
+- Add & Update Job: 'Hylan PM' should be dropdown control instead of text field
+
+
+
+GET 
+http://localhost:14000//Rmag/GetAllActiveRmags?_=1485269124908
+
+
+TFS User
+http://69.74.177.178:8080/tfs/DefaultCollection/Hylan/_workitems#path=My+Queries%2FNew+Query+1&_a=query-edit
+
+
+
+
+--------
+hylan project is changed to project id 
+Add, edit , undo Icons can be viewed now
+On users screen message company's message is showing now
+All is included in dropdown in filter's toolbar
+
+----------
+
+
+Globals.ApiUrl = 'http://192.168.10.22:8083/api/';
+
+
+GetUsersForExport(string USER_IDs, DBConnection Connection)
+
+
+
+
+
+Globals.GetLoggedUsers = function () {
+    return $.ajax({
+        type: "GET",
+        url: "/LoggedUsers",
+        cache: false
+    });
+};
+
+
+
+<sup><img src='../../../Content/images/red_asterisk.png' /></sup>
+Projects:
+Added * on columns title
+Added the sorting symbol to show default sort
+Crash is removed. Scnario was explained by Tanzil.
+------------
+NTP Status, Zip, 
+Yesterday error fix,
+Buttons Icons , 
+
+Fixed the error
+Client address is align to left
+Hylan PM Role Name
+userCompaniesLoadBy_ID
+
+
+
+
+<img class="close" src="Content/images/close.png" />
+
+
+
+<div class="nav-buttons clear">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a id= "btnCancel" ng-click="closeDialog()">Reset Filters</a></li>
+                    </ul>
+                </div>
+            </div>
+
+
+
+navbar-nav
+
+-----------------
+
+<div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a type="submit" class="k-button k-button-icontext" id="btnSave" ng-click="PostData()">
+                                        <!--<span class="k-icon"></span>-->
+                                        Close
+                                    </a>
+                                    <a type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="PostData()">
+                                        <span class="k-icon k-update k-i-check"></span>
+                                        Save
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--<ul class="nav navbar-nav navbar-right popup-close-height">
+                                <li><a ng-click="closeDialog()">Close</a></li>
+                            </ul>-->
+                            
+                        </div>
+
+
+<div ng-dropdown-multiselect="" options="exampledata" selected-model="examplemodel" extra-settings="examplesettings" events="exampleevents"></div>
+-------------
+
+select usersbyCompanies
+
+
+---------------
+
+_ProjectStatusDS = Globals.GetLookUp(Globals.LookUpTypes.PROJECT_STATUS, false);
+        $scope.ProjectStatus = _ProjectStatusDS;
+
+
+
+http://docs.telerik.com/kendo-ui/controls/data-management/grid/how-to/filtering/multiselect-used-for-column-filtering
+http://demos.telerik.com/kendo-ui/grid/filter-multi-checkboxes
+from where code is copied
+https://randombrainworks.com/2014/03/16/external-filters-for-kendo-grid/
+
+Filters Working Code and example 
+http://jsfiddle.net/randombw/27hTK/
+
+or and combination filters
+http://jsfiddle.net/valchev/MG89G/
+---------------
+Multiselect dd with images 
+http://yairnevet.blogspot.dk/2013/02/multiple-select-drop-down-list-using.html
+
+ $scope.settings.smartButtonMaxItems
+
+.. in multiselect
+changed the sequence on project's screen.
+and or logic is 
+
+Find the item is javascript
+//var item1 = $.grep($scope.projectStatusOptions, function (e) {
+//  return e.LOOK_UP_ID == item.LOOK_UP_ID;
+//});
+
+
+/*
+                            //grid.dataSource.filter({}); //clearing old filters
+                            if (currentFilters.length > 0) {
+                                angular.forEach(currentFilters, function (value, key) {
+                                    if (value.logic && value.logic == "or") {//&& value.filters
++
+                                        angular.forEach(value.filters, function (v2, key2) {
+                                            //if(v2.field == field)
+                                            currentFilters.push({ field: field, operator: "eq", value: value });
+                                        });
+                                    }
+                                    else {
+                                        currentFilters.push({ field: field, operator: "eq", value: value });
+                                    }
+                                });
+                            } else {
+                                orfilters.filters.push({ field: field, operator: "eq", value: value });
+                                currentFilters.push(orfilters);
+                            }
+                            */
+
+                            //grid.dataSource.filter(currentFilters);
+
+
+
+
+multiselect-parent btn-group dropdown-multiselect
+
+
+delete
+
+
+-----
+
+, (itemsText.length >25 && itemsText.substring(0,25)+'...')
+
+
+$scope.toggleDropdown = function () {
+                if (!$scope.settings.alwaysDisplay)
+                    $scope.open = !$scope.open                
+            }
+
+
+
+Additional information: Violation of UNIQUE KEY constraint 'unique_Projects_Project_Bid_Name'. Cannot insert duplicate key in object 'dbo.PROJECTS'.
+
+
+Fixed the duplicate project bid name exception 
+Added the forign key constraint in projects, for Project Status
+MultiSelect
+Added the default text, reset filter is woking now, 
+working on focus issue
+
+
+
+Source Path 
+---------------------------
+2/14/2017
+ Shelveset MultiSelectwithFilters14Feb2017 successfully created.
+
+
+-----------
+
+2/15/2017
+{display: settings.alwaysDisplay ? 'block' : open ? 'block' : 'none', maxHeight : settings.scrollable ? settings.scrollableHeight : 'auto' }
+
+
+User, client  -- remove table , add constraints for addby , modified by
+, jobs , projects 
+
+
+function onError(XMLHttpRequest, textStatus, errorThrown) {
+          var exception = XMLHttpRequest.responseText ? XMLHttpRequest.responseText : errorThrown;
+          var customErrorMessage = "User Name already exists."
+          var exceptionParsed = JSON.parse(exception);
+          if (exceptionParsed != undefined && exceptionParsed.Message != undefined && exceptionParsed.Message == customErrorMessage) {
+            Utility.Notify({ type: NOTIFYTYPE.ERROR, message: customErrorMessage, IsPopUp: true });
+          }
+          else 
+            Utility.Notify({ type: NOTIFYTYPE.ERROR, message: exception, IsPopUp: $scope.ngDialogData });
+        }
+
+
+if ($scope.grid.dataSource.hasChanges() && confirm(Globals.ChangesLostMessage) == true) {
+                $scope.grid.dataSource.cancelChanges();
+                Globals.isNewRowAdded = false;
+                Utility.HideNotification();
+                isChildDataChanged = false;
+                $(".k-grid-header .k-link").off('click');
+            }
+
+------------------
+
+Need to work on MultiSelect check all, uncheck all
+
+
+
+http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
+
+
+-----------------
+
+Created teh table Messages 
+being used during sending emails
+In there there is reference for EventID ?
+
+-------------------
+
+
+
+2/27/2017
+--Delete the messages table and its relevent code. 
+
+Manage Users & Manage Clients: 
+Mandatroy fields are not focusing correctly while clicking 'Save' button without entering them
+
+Working on a sorting issue...
+
+--------------
+
+2830: Manage Jobs: Tool tip should be proper instead of showing ids for the Project ID dropdown
+
+http://dotnetpanda.blogspot.com/2013/12/lets-do-check-all-and-uncheck-all.html
+https://long2know.com/2015/07/angular-multiselect-dropdown/
+
+Angular JS Multiselect documentation 
+http://dotansimha.github.io/angularjs-dropdown-multiselect/#/
+
+
+proc_MESSAGES_COMPANIESInsert
+
+------------------
+Associated 
+
+
+-----------------
+Users Company's Sorting issue
+
+2831
+Manage Users: Sorting is not working properly for Company column
+
+Associated clients should not be allowed to inactivate
+
+Company Name on PDF Export 
+Working on Delete button on Manage Jobs
+
+Angular Questions 
+
+https://www.codementor.io/angularjs/tutorial/angularjs-interview-questions-sample-answers
+
+
+--------------3/1/2017--------
+
+The DELETE statement conflicted with the REFERENCE constraint "FK_JOBS_NOTES_JOBS". The conflict occurred in database "HYLEN_QA_TC1", table "dbo.JOBS_NOTES", column 'JOB_ID'.
+The statement has been terminated.
+
+-------3/2/2017
+setSelectedItem(getPropertyForObject(option,settings.idProp)
+
+$scope.selectedModel
+
+$scope.selectedProjectsList
+
+
+-------------
+MultiSelect 
+Set the filters
+Tool tips  for multi select and on items
+Also added code for DOitNTP Status
+
+------------
+3/3/2017
+
+Duplicate user message
+MultiSelect drop down 
+-- Hide the cross icon, 
+-- Fixed the control height for firefox
+-- Make the generic to messges, fixed the roles screen issue.
+------------
+--3/6/2017
+Menus total width, top margin, 
+
+
+<div class="col-sm-4 no-padding">MANAGE <span>PROJECTS</span></div>
+
+
+"Associated record(s) cannot be inactive. All other changes saved successfully."
+
+---------------------
+
+IsPopUp != null ? IsPopUp : false;
+    if (Utility.IsJSON(exception)) {
+      var jsonObj = JSON.parse(exception)
+      if (jsonObj.Message) {
+	var dollarIndex = jsonObj.Message.indexOf('$');
+	if (dollarIndex > -1)
+	  exceptionMsg = jsonObj.Message.substring(0, dollarIndex);
+	else
+	  exceptionMsg = jsonObj.Message;
+      }
+    }
+    Utility.Notify({ type: NOTIFYTYPE.ERROR, message: exceptionMsg, IsPopUp: IsPopUp });
+
+    ----------------
+
+ //$.each(selectedRows, function (index, value) {
+            //  selDataItems.push(grid.dataItem(value));
+            //});
+---------
+---3/7/2017
+------------
+ 
+        $scope.destroyRecord1 = function (e) {
+
+         
+          
+
+          var grid = $scope.grid;
+          var selectedRows = grid.select();
+          //Globals.changedModelIds = [];
+          //var selectedItem = grid.dataItem(grid.select());
+          //Globals.changedModelIds.push(selectedItem.id);
+         //grid.select().each(
+         //    function () {
+         //      var dataItem = grid.dataItem($(this));
+         //      selection.push(dataItem);
+         //    }
+         //);
+
+          $.each(selectedRows, function (index, value) {
+            var dataItem = grid.dataItem(value);
+            if ($.inArray(dataItem.id, Globals.changedModels) == -1) {
+              Globals.changedModels.push(dataItem.id);
+            }
+          });
+
+          if (Globals.changedModels <= 0) {
+            return;
+          }
+            var message = Globals.BasicDeleteConfirmation;
+            if (confirm(message) == true) {; }
+            else return;
+
+            var selDataItems = [];
+            selDataItems.push(selectedItem);
+            JobsService.deleteJobs(selDataItems).then(function (result) {
+              onSuccess(result);
+              NotificationService.transmit('Jobs');
+              isDataChanged = false;
+              $scope.DialogChangesSaved = true;
+              $timeout(function () { });
+              //$scope.ngDialogData.ID = result;
+
+              if ($scope.ngDialogData.JOB_ID == 0) //add mode
+              {
+                $scope.ngDialogData.JOB_ID = result;
+              }
+
+              $scope.GetJobDetails($scope.ngDialogData.JOB_ID);
+            }).fail(onError);
+
+            ////  var dataItem = grid.dataItem(value);
+            ////  if (dataItem.NEEDED_TASKS_COUNT > 0)
+            ////  {
+
+            ////  }
+            ////});
+
+
+            //if (Globals.changedModels.length > 0) {
+            //  var doDestroy = false;
+
+            //  var message = ($scope.screenId == Globals.Screens.REQUESTS.ID || $scope.screenId == Globals.Screens.RESPONSES.ID) ? Globals.DeleteConfirmation : Globals.BasicDeleteConfirmation;
+            //  if (grid.dataSource.hasChanges() == false) {
+            //    doDestroy = confirm(message);
+            //  }
+            //  else {
+            //    doDestroy = $scope.handleFilterChange(message);
+            //  }
+            //  if (doDestroy == true) {
+            //    $(Globals.changedModels).each(function (index, value) {
+            //      grid.dataSource.remove(grid.dataSource.get(value));
+            //    });
+            //    grid.dataSource.sync();
+            //    Utility.Notify({ type: NOTIFYTYPE.SUCCESS, message: '', IsPopUp: false });
+            //  }
+            //} else if (AllocatedArray.length > 0) {
+            //  if (grid.dataSource.hasChanges() == false) {
+            //    Utility.Notify({ type: NOTIFYTYPE.WARNING, message: Globals.AllocationAlert });
+            //  }
+            //}
+          
+        };
+
+       
+--------
+
+Delete functionality , highlight the records, 
+Now working on Concurrency messages
+
+
+------------
+Concurancy Issues on users, clients, Jobs also resolve the hilighting for Users
+
+---
+Now working for Projects
+---------
+Exporting PDF Files
+http://stackoverflow.com/questions/742271/generating-pdf-files-with-javascript
+Server side export
+http://docs.telerik.com/kendo-ui/controls/data-management/grid/pdf-export#pdf-export-of-all-pages
+
+Export with Angular JS
+https://medium.com/@darilldrems/angularjs-export-html-table-to-pdf-excel-or-doc-formats-bb741d06dfec#.twfmh3fma
+
+Kendo Example
+http://demos.telerik.com/aspnet-mvc/grid/pdf-export
+
+
+Printing example
+http://jsfiddle.net/dimshik/9DbEP/4/
+
+Flexi table 
+http://codepen.io/anon/pen/RPLvyN
+
+---------
+http://stackoverflow.com/questions/26777317/printing-html-table-with-many-columns-rows-using-css-layout
+http://stackoverflow.com/questions/27632091/export-html-tables-with-large-number-of-columns-to-pdf
+------------
+http://www.princexml.com/forum/topic/2645/how-to-convert-html-to-2-column-page-pdf
+
+
+@media print{
+    thead{display:table-header-group;}
+    tr{page-break-inside:avoid;}
+}
+----------
+3/9/2017
+Worked on Concurrency Messages for projects. 
+Also fixed couple of bugs. 
+Now googling on Showing all columns during printing.
+--Actually printing culumns are not based on viewable area, rather than page size we are printing.
+--Splitable tables 
+----
+Question on MultiSelect. 
+On Jobs MultiSelect , 
+--Latest Projects should come first
+--If  New project is created then user goes to Jobs screen it should be selected in the MultiSelect.
+
+It should show the latest Project in the 'Project ID' multi-select dropdown
+
+
+----------------
+Cache Factory Example 
+http://techfunda.com/howto/608/add-into-cache
+
+-----------------
+
+3/14/2017
+----------
+
+Applied the cache for jobs, 
+--Created the tables
+--generated the code and stored procedures.
+--now 
+
+
+DOT_TRACKING_NO
+CLIENT pM IS THERE AT JOBS but dont have client
+
+permit_Fees
+
+
+
+stipulation 100
+
+--------------------
+Added the column Permit Number text. 
+--insert will be completed by today.
+
+
+-------------------
+
+class="date-control"
+
+
+---------------
+
+<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.JOB_ID, form.formPermitModal.ddlJobFileNumber) }">
+                <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Job File Number</label>
+                <select id="ddlJobFileNumber" hylan-control-validation hylancontrolname="JobFileNumber" name="ddlJobFileNumber" class="form-control" required
+                        ng-model="permitDCModel.JOB_ID"
+                        ng-options="JFN.VALUE as JFN.TEXT for JFN in DSJobFileNumbers"
+                        ng-change="OnChangeJobFileNumber()">
+                    <option value="">-- Select Job File Number --</option>
+                </select>
+            </div>
+
+
+
+<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtStreetAddress) }">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Street Address</label>
+                    <input name="txtStreetAddress" ng-disabled="DisableJobDetails" ng-class="{'Disabled': DisableJobDetails}"
+                           hylan-control-validation hylancontrolname="StreetAddress" type="text" class="form-control event-select" ng-model="permitDCModel.STREET_ADDRESS" ng-required="!DisableJobDetails" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+
+
+
+txtExpiresDate
+txtValidDate
+txtIssuedDate
+
+
+
+-------------------
+dbCommandWrapper.AddInParameter("p_JOB_ID", DbType.Int32, objPERMIT.JOB_ID);
+
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+INSERT INTO [dbo].[PERMITS]
+           ([PROJECT_ID]
+           ,[JOB_ID]
+           ,[CLIENT]
+           ,[NODE_ID1]
+           ,[NODE_ID2]
+           ,[NODE_ID3]
+           ,[HUB]
+           ,[HYLAN_PM]
+           ,[STREET_ADDRESS]
+           ,[CITY]
+           ,[STATE]
+           ,[ZIP]
+           ,[LAT]
+           ,[LONG]
+           ,[POLE_LOCATION]
+           ,[PERMIT_NUMBER_TEXT]
+           ,[PERMIT_NUMBER]
+           ,[DOT_TRACKING_NUMBER]
+           ,[SEGMENT]
+           ,[IS_PROTECTED_STREET]
+           ,[MARKOUT_START_DATE]
+           ,[MARKOUT_END_DATE]
+           ,[STIPULATIONS]
+           ,[ISSUED_DATE]
+           ,[VALID_DATE]
+           ,[EXPIRES_DATE]
+           ,[PERMIT_STATUS]
+           ,[NOTES]
+           ,[CREATED_BY]
+           ,[CREATED_ON]
+           ,[MODIFIED_BY]
+           ,[MODIFIED_ON]
+           ,[LOCK_COUNTER])
+     VALUES
+           (<PROJECT_ID, int,>
+           ,<JOB_ID, int,>
+           ,<CLIENT, nvarchar(250),>
+           ,<NODE_ID1, nvarchar(250),>
+           ,<NODE_ID2, nvarchar(250),>
+           ,<NODE_ID3, nvarchar(250),>
+           ,<HUB, nvarchar(250),>
+           ,<HYLAN_PM, int,>
+           ,<STREET_ADDRESS, nvarchar(250),>
+           ,<CITY, nvarchar(40),>
+           ,<STATE, varchar(2),>
+           ,<ZIP, varchar(5),>
+           ,<LAT, nvarchar(50),>
+           ,<LONG, nvarchar(50),>
+           ,<POLE_LOCATION, nvarchar(250),>
+           ,<PERMIT_NUMBER_TEXT, varchar(25),>
+           ,<PERMIT_NUMBER, varchar(4),>
+           ,<DOT_TRACKING_NUMBER, varchar(20),>
+           ,<SEGMENT, nvarchar(800),>
+           ,<IS_PROTECTED_STREET, varchar(1),>
+           ,<MARKOUT_START_DATE, datetime,>
+           ,<MARKOUT_END_DATE, datetime,>
+           ,<STIPULATIONS, nvarchar(100),>
+           ,<ISSUED_DATE, datetime,>
+           ,<VALID_DATE, datetime,>
+           ,<EXPIRES_DATE, datetime,>
+           ,<PERMIT_STATUS, int,>
+           ,<NOTES, varchar(max),>
+           ,<CREATED_BY, int,>
+           ,<CREATED_ON, datetime,>
+           ,<MODIFIED_BY, int,>
+           ,<MODIFIED_ON, datetime,>
+           ,<LOCK_COUNTER, int,>)
+GO
+
+-----
+
+
+Globals.GetPermitsLookup
+
+permitsLookupOptions
+
+http://localhost:4917/PERMITS_LOOK_UP/GetAll
+
+
+0300 9490898
+
+
+
+ UserProfileService.UpdateUserProfile
+
+
+doing work on update.. 
+validation issus 
+
+
+
+style="margin-bottom:10px;"
+
+
+
+if (hylanCache.GetValue(hylanCache.Keys.LATEST_PROJECTS) == undefined && $scope.projectIdDS.length > 0) {
+      var latestProjects = [];
+      latestProjects.push($scope.projectIdDS[0]);
+      hylanCache.SetValue(hylanCache.Keys.LATEST_PROJECTS, latestProjects);
+    }
+
+--------------
+
+---Remove the Notes count.
+--Reltion of dailies with Jobs
+--------------------------
+ var ntpStatusSelect = function () {
+    $scope.selectedDOITTNTPStatusList = [];
+    var objMulti = { controlID: 'divMultiSelDOITTNTPStatus', idProp: 'LU_NAME', displayProp: 'LU_NAME', filterField: 'DOITT_NTP_STATUS_LU.LU_NAME' };
+    $scope.ntpStatusSettings = {
+      externalIdProp: '',
+      idProp: objMulti.idProp,
+      displayProp: objMulti.displayProp,
+      enableSearch: true,
+      scrollable: true,
+      showCheckAll: false,
+      showUncheckAll: true,
+      smartButtonMaxItems: 3,
+      closeOnBlur: true
+    };
+
+    if (/iPad/.test(Globals.UserAgent) || /Android/.test(Globals.UserAgent))
+      $scope.projectsSettings.smartButtonMaxItems = 2;
+
+    $scope.DOITTNTPStatusEvents = {
+      onItemSelect: function (item) {
+        Utility.ApplyFilters(objMulti.filterField, item[objMulti.displayProp], 'eq', $scope.grid, 'or', 'add');
+        setTooltipOnMultiSelect(objMulti.controlID, $scope.selectedDOITTNTPStatusList, objMulti.displayProp);
+        hylanCache.SetValue(hylanCache.Keys.DOITT_NTP_STATUS, $scope.selectedDOITTNTPStatusList.slice(), Globals.MANAGE_JOBS.ID);
+      },
+      onItemDeselect: function (item) {
+        Utility.ApplyFilters(objMulti.filterField, item[objMulti.displayProp], 'eq', $scope.grid, 'or', 'remove');
+        setTooltipOnMultiSelect(objMulti.controlID, $scope.selectedDOITTNTPStatusList, objMulti.displayProp);
+        hylanCache.SetValue(hylanCache.Keys.DOITT_NTP_STATUS, $scope.selectedDOITTNTPStatusList.slice(), Globals.MANAGE_JOBS.ID);
+      },
+      onDeselectAll: function (items) {
+        //remove all selected filters
+        angular.forEach($scope.selectedDOITTNTPStatusList, function (value) {
+          Utility.ApplyFilters(objMulti.filterField, value[objMulti.displayProp], 'eq', $scope.grid, 'or', 'remove');
+        });
+        setTooltipOnMultiSelect(objMulti.controlID, [], objMulti.displayProp);        
+        hylanCache.SetValue(hylanCache.Keys.DOITT_NTP_STATUS, [], Globals.MANAGE_JOBS.ID);
+      }
+    };
+  }
+
+
+  ------------
+
+  var setProjectsMultiSelectDefaultValues = function () {
+    var latestProjects = hylanCache.GetValue(hylanCache.Keys.LATEST_PROJECTS);
+    if (latestProjects) {
+      //remove already applied filters
+      angular.forEach($scope.selectedProjectsList, function (value) {
+        Utility.ApplyFilters('HYLAN_PROJECT_ID', value['HYLAN_PROJECT_ID'], 'eq', $scope.grid, 'or', 'remove');
+      });
+
+      $scope.selectedProjectsList = [];
+      //add filters on values came from cache
+      angular.forEach(latestProjects, function (value) {
+        Utility.ApplyFilters('HYLAN_PROJECT_ID', value['HYLAN_PROJECT_ID'], 'eq', $scope.grid, 'or', 'add');
+        $scope.selectedProjectsList.push(value);
+      });
+
+      setTooltipOnMultiSelect('divMultiSelProjects', $scope.selectedProjectsList, 'HYLAN_PROJECT_ID');
+    }
+  };
+
+-----------------
+  var setDoITTNTPStatusMultiSelectDefaultValues = function () {
+      var selectedObjects = hylanCache.GetValue(hylanCache.Keys.LATEST_PROJECTS,Globals.MANAGE_JOBS.ID);
+      if (selectedObjects) {
+          //remove already applied filters
+          angular.forEach($scope.selectedDOITTNTPStatusList, function (value) {
+              Utility.ApplyFilters('DOITT_NTP_STATUS_LU.LU_NAME', value['LU_NAME'], 'eq', $scope.grid, 'or', 'remove');
+          });
+
+          $scope.selectedDOITTNTPStatusList = [];
+          //add filters on values came from cache
+          angular.forEach(selectedObjects, function (value) {
+              Utility.ApplyFilters('DOITT_NTP_STATUS_LU.LU_NAME', value['LU_NAME'], 'eq', $scope.grid, 'or', 'add');
+              $scope.selectedDOITTNTPStatusList.push(value);
+          });
+
+          setTooltipOnMultiSelect('divMultiSelDOITTNTPStatus', $scope.selectedDOITTNTPStatusList, objMulti.displayProp);
+      }
+  };
+
+
+
+proc_ErrorLogInsert
+
+-----------------------
+Work on Jobs Filter Layout, 
+Its screen wise cache setting 
+Look into why exception loging to make it generic.
+
+
+3/28/2017
+
+string projectIDs, string doITTNTPStatusIDs, string jobCategoryIDs, string jobStatusIDs
+
+
+$scope.gridOptions.dataSource = ProjectsService.dataSource;
+
+
+
+  var getFilterBasedValues = function () {
+      $scope.projectIDs = getIDFromList($scope.selectedProjectsList, 'PROJECT_ID');
+      $scope.doITTNTPStatusIDs = getIDFromList($scope.selectedDOITTNTPStatusList, 'LOOK_UP_ID');
+      $scope.jobCategoriesIDs = getIDFromList($scope.selectedJobCategoryList, 'LOOK_UP_ID');
+      $scope.jobStatusIDs = getIDFromList($scope.selectedJobStatusList, 'LOOK_UP_ID');
+      JobsService.RetrieveJobByFilters(projectIDs, doITTNTPStatusIDs, jobCategoriesIDs, jobStatusIDs);
+  }
+
+
+///////3/29/2017
+
+http://www.telerik.com/forums/filter-grid-based-on-controls-outside-of-grid
+
+
+var getParams = function(){
+	hylanCache.SetValue(hylanCache.Keys.JOB_CATEGORY, $scope.selectedJobCategoryList.slice(), Globals.Screens.MANAGE_JOBS.ID);
+
+	objParams =  { projectIDs: 'All', doITTNTPStatusIDs: 'All', jobCategoriesIDs: 'All', jobStatusIDs: 'All' };
+
+	var selectedProjectsList = hylanCache.GetValue(hylanCache.Keys.LATEST_PROJECTS);
+	var selectedJobStatusList = hylanCache.GetValue(hylanCache.Keys.JOB_STATUS, Globals.Screens.MANAGE_JOBS.ID);
+	var selectedDOITTNTPStatusList = hylanCache.GetValue(hylanCache.Keys.DOITT_NTP_STATUS, Globals.Screens.MANAGE_JOBS.ID);
+	var selectedJobCategoryList = hylanCache.GetValue(hylanCache.Keys.JOB_CATEGORY, Globals.Screens.MANAGE_JOBS.ID);
+
+	if(selectedProjectsList) objParams.projectIDs = getIDFromList(selectedProjectsList, 'PROJECT_ID');
+	if(selectedDOITTNTPStatusList) objParams.doITTNTPStatusIDs = getIDFromList(selectedDOITTNTPStatusList, 'LOOK_UP_ID');
+	if(selectedJobCategoryList)  objParams.jobCategoriesIDs = getIDFromList(selectedJobCategoryList, 'LOOK_UP_ID');
+	if(selectedJobStatusList) objParams.jobStatusIDs = getIDFromList(selectedJobStatusList, 'LOOK_UP_ID');
+
+	return objPrarams;
+}
+
+
+
+exec [proc_USERS_COMPANIESLoadByUserID] @p_USER_ID=246,@p_Access_Type=N'COMPANY'
+Globals.GetUserCompanies
+
+
+
+var getFilterBasedValues = function () {
+      projectIDs = getIDFromList($scope.selectedProjectsList, 'PROJECT_ID');
+      doITTNTPStatusIDs = getIDFromList($scope.selectedDOITTNTPStatusList, 'LOOK_UP_ID');
+      jobCategoriesIDs = getIDFromList($scope.selectedJobCategoryList, 'LOOK_UP_ID');
+      jobStatusIDs = getIDFromList($scope.selectedJobStatusList, 'LOOK_UP_ID');
+      return { projectIDs: projectIDs, doITTNTPStatusIDs: doITTNTPStatusIDs, jobCategoriesIDs: jobCategoriesIDs, jobStatusIDs: jobStatusIDs };
+      //JobsService.RetrieveJobByFilters(projectIDs, doITTNTPStatusIDs, jobCategoriesIDs, jobStatusIDs);
+  }
+
+
+
+
+
+------------------
+
+	@p_ProjectIDs varchar(max) = 'All',
+	@p_DoITTNTPStatusIDs varchar(max) = 'All',
+	@p_JobCategoryIDs varchar(max) = 'All',
+	@p_JobStatusIDs varchar(max) = 'All'
+
+
+(isNull(@p_ProjectIDs,'All') = 'All' or JOB.[PROJECT_ID] in (Select item from dbo.split(@p_ProjectIDs,',') ) )
+
+
+(string clientIDs = "All", string projectStatusIDs = "All")
+
+(clientIDs, projectStatusIDs);
+
+@p_projectIDs varchar(max) = 'All'
+
+
+string clientName = null,string primaryContactNme = null, string statusIDs = "All"
+
+ clientName, primaryContactNme, statusIDs 
+
+
+ ----------------
+ string ROLE_NAME = null, string userName = null, string LastName = null, string roleIDs = "All", string companyIDs = "All", string statusIDs = "All"
+
+  ROLE_NAME, userName, LastName, roleIDs, companyIDs, statusIDs
+
+Token-Based Authentication for Web Service APIs in C# MVC .NET
+  http://www.primaryobjects.com/2015/05/08/token-based-authentication-for-web-service-apis-in-c-mvc-net/
+
+
+$.ajax({
+   url : myurl,
+   headers: {
+        'X-Auth-Token' : token
+   });
+
+
+
+RequestUri.UserInfo
+
+
+
+--------
+
+Globals.SecureGet = function (resource, params, async) {
+  $.support.cors = true;
+  return $.ajax({
+    url: Globals.ApiUrl + "/" + resource,
+    type: "GET",
+    dataType: "json",
+    //contentType: "application/json; charset=utf-8",
+    data: params,
+    async: async,
+    cache: false,
+    headers: {
+      "Authorization": "Forms " + Globals.CurrentUser.USER_NAME + " " + Globals.CurrentUser.PASSWORD
+    },
+    username: Globals.CurrentUser.USER_NAME,
+    password: Globals.CurrentUser.PASSWORD
+  });
+};
+
+--------------3/31/2017
+
+  //--------------------------Start Clients MultiSelect-----------------  
+  var clientsMultiSelect = function () {
+    $scope.selectedProjectsList = [];
+    var objMulti = { controlID: 'divMSClients', idProp: 'HYLAN_PROJECT_ID', displayProp: 'HYLAN_PROJECT_ID', filterField: 'HYLAN_PROJECT_ID' };
+    $scope.clientsSettings = {
+      externalIdProp: '',
+      idProp: objMulti.idProp,
+      displayProp: objMulti.displayProp,
+      enableSearch: true,
+      scrollable: true,
+      showCheckAll: false,
+      showUncheckAll: true,
+      smartButtonMaxItems: 3,  //need to change depends on size of control 
+      closeOnBlur: true
+      //  ,
+      //smartButtonTextConverter: function (itemText, originalItem) {
+      //  if (itemText.length > 23)
+      //    return itemText.substring(0, 23) + '..';
+      //}
+    };
+
+    if (/iPad/.test(Globals.UserAgent) || /Android/.test(Globals.UserAgent))
+      $scope.clientsSettings.smartButtonMaxItems = 2;
+
+    $scope.clientsEvents = {
+      onItemSelect: function (item) {
+        setTooltipOnMultiSelect(objMulti.controlID, $scope.selectedClientsList, objMulti.displayProp);
+        hylanCache.SetValue(hylanCache.Keys.LATEST_PROJECTS, $scope.selectedClientsList.slice());
+        $scope.RefreshGrid();
+      },
+      onItemDeselect: function (item) {
+        setTooltipOnMultiSelect(objMulti.controlID, $scope.selectedClientsList, objMulti.displayProp);
+        hylanCache.SetValue(hylanCache.Keys.LATEST_PROJECTS, $scope.selectedClientsList.slice());
+        $scope.RefreshGrid();
+      },
+      onDeselectAll: function (items) {
+
+        setTooltipOnMultiSelect(objMulti.controlID, [], objMulti.displayProp);
+        hylanCache.SetValue(hylanCache.Keys.LATEST_PROJECTS, []);
+        $scope.RefreshGrid();
+      }
+    };
+  }
+
+  clientsMultiSelect();
+  var setClientsMultiSelectDefaultValues = function () {
+    $scope.selectedClientsList = [];
+    var latestClients = hylanCache.GetValue(hylanCache.Keys.LATEST_PROJECTS);
+    if (latestClients) {      
+      //add values in control ,values came from cache
+      angular.forEach(latestClients, function (value) {
+        $scope.selectedClientsList.push(value);
+      });
+      setTooltipOnMultiSelect('divMSClients', $scope.selectedClientsList, 'HYLAN_PROJECT_ID');
+    }
+  };
+
+    //--------------------------End Clients MultiSelect----------------- 
+
+<div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Project ID</label>
+                <div id="divMSClients" title="All"  control="multiSelectProjIdControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="projectIdDS" selected-model="selectedClientsList" extra-settings="clientsSettings" events="clientsEvents" checkboxes="true"></div>
+            </div>
+
+
+Server side apIs, Store Procedures changes, 
+UserID is provided to Naeem sb from client side , without changing of user ID 
+
+
+
+Request header field Authorization is not allowed by Access-Control-Allow-Headers in preflight response.
+
+-------------------------
+projectStatus, MSProjectStatus
+----------------
+
+                <div id="divMSProjectStatus"                      
+                     options="MSProjectStatus.options" 
+                     selected-model="MSProjectStatus.selectedList" 
+                     extra-settings="MSProjectStatus.settings" 
+                     events="MSProjectStatus.events" 
+                     title="All"                      
+                     ng-dropdown-multiselect="" 
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" 
+                     checkboxes="true"></div>
+
+-----------------
+
+  //--------------------------Start ProjectStatus MultiSelect-----------------  
+  var projectStatusMultiSelect = function () {
+    
+      var objMulti = {
+          controlID: 'divMSProjectStatus', options: $scope.projectStatusOptions, selectedList: [],
+          idProp: 'LOOK_UP_ID', displayProp: 'LU_NAME', key: hylanCache.Keys.PROJECT_STATUS + Globals.Screens.MANAGE_PROJECTS.ID
+      };
+    $scope.MSProjectStatus = objMulti;
+    $scope.MSProjectStatus.settings = {
+      externalIdProp: '',
+      idProp: objMulti.idProp,
+      displayProp: objMulti.displayProp,
+      enableSearch: true,
+      scrollable: true,
+      showCheckAll: false,
+      showUncheckAll: true,
+      smartButtonMaxItems: 3,  //need to change depends on size of control 
+      closeOnBlur: true
+    };
+
+    if (/iPad/.test(Globals.UserAgent) || /Android/.test(Globals.UserAgent))
+      $scope.projectStatusSettings.smartButtonMaxItems = 2;
+
+    $scope.MSProjectStatus.events = {
+      onItemSelect: function (item) {
+          setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+          hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+        $scope.RefreshGrid();
+      },
+      onItemDeselect: function (item) {
+          setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+          hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+        $scope.RefreshGrid();
+      },
+      onDeselectAll: function (items) {
+
+        setTooltipOnMultiSelect(objMulti.controlID, [], objMulti.displayProp);
+        hylanCache.SetValue(objMulti.key, []);
+        $scope.RefreshGrid();
+      }
+    };
+  }
+
+  projectStatusMultiSelect();
+  //--------------------------End ProjectStatus MultiSelect----------------- 
+
+
+  setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+
+Dr. GA Shah
+3530-2701
+
+fix : Additionl value error for chrom and firefox
+fixed some issues for Jobs, Im
+
+
+hylanCache.RemoveKey(hylanCache.Keys.JOB_STATUS, Globals.Screens.MANAGE_JOBS.ID);
+hylanCache.RemoveKey(hylanCache.Keys.JOB_CATEGORY, Globals.Screens.MANAGE_JOBS.ID);
+hylanCache.RemoveKey(hylanCache.Keys.DOITT_NTP_STATUS, Globals.Screens.MANAGE_JOBS.ID);
+--------------
+
+4/4/2017
+-------------------------
+       <div id="divMultiSelDailyShift"
+                     options="MSDailyShift.options"
+                     selected-model="MSDailyShift.selectedList"
+                     extra-settings="MSDailyShift.settings"
+                     events="MSDailyShift.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+        //--------------------------Start DailyShift MultiSelect-----------------  
+	Globals.GetLookUp(Globals.LookUpTypes.DAILY_SHIFT, false, function (result) {
+            $scope.dailyShiftDS = result;
+        });
+	
+	var dailyShiftMultiSelect = function () {
+
+          var objMulti = {
+              controlID: 'divMultiSelDailyShift', options: $scope.dailyShiftDS, selectedList: [],
+              idProp: 'LOOK_UP_ID', displayProp: 'LU_NAME', key: hylanCache.Keys.DAILY_TYPE
+          };
+          $scope.MSDailyShift = objMulti;
+          $scope.MSDailyShift.settings = {
+              externalIdProp: '',
+              idProp: objMulti.idProp,
+              displayProp: objMulti.displayProp,
+              enableSearch: true,
+              scrollable: true,
+              showCheckAll: false,
+              showUncheckAll: true,
+              smartButtonMaxItems: 3,  //need to change depends on size of control 
+              closeOnBlur: true
+          };
+
+          if (/iPad/.test(Globals.UserAgent) || /Android/.test(Globals.UserAgent))
+              $scope.dailyShiftSettings.smartButtonMaxItems = 2;
+
+          $scope.MSDailyShift.events = {
+              onItemSelect: function (item) {
+                  setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+                  $scope.refreshGrid();
+              },
+              onItemDeselect: function (item) {
+                  setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+                  $scope.refreshGrid();
+              },
+              onDeselectAll: function (items) {
+
+                  setTooltipOnMultiSelect(objMulti.controlID, [], objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, []);
+                  $scope.refreshGrid();
+              }
+          };
+      }
+
+      dailyShiftMultiSelect();
+        //--------------------------End DailyShift MultiSelect----------------- 
+      var setDefaultValuesOnMultiSelect = function (multiSelectObject) {
+          var objMulti = multiSelectObject;  //need to set
+          objMulti.selectedList = [];
+          var dailyShift = hylanCache.GetValue(objMulti.key);
+          if (dailyShift) {
+              //add values in control ,values came from cache
+              angular.forEach(dailyShift, function (value) {
+                  objMulti.selectedList.push(value);
+              });
+              setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+          }
+          else {
+              if (objMulti.controlID == 'divMultiSelDailyShift') {
+                  if ($scope.dailyShiftDS.length > 0) {
+                      //var latestDailyShift = [];
+                      objMulti.selectedList.push($scope.dailyShiftDS[0]);
+                      hylanCache.SetValue(hylanCache.Keys.LATEST_PROJECTS, objMulti.selectedList.slice(), Globals.Screens.MANAGE_JOBS.ID);
+                      setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+                  }
+              }
+          }
+      };
+      $scope.ApplyCache = function () {  //being called from baseController
+          setDefaultValuesOnMultiSelect($scope.MSDailyShift);
+      }
+      $scope.ApplyCache();
+      $scope.refreshGrid();
+
+
+---------
+Add the flag to load latest project in filter
+fix some issue on tasks
+
+
+
+hylanCache.Keys.LATEST_PROJECTS, Globals.Screens.MANAGE_ATTACHMENTS.ID)
+
+
+ string projectIDs = "All", string attachmentTypeIDs = "All"
+
+
+ http://localhost:61000/
+
+ 4/6/2017
+==============
+
+VIEW_EDIT
+
+
+4/6/2017
+==========
+•	Looking to install on their servers later this week.  Can you do it remotely or better in person? 
+•	Add new columns of Manage Clients to support additional contacts (Hylan to provide, i.e. Billing Contact, Customer Service, etc.)
+---------------
+•	Add a Client column and filter to Manage Jobs
+•	Manage Jobs, default Project ID filter to All
+•	Add a new job status for “Completed & Invoiced”
+•	Create a hyperlink from Manage Projects to Manage Jobs that filters on the selected Project ID
+
+
+
+-------------
+
+4/4/2017
+-------------------------
+       <div id="divMultiSelClients"
+                     options="MSClients.options"
+                     selected-model="MSClients.selectedList"
+                     extra-settings="MSClients.settings"
+                     events="MSClients.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+        //--------------------------Start Clients MultiSelect-----------------  
+	Globals.GetLookUp(Globals.LookUpTypes.DAILY_SHIFT, false, function (result) {
+            $scope.dailyShiftDS = result;
+        });
+	
+	var ClientstMultiSelect = function () {
+
+          var objMulti = {
+              controlID: 'divMultiSelClients', options: $scope.ClientstDS, selectedList: [],
+              idProp: 'LOOK_UP_ID', displayProp: 'LU_NAME', key: hylanCache.Keys.DAILY_TYPE
+          };
+          $scope.MSClients = objMulti;
+          $scope.MSClients.settings = {
+              externalIdProp: '',
+              idProp: objMulti.idProp,
+              displayProp: objMulti.displayProp,
+              enableSearch: true,
+              scrollable: true,
+              showCheckAll: false,
+              showUncheckAll: true,
+              smartButtonMaxItems: 3,  //need to change depends on size of control 
+              closeOnBlur: true
+          };
+
+          if (/iPad/.test(Globals.UserAgent) || /Android/.test(Globals.UserAgent))
+              $scope.ClientstSettings.smartButtonMaxItems = 2;
+
+          $scope.MSClients.events = {
+              onItemSelect: function (item) {
+                  setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+                  $scope.refreshGrid();
+              },
+              onItemDeselect: function (item) {
+                  setTooltipOnMultiSelect(objMulti.controlID, objMulti.selectedList, objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, objMulti.selectedList.slice());
+                  $scope.refreshGrid();
+              },
+              onDeselectAll: function (items) {
+
+                  setTooltipOnMultiSelect(objMulti.controlID, [], objMulti.displayProp);
+                  hylanCache.SetValue(objMulti.key, []);
+                  $scope.refreshGrid();
+              }
+          };
+      }
+
+      ClientstMultiSelect();
+        //--------------------------End Clients MultiSelect----------------- 
+
+
+
+hylanCache.Keys.CLIENTS , Globals.Screens.MANAGE_JOBS.ID
+
+
+<li>Job File#: 321 has 7 Task(s), 12 Note(s), 1 Attachment(s), 1 Dail(ies) associated<li><br><li>Job File#: 147834534 has 4 Task(s), 11 Note(s) associated<li><br><li>Job File#: 4545 has 1 Note(s), 2 Dail(ies) associated<li><br><li>Job File#: 3243 has 1 Note(s), 3 Dail(ies) associated<li><br><li>Job File#: -1 has 2 Task(s) associated<li><br> $ 24,26,31,33,34
+
+
+<a ui-sref="Jobs" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_JOBS.ID)">{{Screens.MANAGE_JOBS.TITLE}}</a>
+
+
+
+-------------
+
+•	Looking to install on their servers later this week.  Can you do it remotely or better in person? 
+•	Add new columns of Manage Clients to support additional contacts (Hylan to provide, i.e. Billing Contact, Customer Service, etc.)
+---------------
+•	Add a Client column and filter to Manage Jobs
+•	Manage Jobs, default Project ID filter to All
+•	Add a new job status for “Completed & Invoiced”
+•	Create a hyperlink from Manage Projects to Manage Jobs that filters on the selected Project ID
+
+----------------------
+
+On manage job, 
+	Added the client column, its filter, its Api and its stored procedure.
+	Changed the message during deletion on job
+On Manage Job 
+	Added the link to redirect to Jobs Screen
+
+Add the Completed and Invoice Status in lookup for jobs 
+-------------------4/7/2017---------
+4/7/2017
+
+Billing Contact Name
+Billing Contact Phone
+Billing Contact Email
+
+Project Director Name
+Project Director Phone
+Project Director Email
+
+Project Manager Name
+Project Manager Phone
+Project Manager Email
+-------------
+
+ALTER TABLE COMPANIES ADD
+	[BILLING_CONTACT_NAME] [varchar](30),
+	[BILLING_PHONE] [varchar](30) ,
+	[BILLING_CONTACT_EMAIL] [varchar](250),
+	[PROJECT_DIRECTOR_NAME] [varchar](30) ,
+	[PROJECT_DIRECTOR_PHONE] [varchar](30),
+	[PROJECT_DIRECTOR_EMAIL] [varchar](250) ,
+	[PROJECT_MANAGER_NAME] [varchar](30),
+	[PROJECT_MANAGER_PHONE] [varchar](30),
+	[PROJECT_MANAGER_EMAIL] [varchar](250)
+
+-----------
+
+            { field: "COMPANY_PHONE_NUMBER" },
+            { field: "PRIMARY_CONTACT_NAME" },
+            { field: "PRIMARY_CONTACT_EMAIL" },
+
+----------
+	{ field: "BILLING_CONTACT_NAME" },
+	{ field: "BILLING_PHONE" },
+	{ field: "BILLING_CONTACT_EMAIL" },
+
+	{ field: "PROJECT_DIRECTOR_NAME" },
+	{ field: "PROJECT_DIRECTOR_PHONE" },
+	{ field: "PROJECT_DIRECTOR_EMAIL" },
+
+	{ field: "PROJECT_MANAGER_NAME" },
+	{ field: "PROJECT_MANAGER_PHONE" },
+	{ field: "PROJECT_MANAGER_EMAIL" },
+
+BILLING_CONTACT_NAME: {
+                        title: "Billing Contact Name", validation: {
+                            billingcontactnamemaxlength: function (input) {
+                                if (input.val().length > 30) {
+                                    input.attr("data-billingcontactnamemaxlength-msg", "Max. length for Billing Contact Name is 30.");
+                                    return false;
+                                }
+                                return true;
+                            }
+                        }
+                    },
+ BILLING_PHONE: {
+                        title: "Billing Phone Number", validation: {
+                            billingphonenumbervalidation: function (input) {
+                                if (input.is("[name='BILLING_PHONE']") && input.val() != "") {
+                                    input.attr("data-billingphonenumbervalidation-msg", "Enter at least ten digits.");
+                                    return /\d{10}/.test(input.val());
+                                }
+                                return true;
+                            }
+                        }
+                    },                   
+    BILLING_CONTACT_EMAIL: {
+	title: "Billing Contact Email", validation: {
+	 //   email: { message: "Please enter Email in correct format." },
+	    billingcontactemailmaxlength: function (input) {
+		if (input.val().length > 250) {
+		    input.attr("data-billingcontactemailmaxlength-msg", "Max. length for Billing Contact Email is 250.");
+		    return false;
+		}
+	       
+		return true;
+	    },
+
+	    billingcontactemailformat: function (input) {
+
+	    if (input.is("[name='BILLING_CONTACT_EMAIL']") && input.val() != "") {
+		input.attr("data-billingcontactemailformat-msg", "Please enter Billing Email in correct format.");
+		return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/.test(input.val().toLowerCase());
+	    }
+	    return true;
+	}
+
+	}
+    },
+    PROJECT_DIRECTOR_NAME: {
+                        title: "Project Director Name", validation: {
+                            projectdirectornamemaxlength: function (input) {
+                                if (input.val().length > 30) {
+                                    input.attr("data-projectdirectornamemaxlength-msg", "Max. length for Billing Contact Name is 30.");
+                                    return false;
+                                }
+                                return true;
+                            }
+                        }
+                    },
+ PROJECT_DIRECTOR_PHONE: {
+                        title: "Project Director Phone", validation: {
+                            projectdirectorphonevalidation: function (input) {
+                                if (input.is("[name='PROJECT_DIRECTOR_PHONE']") && input.val() != "") {
+                                    input.attr("data-projectdirectorphonevalidation-msg", "Enter at least ten digits.");
+                                    return /\d{10}/.test(input.val());
+                                }
+                                return true;
+                            }
+                        }
+                    },                   
+    PROJECT_DIRECTOR_EMAIL: {
+	title: "Project Director Email", validation: {
+	 //   email: { message: "Please enter Email in correct format." },
+	    projectdirectoremailmaxlength: function (input) {
+		if (input.val().length > 250) {
+		    input.attr("data-projectdirectoremailmaxlength-msg", "Max. length for Project Director Email is 250.");
+		    return false;
+		}
+	       
+		return true;
+	    },
+
+	    projectdirectoremailformat: function (input) {
+
+	    if (input.is("[name='BILLING_CONTACT_EMAIL']") && input.val() != "") {
+		input.attr("data-projectdirectoremailformat-msg", "Please enter Project Director Email in correct format.");
+		return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/.test(input.val().toLowerCase());
+	    }
+	    return true;
+	}
+
+	}
+    },
+    PROJECT_MANAGER_NAME: {
+                        title: "Project Manager Name", validation: {
+                            projectmanagernamemaxlength: function (input) {
+                                if (input.val().length > 30) {
+                                    input.attr("data-projectmanagernamemaxlength-msg", "Max. length for Billing Contact Name is 30.");
+                                    return false;
+                                }
+                                return true;
+                            }
+                        }
+                    },
+ PROJECT_MANAGER_PHONE: {
+                        title: "Project Manager Phone", validation: {
+                            projectmanagerphonevalidation: function (input) {
+                                if (input.is("[name='PROJECT_MANAGER_PHONE']") && input.val() != "") {
+                                    input.attr("data-projectmanagerphonevalidation-msg", "Enter at least ten digits.");
+                                    return /\d{10}/.test(input.val());
+                                }
+                                return true;
+                            }
+                        }
+                    },                   
+    PROJECT_MANAGER_EMAIL: {
+	title: "Project Manager Email", validation: {
+	 //   email: { message: "Please enter Email in correct format." },
+	    projectmanageremailmaxlength: function (input) {
+		if (input.val().length > 250) {
+		    input.attr("data-projectmanageremailmaxlength-msg", "Max. length for Project Manager Email is 250.");
+		    return false;
+		}
+	       
+		return true;
+	    },
+
+	    projectmanageremailformat: function (input) {
+
+	    if (input.is("[name='BILLING_CONTACT_EMAIL']") && input.val() != "") {
+		input.attr("data-projectmanageremailformat-msg", "Please enter Project Manager Email in correct format.");
+		return /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/.test(input.val().toLowerCase());
+	    }
+	    return true;
+	}
+
+	}
+    },
+------------------
+{ field: "BILLING_CONTACT_NAME", title: "Billing Contact Name", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'BILLING_CONTACT_NAME')# #:BILLING_CONTACT_NAME#" },
+{ field: "BILLING_PHONE", title: "Billing Phone #", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "170px", attributes: { "class": "contert-number GridBorder no-left-border" }, template: "#= Globals.dirtyField(data,'BILLING_PHONE')# #:BILLING_PHONE#", editor: Globals.PhoneMaskingEditor },
+{ field: "BILLING_CONTACT_EMAIL", title: "Billing Contact Email", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'BILLING_CONTACT_EMAIL')# #:BILLING_CONTACT_EMAIL#" },
+
+{ field: "PROJECT_DIRECTOR_NAME", title: "Project Director Name", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'PROJECT_DIRECTOR_NAME')# #:PROJECT_DIRECTOR_NAME#" },
+{ field: "PROJECT_DIRECTOR_PHONE", title: "Project Director Phone #", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "170px", attributes: { "class": "contert-number GridBorder no-left-border" }, template: "#= Globals.dirtyField(data,'PROJECT_DIRECTOR_PHONE')# #:PROJECT_DIRECTOR_PHONE#", editor: Globals.PhoneMaskingEditor },
+{ field: "PROJECT_DIRECTOR_EMAIL", title: "Project Director Email", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'PROJECT_DIRECTOR_EMAIL')# #:PROJECT_DIRECTOR_EMAIL#" },
+
+{ field: "PROJECT_MANAGER_NAME", title: "Project Manager Name", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'PROJECT_MANAGER_NAME')# #:PROJECT_MANAGER_NAME#" },
+{ field: "PROJECT_MANAGER_PHONE", title: "Project Manager Phone #", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "170px", attributes: { "class": "contert-number GridBorder no-left-border" }, template: "#= Globals.dirtyField(data,'PROJECT_MANAGER_PHONE')# #:PROJECT_MANAGER_PHONE#", editor: Globals.PhoneMaskingEditor },
+{ field: "PROJECT_MANAGER_EMAIL", title: "Project Manager Email", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, width: "200px", attributes: { "class": "contert-alpha GridBorder" }, template: "#= Globals.dirtyField(data,'PROJECT_MANAGER_EMAIL')# #:PROJECT_MANAGER_EMAIL#" },
+
+-----------------
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+UPDATE [dbo].[COMPANIES]
+   SET [COMPANY_NAME] = @p_COMPANY_NAME
+      ,[COMPANY_PHONE_NUMBER] = @p_COMPANY_PHONE_NUMBER
+      ,[PRIMARY_CONTACT_NAME] = @p_PRIMARY_CONTACT_NAME
+      ,[PRIMARY_CONTACT_EMAIL] = @p_PRIMARY_CONTACT_EMAIL
+      ,[COMPANY_CITY] = @p_COMPANY_CITY
+      ,[COMPANY_STATE] = @p_COMPANY_STATE
+      ,[COMPANY_ZIP] = @p_COMPANY_ZIP
+      ,[COMPANY_ADDRESS] = @p_COMPANY_ADDRESS
+      ,[STATUS] = @p_STATUS
+      ,[CREATED_ON] = @p_CREATED_ON
+      ,[CREATED_BY] = @p_CREATED_BY
+      ,[MODIFIED_ON] = @p_MODIFIED_ON
+      ,[MODIFIED_BY] = @p_MODIFIED_BY
+      ,[LOCK_COUNTER] = @p_LOCK_COUNTER
+
+      ,[BILLING_CONTACT_NAME] = @p_BILLING_CONTACT_NAME
+      ,[BILLING_PHONE] = @p_BILLING_PHONE
+      ,[BILLING_CONTACT_EMAIL] = @p_BILLING_CONTACT_EMAIL
+      ,[PROJECT_DIRECTOR_NAME] = @p_PROJECT_DIRECTOR_NAME
+      ,[PROJECT_DIRECTOR_PHONE] = @p_PROJECT_DIRECTOR_PHONE
+      ,[PROJECT_DIRECTOR_EMAIL] = @p_PROJECT_DIRECTOR_EMAIL
+      ,[PROJECT_MANAGER_NAME] = @p_PROJECT_MANAGER_NAME
+      ,[PROJECT_MANAGER_PHONE] = @p_PROJECT_MANAGER_PHONE
+      ,[PROJECT_MANAGER_EMAIL] = @p_PROJECT_MANAGER_EMAIL
+
+ WHERE @p_Search Conditions,,>
+GO
+
+
+
+----4/10/2017
+
+
+Declare @LastID as int = 0;
+SELECT @LastID = MAX([LOOK_UP_ID])  FROM [LOOK_UPS] 
+INSERT INTO [dbo].[LOOK_UPS]([LOOK_UP_ID],[LU_TYPE],[LU_NAME])
+values 
+( @LastID+1  , 'PERMIT_REJECTION_REASON' ,'BOB HOLD' ),
+( @LastID+2  , 'PERMIT_REJECTION_REASON' ,'CAN HOLD' ),
+( @LastID+3  , 'PERMIT_REJECTION_REASON' ,'COB HOLD' ),
+( @LastID+4  , 'PERMIT_REJECTION_REASON' ,'CON HOLD' ),
+( @LastID+5  , 'PERMIT_REJECTION_REASON' ,'CPI HOLD' ),
+( @LastID+6  , 'PERMIT_REJECTION_REASON' ,'CPO HOLD' ),
+( @LastID+7  , 'PERMIT_REJECTION_REASON' ,'ECN HOLD' ),
+( @LastID+8  , 'PERMIT_REJECTION_REASON' ,'EXC HOLD' ),
+( @LastID+9  , 'PERMIT_REJECTION_REASON' ,'FCR HOLD' ),
+( @LastID+10  , 'PERMIT_REJECTION_REASON' ,'LMZ HOLD' ),
+( @LastID+11 , 'PERMIT_REJECTION_REASON' ,'POL HOLD' ),
+( @LastID+12  , 'PERMIT_REJECTION_REASON' ,'RED HOLD' ),
+( @LastID+13  , 'PERMIT_REJECTION_REASON' ,'SAM HOLD' ),
+( @LastID+14  , 'PERMIT_REJECTION_REASON' ,'STP HOLD' ),
+( @LastID+15  , 'PERMIT_REJECTION_REASON' ,'VAR HOLD' ),
+( @LastID+16  , 'PERMIT_REJECTION_REASON' ,'VLT HOLD' )
+go
+------------
+
+UPDATE LOOK_UPS SET LU_TYPE = 'PERMIT_CATEGORY' WHERE LU_TYPE = 'PERMIT_TYPE'
+gO
+
+-----------
+
+DROP PROC proc_PERMITS_LOOK_UPSLoadAll
+go
+---------
+Create PROCEDURE [dbo].[proc_PERMIT_TYPESLoadAll]
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[PERMIT_TYPE_ID],
+		[DESCRIPTION],
+		[PERMIT_CATEGORY],
+		[FEE],
+		[DURATION]
+	FROM [PERMIT_TYPES]
+	
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+
+------------
+
+
+drop proc proc_PERMITS_LOOK_UPLoadByPrimaryKey
+go
+------------
+
+
+Create PROCEDURE [dbo].[proc_PERMIT_TYPESLoadByPrimaryKey]
+(
+	@p_PERMIT_TYPE_ID varchar(4)
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[PERMIT_TYPE_ID],
+		[DESCRIPTION],
+		[PERMIT_CATEGORY],
+		[FEE],
+		[DURATION]
+	FROM [PERMIT_TYPES]
+	WHERE
+		([PERMIT_TYPE_ID] = @p_PERMIT_TYPE_ID)
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+GO
+---------
+DROP PROCEDURE proc_PERMITS_LOOK_UPUpdate
+GO
+--------
+CREATE PROCEDURE [dbo].[proc_PERMIT_TYPESUpdate]
+(
+	@p_PERMIT_TYPE_ID varchar(4),
+	@p_DESCRIPTION varchar(100),
+	@p_PERMIT_CATEGORY int,
+	@p_FEE varchar(25),
+	@p_DURATION varchar(25)
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	UPDATE [PERMIT_TYPES]
+	SET
+		[DESCRIPTION] = @p_DESCRIPTION,
+		PERMIT_CATEGORY = @p_PERMIT_CATEGORY,
+		[FEE] = @p_FEE,
+		[DURATION] = @p_DURATION
+	WHERE
+		PERMIT_TYPE_ID = @p_PERMIT_TYPE_ID
+
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+gO
+----------
+DROP PROCEDURE [proc_PERMITS_LOOK_UPInsert]
+GO
+CREATE PROCEDURE [dbo].[proc_PERMIT_TYPESInsert]
+(
+	@p_PERMIT_TYPE_ID varchar(4),
+	@p_DESCRIPTION varchar(100),
+	@p_PERMIT_CATEGORY int,
+	@p_FEE varchar(25),
+	@p_DURATION varchar(25)
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	INSERT
+	INTO [PERMIT_TYPES]
+	(
+		[PERMIT_TYPE_ID],
+		[DESCRIPTION],
+		PERMIT_CATEGORY,
+		[FEE],
+		[DURATION]
+	)
+	VALUES
+	(
+		@p_PERMIT_TYPE_ID,
+		@p_DESCRIPTION,
+		@p_PERMIT_CATEGORY,
+		@p_FEE,
+		@p_DURATION
+	)
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+GO
+-------------
+
+ALTER PROCEDURE [dbo].[proc_PERMITSLoadAll]
+
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT [PERMIT_ID]
+		  ,ISNULL([PERMITS].[PROJECT_ID] ,-1) [PROJECT_ID]
+		  ,ISNULL(PROJECTS.HYLAN_PROJECT_ID, 'Unkhown') HYLAN_PROJECT_ID
+		  ,ISNULL(PERMITS.JOB_ID, -1) JOB_ID
+		  ,ISNULL(cast(JOBS.[JOB_FILE_NUMBER] as varchar) ,'Unknown')  [JOB_FILE_NUMBER] 
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[CLIENT] ELSE COMPANIES.COMPANY_NAME END AS CLIENT
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[NODE_ID1]		   ELSE JOBS.[NODE_ID1]         END  [NODE_ID1]
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[NODE_ID2]		   ELSE JOBS.[NODE_ID2]			END  [NODE_ID2]			
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[NODE_ID3]		   ELSE JOBS.[NODE_ID3]			END  [NODE_ID3]			
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[HUB]			   ELSE JOBS.[HUB]				END  [HUB]				
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[HYLAN_PM]		   ELSE JOBS.[HYLAN_PM]			END  [HYLAN_PM]			
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[STREET_ADDRESS]  ELSE JOBS.[STREET_ADDRESS]	END  [STREET_ADDRESS]	
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[CITY]			   ELSE JOBS.[CITY]				END  [CITY]				
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[STATE]		   ELSE JOBS.[STATE]			END  [STATE]			
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[ZIP]			   ELSE JOBS.[ZIP]				END  [ZIP]				
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[LAT]			   ELSE JOBS.[LAT]				END  [LAT]				
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[LONG]			   ELSE JOBS.[LONG]				END  [LONG]				
+		  ,CASE WHEN HYLAN_PROJECT_ID IS NULL THEN [PERMITS].[POLE_LOCATION]	   ELSE JOBS.[POLE_LOCATION]	END  [POLE_LOCATION]	
+		  ,[PERMITS].PERMIT_NUMBER_TEXT PERMIT_NUMBER_TEXT
+		  ,[PERMITS].[PERMIT_TYPE]
+
+		  ,PermitNames.[DESCRIPTION] PERMIT_DESCRIPTION		  
+		  ,Lu_PermitCategories.[LU_NAME] AS PERMIT_CATEGORY_NAME
+		  ,[PERMITS].[DOT_TRACKING_NUMBER]
+		  ,[PERMITS].[SEGMENT]
+		  ,CASE WHEN [PERMITS].[IS_PROTECTED_STREET] = 'Y' THEN 'Yes' WHEN [PERMITS].[IS_PROTECTED_STREET] = 'N' THEN 'No' ELSE ISNULL([PERMITS].[IS_PROTECTED_STREET],'') END [IS_PROTECTED_STREET]
+		  ,[PERMITS].[MARKOUT_START_DATE]
+		  ,[PERMITS].[MARKOUT_END_DATE]
+		  ,[PERMITS].[ISSUED_DATE]
+		  ,[PERMITS].[VALID_DATE]
+		  ,[PERMITS].[EXPIRES_DATE]
+		  ,[PERMITS].[PERMIT_STATUS]
+		  ,Lu_PermitStatus.[LU_NAME] AS PERMIT_STATUS_NAME
+		  ,[PERMITS].[NOTES]
+		  ,(select count(pa.permit_id) from permit_attachments pa join attachments as a on a.attachment_id = pa.attachment_id where pa.permit_id = permits.permit_id and a.Is_deleted = 0) as ATTACHMENTS_COUNT
+		  ,[PERMITS].[CREATED_BY]
+		  ,[PERMITS].[CREATED_ON]
+		  ,[PERMITS].[MODIFIED_BY]
+		  ,[PERMITS].[MODIFIED_ON]
+		  ,[PERMITS].[LOCK_COUNTER]
+		  ,case when ISNULL(H_PM_USERS.LAST_NAME,'')!='' then H_PM_USERS.LAST_NAME+', '+ISNULL(H_PM_USERS.FIRST_NAME,'') ELSE '' END HYLAN_PM_NAME
+		  ,[PERMITS].[SUBMITTED_DATE]
+		  ,[PERMITS].[STIPULATION_DAY]
+		  ,[PERMITS].[STIPULATION_NIGHT]
+		  ,[PERMITS].[STIPULATION_WEEKEND]
+		  ,[PERMITS].[STIPULATIONS_OTHER]
+		  ,[PERMITS].[REJECTED_DATE]
+		  ,[PERMITS].[REJECTED_REASON]
+	  FROM [dbo].[PERMITS]
+	  LEFT JOIN [LOOK_UPS] Lu_PermitStatus ON ([PERMITS].[PERMIT_STATUS] = Lu_PermitStatus.[LOOK_UP_ID])
+	  LEFT JOIN PERMIT_TYPES PermitNames on (PermitNames.PERMIT_TYPE_ID = [PERMITS].[PERMIT_TYPE])
+	  LEFT JOIN LOOK_UPS Lu_PermitCategories ON (PermitNames.PERMIT_CATEGORY = Lu_PermitCategories.[LOOK_UP_ID])
+	  LEFT JOIN JOBS ON (JOBS.JOB_ID = PERMITS.JOB_ID)
+	  LEFT JOIN PROJECTS ON (PROJECTS.PROJECT_ID = PERMITS.PROJECT_ID)
+	  LEFT JOIN COMPANIES ON (COMPANIES.COMPANY_ID = PROJECTS.CLIENT)
+	  LEFT JOIN USERS H_PM_USERS ON (H_PM_USERS.[USER_ID] = [PERMITS].[HYLAN_PM])   
+
+
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+gO
+-------------
+
+calDailyDate
+
+
+--------------
+
+Hello Imran,
+ 
+Please add one text field “Priority” in Add/Update Job screen and Manage Jobs screen.
+ 
+Regards,
+Tenzeel
+--------------
+
+
+Alter table jobs add [PRIORITY] VARCHAR(800) 
+GO
+
+JOB_NOTES
+
+----------------
+
+
+@p_PRIORITY varchar(1000) = null
+
+
+Added the column for job
+delete notes messge from manage jobs screen.
+added the columns for Permits, db changes and server side changes
+
+
+------
+
+
+<input name="PRIMARY_CONTACT_EMAIL"
+class="k-input k-textbox k-invalid" aria-invalid="true"
+type="text" data-bind="value:PRIMARY_CONTACT_EMAIL"
+data-primarycontactemailformat-msg="Please enter Email in correct format."><div class="k-widget k-tooltip k-tooltip-validation k-invalid-msg" role="alert"
+style="margin: 0.5em; display: block;" data-for="PRIMARY_CONTACT_EMAIL"><span class="k-icon k-i-warning"> </span>Please enter Email in correct format.<div class="k-callout k-callout-n"></div></div>
+
+-----------------------------------------
+
+---Project to jobs link, resolved the issue for caching
+---Resolved the validation issue for clients
+------------------
+
+<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtDotTrackingNumber) }">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>DOT Tracking #</label>
+                    <input name="txtDotTrackingNumber"
+                           hylan-control-validation hylancontrolname="DotTrackingNumber" required type="text" class="form-control event-select"
+                           ng-model="permitDCModel.DOT_TRACKING_NUMBER" ng-maxlength="250" ng-change="ChangeStart()" />
+                </div>
+
+<div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtSubmittedDate)}">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Issued Date</label>
+                    <input name="txtSubmittedDate" hylan-control-validation hylancontrolname="SubmittedDate" type="text" required
+                           class="date-control" ng-model="permitDCModel.SUBMITTED_DATE" ng-maxlength="10" ng-change="ChangeStart()" />
+                </div
+
+		<div class="col-sm-4 col-md-4 col-lg-4"
+                     ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.PERMIT_STATUS, form.formPermitModal.ddlPermitStatus)}">
+                    <label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Permit Status</label>
+                    <select id="ddlPermitStatus" hylan-control-validation hylancontrolname="PermitStatus" name="ddlPermitStatus" class="form-control" required
+                            ng-model="permitDCModel.PERMIT_STATUS"
+                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME for lu in permitStatusOptions"
+                            ng-change="ChangeStart()">
+                        <option value="">-- Select Permit Status --</option><!--ng-init="permitDCModel.PERMIT_STATUS = permitDCModel.PERMIT_STATUS !== 0 ? permitDCModel.PERMIT_STATUS : null"-->
+                    </select>
+                </div>
+
+
+
+
+ <div class="col-sm-4 col-md-4 col-lg-4" ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal,form.formPermitModal.txtStipulations) }">
+                    <label class="control-label">Stipulations</label>
+                    <input name="txtStipulations"
+                           hylan-control-validation hylancontrolname="Stipulations" type="text" class="form-control event-select" ng-model="permitDCModel.STIPULATIONS" ng-maxlength="50" ng-change="ChangeStart()" />
+                </div>
+
+
+
+4/14/2017
+-----------
+
+
+
+INSERT INTO [PERMITS] ( [PROJECT_ID], [JOB_ID], [CLIENT], [NODE_ID1], [NODE_ID2], [NODE_ID3], [HUB], [HYLAN_PM], [STREET_ADDRESS], [CITY], [STATE], [ZIP], [LAT], [LONG], [POLE_LOCATION], [PERMIT_NUMBER_TEXT], [PERMIT_TYPE], [DOT_TRACKING_NUMBER], [SEGMENT], [IS_PROTECTED_STREET], [MARKOUT_START_DATE], [MARKOUT_END_DATE], STIPULATION_DAY,  STIPULATION_NIGHT,  STIPULATION_WEEKEND,  STIPULATIONS_OTHER, [ISSUED_DATE], [VALID_DATE], [EXPIRES_DATE], [PERMIT_STATUS], [NOTES], REJECTED_DATE, REJECTED_REASON, [CREATED_BY], [CREATED_ON], [MODIFIED_BY], [MODIFIED_ON], [LOCK_COUNTER] ) 
+VALUES ( @p_PROJECT_ID, @p_JOB_ID, @p_CLIENT, @p_NODE_ID1, @p_NODE_ID2, @p_NODE_ID3, @p_HUB, @p_HYLAN_PM, @p_STREET_ADDRESS, @p_CITY, @p_STATE, @p_ZIP, @p_LAT, @p_LONG, @p_POLE_LOCATION, @p_PERMIT_NUMBER_TEXT, @p_PERMIT_TYPE, @p_DOT_TRACKING_NUMBER, @p_SEGMENT, @p_IS_PROTECTED_STREET, @p_MARKOUT_START_DATE, @p_MARKOUT_END_DATE,		 @p_STIPULATION_DAY,  @p_STIPULATION_NIGHT,  @p_STIPULATION_WEEKEND,  @p_STIPULATIONS_OTHER, @p_ISSUED_DATE, @p_VALID_DATE, @p_EXPIRES_DATE, @p_PERMIT_STATUS, @p_NOTES, @p_REJECTED_DATE, @p_REJECTED_REASON, @p_CREATED_BY, getdate(), @p_MODIFIED_BY, getdate(), @p_LOCK_COUNTER )
+
+
+p_DAILY_ID = Convert.ToInt32(dbCommandWrapper.DBCommand.Parameters["@p_DAILY_ID"].Value);
+
+
+ng-if="currentPage == 'page6'"
+
+
+
+ PROJECT_ID           	= @p_PROJECT_ID
+,JOB_ID               	= @p_JOB_ID
+,CLIENT               	= @p_CLIENT
+,NODE_ID1             	= @p_NODE_ID1
+,NODE_ID2             	= @p_NODE_ID2
+,NODE_ID3             	= @p_NODE_ID3
+,HUB                  	= @p_HUB
+,HYLAN_PM             	= @p_HYLAN_PM
+,STREET_ADDRESS       	= @p_STREET_ADDRESS
+,CITY                 	= @p_CITY
+,STATE                	= @p_STATE
+,ZIP                  	= @p_ZIP
+,LAT                  	= @p_LAT
+,LONG                 	= @p_LONG
+,POLE_LOCATION        	= @p_POLE_LOCATION
+,PERMIT_NUMBER_TEXT   	= @p_PERMIT_NUMBER_TEXT
+,PERMIT_TYPE          	= @p_PERMIT_TYPE
+,DOT_TRACKING_NUMBER  	= @p_DOT_TRACKING_NUMBER
+,SUBMITTED_DATE       	= @p_SUBMITTED_DATE
+,NOTES                	= @p_NOTES
+,PERMIT_STATUS        	= @p_PERMIT_STATUS
+
+
+
+ SEGMENT            		= @p_SEGMENT
+,STIPULATION_DAY    		= @p_STIPULATION_DAY
+,STIPULATION_NIGHT  		= @p_STIPULATION_NIGHT
+,STIPULATION_WEEKEND		= @p_STIPULATION_WEEKEND
+,STIPULATIONS_OTHER 		= @p_STIPULATIONS_OTHER
+,MARKOUT_START_DATE 		= @p_MARKOUT_START_DATE
+,MARKOUT_END_DATE   		= @p_MARKOUT_END_DATE
+,IS_PROTECTED_STREET		= @p_IS_PROTECTED_STREET
+,ISSUED_DATE        		= @p_ISSUED_DATE
+,VALID_DATE         		= @p_VALID_DATE
+,EXPIRES_DATE       		= @p_EXPIRES_DATE
+,REJECTED_DATE      		= @p_REJECTED_DATE
+,REJECTED_REASON    		= @p_REJECTED_REASON
+
+
+Permit no, type, desc  make them combine
+
+Alter table add column isPage2Filled bit
+
+-----------
+While navigating , save, close the popup messge 
+
+
+PERMIT_CATEGORY
+
+
+ng-disabled="true" ng-class="{'Disabled': true}"
+
+
+
+style="margin-left:150px;margin-right:150px;"
+
+
+INSERT INTO LOOK_UPS 
+SELECT (SELECT MAX(LOOK_UP_ID) + 1 FROM LOOK_UPS), 'XYZ', 'ABC';
+
+data.form.txtCity.$$attr.hylancontrolname
+
+
+ has-error
+ id="divPermitType"
+
+        var hylenProjectIDTemplate = function (dataItem) { //"<a href='javascript:;' ng-click='OpenProjectCRUDWindow(#:PROJECT_ID#)' >#: HYLAN_PROJECT_ID == null ? '' : HYLAN_PROJECT_ID#</a>";
+                                        if (dataItem.PROJECT_ID != null) {
+                                            return "<a href='javascript:;' ng-click='OpenProjectCRUDWindow(" + dataItem.PROJECT_ID + ")' >" + dataItem.HYLAN_PROJECT_ID + "</a>";
+                                        } else {
+                                            return "Unknown";
+                                        }
+                                    }
+---------------
+Add Edit  Delete with angular JS
+https://www.codeproject.com/Articles/1031858/Comprehensive-CRUD-Operations-with-AngularJS-and-W
+
+
+https://www.codeproject.com/Articles/1034593/Angular-js-with-ASP-NET-MVC-Insert-Update-Delete
+
+Pakist@n_01
+Pakist@n_02
+P@kist@n_01
+P@kist@n_02
+
+Unit testing and fixing of issues of Permits, added the validation rules, 
+
+	
+	
+Expired	Expiring  5 days
+auto	auto
+based on	based on
+Expires date	Expires date
+only for	only for Active
+Active	
+or Expiring in 5 days	
+	
+
+status Expiring , expired date is manadatory 
+
+
+
+.resource-requests th
+{
+    padding: 4px 5px;
+}
+
+.k-filtercell, .k-filtercell .k-widget, .k-filtercell > span
+{
+	display: run-in;
+}
+
+
+to show filter 
+$scope.gridOptions.filterable = true;
+$scope.gridOptions.filterable = {
+    mode: "row"
+}
+
+-----------------
+
+
+<div class="col-sm-4 col-md-4 col-lg-4"
+                     ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formPermitModal, form.formPermitModal.txtRejectedDate)}">
+                    <label class="control-label">Rejected Date</label>
+                    <input name="txtRejectedDate" id="txtRejectedDate" hylan-control-validation hylancontrolname="RejectedDate" type="text"
+                           class="date-control" ng-model="permitDCModel.REJECTED_DATE" ng-change="ChangeStart()" ng-required='permitDCModel.REJECTED_REASON' />
+                    <script>
+                        $("#txtRejectedDate").kendoMaskedDatePicker();
+                        if (/Android/.test(Globals.UserAgent) || /iPad/.test(Globals.UserAgent))
+                            $("#txtRejectedDate").attr("readonly", "readonly");
+                    </script>
+                </div>
+
+<div class="col-sm-4 col-md-4 col-lg-4"
+                     ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formPermitModal, permitDCModel.REJECTED_REASON, form.formPermitModal.ddlRejectedReason)}">
+                    <label class="control-label">Rejected Reason</label>
+                    <select id="ddlRejectedReason" hylan-control-validation hylancontrolname="RejectedReason" name="ddlRejectedReason" class="form-control"
+                            ng-model="permitDCModel.REJECTED_REASON"
+                            ng-options="lu.LOOK_UP_ID as lu.LU_NAME for lu in rejectedReasonOptions"
+                            ng-change="ChangeStart()"
+                            ng-required='permitDCModel.REJECTED_DATE'>
+                        <option value="">-- Select Rejected Reason --</option><!--ng-init="permitDCModel.PERMIT_STATUS = permitDCModel.PERMIT_STATUS !== 0 ? permitDCModel.PERMIT_STATUS : null"-->
+                    </select>
+                </div>
+
+
+
+USE [HYLEN_QA_TC1]
+GO
+
+INSERT INTO [dbo].[PERMITS]
+           ([PROJECT_ID]
+           ,[JOB_ID]
+           ,[CLIENT]
+           ,[NODE_ID1]
+           ,[NODE_ID2]
+           ,[NODE_ID3]
+           ,[HUB]
+           ,[HYLAN_PM]
+           ,[STREET_ADDRESS]
+           ,[CITY]
+           ,[STATE]
+           ,[ZIP]
+           ,[LAT]
+           ,[LONG]
+           ,[POLE_LOCATION]
+           ,[DOT_TRACKING_NUMBER]
+           ,[SUBMITTED_DATE]
+           ,[PERMIT_NUMBER_TEXT]
+           ,[PERMIT_TYPE]
+           ,[SEGMENT]
+           ,[IS_PROTECTED_STREET]
+           ,[MARKOUT_START_DATE]
+           ,[MARKOUT_END_DATE]
+           ,[STIPULATION_DAY]
+           ,[STIPULATION_NIGHT]
+           ,[STIPULATION_WEEKEND]
+           ,[STIPULATIONS_OTHER]
+           ,[ISSUED_DATE]
+           ,[VALID_DATE]
+           
+           ,[PERMIT_STATUS]
+           ,[NOTES]
+
+
+           ,[REJECTED_DATE],[REJECTED_REASON],[EXPIRES_DATE]
+
+           ,[CREATED_BY]
+           ,[CREATED_ON]
+           ,[MODIFIED_BY]
+           ,[MODIFIED_ON]
+           ,[LOCK_COUNTER]
+           ,[IS_PAGE2_FILLED])
+     VALUES
+           (<PROJECT_ID, int,>
+           ,<JOB_ID, int,>
+           ,<CLIENT, nvarchar(250),>
+           ,<NODE_ID1, nvarchar(250),>
+           ,<NODE_ID2, nvarchar(250),>
+           ,<NODE_ID3, nvarchar(250),>
+           ,<HUB, nvarchar(250),>
+           ,<HYLAN_PM, varchar(60),>
+           ,<STREET_ADDRESS, nvarchar(250),>
+           ,<CITY, nvarchar(40),>
+           ,<STATE, varchar(2),>
+           ,<ZIP, varchar(5),>
+           ,<LAT, nvarchar(50),>
+           ,<LONG, nvarchar(50),>
+           ,<POLE_LOCATION, nvarchar(250),>
+           ,<DOT_TRACKING_NUMBER, varchar(20),>
+           ,<SUBMITTED_DATE, datetime,>
+           ,<PERMIT_NUMBER_TEXT, varchar(25),>
+           ,<PERMIT_TYPE, varchar(4),>
+           ,<SEGMENT, nvarchar(800),>
+           ,<IS_PROTECTED_STREET, varchar(1),>
+           ,<MARKOUT_START_DATE, datetime,>
+           ,<MARKOUT_END_DATE, datetime,>
+           ,<STIPULATION_DAY, bit,>
+           ,<STIPULATION_NIGHT, bit,>
+           ,<STIPULATION_WEEKEND, bit,>
+           ,<STIPULATIONS_OTHER, varchar(100),>
+           ,<ISSUED_DATE, datetime,>
+           ,<VALID_DATE, datetime,>
+           ,<EXPIRES_DATE, datetime,>
+           ,<PERMIT_STATUS, int,>
+           ,<NOTES, varchar(max),>
+           ,<REJECTED_DATE, datetime,>
+           ,<REJECTED_REASON, int,>
+           ,<CREATED_BY, int,>
+           ,<CREATED_ON, datetime,>
+           ,<MODIFIED_BY, int,>
+           ,<MODIFIED_ON, datetime,>
+           ,<LOCK_COUNTER, int,>
+           ,<IS_PAGE2_FILLED, bit,>)
+GO
+
+
+
+txtPermitType
+
+--------------------------
+4/24/2017
+
+ALTER PROCEDURE [dbo].[proc_PERMIT_TYPESLoadAll]
+@p_getDescWithCode as bit = 0
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[PERMIT_TYPE_ID],
+		case when isnull(@p_getDescWithCode ,1) = 1 then [PERMIT_TYPE_ID]+'-' +[DESCRIPTION] else [DESCRIPTION] end [DESCRIPTION],
+		[PERMIT_CATEGORY], 
+		[FEE],
+		[DURATION]
+	FROM [PERMIT_TYPES]
+	
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+----------------
+
+
+template: '<span class="order-id">#= OrderID #</span> #= ShipName #, #= ShipCountry #',
+                        dataTextField: "ShipName",
+
+
+{"PERMIT_TYPE_ID":"0102","DESCRIPTION":"0102-Major installations - high voltage","PERMIT_CATEGORY":64,"FEE":"$ 135/380","DURATION":"30/90","IsDirty":false,"ErrorString":""}
+
+
+
+
+http://demos.telerik.com/kendo-ui/autocomplete/events
+http://www.telerik.com/forums/datavaluefield-does-exist
+
+
+permitDCModel.PERMIT_TYPE
+
+    border-left: 0px;
+    border-left-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+
+        border-right: 0px;border-top-right-radius: 0px;border-bottom-right-radius: 0px;
+
+
+PERMIT_NUMBER_TEXT, PERMIT_TYPE
+
+
+
+
+STIPULATIONS_OTHER == null
+
+
+                { field: "ISSUED_DATE", title: "ISSUED DATE", width: "100px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, format: "{0: MM/dd/yyyy}", filterable: { cell: { operator: "eq", showOperators: false } } },
+                { field: "VALID_DATE", title: "VALID DATE", width: "100px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, format: "{0: MM/dd/yyyy}" , filterable: { cell: { operator: "eq", showOperators: false } } },
+                { field: "EXPIRES_DATE", title: "EXPIRES DATE", width: "100px", headerAttributes: { "class": "sub-col no-left-border lightYellow-col" }, attributes: { "class": "contert-alpha GridBorder" }, format: "{0: MM/dd/yyyy}", filterable: { cell: { operator: "eq", showOperators: false } } },
+
+
+
+Date with contain operator is not working.

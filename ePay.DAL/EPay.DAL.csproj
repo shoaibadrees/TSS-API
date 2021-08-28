@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EPay.DAL</RootNamespace>
+    <AssemblyName>EPay.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database, Version=4.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder2, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Practices.EnterpriseLibrary.2008.4.1\lib\Microsoft.Practices.ObjectBuilder2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataAccess\ngAC\EmployeeDA.cs" />
+    <Compile Include="DataAccess\ngAC\PaySalaryEditingDA.cs" />
+    <Compile Include="DataAccess\ngAC\PayAdvanceDA .cs" />
+    <Compile Include="DataAccess\ngAC\PayLeavesDA.cs" />
+    <Compile Include="DataAccess\ngAC\PayShiftsDA.cs" />
+    <Compile Include="DataAccess\ngAC\PayDepartmentDA.cs" />
+    <Compile Include="DataAccess\ngAC\PayDesignationDA.cs" />
+    <Compile Include="DataAccess\AdhocReportDA.cs" />
+    <Compile Include="DataAccess\ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\COMPANIEDA.cs" />
+    <Compile Include="DataAccess\DAILYDA.cs" />
+    <Compile Include="DataAccess\DAILY_UNKNOWNDA.cs" />
+    <Compile Include="DataAccess\JOBDA.cs" />
+    <Compile Include="DataAccess\JOB_ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\ngAC\RoleDA.cs" />
+    <Compile Include="DataAccess\ngAC\RoleTaskPermDA.cs" />
+    <Compile Include="DataAccess\ngAC\TaskDA.cs" />
+    <Compile Include="DataAccess\ngAC\UserDA.cs" />
+    <Compile Include="DataAccess\Partials\EMAIL_GROUPSDA.cs" />
+    <Compile Include="DataAccess\Partials\LABORDA.cs" />
+    <Compile Include="DataAccess\MAN_POWERDA.cs" />
+    <Compile Include="DataAccess\Partials\MATERIALDA.cs" />
+    <Compile Include="DataAccess\NOTEDA.cs" />
+    <Compile Include="DataAccess\Partials\ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\Partials\COMPANIEDA.cs" />
+    <Compile Include="DataAccess\Partials\JOBDA.cs" />
+    <Compile Include="DataAccess\Partials\NOTEDA.cs" />
+    <Compile Include="DataAccess\Partials\HYLAN_TASKDA.cs" />
+    <Compile Include="DataAccess\Partials\PROJECTDA.cs" />
+    <Compile Include="DataAccess\Partials\PROJECT_ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\Partials\REPORTDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_MATRIXDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_ROSTERDA.cs" />
+    <Compile Include="DataAccess\PERMITDA.cs" />
+    <Compile Include="DataAccess\PERMIT_ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\PROJECTDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_CONTINUITY_ZERODA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_FIBER_POWER_DIGDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_FIBER_PULL_SPLICEDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_FOUNDATION_POLE_WORKDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_MISC_AC_POWERDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_PIM_SWEEPDA.cs" />
+    <Compile Include="DataAccess\Partials\TASK_SHROUD_ANTENADA.cs" />
+    <Compile Include="DataAccess\PROJECT_ATTACHMENTDA.cs" />
+    <Compile Include="DataAccess\PERMIT_TYPEDA.cs" />
+    <Compile Include="DataAccess\USERS_RMAGDA.cs" />
+    <Compile Include="DataAccess\Partials\VEHICLEDA.cs" />
+    <Compile Include="DataAccess\Partials\WORK_DETAILDA.cs" />
+    <Compile Include="DataClassesExtension\FileDescription.cs" />
+    <Compile Include="DataClasses\ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\DAILYDC.cs" />
+    <Compile Include="DataClasses\DAILY_UNKNOWNDC.cs" />
+    <Compile Include="DataClasses\EXCEPTIONDC.cs" />
+    <Compile Include="DataClasses\JOBDC.cs" />
+    <Compile Include="DataClasses\JOB_ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\ngDC\FormSecurityDC.cs" />
+    <Compile Include="DataClasses\ngDC\EmployeeDC.cs" />
+    <Compile Include="DataClasses\ngDC\PaySalaryEditingDC.cs" />
+    <Compile Include="DataClasses\ngDC\PayAdvanceDC.cs" />
+    <Compile Include="DataClasses\ngDC\PayLeavesDC.cs" />
+    <Compile Include="DataClasses\ngDC\PayShiftsDC.cs" />
+    <Compile Include="DataClasses\ngDC\PayDepartmentDC.cs" />
+    <Compile Include="DataClasses\ngDC\PayDesignationDC.cs" />
+    <Compile Include="DataClasses\ngDC\RoleDC.cs" />
+    <Compile Include="DataClasses\ngDC\RoleTaskPermDC.cs" />
+    <Compile Include="DataClasses\ngDC\TaskDC.cs" />
+    <Compile Include="DataClasses\ngDC\UserDC.cs" />
+    <Compile Include="DataClasses\Partials\DailyHoursReportDC.cs" />
+    <Compile Include="DataClasses\Partials\AdditionalReportCriteria.cs" />
+    <Compile Include="DataClasses\Partials\DailyDTO.cs" />
+    <Compile Include="DataClasses\Partials\PERMITDC.cs" />
+    <Compile Include="DataClasses\Partials\DD_DTO.cs" />
+    <Compile Include="DataClasses\Partials\LABORDC.cs" />
+    <Compile Include="DataClasses\MAN_POWERDC.cs" />
+    <Compile Include="DataClasses\Partials\MATERIALDC.cs" />
+    <Compile Include="DataClasses\NOTEDC.cs" />
+    <Compile Include="DataClasses\NOTES_TYPEDC.cs" />
+    <Compile Include="DataClasses\Partials\ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\Partials\DAILYDC.cs" />
+    <Compile Include="DataClasses\Partials\DAILY_UNKNOWNDC.cs" />
+    <Compile Include="DataClasses\Partials\MAN_POWERDC.cs" />
+    <Compile Include="DataClasses\Partials\PermitsSummary.cs" />
+    <Compile Include="DataClasses\Partials\TASK_MATRIXDC.cs" />
+    <Compile Include="DataClasses\Partials\TASK_ROSTERDC.cs" />
+    <Compile Include="DataClasses\Partials\HYLAN_TASKDC.cs" />
+    <Compile Include="DataClasses\Partials\JOBDC.cs" />
+    <Compile Include="DataClasses\Partials\NOTEDC.cs" />
+    <Compile Include="DataClasses\Partials\PROJECTDC.cs" />
+    <Compile Include="DataClasses\Partials\REPORTDC.cs" />
+    <Compile Include="DataClasses\PERMITDC.cs" />
+    <Compile Include="DataClasses\DAILY_ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\PERMIT_ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\PROJECTDC.cs" />
+    <Compile Include="DataClasses\PERMIT_TYPEDC.cs" />
+    <Compile Include="DataClasses\PROJECT_ATTACHMENTDC.cs" />
+    <Compile Include="DataClasses\Partials\VEHICLEDC.cs" />
+    <Compile Include="DataClasses\Partials\WORK_DETAILDC.cs" />
+    <Compile Include="Encryptor.cs" />
+    <Compile Include="DataAccess\LOOK_UPDA.cs" />
+    <Compile Include="DataAccess\NOTIFICATIONDA.cs" />
+    <Compile Include="DataAccess\Partials\ErroLogDA.cs" />
+    <Compile Include="DataAccess\MESSAGEDA.cs" />
+    <Compile Include="DataAccess\MESSAGES_COMPANIEDA.cs" />
+    <Compile Include="DataAccess\MESSAGES_RMAGDA.cs" />
+    <Compile Include="DataAccess\Partials\LOOK_UPDA.cs" />
+    <Compile Include="DataAccess\Partials\ROLEDA.cs" />
+    <Compile Include="DataAccess\Partials\USERS_COMPANIEDA.cs" />
+    <Compile Include="DataAccess\ROLEDA.cs" />
+    <Compile Include="DataAccess\ROLES_PERMISSIONDA.cs" />
+    <Compile Include="DataAccess\SCREENDA.cs" />
+    <Compile Include="DataAccess\ST_STATE_LDA.cs" />
+    <Compile Include="DataAccess\USERDA.cs" />
+    <Compile Include="DataAccess\Partials\USERDA.cs" />
+    <Compile Include="DataAccess\USERS_COMPANIEDA.cs" />
+    <Compile Include="DataClasses\AbstractDataClass.cs" />
+    <Compile Include="DataClasses\COMPANIEDC.cs" />
+    <Compile Include="DataClasses\LOOK_UPDC.cs" />
+    <Compile Include="DataClasses\NOTIFICATIONDC.cs" />
+    <Compile Include="DataClasses\Partials\ErrorLogDC.cs" />
+    <Compile Include="DataClasses\MESSAGEDC.cs" />
+    <Compile Include="DataClasses\MESSAGES_COMPANIEDC.cs" />
+    <Compile Include="DataClasses\MESSAGES_RMAGDC.cs" />
+    <Compile Include="DataClasses\Partials\COMPANIEDC.cs" />
+    <Compile Include="DataClasses\Partials\MAPStruct.cs" />
+    <Compile Include="DataClasses\Partials\MESSAGEDC.cs" />
+    <Compile Include="DataClasses\Partials\ROLEDC.cs" />
+    <Compile Include="DataClasses\Partials\USERDC.cs" />
+    <Compile Include="DataClasses\Partials\EVENTS_COMPANIEDC.cs" />
+    <Compile Include="DataClasses\Partials\USERS_COMPANIEDC.cs" />
+    <Compile Include="DataClasses\ROLEDC.cs" />
+    <Compile Include="DataClasses\ROLES_PERMISSIONDC.cs" />
+    <Compile Include="DataClasses\SCREENDC.cs" />
+    <Compile Include="DataClasses\ST_STATE_LDC.cs" />
+    <Compile Include="DataClasses\USERDC.cs" />
+    <Compile Include="DataClasses\USERS_COMPANIEDC.cs" />
+    <Compile Include="DataClasses\USERS_RMAGDC.cs" />
+    <Compile Include="DBCommandWarpper.cs" />
+    <Compile Include="DBConnection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utlities.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ePay.Common\EPay.Common.csproj">
+      <Project>{601e1d6d-3ed6-49a8-9465-d617cdfb7c84}</Project>
+      <Name>EPay.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

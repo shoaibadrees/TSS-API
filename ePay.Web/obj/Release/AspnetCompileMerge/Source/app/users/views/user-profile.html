@@ -1,0 +1,168 @@
+﻿<form id="frmUserProfile" name="form.formUserProfile" novalidate>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+            <span class="type"></span>:
+            <span class="message"></span>
+            <img class="close" src="Content/images/close.png" />
+        </div>
+        <!-- Header -->
+        <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+            <div class="col-sm-6 col-md-4 col-lg-4 no-padding"><img style="vertical-align:inherit;margin-right:10px;width:21px;height:21px" src="Content/images/user-photo.png" alt="">USER <span>PROFILE</span></div>
+            <div class="clearfix visible-sm-block"></div>
+            <div class="col-sm-6 col-md-4 col-lg-4 no-padding HeadNote"><sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.</div>
+            <div class="col-sm-6 col-md-4 col-lg-4 pull-right no-padding">
+                <div class="col-sm-12 nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a class="k-button k-button-icontext" id="btnCancel" style="text-decoration:none" ng-click="closeDialog()">
+                                    <span class="k-icon k-update  k-i-close"></span>
+                                    Close
+                                </a>
+                            </li>
+                            <li>
+                                <a type="submit" class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-click="updateUserProfile(form.formUserProfile)">
+                                    <span class="k-icon k-update k-i-check"></span>
+                                    Save
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12  up-section clear">
+            <div class="col-sm-12 col-md-12 col-lg-12 title ">
+                Update User Information
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">User Name</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4"><label class="ReadOnlyText">{{userProfile.USER_NAME}}</label></div>
+
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">User Type</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4"><label class="ReadOnlyText">{{userProfile.ROLE.ROLE_NAME}}</label></div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+                
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>First Name</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4 form-group" >
+                    <input name="txtFirstName" hylan-control-validation hylancontrolname="FirstName"  hylancontrollabel="First Name"  type="text" class="form-control event-select" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formUserProfile, form.formUserProfile.txtFirstName) }"
+                           ng-model="userProfile.FIRST_NAME" required ng-click="changeUserProfile()" ng-maxlength="30" />
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Last Name</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4 form-group" >
+                    <input name="txtLastName" hylan-control-validation hylancontrolname="LastName" hylancontrollabel="Last Name" type="text" class="form-control event-select" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formUserProfile, form.formUserProfile.txtLastName) }"
+                           ng-model="userProfile.LAST_NAME" required ng-click="changeUserProfile()" ng-maxlength="30" />
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Email</label></div>
+                <div class="col-sm-8 col-md-10 col-lg-4 form-group" >
+                    <input name="txtEmail" type="text" class="form-control event-select" hylan-control-validation hylancontrolname="Email" hylancontrollabel="Email" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formUserProfile, form.formUserProfile.txtEmail) }"
+                           ng-model="userProfile.EMAIL_ADDRESS" required ng-click="changeUserProfile()" ng-maxlength="250" />
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label for="mobPhone" class="control-label nopadding"><sup><img src="Content/images/red_asterisk.png" /></sup>Cell #</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4 form-group" >
+                    <input name="txtMobileNumber" hylan-control-validation hylancontrolname="MobileNumber" hylancontrollabel="Cell #" id="mobPhone" class="form-control event-select" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxes(form.formUserProfile, form.formUserProfile.txtMobileNumber) }"
+                           ng-model="userProfile.MOBILE_PHONE" type="text" required ng-click="changeUserProfile('MOBILE_PHONE')" />
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label"><sup><img src="Content/images/red_asterisk.png" /></sup>Company</label></div>
+                <div class="col-sm-8 col-md-10 col-lg-4 form-group" >
+                    <select name="ddlCompany" hylan-control-validation hylancontrolname="Company" hylancontrollabel="Company" class="form-control"
+                            ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formUserProfile, userProfile.USER_COMPANY_ID, form.formUserProfile.ddlCompany) } "
+                             ng-model="userProfile.USER_COMPANY_ID" ng-init="userProfile.USER_COMPANY_ID = userProfile.USER_COMPANY_ID !== 0 ? userProfile.USER_COMPANY_ID : null" required
+                            ng-click="changeUserProfile('USER_COMPANY_ID')"
+                            ng-options="x.COMPANY_ID as x.COMPANY_NAME for x in companyOptions">
+                        <option selected value="">-- Select Company --</option>
+                    </select>
+                   </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-sm-4 col-md-2 col-lg-2"><label for="officePhone" class="control-label nopadding">Office Phone #</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4"><input id="officePhone" class="form-control event-select" ng-model="userProfile.OFFICE_PHONE" type="text" ng-click="changeUserProfile('OFFICE_PHONE')" /></div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12  up-section clear">
+            <div class="col-sm-12 col-md-12 col-lg-12 title">
+                Change Password
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">Old Password</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4">
+                    <input class="form-control event-select" ng-model="userProfile.OLD_PSWD" type="password" ng-click="changeUserProfile()" />
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">New Password</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4">
+                    <input ng-model="ResetPswd.newPassword" class="form-control event-select" type="password" ng-click="changeUserProfile()" />
+                </div>
+
+                <div class="clearfix visible-sm-block"></div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="clearfix visible-lg-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding">Re-type New Password</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4">
+                    <input ng-model="ResetPswd.newPasswordReType" class="form-control event-select" type="password" ng-click="changeUserProfile()" />
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-12 up-section clear" style="border-bottom:none;">
+            <div class="col-sm-12 col-md-12 col-lg-12 title">
+                Update Security Question
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 no-padding">
+                <div class="col-sm-4 col-md-2 col-lg-2"><label class="control-label nopadding"><sup><img src="Content/images/red_asterisk.png" /></sup>Security Question</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4 form-group" >
+                    <select name="ddlSecurityQuestion"  hylan-control-validation hylancontrolname="SecurityQuestion" hylancontrollabel="Security Question" id="ddlSecQuestion" class="form-control" required 
+                            ng-class="{ 'has-error' : commonValidationService.ValidateDropDown(form.formUserProfile, userProfile.SECURITY_QUESTION, form.formUserProfile.ddlSecurityQuestion) }"
+                            ng-model="userProfile.SECURITY_QUESTION" ng-change="changeUserProfile()">
+                        <option value="">-- Select a Security Question --</option>
+                        <option value="1" title="What is your mother’s maiden Name?">What is your mother’s maiden Name?</option>
+                        <option value="2" title="Which city were you born in?">Which city were you born in?</option>
+                        <option value="3" title="In what city or town does your nearest sibling live?">In what city or town does your nearest sibling live?</option>
+                        <option value="4" title="What was your first pet’s name?">What was your first pet’s name?</option>
+                    </select>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+
+                <div class="col-sm-4 col-md-2 col-lg-2"><sup><img src="Content/images/red_asterisk.png" /></sup><label class="control-label nopadding">Answer</label></div>
+                <div class="col-sm-8 col-md-4 col-lg-4 form-group" >
+                    <input name="txtAnswer" hylan-control-validation hylancontrolname="Answer" hylancontrollabel="Answer" type="text" id="ipAnswer" class="form-control event-select" 
+                           ng-class="{ 'has-error' : commonValidationService.ValidateTextBoxesRequired(form.formUserProfile, form.formUserProfile.txtAnswer) }"
+                           ng-model="userProfile.ANSWER" ng-click="changeUserProfile()" required ng-maxlength="50" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
+<style>
+    .form-control {
+        height:32px !important;
+    }
+</style>

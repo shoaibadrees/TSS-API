@@ -1,0 +1,25 @@
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\bin\Release\EPay.Common.dll
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\bin\Release\EPay.Common.pdb
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Release\EPay.Common.csprojResolveAssemblyReference.cache
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Release\EPay.Common.dll
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Release\EPay.Common.pdb
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\bin\Release\EPay.Common.dll
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\bin\Release\EPay.Common.pdb
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Release\EPay.Common.csprojResolveAssemblyReference.cache
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Release\EPay.Common.dll
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Release\EPay.Common.pdb
+E:\Projects\TFS\EEI\nMart.Common\bin\Release\EPay.Common.dll
+E:\Projects\TFS\EEI\nMart.Common\bin\Release\EPay.Common.pdb
+E:\Projects\TFS\EEI\nMart.Common\obj\Release\EPay.Common.dll
+E:\Projects\TFS\EEI\nMart.Common\obj\Release\EPay.Common.pdb
+E:\Projects\TFS\EEI\nMart.Common\obj\Release\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\TFS\Hylan\nMart.Common\bin\Release\EPay.Common.dll
+E:\Projects\TFS\Hylan\nMart.Common\bin\Release\EPay.Common.pdb
+E:\Projects\TFS\Hylan\nMart.Common\obj\Release\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\TFS\Hylan\nMart.Common\obj\Release\EPay.Common.dll
+E:\Projects\TFS\Hylan\nMart.Common\obj\Release\EPay.Common.pdb
+E:\TFS-Projects\Hylan\nMart.Common\bin\Release\EPay.Common.dll
+E:\TFS-Projects\Hylan\nMart.Common\bin\Release\EPay.Common.pdb
+E:\TFS-Projects\Hylan\nMart.Common\obj\Release\EPay.Common.csprojResolveAssemblyReference.cache
+E:\TFS-Projects\Hylan\nMart.Common\obj\Release\EPay.Common.dll
+E:\TFS-Projects\Hylan\nMart.Common\obj\Release\EPay.Common.pdb

@@ -1,0 +1,470 @@
+--------------
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSDelete] 
+(
+	@p_JOB_ID int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	Declare @TaskCount int = 0
+	Declare @AttachmentsCount int = 0
+	Declare @PermitsCount int = 0
+	Declare @DailiesCount int = 0
+	Declare @Job_Name as varchar
+	Declare @JOB_FILE_NUMBER as varchar(20)= ''
+	Declare @ErrorMessage as varchar(max) ='' 
+	Declare @Comma varchar(3)= ', '
+
+	select @JOB_FILE_NUMBER = JOB_FILE_NUMBER from jobs where Job_ID = @p_JOB_ID ;
+	set @ErrorMessage =  'Job File#: '+cast(@JOB_FILE_NUMBER as varchar(20))+' has '
+
+	Select @TaskCount = dbo.COUNT_NEEDED_TASKS(@p_JOB_ID)
+	select @AttachmentsCount = count(job_id) from [JOB_ATTACHMENTS] inner join Attachments on (Attachments.Attachment_ID = [JOB_ATTACHMENTS].Attachment_ID ) where Attachments.Is_Deleted=0 and JOB_ID = @p_JOB_ID
+	select @DailiesCount = count(Daily_ID) from [dbo].[DAILY] where JOB_ID = @p_JOB_ID
+	select @PermitsCount = count(PERMIT_ID) from [dbo].[PERMITS] where JOB_ID = @p_JOB_ID
+
+	IF(@TaskCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@taskCount AS VARCHAR(10)) + ' Task(s), '
+	IF(@AttachmentsCount>0) SET @ErrorMessage = @ErrorMessage +CAST(@AttachmentsCount AS VARCHAR(10)) + ' Attachment(s), '
+	IF(@PermitsCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@PermitsCount AS VARCHAR(10)) + ' Permit(s), '
+	IF(@DailiesCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@DailiesCount AS VARCHAR(10)) + ' Dail(ies), '
+	IF( @TaskCount > 0  OR @AttachmentsCount > 0 OR @DailiesCount > 0 or @PermitsCount>0 )
+	BEGIN
+		-- remove last 2 char
+		Select @ErrorMessage = left(@ErrorMessage, len(@ErrorMessage)-1) +' associated'
+		RAISERROR(@ErrorMessage,16,1)
+	END
+	ELSE
+	BEGIN
+		BEGIN TRY
+			BEGIN TRAN
+				select Attachment_ID into #tempAttachments From [JOB_ATTACHMENTS] where JOB_ID = @p_JOB_ID
+				Delete from [JOB_ATTACHMENTS] where JOB_ID = @p_JOB_ID
+				Delete from Attachments where Attachment_ID in (select Attachment_ID From #tempAttachments)
+
+				DELETE FROM [JOBS_NOTES] WHERE JOB_ID = @p_JOB_ID
+				DELETE FROM [JOBS] WHERE JOB_ID = @p_JOB_ID
+			COMMIT TRAN
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRAN
+		END CATCH
+	END
+
+	SET @Err = @@Error
+	RETURN @Err
+END
+Go
+------------------
+---6/7/2017
+---------------
+
+ALTER PROCEDURE [dbo].[proc_JOBNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	INNER JOIN JOBS_NOTES JN ON NOTES.NOTE_ID=JN.NOTE_ID and @p_SCREEN_ID=3 AND JN.JOB_ID = @p_SCREEN_RECORD_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+--------------
+ALTER PROCEDURE [dbo].[proc_PROJECTNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN
+	PROJECT_NOTES PN ON  PN.PROJECT_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=PN.NOTE_ID
+	order by NOTES.CREATED_ON desc
+SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+-------------
+ALTER PROCEDURE [dbo].[proc_TASKNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN TASK_NOTES JN ON @p_SCREEN_ID=4 AND JN.JOB_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=JN.NOTE_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+----------------
+
+ALTER PROCEDURE [dbo].[proc_PERMITNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN PERMIT_NOTES JN ON @p_SCREEN_ID=5 AND JN.JOB_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=JN.NOTE_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+-----------
+
+ALTER PROCEDURE [dbo].[proc_DIALIASNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN DIALIAS_NOTES JN ON @p_SCREEN_ID=6 AND JN.JOB_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=JN.NOTE_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+------------
+
+ALTER PROCEDURE [dbo].[proc_EXECUTIVEDASHBOARDNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN EXECUTIVEDASHBOARD_NOTES JN ON @p_SCREEN_ID=7 AND JN.JOB_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=JN.NOTE_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+--------------
+
+ALTER PROCEDURE [dbo].[proc_JOBMAPNOTESLoadByPrimaryKey]
+(
+	
+	@p_SCREEN_ID int,
+	@p_SCREEN_RECORD_ID int
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		[NOTES].[NOTE_ID],
+		[NOTES],
+		[NOTES_TYPE],
+		NOTES.[LOCK_COUNTER],
+		[SCREEN_ID],
+		dbo.fGetUserName( NOTES.CREATED_BY) [USER_NAME],
+		NOTES.[CREATED_ON],
+		NOTES.[MODIFIED_BY],
+		NOTES.[MODIFIED_ON]
+	FROM [NOTES] 
+	--INNER JOIN USERS ON USERS.USER_ID = NOTES.CREATED_BY
+	INNER JOIN JOBMAP_NOTES JN ON @p_SCREEN_ID=8 AND JN.JOB_ID = @p_SCREEN_RECORD_ID AND NOTES.NOTE_ID=JN.NOTE_ID
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+-------------
+
+
+ALTER PROCEDURE [dbo].[proc_TASK_ROSTER_LOADAll]    
+@p_projectIDs varchar(max) = 'All'  
+AS    
+BEGIN    
+    
+	if(@p_projectIDs = '-1') SET @p_projectIDs = 'All'
+	  
+	DECLARE @Job_IDs TABLE (Job_ID INT)    
+	INSERT INTO @Job_IDs    
+	SELECT JOB_ID 
+	FROM JOBS jb
+	left join projects prj on prj.project_id = jb.PROJECT_ID
+	left JOIN dbo.LOOK_UPS prjLU ON prjLU.LOOK_UP_ID = prj.PROJECT_STATUS
+	left JOIN dbo.LOOK_UPS jbLU ON jbLU.LOOK_UP_ID = jb.JOB_STATUS
+	WHERE ( @p_projectIDs = 'All' OR CAST(prj.PROJECT_ID AS VARCHAR) IN (SELECT item FROM dbo.split(@p_projectIDs,',')) )
+	--AND prjLU.lu_name = 'Active'
+	--AND jbLU.lu_name = 'Active'
+	      
+	 ------ JOB    
+	SELECT JOB.JOB_ID, JOB.PROJECT_ID, dbo.COUNT_NEEDED_TASKS(JOB.JOB_ID) AS [TOTAL_TASKS],PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID, 
+			[JOB_FILE_NUMBER], [NODE_ID1],[NODE_ID2], [NODE_ID3], [HUB], [HYLAN_PM], [STREET_ADDRESS], [CITY], [STATE], [ZIP], [LAT], [LONG], 
+			[POLE_LOCATION], LUNTS.[LU_NAME] AS DOITT_NTP_STATUS_NAME, [JOB_NOTES], [DOITT_NTP_GRANTED_DATE], LUJC.[LU_NAME] AS JOB_CATEGORY_NAME, 
+			LUJS.[LU_NAME] AS JOB_STATUS_NAME, [ON_HOLD_REASON], [CLIENT_PM], [NUMBER_OF_SUBMITTED_PERMITS], [PERMIT_NOTES], 
+			case when [PUNCHLIST_COMPLETE] = 'Y' then 'Yes' else 'No' end [PUNCHLIST_COMPLETE], [PUNCHLIST_SUBMITTED_DATE], [CLIENT_APPROVAL_DATE],
+			(select count(job_id) from JOBS_NOTES jn where jn.job_id = JOB.[JOB_ID]) as [NOTES_COUNT],
+			(select max(notes.created_on) from JOBS_NOTES jn inner join notes on notes.note_id = jn.note_id where jn.job_id = job.job_id ) as [NOTES_DATE],
+			(select count(job_id) from job_attachments join attachments on attachments.attachment_id = job_attachments.attachment_id where job_attachments.job_id = job.job_id and attachments.Is_deleted = 0) as ATTACHMENTS_COUNT
+			,isNull(vPermitsSummary.PERMITS_COUNT,0) PERMITS_COUNT
+			,isNull(vPermitsSummary.ACTIVE_COUNT,0) ACTIVE_COUNT
+			,isNull(vPermitsSummary.EXPIRED_COUNT,0) EXPIRED_COUNT
+			,isNull(vPermitsSummary.EXPIRING_5DAYS_COUNT,0) EXPIRING_5DAYS_COUNT
+			,isNull(vPermitsSummary.ON_HOLD_COUNT ,0) ON_HOLD_COUNT
+			,isNull(vPermitsSummary.REQUEST_EXTENSION_COUNT ,0) REQUEST_EXTENSION_COUNT
+			,isNull(vPermitsSummary.REQUEST_RENEWAL_COUNT,0) REQUEST_RENEWAL_COUNT
+			,isNull(vPermitsSummary.PENDING_COUNT ,0) PENDING_COUNT
+			,isNull(vPermitsSummary.REJECTED_COUNT,0) REJECTED_COUNT
+	FROM   [JOBS] JOB    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = JOB.JOB_ID    
+		LEFT JOIN PROJECTS PRJ ON  JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]    
+		LEFT JOIN [LOOK_UPS] LUNTS ON  JOB.[DOITT_NTP_STATUS] = LUNTS.[LOOK_UP_ID]    
+		LEFT JOIN [LOOK_UPS] LUJC ON  JOB.[JOB_CATEGORY] = LUJC.[LOOK_UP_ID]    
+		LEFT JOIN [LOOK_UPS] LUJS ON  JOB.[JOB_STATUS] = LUJS.[LOOK_UP_ID]    
+		LEFT JOIN vPermitsSummary ON (vPermitsSummary.PROJECT_ID = JOB.PROJECT_ID AND vPermitsSummary.JOB_ID =JOB.JOB_ID )
+
+	 ORDER BY JOB.JOB_ID    
+	    
+	 ---- 1- Continuity To Zero    
+	 SELECT CTZ.JOB_ID , case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end  AS CTZ_REQUIRED,   
+			EST_COMPLETION_DATE AS CTZ_FORECAST_DATE, ACT_COMPLETION_DATE AS CTZ_ACT_COMPLETION_DATE, PARTY_RESPONSIBLE AS CTZ_PARTY_RESPONSIBLE, 
+			NOTES AS CTZ_NOTES    
+	 FROM TASK_CONTINUITY_ZERO   AS CTZ       
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = CTZ.JOB_ID    
+	 ORDER BY CTZ.JOB_ID    
+	    
+	 ---- 2- Foundation Work    
+	 SELECT Foundation_Work.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FDW_REQUIRED,   
+			lutype.LU_NAME AS FDW_TYPE, EST_START_DATE AS FDW_FORECAST_START_DATE, ACT_START_DATE AS FDW_ACT_START_DATE, 
+			ACT_COMPLETION_DATE AS FDW_ACT_COMPLETION_DATE, CONED_TICKET_NUMBER as FDW_CONED_TICKET_NUMBER,	luhold.LU_NAME AS FDW_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS FDW_ON_HOLD_OTHER, NOTES AS FDW_NOTES    
+	 FROM [TASK_FOUNDATION_POLE_WORK ] AS Foundation_Work    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Foundation_Work.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Foundation_Work.FOUNDATION_WORK_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Foundation_Work.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 2    
+	 ORDER BY Foundation_Work.JOB_ID    
+	     
+	 ---- 3- Pole Work    
+	 SELECT Pole_Work.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PLW_REQUIRED,   
+			lutype.LU_NAME AS PLW_TYPE, EST_START_DATE AS PLW_FORECAST_START_DATE, ACT_START_DATE AS PLW_ACT_START_DATE, ACT_COMPLETION_DATE AS PLW_ACT_COMPLETION_DATE, 
+			luhold.LU_NAME AS PLW_ON_HOLD_REASON, ON_HOLD_OTHER AS PLW_ON_HOLD_OTHER, NOTES AS PLW_NOTES    
+	 FROM [TASK_FOUNDATION_POLE_WORK ] AS Pole_Work    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Pole_Work.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Pole_Work.POLE_WORK_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Pole_Work.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 3    
+	 ORDER BY Pole_Work.JOB_ID    
+	     
+	 ---- 4- Fiber Dig    
+	 SELECT Fiber_Dig.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBD_REQUIRED,   
+			lutype.LU_NAME AS FBD_TYPE, EST_START_DATE AS FBD_FORECAST_START_DATE, ACT_START_DATE AS FBD_ACT_START_DATE, ACT_COMPLETION_DATE AS FBD_ACT_COMPLETION_DATE, 
+			EST_LENGTH AS FBD_EST_LENGTH, ACT_LENGTH AS FBD_ACT_LENGTH, luhold.LU_NAME AS FBD_ON_HOLD_REASON, ON_HOLD_OTHER AS FBD_ON_HOLD_OTHER,     
+	   NOTES AS FBD_NOTES, luvault.LU_NAME  AS FBD_VAULT
+	 FROM TASK_FIBER_POWER_DIG AS Fiber_Dig           
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Dig.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Dig.FIBER_DIG_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Dig.ON_HOLD_REASON     
+		LEFT OUTER JOIN LOOK_UPS AS luvault ON luvault.LOOK_UP_ID = Fiber_Dig.FIBER_DIG_VAULT      
+	 WHERE TASK_TITLE_ID = 4    
+	 ORDER BY Fiber_Dig.JOB_ID    
+	     
+	 ---- 5- Power Dig    
+	 SELECT Power_Dig.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PWD_REQUIRED,   
+			EST_START_DATE AS PWD_FORECAST_START_DATE, ACT_START_DATE AS PWD_ACT_START_DATE, ACT_COMPLETION_DATE AS PWD_ACT_COMPLETION_DATE,     
+			EST_LENGTH AS PWD_EST_LENGTH, ACT_LENGTH AS PWD_ACT_LENGTH, luhold.LU_NAME AS PWD_ON_HOLD_REASON, ON_HOLD_OTHER AS PWD_ON_HOLD_OTHER, NOTES AS PWD_NOTES    
+	 FROM TASK_FIBER_POWER_DIG AS Power_Dig           
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Power_Dig.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Power_Dig.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 5    
+	 ORDER BY Power_Dig.JOB_ID     
+	    
+	 ---- 6- Underground Miscellaneous    
+	 SELECT Underground_Miscellaneous.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS UGM_REQUIRED,   
+			ACT_COMPLETION_DATE AS UGM_ACT_COMPLETION_DATE, luhold.LU_NAME AS UGM_ON_HOLD_REASON, ON_HOLD_OTHER AS UGM_ON_HOLD_OTHER, NOTES AS UGM_NOTES    
+	 FROM TASK_MISC_AC_POWER AS Underground_Miscellaneous    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Underground_Miscellaneous.JOB_ID
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Underground_Miscellaneous.ON_HOLD_REASON        
+	 WHERE TASK_TITLE_ID = 6    
+	 ORDER BY Underground_Miscellaneous.JOB_ID    
+	    
+	 ---- 7- Fiber Pull    
+	 SELECT Fiber_Pull.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBP_REQUIRED,   
+			lutype.LU_NAME AS FBP_TYPE, luop.LU_NAME AS FBP_Lateral_Node_Tail, ACT_COMPLETION_DATE AS FBP_ACT_COMPLETION_DATE, 
+			luhold.LU_NAME AS FBP_ON_HOLD_REASON, ON_HOLD_OTHER AS FBP_ON_HOLD_OTHER, NOTES AS FBP_NOTES    
+	 FROM TASK_FIBER_PULL_SPLICE AS Fiber_Pull      
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Pull.JOB_ID  
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Pull.FIBER_TYPE 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Pull.ON_HOLD_REASON
+		LEFT OUTER JOIN LOOK_UPS AS luop ON luop.LOOK_UP_ID = Fiber_Pull.FIBER_OPTIC_POSITION   
+	 WHERE TASK_TITLE_ID = 7    
+	 ORDER BY Fiber_Pull.JOB_ID    
+	     
+	 ---- 8- Fiber Splicing    
+	 SELECT Fiber_Splicing.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBS_REQUIRED,   
+			lutype.LU_NAME AS FBS_TYPE, ACT_COMPLETION_DATE AS FBS_ACT_COMPLETION_DATE, luhold.LU_NAME AS FBS_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS FBS_ON_HOLD_OTHER, NOTES AS FBS_NOTES, LIGHT_TEST_CLIENT_DATE AS FBS_LIGHT_TEST_CLIENT_DATE    
+	 FROM TASK_FIBER_PULL_SPLICE AS Fiber_Splicing      
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Splicing.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Splicing.FIBER_TYPE 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Splicing.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 8    
+	 ORDER BY Fiber_Splicing.JOB_ID    
+	     
+	 ---- 9- ACPower To Pole    
+	 SELECT ACPower_To_Pole.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS APP_REQUIRED,   
+			ACT_COMPLETION_DATE AS APP_ACT_COMPLETION_DATE, luhold.LU_NAME AS APP_ON_HOLD_REASON, ON_HOLD_OTHER AS APP_ON_HOLD_OTHER, NOTES AS APP_NOTES    
+	 FROM TASK_MISC_AC_POWER AS ACPower_To_Pole    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = ACPower_To_Pole.JOB_ID 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = ACPower_To_Pole.ON_HOLD_REASON   
+	 WHERE TASK_TITLE_ID = 9    
+	 ORDER BY ACPower_To_Pole.JOB_ID    
+	     
+	 ----- 10- Shroud/Antenna    
+	 SELECT Shroud_Antenna.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end as SRA_REQUIRED,   
+			EST_START_DATE AS SRA_FORECAST_START_DATE, ACT_COMPLETION_DATE AS SRA_ACT_COMPLETION_DATE,     
+			case when SHROUD_INSTALLED is null or SHROUD_INSTALLED = 'N' then CAST(0 AS Bit) when SHROUD_INSTALLED = 'Y' then CAST(1 AS Bit) end AS SRA_SHROUD_INSTALLED,   
+			case when ANTENA_INSTALLED is null or ANTENA_INSTALLED = 'N' then CAST(0 AS Bit) when ANTENA_INSTALLED = 'Y' then CAST(1 AS Bit) end AS SRA_ANTENA_INSTALLED,   
+			SHROUD_SERIAL_NUMBER AS SRA_SHROUD_SERIAL_NUMBER, ION_SERIAL_NUMBER AS SRA_ION_SERIAL_NUMBER, luhold.LU_NAME AS SRA_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS SRA_ON_HOLD_OTHER, NOTES AS SRA_NOTES    
+	 FROM TASK_SHROUD_ANTENA AS Shroud_Antenna    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Shroud_Antenna.JOB_ID
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Shroud_Antenna.ON_HOLD_REASON    
+	 ORDER BY Shroud_Antenna.JOB_ID    
+	     
+	 ---- 11- PIM Sweeps    
+	 SELECT PIM_Sweeps.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PMS_REQUIRED,   
+			ACT_COMPLETION_DATE AS PMS_ACT_COMPLETION_DATE, SUBMITTED_DATE AS PMS_SUBMITTED_DATE, CLIENT_APPROVAL_DATE AS PMS_CLIENT_APPROVAL_DATE, 
+			luhold.LU_NAME  AS PMS_ON_HOLD_REASON, ON_HOLD_OTHER AS PMS_ON_HOLD_OTHER, NOTES AS PMS_NOTES    
+	 FROM TASK_PIM_SWEEP AS PIM_Sweeps    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = PIM_Sweeps.JOB_ID 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = PIM_Sweeps.ON_HOLD_REASON   
+	 ORDER BY PIM_Sweeps.JOB_ID    
+        
+END
+Go
+----------------
+----6/8/2017
+-----------------
+Alter view [dbo].[vPermitsSummary]
+as
+SELECT        dbo.PERMITS.JOB_ID, dbo.PERMITS.PROJECT_ID, COUNT(*) AS PERMITS_COUNT, 
+
+	SUM(CASE WHEN LU_NAME = 'Active' THEN CASE WHEN EXPIRES_DATE IS NOT NULL AND DATEDIFF(d, getdate(), [PERMITS].[EXPIRES_DATE]) < 0 THEN 0 ELSE 1 END ELSE 0 END) AS ACTIVE_COUNT, 
+	SUM(CASE WHEN EXPIRES_DATE IS NOT NULL AND LOOK_UPS.[LU_NAME] = 'Active' THEN CASE WHEN DATEDIFF(d, getdate(), [PERMITS].[EXPIRES_DATE]) < 0 THEN 1 ELSE 0 END ELSE CASE WHEN LU_NAME = 'Expired' THEN 1 ELSE 0 END END) AS EXPIRED_COUNT, SUM(CASE WHEN EXPIRES_DATE IS NOT NULL 
+	AND LOOK_UPS.[LU_NAME] = 'Active' THEN CASE WHEN DATEDIFF(d, getdate(), [PERMITS].[EXPIRES_DATE]) >= 0 AND DATEDIFF(d, getdate(), 
+	[PERMITS].[EXPIRES_DATE]) < 5 THEN 1 ELSE 0 END ELSE 0 END) AS EXPIRING_5DAYS_COUNT, SUM(CASE WHEN LU_NAME = 'On-Hold' THEN 1 ELSE 0 END) 
+	AS ON_HOLD_COUNT, SUM(CASE WHEN LU_NAME = 'Request Extension' THEN 1 ELSE 0 END) AS REQUEST_EXTENSION_COUNT, 
+	SUM(CASE WHEN LU_NAME = 'Request Renewal' THEN 1 ELSE 0 END) AS REQUEST_RENEWAL_COUNT, 
+	SUM(CASE WHEN LU_NAME = 'Pending' THEN 1 ELSE 0 END) AS PENDING_COUNT, SUM(CASE WHEN LU_NAME = 'Rejected' THEN 1 ELSE 0 END) 
+	AS REJECTED_COUNT
+FROM            dbo.PERMITS INNER JOIN
+dbo.LOOK_UPS ON dbo.PERMITS.PERMIT_STATUS = dbo.LOOK_UPS.LOOK_UP_ID
+GROUP BY dbo.PERMITS.JOB_ID, dbo.PERMITS.PROJECT_ID
+Go
+------------

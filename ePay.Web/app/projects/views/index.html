@@ -1,0 +1,131 @@
+﻿
+
+<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>PROJECTS</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Client</label>               
+                <div id="divMSClients"
+                     options="MSClients.options"
+                     selected-model="MSClients.selectedList"
+                     extra-settings="MSClients.settings"
+                     events="MSClients.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <!--<label class="control-label nopadding">Project Status</label>
+                <select id="ddlProjectStatus" class="form-control" ng-model="filters.PROJECT_STATUS_LU.value" ng-change="applyFilter(filters.PROJECT_STATUS_LU.name, 'filters.PROJECT_STATUS_LU.value')">
+                    <option value="0"> All </option>
+                    <option ng-repeat="x in ProjectStatusDS1" title="{{x.LU_NAME}}" value="{{x.LU_NAME}}">{{x.LU_NAME}}</option>
+                </select>-->
+                <label class="control-label nopadding" >Project Status</label>
+                <!--<div id="divMultiSelProjectStatus" title="All" control="multiSelectControl"
+                     ng-dropdown-multiselect="" ng-focus="HideNotification1()" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="projectStatusOptions" selected-model="selectedStatusList" extra-settings="projectStatusSettings" events="projectStatusEvents" checkboxes="true"></div>-->
+                <div id="divMSProjectStatus"
+                     options="MSProjectStatus.options"
+                     selected-model="MSProjectStatus.selectedList"
+                     extra-settings="MSProjectStatus.settings"
+                     events="MSProjectStatus.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">&nbsp;</label>
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a ng-click="ResetFilter()">Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+
+<style>   
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top:-10px!important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content:none;
+    }
+
+
+    
+    /*-------------for filters settings ----------*/
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-----------*/
+    div.k-grid-header-locked table th:nth-child(5) {
+        border-right-width: 1px !important;
+    }     
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+
+</style>

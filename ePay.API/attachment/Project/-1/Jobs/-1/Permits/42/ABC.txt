@@ -1,0 +1,53 @@
+--------4/11/2017
+
+
+Declare @LastID as int = 0;
+SELECT @LastID = MAX([LOOK_UP_ID])  FROM [LOOK_UPS] 
+INSERT INTO [dbo].[LOOK_UPS]([LOOK_UP_ID],[LU_TYPE],[LU_NAME])
+values 
+( @LastID+1  , 'PERMIT_REJECTION_REASON' ,'BOB HOLD' ),
+( @LastID+2  , 'PERMIT_REJECTION_REASON' ,'CAN HOLD' ),
+( @LastID+3  , 'PERMIT_REJECTION_REASON' ,'COB HOLD' ),
+( @LastID+4  , 'PERMIT_REJECTION_REASON' ,'CON HOLD' ),
+( @LastID+5  , 'PERMIT_REJECTION_REASON' ,'CPI HOLD' ),
+( @LastID+6  , 'PERMIT_REJECTION_REASON' ,'CPO HOLD' ),
+( @LastID+7  , 'PERMIT_REJECTION_REASON' ,'ECN HOLD' ),
+( @LastID+8  , 'PERMIT_REJECTION_REASON' ,'EXC HOLD' ),
+( @LastID+9  , 'PERMIT_REJECTION_REASON' ,'FCR HOLD' ),
+( @LastID+10  , 'PERMIT_REJECTION_REASON' ,'LMZ HOLD' ),
+( @LastID+11 , 'PERMIT_REJECTION_REASON' ,'POL HOLD' ),
+( @LastID+12  , 'PERMIT_REJECTION_REASON' ,'RED HOLD' ),
+( @LastID+13  , 'PERMIT_REJECTION_REASON' ,'SAM HOLD' ),
+( @LastID+14  , 'PERMIT_REJECTION_REASON' ,'STP HOLD' ),
+( @LastID+15  , 'PERMIT_REJECTION_REASON' ,'VAR HOLD' ),
+( @LastID+16  , 'PERMIT_REJECTION_REASON' ,'VLT HOLD' )
+go
+------------
+
+UPDATE LOOK_UPS SET LU_TYPE = 'PERMIT_CATEGORY' WHERE LU_TYPE = 'PERMIT_TYPE'
+gO
+
+-----------
+
+DROP PROC proc_PERMITS_LOOK_UPSLoadAll
+go
+---------
+------------
+
+
+drop proc proc_PERMITS_LOOK_UPLoadByPrimaryKey
+go
+------------
+
+---------
+DROP PROCEDURE proc_PERMITS_LOOK_UPUpdate
+GO
+--------
+
+----------
+DROP PROCEDURE [proc_PERMITS_LOOK_UPInsert]
+GO
+
+GO
+-----------------------------------------------
+

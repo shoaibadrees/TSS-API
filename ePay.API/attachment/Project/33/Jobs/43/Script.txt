@@ -1,0 +1,2039 @@
+--2/1/2017
+
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSLoadAll]
+
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		JOB.[JOB_ID],
+		JOB.[PROJECT_ID],
+		PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID,
+		[JOB_FILE_NUMBER],
+		[NODE_ID1],
+		[NODE_ID2],
+		[NODE_ID3],
+		[HUB],
+		[HYLAN_PM],
+		[STREET_ADDRESS],
+		[CITY],
+		[STATE],
+		[ZIP],
+		[LAT],
+		[LONG],
+		[POLE_LOCATION],
+		[DOITT_NTP_STATUS],
+		LUNTS.[LU_NAME] AS DOITT_NTP_STATUS_NAME,
+		[DOITT_NTP_GRANTED_DATE],
+		[JOB_CATEGORY],
+		LUJC.[LU_NAME] AS JOB_CATEGORY_NAME,
+		[JOB_STATUS],
+		LUJS.[LU_NAME] AS JOB_STATUS_NAME,
+		[ON_HOLD_REASON],
+		[CLIENT_PM],
+		[JOB_NOTES],
+		[NUMBER_OF_SUBMITTED_PERMITS],
+		[PERMIT_NOTES],
+		[PUNCHLIST_COMPLETE],
+		[PUNCHLIST_SUBMITTED_DATE],
+		[CLIENT_APPROVAL_DATE],
+		JOB.[CREATED_BY],
+		JOB.[CREATED_ON],
+		JOB.[MODIFIED_BY],
+		JOB.[MODIFIED_ON],
+		JOB.[LOCK_COUNTER],
+		case when ISNULL(H_PM_USERS.LAST_NAME,'')!='' then H_PM_USERS.LAST_NAME+', '+ISNULL(H_PM_USERS.FIRST_NAME,'') ELSE '' END HYLAN_PM_NAME
+	FROM [JOBS] JOB
+	LEFT JOIN PROJECTS PRJ ON JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]
+	LEFT JOIN [LOOK_UPS] LUNTS ON JOB.[DOITT_NTP_STATUS] = LUNTS.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJC ON JOB.[JOB_CATEGORY] = LUJC.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJS ON JOB.[JOB_STATUS] = LUJS.[LOOK_UP_ID]
+	LEFT JOIN USERS H_PM_USERS ON (H_PM_USERS.[USER_ID] = JOB.[HYLAN_PM]) 
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+----2/1/2017---------
+
+ALTER TABLE JObs ALTER COLUMN [DOITT_NTP_STATUS] int NULL
+--UPDATE JOBS SET PROJECT_ID = 1 WHERE PROJECT_ID = 0 
+ALTER TABLE JOBS ADD CONSTRAINT fk_JOBS_PROJECTS FOREIGN KEY (PROJECT_ID) REFERENCES PROJECTS(PROJECT_ID)
+
+----------2/7/2017--------
+ALTER TABLE projects ADD CONSTRAINT unique_Projects_Project_Bid_Name Unique (PROJECT_BID_NAME) 
+
+-- GIVEN
+---------2/10/2017--------------
+
+ALTER TABLE [dbo].[PROJECTS]  ADD  CONSTRAINT [FK_PROJECTS_LOOK_UPS_Project_Status] FOREIGN KEY(Project_Status)
+REFERENCES LOOK_UPS ([LOOK_UP_ID])
+--------
+ALTER TABLE [dbo].[JOBS]  ADD  CONSTRAINT [fk_JOBS_ST_STATE_LU_State] FOREIGN KEY([STATE]) REFERENCES [ST_STATE_LU] ([ST_STATE])
+ALTER TABLE [dbo].[JOBS]  ADD  CONSTRAINT [fk_JOBS_LOOK_UPS_JobCategory] FOREIGN KEY(JOB_CATEGORY) REFERENCES LOOK_UPS (look_up_ID)
+ALTER TABLE [dbo].[JOBS]  ADD  CONSTRAINT [fk_JOBS_LOOK_UPS_JobStatus] FOREIGN KEY(JOB_STATUS) REFERENCES LOOK_UPS (look_up_ID)
+ALTER TABLE [dbo].[JOBS]  WITH CHECK ADD  CONSTRAINT [FK_JOBS_USERS_CREATEDBY] FOREIGN KEY(CREATED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+ALTER TABLE [dbo].[JOBS]  WITH CHECK ADD  CONSTRAINT [FK_JOBS_USERS_MODIFIEDBY] FOREIGN KEY(MODIFIED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+----------
+-----------============================================================
+----------2/16/2017-----------------
+-----------============================================================
+
+Alter table [NOTIFICATIONS] drop constraint [FK_NOTIFICATIONS_EVENTS]
+drop table [dbo].[MATCHING_LOG]
+drop table [dbo].[MATCHING_REQUEST_COMPANIES]
+drop table [dbo].[MATCHING_RESPONSE_COMPANIES]
+drop table [dbo].[MATCHING]
+drop table [dbo].[EVENTS_COMPANIES]
+drop table [dbo].[EVENTS_INVITATIONS]
+drop table [dbo].[EVENTS_RMAGS]
+drop table [dbo].[ALLOCATION]
+Alter table [messages] drop constraint FK_MESSAGES_EVENT_ID
+drop table [dbo].[MESSAGES_RMAGS]
+drop table [dbo].[MRC_MATCHING_REQUEST_COMPANIES_SNAPSHOT]
+drop table [dbo].[MRC_MATCHING_RESPONSE_COMPANIES_SNAPSHOT]
+drop table [dbo].[MS_MATCHING_SNAPSHOT]
+drop table [dbo].[NONIOU_REQUESTS]
+drop table [dbo].[REQUESTS]
+drop table [dbo].[RESPONSES]
+drop table [dbo].[RMAGS]
+drop table [dbo].[RS_REQUEST_SNAPSHOT]
+drop table [dbo].[RS_RESPONSE_SNAPSHOT]
+
+drop table [dbo].[MESSAGES_COMPANIES]
+drop table [Messages]
+drop table [dbo].[SS_SYSTEM_SNAPSHOT]
+drop table [dbo].[EVENTS]
+
+--------USERS------------
+ALTER TABLE USERS ALTER COLUMN CREATED_BY int NOT NULL
+ALTER TABLE USERS ALTER COLUMN  [MODIFIED_BY] int NOT null
+ALTER TABLE [dbo].[USERS]  ADD  CONSTRAINT [FK_USERS_USERS_CREATEDBY] FOREIGN KEY(CREATED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+ALTER TABLE [dbo].[USERS]  ADD  CONSTRAINT [FK_USERS_USERS_MODIFIEDBY] FOREIGN KEY(MODIFIED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+ALTER TABLE USERS ALTER COLUMN CREATED_ON DATETIME NOT NULL
+ALTER TABLE USERS ALTER COLUMN MODIFIED_ON DATETIME NOT NULL
+--------COMPANIES------------
+
+ALTER TABLE COMPANIES ALTER COLUMN  [MODIFIED_BY] int NOT null
+ALTER TABLE COMPANIES ALTER COLUMN MODIFIED_ON DATETIME  NOT null
+
+---------JOBS -------
+--UPDATE JOBS SET CREATED_BY = 147 WHERE CREATED_BY IS NULL
+ALTER TABLE JOBS ALTER COLUMN  [CREATED_BY] int NOT null
+ALTER TABLE JOBS ALTER COLUMN CREATED_ON DATETIME NOT NULL
+ALTER TABLE JOBS ALTER COLUMN  [MODIFIED_BY] int NOT null
+ALTER TABLE JOBS ALTER COLUMN [MODIFIED_ON] DATETIME NOT NULL
+-----------[NOTES]-------------------
+ALTER TABLE NOTES ALTER COLUMN  [CREATED_BY] int NOT null
+ALTER TABLE NOTES ALTER COLUMN CREATED_ON DATETIME NOT NULL
+ALTER TABLE NOTES ALTER COLUMN  [MODIFIED_BY] int NOT null
+ALTER TABLE NOTES ALTER COLUMN [MODIFIED_ON] DATETIME NOT NULL
+--------
+ALTER TABLE [dbo].NOTES  ADD  CONSTRAINT [FK_NOTES_USERS_CREATEDBY] FOREIGN KEY(CREATED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+ALTER TABLE [dbo].NOTES  ADD  CONSTRAINT [FK_NOTES_USERS_MODIFIEDBY] FOREIGN KEY(MODIFIED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+-----------[Roles]-------------------
+-- SELECT * FROM ROLES 
+-- UPDATE ROLES SET CREATED_BY = 147, MODIFIED_BY = 147 
+ALTER TABLE [dbo].Roles  ADD  CONSTRAINT [FK_ROLES_USERS_CREATEDBY] FOREIGN KEY(CREATED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+ALTER TABLE [dbo].Roles  ADD  CONSTRAINT [FK_ROLES_USERS_MODIFIEDBY] FOREIGN KEY(MODIFIED_BY) REFERENCES [dbo].[USERS] ([USER_ID])
+---------------------------------------
+
+---------------------------------------
+
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSInsert]
+(
+	@p_JOB_ID int output,
+	@p_PROJECT_ID int,
+	@p_JOB_FILE_NUMBER int,
+	@p_NODE_ID1 nvarchar(250) = NULL,
+	@p_NODE_ID2 nvarchar(250) = NULL,
+	@p_NODE_ID3 nvarchar(250) = NULL,
+	@p_HUB nvarchar(250) = NULL,
+	@p_HYLAN_PM nvarchar(250) = NULL,
+	@p_STREET_ADDRESS nvarchar(250),
+	@p_CITY nvarchar(50),
+	@p_STATE varchar(2),
+	@p_ZIP varchar(5),
+	@p_LAT nvarchar(50) = NULL,
+	@p_LONG nvarchar(50) = NULL,
+	@p_POLE_LOCATION nvarchar(250) = NULL,
+	@p_DOITT_NTP_STATUS int = NULL,
+	@p_DOITT_NTP_GRANTED_DATE datetime = NULL,
+	@p_JOB_CATEGORY int = NULL,
+	@p_JOB_STATUS int,
+	@p_ON_HOLD_REASON nvarchar(250) = NULL,
+	@p_CLIENT_PM nvarchar(250) = NULL,
+	@p_JOB_NOTES varchar(1000) = NULL,
+	@p_NUMBER_OF_SUBMITTED_PERMITS int = NULL,
+	@p_PERMIT_NOTES nvarchar(800) = NULL,
+	@p_PUNCHLIST_COMPLETE char(1) = NULL,
+	@p_PUNCHLIST_SUBMITTED_DATE datetime = NULL,
+	@p_CLIENT_APPROVAL_DATE datetime = NULL,
+	@p_CREATED_BY int = NULL,
+	@p_CREATED_ON datetime = NULL,
+	@p_MODIFIED_BY nchar(10) = NULL,
+	@p_MODIFIED_ON datetime = NULL,
+	@p_LOCK_COUNTER int = NULL
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	INSERT
+	INTO [JOBS]
+	(
+		[PROJECT_ID],
+		[JOB_FILE_NUMBER],
+		[NODE_ID1],
+		[NODE_ID2],
+		[NODE_ID3],
+		[HUB],
+		[HYLAN_PM],
+		[STREET_ADDRESS],
+		[CITY],
+		[STATE],
+		[ZIP],
+		[LAT],
+		[LONG],
+		[POLE_LOCATION],
+		[DOITT_NTP_STATUS],
+		[DOITT_NTP_GRANTED_DATE],
+		[JOB_CATEGORY],
+		[JOB_STATUS],
+		[ON_HOLD_REASON],
+		[CLIENT_PM],
+		[JOB_NOTES],
+		[NUMBER_OF_SUBMITTED_PERMITS],
+		[PERMIT_NOTES],
+		[PUNCHLIST_COMPLETE],
+		[PUNCHLIST_SUBMITTED_DATE],
+		[CLIENT_APPROVAL_DATE],
+		[CREATED_BY],
+		[CREATED_ON],
+		[MODIFIED_BY],
+		[MODIFIED_ON],
+		[LOCK_COUNTER]
+	)
+	VALUES
+	(
+		@p_PROJECT_ID,
+		@p_JOB_FILE_NUMBER,
+		@p_NODE_ID1,
+		@p_NODE_ID2,
+		@p_NODE_ID3,
+		@p_HUB,
+		@p_HYLAN_PM,
+		@p_STREET_ADDRESS,
+		@p_CITY,
+		@p_STATE,
+		@p_ZIP,
+		@p_LAT,
+		@p_LONG,
+		@p_POLE_LOCATION,
+		@p_DOITT_NTP_STATUS,
+		@p_DOITT_NTP_GRANTED_DATE,
+		@p_JOB_CATEGORY,
+		@p_JOB_STATUS,
+		@p_ON_HOLD_REASON,
+		@p_CLIENT_PM,
+		@p_JOB_NOTES,
+		@p_NUMBER_OF_SUBMITTED_PERMITS,
+		@p_PERMIT_NOTES,
+		@p_PUNCHLIST_COMPLETE,
+		@p_PUNCHLIST_SUBMITTED_DATE,
+		@p_CLIENT_APPROVAL_DATE,
+		@p_CREATED_BY,
+		getdate(),
+		@p_MODIFIED_BY,
+		GETDATE(),
+		@p_LOCK_COUNTER
+	)
+
+	SET @Err = @@Error
+
+
+	SELECT @p_JOB_ID = SCOPE_IDENTITY()
+
+	RETURN @p_JOB_ID
+END
+-------------------------------------------------
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSUpdate]
+(
+	@p_JOB_ID int,
+	@p_PROJECT_ID int,
+	@p_JOB_FILE_NUMBER int,
+	@p_NODE_ID1 nvarchar(250) = NULL,
+	@p_NODE_ID2 nvarchar(250) = NULL,
+	@p_NODE_ID3 nvarchar(250) = NULL,
+	@p_HUB nvarchar(250) = NULL,
+	@p_HYLAN_PM nvarchar(250) = NULL,
+	@p_STREET_ADDRESS nvarchar(250),
+	@p_CITY nvarchar(50),
+	@p_STATE varchar(2),
+	@p_ZIP varchar(5),
+	@p_LAT nvarchar(50) = NULL,
+	@p_LONG nvarchar(50) = NULL,
+	@p_POLE_LOCATION nvarchar(250) = NULL,
+	@p_DOITT_NTP_STATUS int = NULL,
+	@p_DOITT_NTP_GRANTED_DATE datetime = NULL,
+	@p_JOB_CATEGORY int = NULL,
+	@p_JOB_STATUS int,
+	@p_ON_HOLD_REASON nvarchar(250) = NULL,
+	@p_CLIENT_PM nvarchar(250) = NULL,
+	@p_JOB_NOTES varchar(1000) = NULL,
+	@p_NUMBER_OF_SUBMITTED_PERMITS int = NULL,
+	@p_PERMIT_NOTES nvarchar(800) = NULL,
+	@p_PUNCHLIST_COMPLETE char(1) = NULL,
+	@p_PUNCHLIST_SUBMITTED_DATE datetime = NULL,
+	@p_CLIENT_APPROVAL_DATE datetime = NULL,
+	@p_CREATED_BY int = NULL,
+	@p_CREATED_ON datetime = NULL,
+	@p_MODIFIED_BY nchar(10) = NULL,
+	@p_MODIFIED_ON datetime = NULL,
+	@p_LOCK_COUNTER int = NULL
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	UPDATE [JOBS]
+	SET
+		[PROJECT_ID] = @p_PROJECT_ID,
+		[JOB_FILE_NUMBER] = @p_JOB_FILE_NUMBER,
+		[NODE_ID1] = @p_NODE_ID1,
+		[NODE_ID2] = @p_NODE_ID2,
+		[NODE_ID3] = @p_NODE_ID3,
+		[HUB] = @p_HUB,
+		[HYLAN_PM] = @p_HYLAN_PM,
+		[STREET_ADDRESS] = @p_STREET_ADDRESS,
+		[CITY] = @p_CITY,
+		[STATE] = @p_STATE,
+		[ZIP] = @p_ZIP,
+		[LAT] = @p_LAT,
+		[LONG] = @p_LONG,
+		[POLE_LOCATION] = @p_POLE_LOCATION,
+		[DOITT_NTP_STATUS] = @p_DOITT_NTP_STATUS,
+		[DOITT_NTP_GRANTED_DATE] = @p_DOITT_NTP_GRANTED_DATE,
+		[JOB_CATEGORY] = @p_JOB_CATEGORY,
+		[JOB_STATUS] = @p_JOB_STATUS,
+		[ON_HOLD_REASON] = @p_ON_HOLD_REASON,
+		[CLIENT_PM] = @p_CLIENT_PM,
+		[JOB_NOTES] = @p_JOB_NOTES,
+		[NUMBER_OF_SUBMITTED_PERMITS] = @p_NUMBER_OF_SUBMITTED_PERMITS,
+		[PERMIT_NOTES] = @p_PERMIT_NOTES,
+		[PUNCHLIST_COMPLETE] = @p_PUNCHLIST_COMPLETE,
+		[PUNCHLIST_SUBMITTED_DATE] = @p_PUNCHLIST_SUBMITTED_DATE,
+		[CLIENT_APPROVAL_DATE] = @p_CLIENT_APPROVAL_DATE,
+		--[CREATED_BY] = @p_CREATED_BY,
+		--[CREATED_ON] = @p_CREATED_ON,
+		[MODIFIED_BY] = @p_MODIFIED_BY,
+		[MODIFIED_ON] = getdate(),
+		[LOCK_COUNTER] = @p_LOCK_COUNTER
+	WHERE
+		JOB_ID = @p_JOB_ID
+		
+
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+
+
+-----------------2/24/2017---------------
+
+
+CREATE TABLE [dbo].[MESSAGES](
+	[MESSAGE_ID] [int] IDENTITY(1,1) NOT NULL,
+	[EVENT_ID] [int] NULL,
+	[PURPOSE_ID] [int] NOT NULL,
+	[DELIVERY_METHOD_ID] [int] NOT NULL,
+	[CALL_ON] [datetime] NULL,
+	[ACCESS_CODE] [varchar](50) NULL,
+	[SUBJECT] [varchar](250) NULL,
+	[CONTENTS] [varchar](max) NULL,
+	[RECIPIENTS] [varchar](max) NULL,
+	[CREATED_ON] [datetime] NOT NULL,
+	[CREATED_BY] [int] NOT NULL,
+	[LOCK_COUNTER] [int] NOT NULL,
+ CONSTRAINT [PK_MESSAGE] PRIMARY KEY CLUSTERED 
+(
+	[MESSAGE_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+SET ANSI_PADDING OFF
+GO
+
+ALTER TABLE [dbo].[MESSAGES]  WITH CHECK ADD  CONSTRAINT [FK_MESSAGES_CREATED_USER_ID] FOREIGN KEY([CREATED_BY])
+REFERENCES [dbo].[USERS] ([USER_ID])
+GO
+
+ALTER TABLE [dbo].[MESSAGES] CHECK CONSTRAINT [FK_MESSAGES_CREATED_USER_ID]
+GO
+
+--ALTER TABLE [dbo].[MESSAGES]  WITH CHECK ADD  CONSTRAINT [FK_MESSAGES_EVENT_ID] FOREIGN KEY([EVENT_ID])
+--REFERENCES [dbo].[EVENTS] ([EVENT_ID])
+--GO
+
+--ALTER TABLE [dbo].[MESSAGES] CHECK CONSTRAINT [FK_MESSAGES_EVENT_ID]
+--GO
+
+-----------------------------------------
+
+---------2/27/2017-------------
+Drop table [MESSAGES]
+----
+
+CREATE PROCEDURE proc_CheckCompanyAssociation 
+@CompanyID int
+AS
+BEGIN
+SET NOCOUNT ON
+DECLARE @Err int
+select count(user_id) from users_companies uc inner join companies c on uc.company_id = c.company_id and c.status='Y'  where c.company_id=@CompanyID
+union
+select count(project_id) from projects p inner join companies c on p.client=c.company_id and p.project_status=1 where c.company_id=@CompanyID
+
+SET @Err = @@Error
+
+	RETURN @Err
+END
+
+
+-------2/28/2017-----
+
+Alter PROCEDURE proc_CheckCompanyAssociation 
+@CompanyID int
+AS
+BEGIN
+SET NOCOUNT ON
+DECLARE @Err int
+
+Select sum(isNull(RowsCount,0)) RowsCount From
+(
+	select count(user_id) RowsCount from users_companies uc inner join companies c on uc.company_id = c.company_id and c.status='Y'  where c.company_id=@CompanyID
+	union
+	select count(project_id) RowsCount from projects p inner join companies c on p.client=c.company_id and p.project_status=1 where c.company_id=@CompanyID
+) Tab1
+
+SET @Err = @@Error
+
+	RETURN @Err
+END
+
+-----------------3/7/2017
+ALTER PROCEDURE [dbo].[proc_ROLESUpdate]
+(
+	@p_ROLE_ID int,
+	@p_ROLE_NAME varchar(100),
+	@p_DESCRIPTION varchar(500),
+	@p_IS_RESTRICTED bit,
+	@p_STATUS varchar(1),
+	@p_MODIFIED_BY int,
+	@p_lock_counter int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+    DECLARE @USERASSOCIATION INT
+	
+	SET @USERASSOCIATION = (SELECT COUNT(*) FROM USERS WHERE ROLE_ID =  @p_ROLE_ID)
+	
+	IF @USERASSOCIATION > 0  AND @p_STATUS = 'N'
+	BEGIN
+		RAISERROR('Associated record(s) cannot be inactive. All other changes saved successfully.',16,1)
+	END
+	ELSE IF EXISTS (SELECT [ROLE_NAME] FROM [ROLES] WHERE [ROLE_NAME] = @p_ROLE_NAME AND ROLE_ID <> @p_ROLE_ID)
+	BEGIN
+		DECLARE @tmperr VARCHAR (100)
+		SET @tmperr = 'Role Name ''' + @p_ROLE_NAME + ''' already exists.';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+		UPDATE [ROLES]
+		SET
+			[ROLE_NAME] = @p_ROLE_NAME,
+			[DESCRIPTION] = @p_DESCRIPTION,
+			[IS_RESTRICTED] = @p_IS_RESTRICTED,
+			[STATUS] = @p_STATUS,
+			[MODIFIED_ON] = GetDate(),
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[LOCK_COUNTER]=@p_lock_counter +1
+		WHERE
+			[ROLE_ID] = @p_ROLE_ID
+			AND [LOCK_COUNTER]=@p_lock_counter
+   END
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+Go
+------------------------
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSDelete] 
+(
+	@p_JOB_ID int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	Declare @TaskCount int = 0
+	Declare @NotesCount int = 0
+	Declare @AttachmentsCount int = 0
+	Declare @DailiesCount int = 0
+	Declare @Job_Name as varchar
+	Declare @JOB_FILE_NUMBER as int = 0
+	Declare @ErrorMessage as varchar(max) ='' 
+	Declare @Comma varchar(3)= ', '
+
+	select @JOB_FILE_NUMBER = JOB_FILE_NUMBER from jobs where Job_ID = @p_JOB_ID ;
+	set @ErrorMessage =  'Job: '+cast(@JOB_FILE_NUMBER as varchar(20))+' cannot be deleted as it has '
+
+	Select @TaskCount = dbo.COUNT_NEEDED_TASKS(@p_JOB_ID)
+	select @NotesCount = count(job_id) from JOBS_NOTES where JOB_ID = @p_JOB_ID
+	select @AttachmentsCount = count(job_id) from [JOB_ATTACHMENTS] where JOB_ID = @p_JOB_ID
+	select @DailiesCount = count(Daily_ID) from [dbo].[DAILY] where JOB_ID = @p_JOB_ID
+
+	IF(@TaskCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@taskCount AS VARCHAR(10)) + ' Task(s), '
+	IF(@NotesCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@NotesCount AS VARCHAR(10)) + ' Note(s), '
+	IF(@AttachmentsCount>0) SET @ErrorMessage = @ErrorMessage +CAST(@AttachmentsCount AS VARCHAR(10)) + ' Attachment(s), '
+	IF(@DailiesCount>0)		SET @ErrorMessage = @ErrorMessage +CAST(@DailiesCount AS VARCHAR(10)) + ' Dail(ies), '
+
+	IF( @TaskCount > 0 OR @NotesCount > 0 OR @AttachmentsCount > 0 OR @DailiesCount > 0)
+	BEGIN
+		-- remove last 2 char
+		Select @ErrorMessage = left(@ErrorMessage, len(@ErrorMessage)-1)
+		RAISERROR(@ErrorMessage,16,1)
+	END
+	ELSE
+	BEGIN
+
+		DELETE
+		FROM [JOBS]
+		WHERE
+			JOB_ID = @p_JOB_ID
+	
+	END
+
+	SET @Err = @@Error
+	RETURN @Err
+END
+Go
+
+-------------------------------------------
+----3/8/2017
+---------------------------------------------
+
+ALTER PROCEDURE [dbo].[proc_COMPANIESUpdate]
+(
+	@p_COMPANY_ID int,
+	@p_COMPANY_NAME varchar(50),
+	@p_COMPANY_PHONE_NUMBER varchar(30),
+	@p_PRIMARY_CONTACT_NAME varchar(30),
+	@p_PRIMARY_CONTACT_EMAIL varchar(250),
+	@p_COMPANY_CITY varchar(40),
+	@p_COMPANY_STATE varchar(40),
+	@p_COMPANY_ZIP varchar(25),
+	@p_COMPANY_ADDRESS VARCHAR(250),
+	@p_STATUS varchar(1),
+	@p_CREATED_ON datetime,
+	@p_CREATED_BY int,
+	@p_MODIFIED_ON datetime,
+	@p_MODIFIED_BY int,
+	@p_lock_counter int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+	
+	DECLARE @USERASSOCIATION INT
+	DECLARE @tmperr VARCHAR (100)
+
+	SET @USERASSOCIATION = (SELECT COUNT(*) FROM USERS_COMPANIES WHERE COMPANY_ID =  @p_COMPANY_ID)
+
+	
+	IF (@USERASSOCIATION > 0 ) AND @p_STATUS = 'N'
+	BEGIN
+		RAISERROR('Associated record(s) cannot be inactive.',16,1)
+	END
+	ELSE IF EXISTS (SELECT COMPANY_NAME FROM COMPANIES WHERE COMPANY_NAME = @p_COMPANY_NAME AND COMPANY_ID <> @p_COMPANY_ID)
+	BEGIN
+		SET @tmperr = 'Client Name ''' + @p_COMPANY_NAME + ''' already exists.';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+	
+		UPDATE [COMPANIES]
+		SET
+			[COMPANY_NAME] = @p_COMPANY_NAME,
+			--[TOTAL_CUSTOMERS] = @p_TOTAL_CUSTOMERS,
+			--[HOME_RMAG] = @p_HOME_RMAG,
+			[COMPANY_PHONE_NUMBER] = @p_COMPANY_PHONE_NUMBER,
+			[PRIMARY_CONTACT_NAME] = @p_PRIMARY_CONTACT_NAME,
+			[PRIMARY_CONTACT_EMAIL] = @p_PRIMARY_CONTACT_EMAIL,
+			[COMPANY_CITY] = @p_COMPANY_CITY,
+			[COMPANY_STATE] = @p_COMPANY_STATE,
+			[COMPANY_ZIP] = @p_COMPANY_ZIP,
+			[COMPANY_ADDRESS] =  @p_COMPANY_ADDRESS,
+			[STATUS] = @p_STATUS,
+			[MODIFIED_ON] = GetDate(),
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[LOCK_COUNTER]=@p_lock_counter +1
+		WHERE
+			[COMPANY_ID] = @p_COMPANY_ID
+			AND [LOCK_COUNTER]=@p_lock_counter
+
+    END
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+Go
+
+-------------
+ALTER PROCEDURE [dbo].[proc_USERSUpdate]
+(
+	@p_USER_ID int,
+	@p_USER_NAME varchar(50),
+	@p_PASSWORD varchar(50),
+	@p_FIRST_NAME varchar(30),
+	@p_LAST_NAME varchar(30),
+	@p_ROLE_ID int,
+	@p_EMAIL_ADDRESS varchar(250),
+	@p_OFFICE_PHONE varchar(30) = NULL,
+	@p_MOBILE_PHONE varchar(30) = NULL,
+	@p_SECURITY_QUESTION varchar(50) = NULL,
+	@p_ANSWER varchar(50) = NULL,
+	@p_STATUS varchar(1),
+	@p_MODIFIED_BY int,
+	@p_lock_counter int,
+	@p_USER_COMPANY_ID int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+	DECLARE @NOTIFICATION VARCHAR(2500)
+	DECLARE @TODAY DATETIME
+	
+	DECLARE @LAST_PASSWORD VARCHAR(50)
+	DECLARE @LAST_PSWD_MODIFIED_ON DATETIME
+	SELECT @LAST_PSWD_MODIFIED_ON = [PASSWORD_MODIFIED_ON], @LAST_PASSWORD = PASSWORD from [USERS]
+	WHERE [USER_ID] = @p_USER_ID
+	IF @p_PASSWORD <> @LAST_PASSWORD
+		SET @LAST_PSWD_MODIFIED_ON = GETDATE()
+	
+	IF EXISTS (SELECT [USER_NAME] FROM [USERS] WHERE [USER_NAME] = @p_USER_NAME AND [USER_ID] <> @p_USER_ID)
+	BEGIN
+		DECLARE @tmperr VARCHAR (100)
+		SET @tmperr = 'User Name ''' + @p_USER_NAME + ''' already exists.';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+		UPDATE [USERS]
+		SET
+			[USER_NAME] = @p_USER_NAME,
+			[PASSWORD] = @p_PASSWORD,
+			[FIRST_NAME] = @p_FIRST_NAME,
+			[LAST_NAME] = @p_LAST_NAME,
+			[ROLE_ID] = @p_ROLE_ID,
+			[EMAIL_ADDRESS] = @p_EMAIL_ADDRESS,
+			[OFFICE_PHONE] = @p_OFFICE_PHONE,
+			[MOBILE_PHONE] = @p_MOBILE_PHONE,
+			[SECURITY_QUESTION] = @p_SECURITY_QUESTION,
+			[ANSWER] = @p_ANSWER,
+			[STATUS] = @p_STATUS,
+			[MODIFIED_ON] = GetDate(),
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[LOCK_COUNTER]=@p_lock_counter +1,
+			[PASSWORD_MODIFIED_ON] = @LAST_PSWD_MODIFIED_ON
+		WHERE
+			[USER_ID] = @p_USER_ID
+			AND [LOCK_COUNTER]=@p_lock_counter
+
+        IF @@ROWCOUNT > 0
+		BEGIN
+			UPDATE [USERS_COMPANIES]
+			SET COMPANY_ID = @p_USER_COMPANY_ID
+			WHERE [USER_ID] = @p_USER_ID
+		END
+		--IF	 @@ROWCOUNT > 0  --- Closed Event
+		--BEGIN
+		--	SET @NOTIFICATION = 'Profile for user <span class=''Notification_Header''>' + @p_USER_NAME + '</span> has been updated.'
+		--	SET @NOTIFICATION = @NOTIFICATION + ' <br>Please log into the system to verify changes.' 
+		--	SET @TODAY = GETDATE()
+		--	EXEC proc_NOTIFICATIONSInsert 0,null,@TODAY,62,@NOTIFICATION,@p_USER_ID    ---- User Profile changed Notification
+		--END
+	END
+
+	SET @Err = @@Error
+	RETURN @Err
+END
+Go
+--------------
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSInsert]
+(
+	@p_JOB_ID int output,
+	@p_PROJECT_ID int,
+	@p_JOB_FILE_NUMBER int,
+	@p_NODE_ID1 nvarchar(250) = NULL,
+	@p_NODE_ID2 nvarchar(250) = NULL,
+	@p_NODE_ID3 nvarchar(250) = NULL,
+	@p_HUB nvarchar(250) = NULL,
+	@p_HYLAN_PM nvarchar(250) = NULL,
+	@p_STREET_ADDRESS nvarchar(250),
+	@p_CITY nvarchar(50),
+	@p_STATE varchar(2),
+	@p_ZIP varchar(5),
+	@p_LAT nvarchar(50) = NULL,
+	@p_LONG nvarchar(50) = NULL,
+	@p_POLE_LOCATION nvarchar(250) = NULL,
+	@p_DOITT_NTP_STATUS int = NULL,
+	@p_DOITT_NTP_GRANTED_DATE datetime = NULL,
+	@p_JOB_CATEGORY int = NULL,
+	@p_JOB_STATUS int,
+	@p_ON_HOLD_REASON nvarchar(250) = NULL,
+	@p_CLIENT_PM nvarchar(250) = NULL,
+	@p_JOB_NOTES varchar(1000) = NULL,
+	@p_NUMBER_OF_SUBMITTED_PERMITS int = NULL,
+	@p_PERMIT_NOTES nvarchar(800) = NULL,
+	@p_PUNCHLIST_COMPLETE char(1) = NULL,
+	@p_PUNCHLIST_SUBMITTED_DATE datetime = NULL,
+	@p_CLIENT_APPROVAL_DATE datetime = NULL,
+	@p_CREATED_BY int = NULL,
+	@p_CREATED_ON datetime = NULL,
+	@p_MODIFIED_BY nchar(10) = NULL,
+	@p_MODIFIED_ON datetime = NULL,
+	@p_LOCK_COUNTER int = NULL
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	INSERT
+	INTO [JOBS]
+	(
+		[PROJECT_ID],
+		[JOB_FILE_NUMBER],
+		[NODE_ID1],
+		[NODE_ID2],
+		[NODE_ID3],
+		[HUB],
+		[HYLAN_PM],
+		[STREET_ADDRESS],
+		[CITY],
+		[STATE],
+		[ZIP],
+		[LAT],
+		[LONG],
+		[POLE_LOCATION],
+		[DOITT_NTP_STATUS],
+		[DOITT_NTP_GRANTED_DATE],
+		[JOB_CATEGORY],
+		[JOB_STATUS],
+		[ON_HOLD_REASON],
+		[CLIENT_PM],
+		[JOB_NOTES],
+		[NUMBER_OF_SUBMITTED_PERMITS],
+		[PERMIT_NOTES],
+		[PUNCHLIST_COMPLETE],
+		[PUNCHLIST_SUBMITTED_DATE],
+		[CLIENT_APPROVAL_DATE],
+		[CREATED_BY],
+		[CREATED_ON],
+		[MODIFIED_BY],
+		[MODIFIED_ON],
+		[LOCK_COUNTER]
+	)
+	VALUES
+	(
+		@p_PROJECT_ID,
+		@p_JOB_FILE_NUMBER,
+		@p_NODE_ID1,
+		@p_NODE_ID2,
+		@p_NODE_ID3,
+		@p_HUB,
+		@p_HYLAN_PM,
+		@p_STREET_ADDRESS,
+		@p_CITY,
+		@p_STATE,
+		@p_ZIP,
+		@p_LAT,
+		@p_LONG,
+		@p_POLE_LOCATION,
+		@p_DOITT_NTP_STATUS,
+		@p_DOITT_NTP_GRANTED_DATE,
+		@p_JOB_CATEGORY,
+		@p_JOB_STATUS,
+		@p_ON_HOLD_REASON,
+		@p_CLIENT_PM,
+		@p_JOB_NOTES,
+		@p_NUMBER_OF_SUBMITTED_PERMITS,
+		@p_PERMIT_NOTES,
+		@p_PUNCHLIST_COMPLETE,
+		@p_PUNCHLIST_SUBMITTED_DATE,
+		@p_CLIENT_APPROVAL_DATE,
+		@p_CREATED_BY,
+		getdate(),
+		@p_MODIFIED_BY,
+		GETDATE(),
+		1
+	)
+
+	SET @Err = @@Error
+
+
+	SELECT @p_JOB_ID = SCOPE_IDENTITY()
+
+	RETURN @p_JOB_ID
+END
+Go
+-----------------------
+
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSUpdate]
+(
+	@p_JOB_ID int,
+	@p_PROJECT_ID int,
+	@p_JOB_FILE_NUMBER int,
+	@p_NODE_ID1 nvarchar(250) = NULL,
+	@p_NODE_ID2 nvarchar(250) = NULL,
+	@p_NODE_ID3 nvarchar(250) = NULL,
+	@p_HUB nvarchar(250) = NULL,
+	@p_HYLAN_PM nvarchar(250) = NULL,
+	@p_STREET_ADDRESS nvarchar(250),
+	@p_CITY nvarchar(50),
+	@p_STATE varchar(2),
+	@p_ZIP varchar(5),
+	@p_LAT nvarchar(50) = NULL,
+	@p_LONG nvarchar(50) = NULL,
+	@p_POLE_LOCATION nvarchar(250) = NULL,
+	@p_DOITT_NTP_STATUS int = NULL,
+	@p_DOITT_NTP_GRANTED_DATE datetime = NULL,
+	@p_JOB_CATEGORY int = NULL,
+	@p_JOB_STATUS int,
+	@p_ON_HOLD_REASON nvarchar(250) = NULL,
+	@p_CLIENT_PM nvarchar(250) = NULL,
+	@p_JOB_NOTES varchar(1000) = NULL,
+	@p_NUMBER_OF_SUBMITTED_PERMITS int = NULL,
+	@p_PERMIT_NOTES nvarchar(800) = NULL,
+	@p_PUNCHLIST_COMPLETE char(1) = NULL,
+	@p_PUNCHLIST_SUBMITTED_DATE datetime = NULL,
+	@p_CLIENT_APPROVAL_DATE datetime = NULL,
+	@p_CREATED_BY int = NULL,
+	@p_CREATED_ON datetime = NULL,
+	@p_MODIFIED_BY nchar(10) = NULL,
+	@p_MODIFIED_ON datetime = NULL,
+	@p_LOCK_COUNTER int = NULL
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	IF EXISTS (SELECT JOB_ID FROM [JOBS] WHERE JOB_FILE_NUMBER = @p_JOB_FILE_NUMBER AND JOB_ID <> @p_JOB_ID)
+	BEGIN
+		DECLARE @tmperr VARCHAR (100)
+		SET @tmperr = 'Job File Number already exists against this Project. ';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+		UPDATE [JOBS]
+		SET
+			[PROJECT_ID] = @p_PROJECT_ID,
+			[JOB_FILE_NUMBER] = @p_JOB_FILE_NUMBER,
+			[NODE_ID1] = @p_NODE_ID1,
+			[NODE_ID2] = @p_NODE_ID2,
+			[NODE_ID3] = @p_NODE_ID3,
+			[HUB] = @p_HUB,
+			[HYLAN_PM] = @p_HYLAN_PM,
+			[STREET_ADDRESS] = @p_STREET_ADDRESS,
+			[CITY] = @p_CITY,
+			[STATE] = @p_STATE,
+			[ZIP] = @p_ZIP,
+			[LAT] = @p_LAT,
+			[LONG] = @p_LONG,
+			[POLE_LOCATION] = @p_POLE_LOCATION,
+			[DOITT_NTP_STATUS] = @p_DOITT_NTP_STATUS,
+			[DOITT_NTP_GRANTED_DATE] = @p_DOITT_NTP_GRANTED_DATE,
+			[JOB_CATEGORY] = @p_JOB_CATEGORY,
+			[JOB_STATUS] = @p_JOB_STATUS,
+			[ON_HOLD_REASON] = @p_ON_HOLD_REASON,
+			[CLIENT_PM] = @p_CLIENT_PM,
+			[JOB_NOTES] = @p_JOB_NOTES,
+			[NUMBER_OF_SUBMITTED_PERMITS] = @p_NUMBER_OF_SUBMITTED_PERMITS,
+			[PERMIT_NOTES] = @p_PERMIT_NOTES,
+			[PUNCHLIST_COMPLETE] = @p_PUNCHLIST_COMPLETE,
+			[PUNCHLIST_SUBMITTED_DATE] = @p_PUNCHLIST_SUBMITTED_DATE,
+			[CLIENT_APPROVAL_DATE] = @p_CLIENT_APPROVAL_DATE,
+			--[CREATED_BY] = @p_CREATED_BY,
+			--[CREATED_ON] = @p_CREATED_ON,
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[MODIFIED_ON] = getdate(),
+			[LOCK_COUNTER]=isNUll(@p_lock_counter,0) +1			
+		WHERE
+			JOB_ID = @p_JOB_ID
+			and isNUll([LOCK_COUNTER],0) = isNUll(@p_LOCK_COUNTER,0)
+
+	END
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+Go
+-------------------------
+-------3/9/2017
+-------------------------
+
+ALTER PROCEDURE [dbo].[proc_PROJECTSInsert]
+(
+	@p_PROJECT_ID int output,
+	@p_HYLAN_PROJECT_ID varchar(340),
+	@p_HYLAN_JOB_NUMBER int = NULL,
+	@p_PROJECT_BID_NAME varchar(50) = NULL,
+	@p_CLIENT int = NULL,
+	@p_PROJECT_STATUS tinyint = NULL,
+	@p_TENTATIVE_PROJECT_START_DATE datetime = NULL,
+	@p_ACTUAL_PROJECT_START_DATE datetime = NULL,
+	@p_PROJECTED_END_DATE datetime = NULL,
+	@p_ACTUAL_PROJECT_CLOSE_DATE datetime = NULL,
+	@p_PROJECT_BID_DATE datetime = NULL,
+	@p_PROJECT_AWARDED datetime = NULL,
+	@p_BID_DOCUMENTS varchar(500) = NULL,
+	@p_NOTES varchar(MAX) = NULL,
+	@p_PO_NUMBER varchar(MAX) = NULL,
+	@p_CREATED_ON datetime,
+	@p_CREATED_BY int,
+	@p_MODIFIED_ON datetime,
+	@p_MODIFIED_BY int,
+	@p_LOCK_COUNTER int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	INSERT
+	INTO [PROJECTS]
+	(
+		[HYLAN_PROJECT_ID],
+		[HYLAN_JOB_NUMBER],
+		[PROJECT_BID_NAME],
+		[CLIENT],
+		[PROJECT_STATUS],
+		[TENTATIVE_PROJECT_START_DATE],
+		[ACTUAL_PROJECT_START_DATE],
+		[PROJECTED_END_DATE],
+		[ACTUAL_PROJECT_CLOSE_DATE],
+		[PROJECT_BID_DATE],
+		[PROJECT_AWARDED],
+		[BID_DOCUMENTS],
+		[NOTES],
+		[PO_NUMBER],
+		[CREATED_ON],
+		[CREATED_BY],
+		[MODIFIED_ON],
+		[MODIFIED_BY],
+		[LOCK_COUNTER]
+	)
+	VALUES
+	(
+		@p_HYLAN_PROJECT_ID,
+		@p_HYLAN_JOB_NUMBER,
+		@p_PROJECT_BID_NAME,
+		@p_CLIENT,
+		@p_PROJECT_STATUS,
+		@p_TENTATIVE_PROJECT_START_DATE,
+		@p_ACTUAL_PROJECT_START_DATE,
+		@p_PROJECTED_END_DATE,
+		@p_ACTUAL_PROJECT_CLOSE_DATE,
+		@p_PROJECT_BID_DATE,
+		@p_PROJECT_AWARDED,
+		@p_BID_DOCUMENTS,
+		@p_NOTES,
+		@p_PO_NUMBER,
+		GETDATE(),
+		@p_CREATED_BY,
+		GETDATE(),
+		@p_MODIFIED_BY,
+		1
+	)
+
+	SET @Err = @@Error
+	SELECT @p_PROJECT_ID = SCOPE_IDENTITY()
+
+	RETURN @p_PROJECT_ID
+END
+Go
+--------------
+ALTER PROCEDURE [dbo].[proc_PROJECTSUpdate]
+(
+	@p_PROJECT_ID int,
+	@p_HYLAN_PROJECT_ID varchar(340),
+	@p_HYLAN_JOB_NUMBER int = NULL,
+	@p_PROJECT_BID_NAME varchar(50) = NULL,
+	@p_CLIENT int = NULL,
+	@p_PROJECT_STATUS tinyint = NULL,
+	@p_TENTATIVE_PROJECT_START_DATE datetime = NULL,
+	@p_ACTUAL_PROJECT_START_DATE datetime = NULL,
+	@p_PROJECTED_END_DATE datetime = NULL,
+	@p_ACTUAL_PROJECT_CLOSE_DATE datetime = NULL,
+	@p_PROJECT_BID_DATE datetime = NULL,
+	@p_PROJECT_AWARDED datetime = NULL,
+	@p_BID_DOCUMENTS varchar(500) = NULL,
+	@p_NOTES varchar(MAX) = NULL,
+	@p_PO_NUMBER varchar(MAX) = NULL,
+	@p_CREATED_ON datetime,
+	@p_CREATED_BY int,
+	@p_MODIFIED_ON datetime,
+	@p_MODIFIED_BY int,
+	@p_LOCK_COUNTER int
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	IF EXISTS (SELECT PROJECT_ID FROM PROJECTS WHERE PROJECT_BID_NAME = @p_PROJECT_BID_NAME AND PROJECT_ID <> @p_PROJECT_ID)
+	BEGIN
+		DECLARE @tmperr VARCHAR (100)
+		SET @tmperr = 'Project/Bid Name already exists.';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+
+		UPDATE [PROJECTS]
+		SET
+			[HYLAN_PROJECT_ID] = @p_HYLAN_PROJECT_ID,
+			[HYLAN_JOB_NUMBER] = @p_HYLAN_JOB_NUMBER,
+			[PROJECT_BID_NAME] = @p_PROJECT_BID_NAME,
+			[CLIENT] = @p_CLIENT,
+			[PROJECT_STATUS] = @p_PROJECT_STATUS,
+			[TENTATIVE_PROJECT_START_DATE] = @p_TENTATIVE_PROJECT_START_DATE,
+			[ACTUAL_PROJECT_START_DATE] = @p_ACTUAL_PROJECT_START_DATE,
+			[PROJECTED_END_DATE] = @p_PROJECTED_END_DATE,
+			[ACTUAL_PROJECT_CLOSE_DATE] = @p_ACTUAL_PROJECT_CLOSE_DATE,
+			[PROJECT_BID_DATE] = @p_PROJECT_BID_DATE,
+			[PROJECT_AWARDED] = @p_PROJECT_AWARDED,
+			[BID_DOCUMENTS] = @p_BID_DOCUMENTS,
+			[NOTES] = @p_NOTES,
+			[PO_NUMBER] = @p_PO_NUMBER,
+			--[CREATED_ON] = @p_CREATED_ON,
+			--[CREATED_BY] = @p_CREATED_BY,
+			[MODIFIED_ON] = GETDATE(),
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[LOCK_COUNTER]= isNUll(@p_lock_counter,0) +1		
+		WHERE
+			[PROJECT_ID] = @p_PROJECT_ID
+			and isNUll([LOCK_COUNTER],0) = isNUll(@p_LOCK_COUNTER,0)
+
+	END
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+Go
+-----------------
+
+
+---------3/15/2017
+--------------------------
+
+ALTER PROCEDURE [dbo].[proc_MANAGE_JOBSUpdate]
+(
+	@p_JOB_ID int,
+	@p_PROJECT_ID int,
+	@p_JOB_FILE_NUMBER int,
+	@p_NODE_ID1 nvarchar(250) = NULL,
+	@p_NODE_ID2 nvarchar(250) = NULL,
+	@p_NODE_ID3 nvarchar(250) = NULL,
+	@p_HUB nvarchar(250) = NULL,
+	@p_HYLAN_PM nvarchar(250) = NULL,
+	@p_STREET_ADDRESS nvarchar(250),
+	@p_CITY nvarchar(50),
+	@p_STATE varchar(2),
+	@p_ZIP varchar(5),
+	@p_LAT nvarchar(50) = NULL,
+	@p_LONG nvarchar(50) = NULL,
+	@p_POLE_LOCATION nvarchar(250) = NULL,
+	@p_DOITT_NTP_STATUS int = NULL,
+	@p_DOITT_NTP_GRANTED_DATE datetime = NULL,
+	@p_JOB_CATEGORY int = NULL,
+	@p_JOB_STATUS int,
+	@p_ON_HOLD_REASON nvarchar(250) = NULL,
+	@p_CLIENT_PM nvarchar(250) = NULL,
+	@p_JOB_NOTES varchar(1000) = NULL,
+	@p_NUMBER_OF_SUBMITTED_PERMITS int = NULL,
+	@p_PERMIT_NOTES nvarchar(800) = NULL,
+	@p_PUNCHLIST_COMPLETE char(1) = NULL,
+	@p_PUNCHLIST_SUBMITTED_DATE datetime = NULL,
+	@p_CLIENT_APPROVAL_DATE datetime = NULL,
+	@p_CREATED_BY int = NULL,
+	@p_CREATED_ON datetime = NULL,
+	@p_MODIFIED_BY nchar(10) = NULL,
+	@p_MODIFIED_ON datetime = NULL,
+	@p_LOCK_COUNTER int = NULL
+)
+AS
+BEGIN
+
+	SET NOCOUNT OFF
+	DECLARE @Err int
+
+	IF EXISTS (SELECT JOB_ID FROM [JOBS] WHERE [PROJECT_ID] = @p_PROJECT_ID AND JOB_FILE_NUMBER = @p_JOB_FILE_NUMBER AND JOB_ID <> @p_JOB_ID)
+	BEGIN
+		DECLARE @tmperr VARCHAR (100)
+		SET @tmperr = 'Job File Number already exists against this Project. ';
+		RAISERROR( @tmperr ,16,1)
+	END
+	ELSE
+	BEGIN
+		UPDATE [JOBS]
+		SET
+			[PROJECT_ID] = @p_PROJECT_ID,
+			[JOB_FILE_NUMBER] = @p_JOB_FILE_NUMBER,
+			[NODE_ID1] = @p_NODE_ID1,
+			[NODE_ID2] = @p_NODE_ID2,
+			[NODE_ID3] = @p_NODE_ID3,
+			[HUB] = @p_HUB,
+			[HYLAN_PM] = @p_HYLAN_PM,
+			[STREET_ADDRESS] = @p_STREET_ADDRESS,
+			[CITY] = @p_CITY,
+			[STATE] = @p_STATE,
+			[ZIP] = @p_ZIP,
+			[LAT] = @p_LAT,
+			[LONG] = @p_LONG,
+			[POLE_LOCATION] = @p_POLE_LOCATION,
+			[DOITT_NTP_STATUS] = @p_DOITT_NTP_STATUS,
+			[DOITT_NTP_GRANTED_DATE] = @p_DOITT_NTP_GRANTED_DATE,
+			[JOB_CATEGORY] = @p_JOB_CATEGORY,
+			[JOB_STATUS] = @p_JOB_STATUS,
+			[ON_HOLD_REASON] = @p_ON_HOLD_REASON,
+			[CLIENT_PM] = @p_CLIENT_PM,
+			[JOB_NOTES] = @p_JOB_NOTES,
+			[NUMBER_OF_SUBMITTED_PERMITS] = @p_NUMBER_OF_SUBMITTED_PERMITS,
+			[PERMIT_NOTES] = @p_PERMIT_NOTES,
+			[PUNCHLIST_COMPLETE] = @p_PUNCHLIST_COMPLETE,
+			[PUNCHLIST_SUBMITTED_DATE] = @p_PUNCHLIST_SUBMITTED_DATE,
+			[CLIENT_APPROVAL_DATE] = @p_CLIENT_APPROVAL_DATE,
+			--[CREATED_BY] = @p_CREATED_BY,
+			--[CREATED_ON] = @p_CREATED_ON,
+			[MODIFIED_BY] = @p_MODIFIED_BY,
+			[MODIFIED_ON] = getdate(),
+			[LOCK_COUNTER]=isNUll(@p_lock_counter,0) +1			
+		WHERE
+			JOB_ID = @p_JOB_ID
+			and isNUll([LOCK_COUNTER],0) = isNUll(@p_LOCK_COUNTER,0)
+
+	END
+
+	SET @Err = @@Error
+
+
+	RETURN @Err
+END
+GO
+
+
+-------------------------------3/16/2017--pending--------------------
+
+INSERT INTO [dbo].[LOOK_UPS] ([LOOK_UP_ID],[LU_TYPE],[LU_NAME])
+VALUES
+(58, 'PERMIT_STATUS', 'Active'),
+(59, 'PERMIT_STATUS', 'Expired'),
+(60, 'PERMIT_STATUS', 'Expiring 5 Days'),
+(61, 'PERMIT_STATUS', 'On-Hold'),
+(62, 'PERMIT_STATUS', 'Request Extension'),
+(63, 'PERMIT_STATUS', 'Request Renewal')
+
+-----------
+Go
+
+INSERT INTO [dbo].[LOOK_UPS] ([LOOK_UP_ID],[LU_TYPE],[LU_NAME])
+VALUES
+(64, 'PERMIT_TYPE', 'Street Opening Permits'),
+(65, 'PERMIT_TYPE', 'Construction Activity Permits'),
+(66, 'PERMIT_TYPE', 'Sidewalk Construction Permits'),
+(67, 'PERMIT_TYPE', 'Canopy Permit')
+
+----------------
+INSERT INTO [dbo].[PERMITS_LOOK_UP]
+([PERMIT_NUMBER],[DESCRIPTION],[PERMIT_TYPE],[FEE],[DURATION])
+VALUES
+('0100', 'Open sidewalk to install foundation', '64', 					 '$ 135',     '30/90'), 
+('0102', 'Major installations - high voltage', '64', 					 '$ 135/380', '30/90'), 
+('0103', 'Major installations – gas', '64', 						 '$ 135/380', '30/90'), 
+('0104', 'Major installations – steam', '64', 						 '$ 135/380', '30/90'), 
+('0105', 'Major installations – telephone', '64', 					 '$ 135/380', '30/90'), 
+('0106', 'Transformer vault - on roadway', '64', 					 '$ 135/380', '15/30'), 
+('0107', 'Transformer vault - on sidewalk', '64', 					 '$ 135',     '15/30'), 
+('0108', 'Installation of poles', '64', 						 '$ 135',     '30'),    
+('0109', 'Major installations – water', '64', 						 '$ 135/380', '30/90'), 
+('0110', 'Major installations – cable', '64', 						 '$ 135/380', '30/90'), 
+('0111', 'Major installations – sewer', '64', 						 '$ 135/380', '30/90'), 
+('0112', 'Rapid transit construct/alteration', '64', 					 '$ 135/380', '30/90'), 
+('0113', 'Repair water', '64', 								 '$ 135/380', '15/30'), 
+('0114', 'Repair sewer', '64', 								 '$ 135/380', '15/30'), 
+('0115', 'Repair water/sewer', '64', 							 '$ 135/380', '15/30'), 
+('0116', 'Fuel oil line', '64', 							 '$ 135',     '15'),    
+('0117', 'Vault construction or alteration', '64', 					 '$ 135',     '30'),    
+('0118', 'Reset repair or replace curb', '64', 						 '$ 135',     '30'),    
+('0119', 'Pave street - w/engineering & inspect. Fee', '64', 				 '$ 135',     '15'),    
+('0120', 'Tree Pit', '64', 								 '$ 135',     '30'),    
+('0121', 'Construct/alter Manhole or Manhole cast', '64', 				 '$ 135/380', '15'),    
+('0122', 'Repair Gas', '64', 								 '$ 135/380', '30'),    
+('0123', 'Repair steam', '64', 								 '$ 135/380', '30'),    
+('0124', 'Repair electric / communications', '64', 					 '$ 135/380', '30'),    
+('0126', 'Test pits cores or boring', '64', 						 '$ 135/380', '15'),    
+('0127', 'Conduit construction (cable telecommunication) and franchise', '64', 		 '$ 135/380', '15'),    
+('0128', 'Erect canopy', '64', 								 '$ 135',     '30'),    
+('0129', 'Install street furniture', '64', 						 '$ 135',     '30'),    
+('0130', 'Land fill', '64', 								 '$ 135',     '30'),    
+('0131', 'Private sewer', '64', 							  '$ 135/380', '30'),    
+('0132', 'Install fence', '64', 							  '$ 135',     '30'),    
+('0133', 'Install traffic signals', '64', 						 '$ 135/380', '30'),    
+('0134', 'Install or repair petroleum pipelines/monitoring and recovery systems', '64',  '$ 135/380', '30'),    
+('0138', 'Installation of fire alarm', '64', 						 '$ 135',     '30'),    
+('0139', 'Installation of bus shelters', '64', 						 '$ 135',     '30'),    
+('0151', 'Public telephones', '64', 							 '$ 135',     '30')   
+Go
+---------------
+
+INSERT INTO [dbo].[PERMITS_LOOK_UP]
+([PERMIT_NUMBER],[DESCRIPTION],[PERMIT_TYPE],[FEE],[DURATION])
+VALUES
+('0201','Place material on street',                            '65', '$ 50', '90' ) ,                             
+('0202','Crossing sidewalk',                                   '65', '$ 50', '90' ) ,     
+('0203','Place crane or shovel on street',                     '65', '$ 50', '1 Week' ) , 
+('0204','Place equipment other than crane/shovel on street',   '65', '$ 50', '90' ) ,     
+('0205','Place shanty or trailer on street',                   '65', '$ 50', '90' ) ,     
+('0207','Franchise installation(overhead structure)',          '65', '$ 50', '90' ) ,     
+('0208','Temporary pedestrian walk',                           '65', '$ 50', '90' ) ,     
+('0210','Install decorative planters on street',               '65', '$ 50', '1 Year' ) , 
+('0211','Temporary closing of roadway',                        '65', '$ 50', '90' ) ,     
+('0214','Place container on street',                           '65', '$ 50', '90' ) ,     
+('0215','Temporary sidewalk closing',                          '65', '$ 50', '90' )     
+
+Go
+--------
+INSERT INTO [dbo].[PERMITS_LOOK_UP]
+([PERMIT_NUMBER],[DESCRIPTION],[PERMIT_TYPE],[FEE],[DURATION])
+VALUES
+('0401','Repair sidewalk',                           '66','$ 70', '30'   ),                 
+('0402','Construction for new sidewalk',             '66','$ 70', '30'   ),                         
+('0500','Vault license',                             '66','$ 35', '1 Time'   ),                                                                    
+('0701','Hotel',                                     '67','$ 50', '1 Year'),                         
+('0702','In connection with sidewalk café license',  '67','$ 25', '1 Year'),                                
+('0703','Resident',                                  '67','$ 50', '1 Year'),                                
+('0704','Miscellaneous',                             '67','$ 50', '1 Year')     
+Go
+
+-------------
+CREATE TABLE [dbo].[PERMITS_LOOK_UP](
+		[PERMIT_NUMBER] VARCHAR(4) PRIMARY KEY,
+		[DESCRIPTION] VARCHAR(100) NOT NULL,
+		PERMIT_TYPE INT NOT NULL, 
+		[FEE] VARCHAR(25) NOT NULL,
+		[DURATION] VARCHAR(25) NOT NULL
+	)
+
+ALTER TABLE [dbo].[PERMITS_LOOK_UP]  WITH CHECK ADD  CONSTRAINT [fk_PERMITS_LOOK_UP_LOOK_UPS_PERMIT_TYPE] FOREIGN KEY(PERMIT_TYPE)
+REFERENCES [dbo].[LOOK_UPS] ([LOOK_UP_ID])
+
+
+
+CREATE TABLE [dbo].[PERMITS](
+	[PERMIT_ID] [int] IDENTITY(1,1) PRIMARY KEY,
+	[PROJECT_ID] [int] NULL,
+	[JOB_FILE_NUMBER] [int] NULL,
+	CLIENT NVARCHAR(250),
+	[NODE_ID1] [nvarchar](250) NULL,
+	[NODE_ID2] [nvarchar](250) NULL,
+	[NODE_ID3] [nvarchar](250) NULL,
+	[HUB] [nvarchar](250) NULL,
+	[HYLAN_PM] [int] NULL,
+	[STREET_ADDRESS] [nvarchar](250) NULL,
+	[CITY] [nvarchar](40)  NULL,
+	[STATE] [varchar](2)  NULL,
+	[ZIP] [varchar](5) NULL,
+	[LAT] [nvarchar](50) NULL,
+	[LONG] [nvarchar](50) NULL,
+	[POLE_LOCATION] [nvarchar](250) NULL,
+	PERMIT_NUMBER VARCHAR(4),
+	DOT_TRACKING_NUMBER  VARCHAR(20),
+	SEGMENT NVARCHAR(800),
+	IS_PROTECTED_STREET VARCHAR(1),
+	MARKOUT_START_DATE DATETIME,
+	MARKOUT_END_DATE DATETIME,
+	STIPULATIONS NVARCHAR(MAX),
+	ISSUED_DATE DATETIME,
+	VALID_DATE DATETIME,
+	EXPIRES_DATE DATETIME,
+	PERMIT_STATUS INT,
+	NOTES VARCHAR(MAX),	
+	[CREATED_BY] [int] NOT NULL,
+	[CREATED_ON] [datetime] NOT NULL,
+	[MODIFIED_BY] [int] NOT NULL,
+	[MODIFIED_ON] [datetime] NOT NULL,
+	[LOCK_COUNTER] [int] NOT NULL
+)
+GO
+
+ALTER TABLE [dbo].[PERMITS]  WITH CHECK ADD  CONSTRAINT [fk_PERMITS_LOOK_UPS_PERMIT_STATUS] FOREIGN KEY(PERMIT_STATUS)
+REFERENCES [dbo].[LOOK_UPS] ([LOOK_UP_ID])
+GO
+
+ALTER TABLE [dbo].[PERMITS]  WITH CHECK ADD  CONSTRAINT [fk_PERMITS_PERMITS_LOOK_UP_PERMIT_NUMBER] FOREIGN KEY(PERMIT_NUMBER)
+REFERENCES [dbo].[PERMITS_LOOK_UP] (PERMIT_NUMBER)
+GO
+
+ALTER TABLE [dbo].[PERMITS]  ADD  CONSTRAINT [FK_PERMITS_USERS_CREATEDBY] FOREIGN KEY([CREATED_BY])
+REFERENCES [dbo].[USERS] ([USER_ID])
+GO
+
+ALTER TABLE [dbo].[PERMITS]  ADD  CONSTRAINT [FK_PERMITS_USERS_MODIFIEDBY] FOREIGN KEY([MODIFIED_BY])
+REFERENCES [dbo].[USERS] ([USER_ID])
+GO
+
+
+-----------------------------
+
+3/28/2017
+--===========
+Create FUNCTION Split (  
+-- to use
+-- select Item from dbo.split('a,b,c',',')
+      @InputString                  VARCHAR(8000),
+      @Delimiter                    VARCHAR(50)
+)
+
+RETURNS @Items TABLE (
+      Item                          VARCHAR(8000)
+)
+
+AS
+BEGIN
+      IF @Delimiter = ' '
+      BEGIN
+            SET @Delimiter = ','
+            SET @InputString = REPLACE(@InputString, ' ', @Delimiter)
+      END
+
+      IF (@Delimiter IS NULL OR @Delimiter = '')
+            SET @Delimiter = ','
+
+      DECLARE @Item           VARCHAR(8000)
+      DECLARE @ItemList       VARCHAR(8000)
+      DECLARE @DelimIndex     INT
+
+      SET @ItemList = @InputString
+      SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      WHILE (@DelimIndex != 0)
+      BEGIN
+            SET @Item = SUBSTRING(@ItemList, 0, @DelimIndex)
+            INSERT INTO @Items VALUES (@Item)
+
+            -- Set @ItemList = @ItemList minus one less item
+            SET @ItemList = SUBSTRING(@ItemList, @DelimIndex+1, LEN(@ItemList)-@DelimIndex)
+            SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      END -- End WHILE
+
+      IF @Item IS NOT NULL -- At least one delimiter was encountered in @InputString
+      BEGIN
+            SET @Item = @ItemList
+            INSERT INTO @Items VALUES (@Item)
+      END
+
+      -- No delimiters were encountered in @InputString, so just return @InputString
+      ELSE INSERT INTO @Items VALUES (@InputString)
+
+      RETURN
+
+END -- End Function
+GO
+----------
+
+Create PROCEDURE [dbo].[proc_MANAGE_JOBSLoadByFilters]
+(
+	@p_ProjectIDs varchar(max) = null,
+	@p_DoITTNTPStatusIDs varchar(max) = null,
+	@p_JobCategoryIDs varchar(max) = null,
+	@p_JobStatusIDs varchar(max) = null
+
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		JOB.[JOB_ID],
+		JOB.[PROJECT_ID],
+		PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID,
+		[JOB_FILE_NUMBER],
+		[NODE_ID1],
+		[NODE_ID2],
+		[NODE_ID3],
+		[HUB],
+		[HYLAN_PM],
+		[STREET_ADDRESS],
+		[CITY],
+		[STATE],
+		[ZIP],
+		[LAT],
+		[LONG],
+		[POLE_LOCATION],
+		[DOITT_NTP_STATUS],
+		LUNTS.[LU_NAME] AS DOITT_NTP_STATUS_NAME,
+		[DOITT_NTP_GRANTED_DATE],
+		[JOB_CATEGORY],
+		LUJC.[LU_NAME] AS JOB_CATEGORY_NAME,
+		[JOB_STATUS],
+		LUJS.[LU_NAME] AS JOB_STATUS_NAME,
+		[ON_HOLD_REASON],
+		[CLIENT_PM],
+		dbo.COUNT_NEEDED_TASKS(JOB.[JOB_ID]) AS [NEEDED_TASKS_COUNT],
+		(select count(job_id) from JOBS_NOTES jn where jn.job_id = JOB.[JOB_ID]) as NOTES_COUNT,
+        (select max(notes.created_on) from JOBS_NOTES jn inner join notes on notes.note_id = jn.note_id where jn.job_id = job.job_id ) as [NOTES_DATE],
+		(select count(job_id) from job_attachments ja join attachments as a on a.attachment_id = ja.attachment_id where ja.job_id = job.job_id and a.Is_deleted = 0) as ATTACHMENTS_COUNT,
+		[NUMBER_OF_SUBMITTED_PERMITS],
+		[PERMIT_NOTES],
+		CASE WHEN [PUNCHLIST_COMPLETE] = 'Y' THEN 'Yes' WHEN [PUNCHLIST_COMPLETE] = 'N' THEN 'No' ELSE ISNULL([PUNCHLIST_COMPLETE],'') END [PUNCHLIST_COMPLETE],
+		[PUNCHLIST_SUBMITTED_DATE],
+		[CLIENT_APPROVAL_DATE],
+		JOB.[CREATED_BY],
+		JOB.[CREATED_ON],
+		JOB.[MODIFIED_BY],
+		JOB.[MODIFIED_ON],
+		JOB.[LOCK_COUNTER],
+		case when ISNULL(H_PM_USERS.LAST_NAME,'')!='' then H_PM_USERS.LAST_NAME+', '+ISNULL(H_PM_USERS.FIRST_NAME,'') ELSE '' END HYLAN_PM_NAME
+	FROM [JOBS] JOB
+	LEFT JOIN PROJECTS PRJ ON JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]
+	LEFT JOIN [LOOK_UPS] LUNTS ON JOB.[DOITT_NTP_STATUS] = LUNTS.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJC ON JOB.[JOB_CATEGORY] = LUJC.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJS ON JOB.[JOB_STATUS] = LUJS.[LOOK_UP_ID]
+	LEFT JOIN USERS H_PM_USERS ON (H_PM_USERS.[USER_ID] = JOB.[HYLAN_PM]) 
+	WHERE
+	(isNull(@p_ProjectIDs,'') = '' or JOB.[PROJECT_ID] in (Select item from dbo.split(@p_ProjectIDs,',') ) )
+	and (isNull(@p_DoITTNTPStatusIDs,'') = '' or job.[DOITT_NTP_STATUS] in  (Select item from dbo.split(@p_DoITTNTPStatusIDs,',') ) )
+	and (isNull(@p_JobCategoryIDs,'') = '' or Job.[JOB_CATEGORY] in  (Select item from dbo.split(@p_JobCategoryIDs,',') ) )
+	and (isNull(@p_JobStatusIDs,'') = '' or Job.[JOB_STATUS] in (Select item from dbo.split(@p_JobStatusIDs,',') ) )
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+--------------------3/29/2017
+
+Create FUNCTION [dbo].[Split] (  
+-- to use
+-- select Item from dbo.split('a,b,c',',')
+      @InputString                  VARCHAR(8000),
+      @Delimiter                    VARCHAR(50) 
+)
+
+RETURNS @Items TABLE (
+      Item                          VARCHAR(8000)
+)
+
+AS
+BEGIN
+      IF @Delimiter = ' '
+      BEGIN
+            SET @Delimiter = ','
+            SET @InputString = REPLACE(@InputString, ' ', @Delimiter)
+      END
+
+      IF (@Delimiter IS NULL OR @Delimiter = '')
+            SET @Delimiter = ','
+
+      DECLARE @Item           VARCHAR(8000)
+      DECLARE @ItemList       VARCHAR(8000)
+      DECLARE @DelimIndex     INT
+
+      SET @ItemList = @InputString
+      SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      WHILE (@DelimIndex != 0)
+      BEGIN
+            SET @Item = SUBSTRING(@ItemList, 0, @DelimIndex)
+            INSERT INTO @Items VALUES (@Item)
+
+            -- Set @ItemList = @ItemList minus one less item
+            SET @ItemList = SUBSTRING(@ItemList, @DelimIndex+1, LEN(@ItemList)-@DelimIndex)
+            SET @DelimIndex = CHARINDEX(@Delimiter, @ItemList, 0)
+      END -- End WHILE
+
+      IF @Item IS NOT NULL -- At least one delimiter was encountered in @InputString
+      BEGIN
+            SET @Item = @ItemList
+            INSERT INTO @Items VALUES (@Item)
+      END
+
+      -- No delimiters were encountered in @InputString, so just return @InputString
+      ELSE INSERT INTO @Items VALUES (@InputString)
+
+      RETURN
+
+END -- End Function
+----------------------------------------
+Create PROCEDURE [dbo].[proc_MANAGE_JOBSLoadByFilters]
+(
+	@p_ProjectIDs varchar(max) = 'All',
+	@p_DoITTNTPStatusIDs varchar(max) = 'All',
+	@p_JobCategoryIDs varchar(max) = 'All',
+	@p_JobStatusIDs varchar(max) = 'All'
+
+)
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		JOB.[JOB_ID],
+		JOB.[PROJECT_ID],
+		PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID,
+		[JOB_FILE_NUMBER],
+		[NODE_ID1],
+		[NODE_ID2],
+		[NODE_ID3],
+		[HUB],
+		[HYLAN_PM],
+		[STREET_ADDRESS],
+		[CITY],
+		[STATE],
+		[ZIP],
+		[LAT],
+		[LONG],
+		[POLE_LOCATION],
+		[DOITT_NTP_STATUS],
+		LUNTS.[LU_NAME] AS DOITT_NTP_STATUS_NAME,
+		[DOITT_NTP_GRANTED_DATE],
+		[JOB_CATEGORY],
+		LUJC.[LU_NAME] AS JOB_CATEGORY_NAME,
+		[JOB_STATUS],
+		LUJS.[LU_NAME] AS JOB_STATUS_NAME,
+		[ON_HOLD_REASON],
+		[CLIENT_PM],
+		dbo.COUNT_NEEDED_TASKS(JOB.[JOB_ID]) AS [NEEDED_TASKS_COUNT],
+		(select count(job_id) from JOBS_NOTES jn where jn.job_id = JOB.[JOB_ID]) as NOTES_COUNT,
+        (select max(notes.created_on) from JOBS_NOTES jn inner join notes on notes.note_id = jn.note_id where jn.job_id = job.job_id ) as [NOTES_DATE],
+		(select count(job_id) from job_attachments ja join attachments as a on a.attachment_id = ja.attachment_id where ja.job_id = job.job_id and a.Is_deleted = 0) as ATTACHMENTS_COUNT,
+		[NUMBER_OF_SUBMITTED_PERMITS],
+		[PERMIT_NOTES],
+		CASE WHEN [PUNCHLIST_COMPLETE] = 'Y' THEN 'Yes' WHEN [PUNCHLIST_COMPLETE] = 'N' THEN 'No' ELSE ISNULL([PUNCHLIST_COMPLETE],'') END [PUNCHLIST_COMPLETE],
+		[PUNCHLIST_SUBMITTED_DATE],
+		[CLIENT_APPROVAL_DATE],
+		JOB.[CREATED_BY],
+		JOB.[CREATED_ON],
+		JOB.[MODIFIED_BY],
+		JOB.[MODIFIED_ON],
+		JOB.[LOCK_COUNTER],
+		case when ISNULL(H_PM_USERS.LAST_NAME,'')!='' then H_PM_USERS.LAST_NAME+', '+ISNULL(H_PM_USERS.FIRST_NAME,'') ELSE '' END HYLAN_PM_NAME
+	FROM [JOBS] JOB
+	LEFT JOIN PROJECTS PRJ ON JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]
+	LEFT JOIN [LOOK_UPS] LUNTS ON JOB.[DOITT_NTP_STATUS] = LUNTS.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJC ON JOB.[JOB_CATEGORY] = LUJC.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] LUJS ON JOB.[JOB_STATUS] = LUJS.[LOOK_UP_ID]
+	LEFT JOIN USERS H_PM_USERS ON (H_PM_USERS.[USER_ID] = JOB.[HYLAN_PM]) 
+	WHERE
+	(isNull(@p_ProjectIDs,'All') = 'All' or JOB.[PROJECT_ID] in (Select item from dbo.split(@p_ProjectIDs,',') ) )
+	and (isNull(@p_DoITTNTPStatusIDs,'All') = 'All' or job.[DOITT_NTP_STATUS] in  (Select item from dbo.split(@p_DoITTNTPStatusIDs,',') ) )
+	and (isNull(@p_JobCategoryIDs,'All') = 'All' or Job.[JOB_CATEGORY] in  (Select item from dbo.split(@p_JobCategoryIDs,',') ) )
+	and (isNull(@p_JobStatusIDs,'All') = 'All' or Job.[JOB_STATUS] in (Select item from dbo.split(@p_JobStatusIDs,',') ) )
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+-------PENDING---------3/30/2017
+ALTER PROCEDURE [dbo].[proc_TASK_ROSTER_LOADAll]    
+@p_projectIDs varchar(max) = 'All'  
+AS    
+BEGIN    
+    
+	if(@p_projectIDs = '-1') SET @p_projectIDs = 'All'
+	  
+	DECLARE @Job_IDs TABLE (Job_ID INT)    
+	INSERT INTO @Job_IDs    
+	SELECT JOB_ID 
+	FROM JOBS jb
+	left join projects prj on prj.project_id = jb.PROJECT_ID
+	left JOIN dbo.LOOK_UPS prjLU ON prjLU.LOOK_UP_ID = prj.PROJECT_STATUS
+	left JOIN dbo.LOOK_UPS jbLU ON jbLU.LOOK_UP_ID = jb.JOB_STATUS
+	WHERE ( @p_projectIDs = 'All' OR prj.PROJECT_ID IN (SELECT item FROM dbo.split(@p_projectIDs,',')) )
+	AND prjLU.lu_name = 'Active'
+	AND jbLU.lu_name = 'Active'
+
+
+
+	--WHERE (@p_PROJECT_ID != -1 AND prj.PROJECT_ID = @p_PROJECT_ID)
+	--OR (@p_PROJECT_ID = -1 AND prj.PROJECT_ID = prj.PROJECT_ID)
+	--AND prjLU.lu_name = 'Active'
+	--AND jbLU.lu_name = 'Active'
+	      
+	 ------ JOB    
+	SELECT JOB.JOB_ID, JOB.PROJECT_ID, dbo.COUNT_NEEDED_TASKS(JOB.JOB_ID) AS [TOTAL_TASKS],PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID, 
+			[JOB_FILE_NUMBER], [NODE_ID1],[NODE_ID2], [NODE_ID3], [HUB], [HYLAN_PM], [STREET_ADDRESS], [CITY], [STATE], [ZIP], [LAT], [LONG], 
+			[POLE_LOCATION], LUNTS.[LU_NAME] AS DOITT_NTP_STATUS_NAME, [JOB_NOTES], [DOITT_NTP_GRANTED_DATE], LUJC.[LU_NAME] AS JOB_CATEGORY_NAME, 
+			LUJS.[LU_NAME] AS JOB_STATUS_NAME, [ON_HOLD_REASON], [CLIENT_PM], [NUMBER_OF_SUBMITTED_PERMITS], [PERMIT_NOTES], 
+			[PUNCHLIST_COMPLETE], [PUNCHLIST_SUBMITTED_DATE], [CLIENT_APPROVAL_DATE],
+			(select count(job_id) from JOBS_NOTES jn where jn.job_id = JOB.[JOB_ID]) as [NOTES_COUNT],
+			(select max(notes.created_on) from JOBS_NOTES jn inner join notes on notes.note_id = jn.note_id where jn.job_id = job.job_id ) as [NOTES_DATE]
+			
+	FROM   [JOBS] JOB    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = JOB.JOB_ID    
+		LEFT JOIN PROJECTS PRJ ON  JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]    
+		LEFT JOIN [LOOK_UPS] LUNTS ON  JOB.[DOITT_NTP_STATUS] = LUNTS.[LOOK_UP_ID]    
+		LEFT JOIN [LOOK_UPS] LUJC ON  JOB.[JOB_CATEGORY] = LUJC.[LOOK_UP_ID]    
+		LEFT JOIN [LOOK_UPS] LUJS ON  JOB.[JOB_STATUS] = LUJS.[LOOK_UP_ID]    
+	 ORDER BY JOB.JOB_ID    
+	    
+	 ---- 1- Continuity To Zero    
+	 SELECT CTZ.JOB_ID , case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end  AS CTZ_REQUIRED,   
+			EST_COMPLETION_DATE AS CTZ_FORECAST_DATE, ACT_COMPLETION_DATE AS CTZ_ACT_COMPLETION_DATE, PARTY_RESPONSIBLE AS CTZ_PARTY_RESPONSIBLE, 
+			NOTES AS CTZ_NOTES    
+	 FROM TASK_CONTINUITY_ZERO   AS CTZ       
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = CTZ.JOB_ID    
+	 ORDER BY CTZ.JOB_ID    
+	    
+	 ---- 2- Foundation Work    
+	 SELECT Foundation_Work.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FDW_REQUIRED,   
+			lutype.LU_NAME AS FDW_TYPE, EST_START_DATE AS FDW_FORECAST_START_DATE, ACT_START_DATE AS FDW_ACT_START_DATE, 
+			ACT_COMPLETION_DATE AS FDW_ACT_COMPLETION_DATE, CONED_TICKET_NUMBER as FDW_CONED_TICKET_NUMBER,	luhold.LU_NAME AS FDW_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS FDW_ON_HOLD_OTHER, NOTES AS FDW_NOTES    
+	 FROM [TASK_FOUNDATION_POLE_WORK ] AS Foundation_Work    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Foundation_Work.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Foundation_Work.FOUNDATION_WORK_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Foundation_Work.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 2    
+	 ORDER BY Foundation_Work.JOB_ID    
+	     
+	 ---- 3- Pole Work    
+	 SELECT Pole_Work.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PLW_REQUIRED,   
+			lutype.LU_NAME AS PLW_TYPE, EST_START_DATE AS PLW_FORECAST_START_DATE, ACT_START_DATE AS PLW_ACT_START_DATE, ACT_COMPLETION_DATE AS PLW_ACT_COMPLETION_DATE, 
+			luhold.LU_NAME AS PLW_ON_HOLD_REASON, ON_HOLD_OTHER AS PLW_ON_HOLD_OTHER, NOTES AS PLW_NOTES    
+	 FROM [TASK_FOUNDATION_POLE_WORK ] AS Pole_Work    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Pole_Work.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Pole_Work.POLE_WORK_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Pole_Work.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 3    
+	 ORDER BY Pole_Work.JOB_ID    
+	     
+	 ---- 4- Fiber Dig    
+	 SELECT Fiber_Dig.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBD_REQUIRED,   
+			lutype.LU_NAME AS FBD_TYPE, EST_START_DATE AS FBD_FORECAST_START_DATE, ACT_START_DATE AS FBD_ACT_START_DATE, ACT_COMPLETION_DATE AS FBD_ACT_COMPLETION_DATE, 
+			EST_LENGTH AS FBD_EST_LENGTH, ACT_LENGTH AS FBD_ACT_LENGTH, luhold.LU_NAME AS FBD_ON_HOLD_REASON, ON_HOLD_OTHER AS FBD_ON_HOLD_OTHER,     
+	   NOTES AS FBD_NOTES, luvault.LU_NAME  AS FBD_VAULT
+	 FROM TASK_FIBER_POWER_DIG AS Fiber_Dig           
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Dig.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Dig.FIBER_DIG_TYPE    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Dig.ON_HOLD_REASON     
+		LEFT OUTER JOIN LOOK_UPS AS luvault ON luvault.LOOK_UP_ID = Fiber_Dig.FIBER_DIG_VAULT      
+	 WHERE TASK_TITLE_ID = 4    
+	 ORDER BY Fiber_Dig.JOB_ID    
+	     
+	 ---- 5- Power Dig    
+	 SELECT Power_Dig.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PWD_REQUIRED,   
+			EST_START_DATE AS PWD_FORECAST_START_DATE, ACT_START_DATE AS PWD_ACT_START_DATE, ACT_COMPLETION_DATE AS PWD_ACT_COMPLETION_DATE,     
+			EST_LENGTH AS PWD_EST_LENGTH, ACT_LENGTH AS PWD_ACT_LENGTH, luhold.LU_NAME AS PWD_ON_HOLD_REASON, ON_HOLD_OTHER AS PWD_ON_HOLD_OTHER, NOTES AS PWD_NOTES    
+	 FROM TASK_FIBER_POWER_DIG AS Power_Dig           
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Power_Dig.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Power_Dig.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 5    
+	 ORDER BY Power_Dig.JOB_ID     
+	    
+	 ---- 6- Underground Miscellaneous    
+	 SELECT Underground_Miscellaneous.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS UGM_REQUIRED,   
+			ACT_COMPLETION_DATE AS UGM_ACT_COMPLETION_DATE, luhold.LU_NAME AS UGM_ON_HOLD_REASON, ON_HOLD_OTHER AS UGM_ON_HOLD_OTHER, NOTES AS UGM_NOTES    
+	 FROM TASK_MISC_AC_POWER AS Underground_Miscellaneous    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Underground_Miscellaneous.JOB_ID
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Underground_Miscellaneous.ON_HOLD_REASON        
+	 WHERE TASK_TITLE_ID = 6    
+	 ORDER BY Underground_Miscellaneous.JOB_ID    
+	    
+	 ---- 7- Fiber Pull    
+	 SELECT Fiber_Pull.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBP_REQUIRED,   
+			lutype.LU_NAME AS FBP_TYPE, luop.LU_NAME AS FBP_Lateral_Node_Tail, ACT_COMPLETION_DATE AS FBP_ACT_COMPLETION_DATE, 
+			luhold.LU_NAME AS FBP_ON_HOLD_REASON, ON_HOLD_OTHER AS FBP_ON_HOLD_OTHER, NOTES AS FBP_NOTES    
+	 FROM TASK_FIBER_PULL_SPLICE AS Fiber_Pull      
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Pull.JOB_ID  
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Pull.FIBER_TYPE 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Pull.ON_HOLD_REASON
+		LEFT OUTER JOIN LOOK_UPS AS luop ON luop.LOOK_UP_ID = Fiber_Pull.FIBER_OPTIC_POSITION   
+	 WHERE TASK_TITLE_ID = 7    
+	 ORDER BY Fiber_Pull.JOB_ID    
+	     
+	 ---- 8- Fiber Splicing    
+	 SELECT Fiber_Splicing.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS FBS_REQUIRED,   
+			lutype.LU_NAME AS FBS_TYPE, ACT_COMPLETION_DATE AS FBS_ACT_COMPLETION_DATE, luhold.LU_NAME AS FBS_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS FBS_ON_HOLD_OTHER, NOTES AS FBS_NOTES, LIGHT_TEST_CLIENT_DATE AS FBS_LIGHT_TEST_CLIENT_DATE    
+	 FROM TASK_FIBER_PULL_SPLICE AS Fiber_Splicing      
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Fiber_Splicing.JOB_ID    
+		LEFT OUTER JOIN LOOK_UPS AS lutype ON lutype.LOOK_UP_ID = Fiber_Splicing.FIBER_TYPE 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Fiber_Splicing.ON_HOLD_REASON    
+	 WHERE TASK_TITLE_ID = 8    
+	 ORDER BY Fiber_Splicing.JOB_ID    
+	     
+	 ---- 9- ACPower To Pole    
+	 SELECT ACPower_To_Pole.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS APP_REQUIRED,   
+			ACT_COMPLETION_DATE AS APP_ACT_COMPLETION_DATE, luhold.LU_NAME AS APP_ON_HOLD_REASON, ON_HOLD_OTHER AS APP_ON_HOLD_OTHER, NOTES AS APP_NOTES    
+	 FROM TASK_MISC_AC_POWER AS ACPower_To_Pole    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = ACPower_To_Pole.JOB_ID 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = ACPower_To_Pole.ON_HOLD_REASON   
+	 WHERE TASK_TITLE_ID = 9    
+	 ORDER BY ACPower_To_Pole.JOB_ID    
+	     
+	 ----- 10- Shroud/Antenna    
+	 SELECT Shroud_Antenna.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end as SRA_REQUIRED,   
+			EST_START_DATE AS SRA_FORECAST_START_DATE, ACT_COMPLETION_DATE AS SRA_ACT_COMPLETION_DATE,     
+			case when SHROUD_INSTALLED is null or SHROUD_INSTALLED = 'N' then CAST(0 AS Bit) when SHROUD_INSTALLED = 'Y' then CAST(1 AS Bit) end AS SRA_SHROUD_INSTALLED,   
+			case when ANTENA_INSTALLED is null or ANTENA_INSTALLED = 'N' then CAST(0 AS Bit) when ANTENA_INSTALLED = 'Y' then CAST(1 AS Bit) end AS SRA_ANTENA_INSTALLED,   
+			SHROUD_SERIAL_NUMBER AS SRA_SHROUD_SERIAL_NUMBER, ION_SERIAL_NUMBER AS SRA_ION_SERIAL_NUMBER, luhold.LU_NAME AS SRA_ON_HOLD_REASON, 
+			ON_HOLD_OTHER AS SRA_ON_HOLD_OTHER, NOTES AS SRA_NOTES    
+	 FROM TASK_SHROUD_ANTENA AS Shroud_Antenna    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = Shroud_Antenna.JOB_ID
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = Shroud_Antenna.ON_HOLD_REASON    
+	 ORDER BY Shroud_Antenna.JOB_ID    
+	     
+	 ---- 11- PIM Sweeps    
+	 SELECT PIM_Sweeps.JOB_ID, case when [REQUIRED] is null or [REQUIRED] = 'N' then CAST(0 AS Bit) when [REQUIRED] = 'Y' then CAST(1 AS Bit) end AS PMS_REQUIRED,   
+			ACT_COMPLETION_DATE AS PMS_ACT_COMPLETION_DATE, SUBMITTED_DATE AS PMS_SUBMITTED_DATE, CLIENT_APPROVAL_DATE AS PMS_CLIENT_APPROVAL_DATE, 
+			luhold.LU_NAME  AS PMS_ON_HOLD_REASON, ON_HOLD_OTHER AS PMS_ON_HOLD_OTHER, NOTES AS PMS_NOTES    
+	 FROM TASK_PIM_SWEEP AS PIM_Sweeps    
+		INNER JOIN @Job_IDs AS jid on jid.Job_ID = PIM_Sweeps.JOB_ID 
+		LEFT OUTER JOIN LOOK_UPS AS luhold ON luhold.LOOK_UP_ID = PIM_Sweeps.ON_HOLD_REASON   
+	 ORDER BY PIM_Sweeps.JOB_ID    
+        
+END
+------------------
+ALTER PROCEDURE [dbo].[proc_PROJECTSLoadAll]
+@p_clientIDs varchar(max) = 'All',
+@p_projectStatusIDs varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+
+SELECT [PROJECT_ID]
+      , p.[HYLAN_PROJECT_ID]
+      , p.[HYLAN_JOB_NUMBER]
+      , p.[PROJECT_BID_NAME]
+      , p.[PROJECT_STATUS]
+      , p.[TENTATIVE_PROJECT_START_DATE]
+      , p.[ACTUAL_PROJECT_START_DATE]
+      , p.[PROJECTED_END_DATE]
+      , p.[ACTUAL_PROJECT_CLOSE_DATE]
+      , p.[PROJECT_BID_DATE]
+      , p.[PROJECT_AWARDED]
+      , p.[BID_DOCUMENTS]
+       , (select count(project_id) from project_notes pn where pn.project_id = p.project_id) as NOTES_COUNT
+      , (select max(notes.created_on) from project_notes pn inner join notes on notes.note_id = pn.note_id where pn.project_id = p.project_id ) as [NOTES_DATE]
+	  , (select count(project_id) from project_attachments pa join attachments as a on a.attachment_id = pa.attachment_id where pa.project_id = p.project_id and a.Is_deleted = 0) as ATTACHMENTS_COUNT
+      , p.[PO_NUMBER]			
+      , p.[CREATED_ON]
+      , p.[CREATED_BY]
+      , p.[MODIFIED_ON]
+      , p.[MODIFIED_BY]
+      , p.[LOCK_COUNTER]
+      ,cast(0 AS BIT) ISDIRTY
+      , c.[COMPANY_ID] AS [CLIENT]
+      , c.[COMPANY_NAME] AS [CLIENT_NAME]
+	  , lu.[LU_NAME] AS [PROJECT_STATUS_NAME]
+  FROM [dbo].[PROJECTS] p 
+  LEFT JOIN COMPANIES c ON p.Client = c.COMPANY_ID
+  left JOIN dbo.LOOK_UPS lu ON lu.LOOK_UP_ID = p.PROJECT_STATUS
+  Where
+	 (isNull(@p_clientIDs,'All') = 'All' or p.Client in (Select item from dbo.split(@p_clientIDs,',') ) )
+ and (isNull(@p_projectStatusIDs,'All') = 'All' or p.[PROJECT_STATUS] in (Select item from dbo.split(@p_projectStatusIDs,',') ) )
+ 
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+
+--------------
+ALTER PROCEDURE [dbo].[proc_PROJECT_ATTACHMENTSLoadAll]
+@p_projectIDs as varchar(max) = 'All',
+@p_attachedWithIDs as varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		P.[HYLAN_PROJECT_ID],
+		NULL as JOB_FILE_NUMBER,
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		A.[USER],
+		PA.[PROJECT_ID],
+		A.[IS_DELETED]
+	FROM [PROJECT_ATTACHMENTS] AS PA
+	JOIN [ATTACHMENTS] AS A ON PA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [PROJECTS] AS P ON PA.Project_Id = P.Project_Id
+	WHERE A.[IS_DELETED] = 0
+    AND (isNull(@p_projectIDs,'All') = 'All' or PA.[PROJECT_ID] in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_attachedWithIDs,'All') = 'All' or A.[ATTACHMENT_ID] in (Select item from dbo.split(@p_attachedWithIDs,',') ) )
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+-----------
+ALTER PROCEDURE [dbo].[proc_PERMIT_ATTACHMENTSLoadAll]
+@p_projectIDs as varchar(max) = 'All',
+@p_attachedWithIDs as varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		P.[HYLAN_PROJECT_ID],
+		P.[PROJECT_ID],
+		J.[JOB_FILE_NUMBER],
+		PT.[PERMIT_NUMBER],
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		A.[USER],
+		J.[JOB_ID],
+		PT.[PERMIT_ID],
+		A.[IS_DELETED]
+	FROM [PERMIT_ATTACHMENTS] AS PA
+	JOIN [ATTACHMENTS] AS A ON PA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [PERMITS] AS PT ON PA.PERMIT_ID = PT.PERMIT_ID
+	JOIN [JOBS] AS J ON J.JOB_ID = PT.JOB_ID
+	JOIN [PROJECTS] AS P ON P.PROJECT_ID = J.PROJECT_ID
+	
+	WHERE A.[IS_DELETED] = 0
+    AND (isNull(@p_projectIDs,'All') = 'All' or P.[PROJECT_ID] in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_attachedWithIDs,'All') = 'All' or A.[ATTACHMENT_ID] in (Select item from dbo.split(@p_attachedWithIDs,',') ) )
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+
+
+------------
+ALTER PROCEDURE [dbo].[proc_JOB_ATTACHMENTSLoadAll]
+@p_projectIDs as varchar(max) = 'All',
+@p_attachedWithIDs as varchar(max) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		A.[ATTACHMENT_ID],
+		A.[FILE_NAME],
+		A.[FILE_TITLE],
+		A.[FILE_KEYWORD],
+		P.[HYLAN_PROJECT_ID],
+		P.[PROJECT_ID],
+		J.[JOB_FILE_NUMBER],
+		A.[FILE_TYPE],
+		A.[FILE_SIZE],
+		DC.[CATEGORY_CODE],
+		DC.[CATEGORY_NAME],
+		DC.[CATEGORY_TYPE],
+		A.[CREATED_ON],
+		A.[CREATED_BY],
+		A.[MODIFIED_ON],
+		A.[MODIFIED_BY],
+		A.[USER],
+		JA.[JOB_ID],
+		A.[IS_DELETED]
+	FROM [JOB_ATTACHMENTS] AS JA
+	JOIN [ATTACHMENTS] AS A ON JA.Attachment_Id = A.Attachment_Id
+	JOIN [DOCUMENT_CATEGORY] AS DC ON A.DOCUMENT_CATEGORY = DC.CATEGORY_CODE
+	JOIN [JOBS] AS J ON JA.JOB_Id = J.JOB_Id
+	JOIN [PROJECTS] AS P ON P.PROJECT_ID = J.PROJECT_ID	
+	WHERE A.[IS_DELETED] = 0
+    AND (isNull(@p_projectIDs,'All') = 'All' or P.[PROJECT_ID] in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_attachedWithIDs,'All') = 'All' or A.[ATTACHMENT_ID] in (Select item from dbo.split(@p_attachedWithIDs,',') ) )
+	
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+
+
+-------------------3/31/2017
+ALTER PROCEDURE [dbo].[proc_DAILYLoadAll] 
+@p_projectIDs as varchar(max) = 'All',
+@p_dailyTypeIDs as varchar(max) = 'All',
+@p_statusIDs as varchar(200) = 'All',
+@p_shiftIDs as varchar(200) = 'All'
+AS
+BEGIN
+	SET NOCOUNT ON
+	DECLARE @Err int
+
+	SELECT
+		DA.[DAILY_ID],
+		JOB.[JOB_ID],
+		PRJ.[PROJECT_ID],
+		PRJ.[HYLAN_PROJECT_ID] AS HYLAN_PROJECT_ID,
+		JOB.[JOB_FILE_NUMBER],
+		JOB.[NODE_ID1],
+		JOB.[NODE_ID2],
+		JOB.[NODE_ID3],
+		JOB.[HUB],
+		JOB.[HYLAN_PM],
+		JOB.[STREET_ADDRESS],
+		JOB.[CITY],
+		JOB.[STATE],
+		JOB.[ZIP],
+		JOB.[LAT],
+		JOB.[LONG],
+		JOB.[POLE_LOCATION],
+		
+		DA.[DAILY_TYPE],
+		DAILY_TYPE_LU.[LU_NAME] AS DAILY_TYPE_NAME,
+		DA.[DAILY_DATE],
+		DA.[DAY_OF_WEEK],
+		DA.[DAILY_DAYS],
+		DA.[STATUS],
+		DAILY_STATUS_LU.[LU_NAME] AS DAILY_STATUS_NAME,
+		DA.[SHIFT],
+		DAILY_SHIFT_LU.[LU_NAME] AS DAILY_SHIFT_NAME,
+		DA.[WORK_ORDER_NUMBER],
+		DA.[DAILY_TYPE_NOTES],
+		DA.[CREATED_ON],
+		DA.[CREATED_BY],
+		DA.[MODIFIED_ON],
+		DA.[MODIFIED_BY],
+		DA.[LOCK_COUNTER]
+	FROM [DAILY] DA
+	INNER JOIN JOBS JOB ON JOB.[JOB_ID] = DA.[JOB_ID]
+	LEFT JOIN PROJECTS PRJ ON JOB.[PROJECT_ID] = PRJ.[PROJECT_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_TYPE_LU ON DA.[DAILY_TYPE] = DAILY_TYPE_LU.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_STATUS_LU ON DA.[STATUS] = DAILY_STATUS_LU.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_SHIFT_LU ON DA.[SHIFT] = DAILY_SHIFT_LU.[LOOK_UP_ID]
+	WHERE DA.PROJECT_ID IS NOT NULL AND DA.JOB_ID IS NOT NULL
+	AND (isNull(@p_projectIDs,'All') = 'All' or PRJ.[PROJECT_ID] in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_dailyTypeIDs,'All') = 'All' or DA.[DAILY_TYPE] in (Select item from dbo.split(@p_dailyTypeIDs,',') ) )
+	AND (isNull(@p_statusIDs,'All') = 'All' or DA.[STATUS] in (Select item from dbo.split(@p_statusIDs,',') ) )
+	AND (isNull(@p_shiftIDs,'All') = 'All' or DA.[SHIFT] in (Select item from dbo.split(@p_shiftIDs,',') ) )
+
+union 
+
+	SELECT
+		DA.[DAILY_ID],
+		DA.[JOB_ID],
+		DA.[PROJECT_ID],
+		NULL AS HYLAN_PROJECT_ID,
+		NULL AS JOB_FILE_NUMBER,
+		UNK_DAILY.[NODE_ID1],
+		UNK_DAILY.[NODE_ID2],
+		UNK_DAILY.[NODE_ID3],
+		UNK_DAILY.[HUB],
+		UNK_DAILY.[HYLAN_PM],
+		UNK_DAILY.[STREET_ADDRESS],
+		UNK_DAILY.[CITY],
+		UNK_DAILY.[STATE],
+		UNK_DAILY.[ZIP],
+		UNK_DAILY.[LAT],
+		UNK_DAILY.[LONG],
+		UNK_DAILY.[POLE_LOCATION],
+		
+		DA.[DAILY_TYPE],
+		DAILY_TYPE_LU.[LU_NAME] AS DAILY_TYPE_NAME,
+		DA.[DAILY_DATE],
+		DA.[DAY_OF_WEEK],
+		DA.[DAILY_DAYS],
+		DA.[STATUS],
+		DAILY_STATUS_LU.[LU_NAME] AS DAILY_STATUS_NAME,
+		DA.[SHIFT],
+		DAILY_SHIFT_LU.[LU_NAME] AS DAILY_SHIFT_NAME,
+		DA.[WORK_ORDER_NUMBER],
+		DA.[DAILY_TYPE_NOTES],
+		DA.[CREATED_ON],
+		DA.[CREATED_BY],
+		DA.[MODIFIED_ON],
+		DA.[MODIFIED_BY],
+		DA.[LOCK_COUNTER]
+	FROM [DAILY] DA
+	INNER JOIN DAILY_UNKNOWN UNK_DAILY ON UNK_DAILY.[DAILY_ID] = DA.[DAILY_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_TYPE_LU ON DA.[DAILY_TYPE] = DAILY_TYPE_LU.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_STATUS_LU ON DA.[STATUS] = DAILY_STATUS_LU.[LOOK_UP_ID]
+	LEFT JOIN [LOOK_UPS] DAILY_SHIFT_LU ON DA.[SHIFT] = DAILY_SHIFT_LU.[LOOK_UP_ID]
+	WHERE 
+	DA.PROJECT_ID IS NULL or DA.JOB_ID IS NULL
+	AND (isNull(@p_projectIDs,'All') = 'All' or DA.[PROJECT_ID] in (Select item from dbo.split(@p_projectIDs,',') ) )
+	AND (isNull(@p_dailyTypeIDs,'All') = 'All' or DA.[DAILY_TYPE] in (Select item from dbo.split(@p_dailyTypeIDs,',') ) )
+	AND (isNull(@p_statusIDs,'All') = 'All' or DA.[STATUS] in (Select item from dbo.split(@p_statusIDs,',') ) )
+	AND (isNull(@p_shiftIDs,'All') = 'All' or DA.[SHIFT] in (Select item from dbo.split(@p_shiftIDs,',') ) )
+
+
+
+	SET @Err = @@Error
+
+	RETURN @Err
+END
+-----------

@@ -1,0 +1,262 @@
+﻿.km-header * {
+    vertical-align: middle;
+}
+
+.km-navbar {
+    background-color: #ea2d2b !important; /*#677077  #495d68*/
+}
+.km-android .km-view-title {
+    margin-top:8px;
+}
+.km-view-title, .km-android .km-view-title {
+    font-family: 'OpenSansSemiBold' !important;
+    color: #ffffff !important;
+    text-align: left;
+    visibility: visible !important;
+    font-size:20px !important;
+    margin-left:20px;
+}
+.km-view-title span[data-role="view-title"]{
+    padding-left:10px;
+}
+#pullCount {
+    font-family: 'OpenSansRegular' !important;
+    font-size: 14px;
+    vertical-align:baseline;
+}
+
+
+.km-android .km-list>li,
+.km-android, .km-android .km-header, .km-android .km-footer, .km-android .km-content, .km-android .km-pane, 
+.km-android .km-scroll-header .km-group-title, .km-android input[type=password], .km-android input[type=search], 
+.km-android input[type=number], .km-android input[type=tel], .km-android input[type=url], .km-android input[type=email], 
+.km-android input[type=text]:not(.k-input), .km-root .km-android textarea,
+.km-android input, .km-android select, .km-android textarea, 
+.km-android .km-widget{
+    background-color:inherit;
+    color:inherit;
+}
+    .km-android .km-list > li {
+        background-color:#ffffff;
+    }
+.km-root .km-android .k-dropdown{
+    margin-top:inherit;
+}
+.km-android input[type=password], .km-android input[type=search], 
+.km-android input[type=number], .km-android input[type=tel], 
+.km-android input[type=url], .km-android input[type=email], 
+.km-android input[type=text]:not(.k-input), 
+.km-root .km-android textarea {
+    outline-width: inherit;
+    outline-style: inherit;
+    outline-offset: inherit;
+    border-width: inherit;
+    border-style: inherit;
+    border:solid 1px #c5c5c5;
+    padding:5px;
+    box-sizing:border-box;
+}
+.button {
+    padding:0px !important;
+    margin: 0px !important;
+    width:56px;
+    height:56px;
+    background-repeat: no-repeat !important;
+    background-position: center !important; 
+    border:none !important;
+}
+.menubutton{
+    background-image: url(../images/appdrawer.png) !important;
+    background-color:transparent !important;
+}
+.addbutton{
+    background-image: url(../images/new.png) !important;
+}
+.grpbutton{
+    background-image: url(../images/group.png) !important;
+}
+.editbutton{
+    background-image: url(../images/edit.png) !important;
+}
+.searchbutton{
+    background-image: url(../images/search.png) !important;
+}
+.savebutton{
+    background-image: url(../images/save.png) !important;
+}
+.resetbutton{
+    background-image: url(../images/reset.png) !important;
+}
+.deletebutton {
+    background-image: url(../images/delete.png) !important;
+}
+.donebutton {
+    color: #ffffff !important;
+    text-shadow: none !important;
+    margin-right: 40px !important;
+    padding-top: 15px !important;
+    padding-left: 15px !important;
+}
+.backbutton {
+    width:26px;
+    background-image: url(../images/back.png) !important;
+    background-color:transparent !important;
+}
+
+
+.button .km-text{
+    font-size:18px !important;
+}
+.ActiveButton {
+    color: #DFEDF6 !important;
+    background-color: rgba(255, 255, 255, 0.16) !important;
+}
+.NavBar {
+    background-color:#ea2d2b;
+    height:56px !important;
+}
+.NavBar a[id*='BackButton'], .NavBar .km-back {
+    background-image: url(../images/back.png);
+    background-repeat: no-repeat;
+    background-position: left;
+    width:30px;
+    height:30px;
+}
+.NavBar a[id*='BackButton']::before, .NavBar .km-back::before {
+   content:none !important;
+}
+#btnAppDrawer {
+    margin-left:-5px !important;
+}
+.NavBar.km-text {
+    color: #000000 !important;
+}
+.km-android .km-navbar [class*=item] .km-text {
+  border-right:none !important;
+  padding: 0 0 !important;
+}
+.km-customIcon {
+    background-repeat: repeat;
+    background-position: left;
+    background-image: url(menu.png);
+}
+#backbutton {
+    font-size:12pt !important;
+}
+.km-back:before {
+    vertical-align:middle;
+}
+.km-android .km-view:not(.km-splitview) {
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+}
+
+/*.km-scroll-container {
+    border-left: solid 1px silver;
+    border-right: solid 1px silver;
+}*/
+.km-listview-wrapper {
+    padding-left:0px !important;
+    padding-right: 0px !important;
+}
+.km-group-title {
+    background-color:#c0c0c0 !important;
+    border-top:none !important;
+    color:#000000 !important;
+    line-height: 1em !important;
+}
+.km-group-container, .km-list li:last-child  {
+    border: none !important;
+}
+.km-list {
+        padding:0px !important;
+    }
+
+.hide {
+    display:none !important;
+}
+#listView.km-ios7  > li {
+    padding-left: 0px !important;
+    background: #ffffff !important;
+}
+#listView > li:nth-child(odd){
+    /*background-color:#f5f5f5;*/
+}
+.taginput {
+    border: solid 1px #f9f9f9;
+    border-radius:3px;
+    margin: 3px 3px 0px 0px;
+    padding: 2px 7px 2px 7px;
+    line-height: 21px;
+    display:inline-block;
+}
+/**** DateTime Picker Large Size Icons **/
+.k-picker-wrap input, .k-dropdown-wrap span, .k-multiselect-wrap input{
+    height:30px !important;
+    line-height:28px !important;
+}
+.k-i-calendar, .k-i-clock {
+    background-repeat:no-repeat;
+    background-position: right !important;
+    background-size: 28px 28px !important;
+    height:28px;
+    width:28px;
+    margin:2px 4px !important;
+}
+.k-i-calendar {
+    background-image: url(../images/calendar.png) !important;
+}
+.k-i-clock {
+    background-image: url(../images/clock.png) !important;
+}
+.k-picker-wrap .k-select {
+    padding-right:27px;
+    background-color: #ffffff !important;
+    border:none;
+    margin:1px 0px 1px 0px;
+    height:28px;
+}
+.k-datetimepicker{
+    padding:0px !important;
+}
+/******DateTimePicker Style Ends ******/
+
+.k-autocomplete.k-state-default, .k-picker-wrap.k-state-default, .k-numeric-wrap.k-state-default, .k-dropdown-wrap.k-state-default{
+    background-color: #ffffff !important;
+}
+
+.k-dropdown-wrap span.k-select .k-icon{
+    background-image: url(../images/dropdown.png) !important;
+    background-repeat:no-repeat;
+    background-position: right !important;
+    background-size: 21px 12px !important;
+    height:12px;
+    width:32px;
+    background-position-x: -1px !important;
+}
+.k-multiselect-wrap ul li{
+    margin-top:5px;
+}
+@media screen and (max-width:400px) {
+	.button, .search {
+		width: 36px;
+        background-size: 22px !important;
+
+	}
+    .backbutton{
+        width:24px !important;
+        background-size: 15px !important;
+    }
+    .menubutton {
+		width: 38px;
+		background-size: 30px !important;
+	}
+    .km-view-title span[data-role="view-title"]{
+    padding-left:4px !important;
+    }
+    .km-view-title, .km-android .km-view-title {
+        margin-left:8px !important;
+    }
+}

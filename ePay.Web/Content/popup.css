@@ -1,0 +1,70 @@
+﻿.dialog-header {
+    margin-bottom: 12px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    height: 46px;
+    vertical-align: middle;
+}
+
+.up-section * {
+    vertical-align: middle;
+}
+
+.up-section {
+    font-family: SOURCE SANS PRO;
+    font-size: 10pt;
+    font-weight: normal;
+    border-bottom: solid 1px #E3E3E3;
+    padding-top: 15px;
+    min-height: 90px;
+}
+
+    .up-section .title {
+        font-weight: bold;
+        color: #4C828F;
+        font-size: 10pt;
+        border-bottom: solid 2px #FE9C15;
+        text-transform:uppercase;
+        margin-bottom:15px;
+    }
+    .up-section label {
+        color: #696969;
+    }
+
+.section-inner-margin {
+    margin: 2px;
+}
+
+.ReadOnlyText {
+    font-weight: bold !important;
+    color: #4C828F !important;
+}
+
+.Required, .Required .k-multiselect-wrap {
+    background-color: #FDDFE1 !important;
+}
+
+.k-multiselect-wrap {
+    /*max-height: 51px;*/
+    overflow-y: auto;
+}
+
+.HeadNote {
+    text-align: right;
+    font-family: SOURCE SANS PRO;
+    font-size: 8pt;
+    font-style: italic;
+    line-height: 20px;
+}
+#btnCancel {
+        background: none;
+        border: none;
+        border-radius: 0px;
+        color: #535353;
+    }
+    #btnCancel:hover {
+        background: none;
+        border: none;
+        text-decoration: underline;
+        border-radius: 0px;
+    }

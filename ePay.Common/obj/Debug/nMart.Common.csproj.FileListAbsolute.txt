@@ -1,0 +1,35 @@
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\bin\Debug\EPay.Common.dll
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\bin\Debug\EPay.Common.pdb
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Debug\EPay.Common.dll
+D:\TariqE-Drive\Rod Clients Enhancments\nMart\Source\nMart\nMart.Common\obj\Debug\EPay.Common.pdb
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\bin\Debug\EPay.Common.dll
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\bin\Debug\EPay.Common.pdb
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Debug\EPay.Common.dll
+D:\TariqE-Drive\Macrosoft Data\EEI\nMart.Common\obj\Debug\EPay.Common.pdb
+E:\TryTFS\EEI\nMart.Common\bin\Debug\EPay.Common.dll
+E:\TryTFS\EEI\nMart.Common\bin\Debug\EPay.Common.pdb
+E:\TryTFS\EEI\nMart.Common\obj\Debug\EPay.Common.dll
+E:\TryTFS\EEI\nMart.Common\obj\Debug\EPay.Common.pdb
+E:\TryTFS\EEI\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\TFS\EEI\nMart.Common\bin\Debug\EPay.Common.dll
+E:\Projects\TFS\EEI\nMart.Common\bin\Debug\EPay.Common.pdb
+E:\Projects\TFS\EEI\nMart.Common\obj\Debug\EPay.Common.dll
+E:\Projects\TFS\EEI\nMart.Common\obj\Debug\EPay.Common.pdb
+E:\Projects\TFS\EEI\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\RODTFS\Hylan\nMart.Common\bin\Debug\EPay.Common.dll
+E:\RODTFS\Hylan\nMart.Common\bin\Debug\EPay.Common.pdb
+E:\RODTFS\Hylan\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\RODTFS\Hylan\nMart.Common\obj\Debug\EPay.Common.dll
+E:\RODTFS\Hylan\nMart.Common\obj\Debug\EPay.Common.pdb
+D:\Work\ROD\Hylan\nMart.Common\bin\Debug\EPay.Common.dll
+D:\Work\ROD\Hylan\nMart.Common\bin\Debug\EPay.Common.pdb
+D:\Work\ROD\Hylan\nMart.Common\obj\Debug\EPay.Common.dll
+D:\Work\ROD\Hylan\nMart.Common\obj\Debug\EPay.Common.pdb
+D:\Work\ROD\Hylan\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\TFS-Projects\Hylan\nMart.Common\bin\Debug\EPay.Common.dll
+E:\TFS-Projects\Hylan\nMart.Common\bin\Debug\EPay.Common.pdb
+E:\TFS-Projects\Hylan\nMart.Common\obj\Debug\EPay.Common.dll
+E:\TFS-Projects\Hylan\nMart.Common\obj\Debug\EPay.Common.pdb
+E:\TFS-Projects\Hylan\nMart.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache

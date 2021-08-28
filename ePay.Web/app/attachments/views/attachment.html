@@ -1,0 +1,164 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>Attachments</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Project ID</label>
+
+                <!--<div style="width: 200px" id="divMultiSelProjects" title="All" control="multiSelectProjIdControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="projectIdDS" selected-model="selectedProjectsList" extra-settings="projectsSettings" events="projectsEvents" checkboxes="true"></div>-->
+                <div id="divMultiSelProjects"
+                     options="MSProjects.options"
+                     selected-model="MSProjects.selectedList"
+                     extra-settings="MSProjects.settings"
+                     events="MSProjects.events"
+                     control="multiSelectProjIdControl"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-6 col-md-3 col-lg-3">
+                <label class="control-label nopadding">Attached With</label>
+                <!--<div style="width: 200px" id="divMultiSelAttachmentType" title="All" control="multiSelectAttachmentTypeControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="attachmentTypeDS" selected-model="selectedAttachmentTypeDS" extra-settings="attachmentTypeSettings" events="attachedWithEvents" checkboxes="true"></div>-->
+                <div id="divMultiSelAttachmentTypes"
+                     options="MSAttachmentTypes.options"
+                     selected-model="MSAttachmentTypes.selectedList"
+                     extra-settings="MSAttachmentTypes.settings"
+                     events="MSAttachmentTypes.events"
+                     control="multiSelectAttachmentTypeControl"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="nav-buttons" style="padding-top: 30px">
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-click="ResetFilter()">Reset Filters</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="col-sm-12 col-md-12 col-lg-12 clear">
+        <br /><br />
+    </div>
+
+
+
+
+
+
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow: hidden">
+        <div id="gridAttachment" kendo-grid="grid" k-options="vm.gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+
+
+<style>
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top: -10px !important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content: none;
+    }
+
+    form.k-filter-menu.k-popup.k-group.k-reset.k-state-border-up {
+        font-family: 'Source Sans Pro Regular', sans-serif !important;
+    }
+
+    .k-grid-header {
+        /*border-bottom: 1px solid #000 !important;*/
+         border-top: 1px solid #c5c5c5 !important;
+    }
+
+
+    /*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-------------*/
+    /*.k-filter-row th*/
+    /*div.k-grid-header-locked table th:nth-child(7),
+    div.k-grid-header-wrap table th:nth-child(4),
+    div.k-grid-header-wrap table th:nth-child(9),
+    div.k-grid-header-wrap table th:nth-child(17) {
+        border-right-width: 1px !important;
+    }*/
+     
+
+    /*-----date filters--------*/
+    /*span.k-widget.k-datepicker.k-header {
+        width:100px !important;
+    }
+
+    span.k-widget.k-dropdown.k-header.k-dropdown-operator {
+        right:0px;
+    }*/
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+
+    #grid1 .k-grid-header-locked .k-filter-row th:last-child{
+        border-right: solid 1px black !important;
+    }
+</style>

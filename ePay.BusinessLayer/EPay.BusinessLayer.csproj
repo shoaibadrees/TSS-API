@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EPay.BusinessLayer</RootNamespace>
+    <AssemblyName>EPay.BusinessLayer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MigraDoc.DocumentObjectModel">
+      <HintPath>..\packages\PdfSharp\MigraDoc.DocumentObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering">
+      <HintPath>..\packages\PdfSharp\MigraDoc.Rendering.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.1-beta1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>..\packages\NPOI\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>..\packages\NPOI\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp">
+      <HintPath>..\packages\PdfSharp\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdhocReportBL.cs" />
+    <Compile Include="ngBL\EmployeeBL.cs" />
+    <Compile Include="ngBL\PaySalaryEditingBL.cs" />
+    <Compile Include="ngBL\PayAdvanceBL.cs" />
+    <Compile Include="ngBL\PayLeavesBL.cs" />
+    <Compile Include="ngBL\PayShiftsBL.cs" />
+    <Compile Include="ngBL\PayDepartmentBL.cs" />
+    <Compile Include="ngBL\PayDesignationBL.cs" />
+    <Compile Include="ATTACHMENTBL.cs" />
+    <Compile Include="COMPANIEBL.cs" />
+    <Compile Include="DAILYBL.cs" />
+    <Compile Include="ErrorLogBL.cs" />
+    <Compile Include="JOB_ATTACHMENTBL.cs" />
+    <Compile Include="ngBL\RoleBL.cs" />
+    <Compile Include="ngBL\RoleTaskPermBL.cs" />
+    <Compile Include="ngBL\TaskBL.cs" />
+    <Compile Include="ngBL\UserBL.cs" />
+    <Compile Include="Partials\EMAIL_GROUPSBL.cs" />
+    <Compile Include="Partials\LABORBL.cs" />
+    <Compile Include="LOOK_UPBL.cs" />
+    <Compile Include="JOBBL.cs" />
+    <Compile Include="MAN_POWERBL.cs" />
+    <Compile Include="Partials\MATERIALBL.cs" />
+    <Compile Include="NOTEBL.cs" />
+    <Compile Include="NOTIFICATIONBL.cs" />
+    <Compile Include="EXPORTBL.cs" />
+    <Compile Include="Partials\ATTACHMENTBL.cs" />
+    <Compile Include="Partials\HYLAN_TASKBL.cs" />
+    <Compile Include="MESSAGEBL.cs" />
+    <Compile Include="MESSAGES_COMPANIEBL.cs" />
+    <Compile Include="MESSAGES_RMAGBL.cs" />
+    <Compile Include="Partials\COMPANIEBL.cs" />
+    <Compile Include="Partials\LOOK_UPBL.cs" />
+    <Compile Include="Partials\MESSAGEBL.cs" />
+    <Compile Include="Partials\NOTEBL.cs" />
+    <Compile Include="Partials\REPORTBL.cs" />
+    <Compile Include="Partials\TASK_MATRIXBL.cs" />
+    <Compile Include="Partials\TASK_ROSTERBL.cs" />
+    <Compile Include="Partials\ROLEBL.cs" />
+    <Compile Include="Partials\USERS_COMPANIEBL.cs" />
+    <Compile Include="PERMIT_TYPEBL.cs" />
+    <Compile Include="PERMITBL.cs" />
+    <Compile Include="PERMIT_ATTACHMENTBL.cs" />
+    <Compile Include="PROJECTBL.cs" />
+    <Compile Include="PROJECT_ATTACHMENTBL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ROLEBL.cs" />
+    <Compile Include="ROLES_PERMISSIONBL.cs" />
+    <Compile Include="SCREENBL.cs" />
+    <Compile Include="ST_STATE_LBL.cs" />
+    <Compile Include="USERBL.cs" />
+    <Compile Include="Partials\USERBL.cs" />
+    <Compile Include="USERS_COMPANIEBL.cs" />
+    <Compile Include="Partials\VEHICLEBL.cs" />
+    <Compile Include="Partials\WORK_DETAILBL.cs" />
+    <Compile Include="Util\Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ePay.Common\EPay.Common.csproj">
+      <Project>{601e1d6d-3ed6-49a8-9465-d617cdfb7c84}</Project>
+      <Name>EPay.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ePay.DAL\EPay.DAL.csproj">
+      <Project>{76b78eae-5b25-4a3b-89c8-9561eda418e8}</Project>
+      <Name>EPay.DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

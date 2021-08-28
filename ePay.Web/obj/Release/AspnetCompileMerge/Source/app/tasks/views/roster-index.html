@@ -1,0 +1,255 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>TASKS</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch()">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-12 col-lg-12 no-padding clear">
+        <!--<div class="overlay hide">
+            <div id="divSpinner"></div>
+        </div>-->
+        <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-4 col-md-2 col-lg-2">
+                    <label class="control-label nopadding">Project ID</label>
+                    <div id="divMultiSelProjects"
+                         options="MSProjects.options"
+                         selected-model="MSProjects.selectedList"
+                         extra-settings="MSProjects.settings"
+                         events="MSProjects.events"
+                         title="All"
+                         ng-dropdown-multiselect=""
+                         translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                         checkboxes="true"></div>
+                </div>
+                <div class="clearfix visible-md-block"></div>
+                <div class="col-sm-8 col-md-10 col-lg-8">
+                    <label class="control-label nopadding" style="display:block">Groups</label>
+                    <div class="group" ng-class="group.id" ng-repeat="group in taskGroups">
+                        <input type="checkbox" value="{{group.id}}" ng-disabled="group.id == 'General'" ng-checked="group.isChecked" ng-model="group.isChecked" ng-click="onGroupClick(group)">{{group.title}}
+                    </div>
+                </div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-sm-3 col-md-2 col-lg-2 pull-right">
+                    <label class="control-label nopadding"></label>
+                    <div class="nav-buttons clear">
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a ng-click="ResetFilter()" style="width:100%;">Reset Filters</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+            <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+        </div>
+    </div>
+</div>
+<style>
+    /*.k-grid td {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }*/
+
+    
+
+    .k-grid-toolbar {
+        visibility: hidden;
+    }
+
+    .group {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: normal;
+        width: 80px;
+        border: solid 1px #d5d5d5;
+        border-right-width: 0px;
+        padding: 3px;
+    }
+
+        .group:last-child {
+            border-width: 0px;
+            border-left-width: 1px;
+        }
+
+        .group.Foundation_Pole,
+        .group.Underground {
+            width: 115px;
+        }
+
+        .group * {
+            vertical-align: middle !important;
+        }
+
+        .group input {
+            margin-top: 0px;
+            margin-right: 2px;
+        }
+
+    div.k-grid-header-wrap table th[data-title~="Continuity"],
+    div.k-grid-header-wrap table th[data-title="Foundation Work"],
+    div.k-grid-header-wrap table th[data-title="Pole Work"],
+    div.k-grid-header-wrap table th[data-title="Fiber Dig"],
+    div.k-grid-header-wrap table th[data-title="Power Dig"],
+    div.k-grid-header-wrap table th[data-title="Underground Miscellaneous"],
+    div.k-grid-header-wrap table th[data-title="Fiber Pull"],
+    div.k-grid-header-wrap table th[data-title="Fiber Splicing"],
+    div.k-grid-header-wrap table th[data-title="AC Power To Pole"],
+    div.k-grid-header-wrap table th[data-title="Shroud/Antenna"],
+    div.k-grid-header-wrap table th[data-title="PIM'S & Sweeps"] {
+        background: white !important;
+        height: 18px !important;
+        border-bottom: solid 1px #c6c6c6 !important;
+        vertical-align: middle;
+        border-top-style: solid;
+        border-top-width: 3px;
+    }
+
+
+    div.k-grid-header-wrap table th[data-title~="Continuity"] {
+        border-top-color: #D9D9DB !important;
+    }
+
+    div.k-grid-header-wrap table th[data-title="Foundation Work"],
+    div.k-grid-header-wrap table th[data-title="Pole Work"] {
+        border-top-color: #F7F2C5;
+    }
+
+    div.k-grid-header-wrap table th[data-title="Fiber Dig"],
+    div.k-grid-header-wrap table th[data-title="Power Dig"],
+    div.k-grid-header-wrap table th[data-title="Underground Miscellaneous"] {
+        border-top-color: #F8E5D6;
+    }
+
+    div.k-grid-header-wrap table th[data-title="Fiber Pull"],
+    div.k-grid-header-wrap table th[data-title="Fiber Splicing"] {
+        border-top-color: #F8F9B5;
+    }
+
+    div.k-grid-header-wrap table th[data-title="AC Power To Pole"],
+    div.k-grid-header-wrap table th[data-title="Shroud/Antenna"],
+    div.k-grid-header-wrap table th[data-title="PIM'S & Sweeps"] {
+        border-top-color: #E8F7C5;
+    }
+
+
+
+
+    /*form.k-filter-menu.k-popup.k-group.k-reset.k-state-border-up {
+        font-family: 'Source Sans Pro Regular', sans-serif !important;
+    }*/
+
+
+
+    /*.k-grid-header .k-header {
+        position: relative;
+    }*/
+
+    /*.k-header > .k-grid-filter {
+        position: absolute;
+        float: none;
+        top: 35%;
+        right: 6px;
+    }*/
+
+    /*.k-grid-header .center-header {
+        text-align: center;
+    }*/
+
+    /*.k-grid-header .wrap-header {
+        height: auto;
+        overflow: visible;
+        white-space: normal;
+    }
+    .k-grid-header th.k-header > .k-link{
+        line-height:12px !important;
+        margin-bottom:5px !important;
+    }*/
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top: -10px !important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content: none;
+    }
+</style>
+
+<style>
+    .overlay {
+        opacity: 0.50;
+        background-color: #000000;
+        z-index: 1;
+    }
+
+
+
+    /*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif !important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right: 0px;
+    }
+    /*----------setting the flter border-------------*/
+    /*.k-filter-row th*/
+    div.k-grid-header-locked table th:nth-child(7) {
+        border-right-width: 1px !important;
+    }
+
+    /*----------setting the flter border-------------*/
+    div.k-grid-header-locked table th:nth-child(5),
+    div.k-grid-header-wrap table th:nth-child(5),
+    div.k-grid-header-wrap table th:nth-child(14),
+    div.k-grid-header-wrap table th:nth-child(22),
+    div.k-grid-header-wrap table th:nth-child(33),
+    div.k-grid-header-wrap table th:nth-child(42),
+    div.k-grid-header-wrap table th:nth-child(47),
+    div.k-grid-header-wrap table th:nth-child(54),
+    div.k-grid-header-wrap table th:nth-child(61),
+    div.k-grid-header-wrap table th:nth-child(66),
+    div.k-grid-header-wrap table th:nth-child(76),
+    div.k-grid-header-wrap table th:nth-child(83) {
+        border-right-width: 1px !important;
+    }
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top: 2px;
+    }
+</style>

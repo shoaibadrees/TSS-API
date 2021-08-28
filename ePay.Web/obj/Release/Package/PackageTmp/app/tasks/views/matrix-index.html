@@ -1,0 +1,290 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">TASK MATRIX <span>DASHBOARD</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();CreateSummarySection();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch();CreateSummarySection();"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Project ID</label>
+
+                <div id="divMultiSelProjects"
+                     options="MSProjects.options"
+                     selected-model="MSProjects.selectedList"
+                     extra-settings="MSProjects.settings"
+                     events="MSProjects.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label">Job File Number</label>
+                <div id="divMultiSelJFN" title="All" control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     options="JFN_DS" selected-model="selectedJFNList"
+                     extra-settings="JFNSettings" events="JFNEvents" checkboxes="true"></div>
+            </div>
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Job Status</label>
+                <div id="divMultiSelJobStatus" title="All" control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="jobStatusLU" selected-model="selectedJobStatusList" extra-settings="jobStatusSettings" events="JobStatusEvents" checkboxes="true"></div>
+
+            </div>
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Task Status</label>
+                <div id="divMultiSelTaskStatus" title="All" control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     options="taskStatusLU" selected-model="selectedTaskStatusList"
+                     extra-settings="taskStatusSettings" events="TaskStatusEvents" checkboxes="true"></div>
+
+            </div>
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Date</label>
+                <input id="dpDate" ng-model="selectedTMDate" ng-change="dateChange()" />
+                <script type="text/javascript">
+                    $("#dpDate").kendoMaskedDatePicker();
+                    $("#dpDate").val((new Date()).toString());
+                </script>
+
+            </div>
+           
+            <div class="col-sm-4 col-md-2 col-lg-2">
+                <label class="control-label nopadding"></label>
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a ng-click="ResetFilter()" style="width:100%;">Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions">
+            <div class="k-header k-grid-toolbar ng-scope" id="tskMatrixToolbar">
+                <table class="summary-table" border="1" cellspacing="0" cellpadding="0">
+                    <thead>
+                        <tr id="summaryTH">
+                            <td class="summary-cell">Summary</td>
+                            <td class="CTZ_STATUS continuity  section-border">Continuity to Zero M/H</td>
+                            <td class="APP_STATUS foundationpole">AC Power To Pole</td>
+                            <td class="FDW_STATUS foundationpole">Foundation Work</td>
+                            <td class="PLW_STATUS foundationpole section-border">Pole Work</td>
+
+                            <td class="FBD_STATUS underground">Fiber Dig</td>
+                            <td class="PWD_STATUS underground">Power Dig</td>
+                            <td class="UGM_STATUS underground section-border">Underground Misc</td>
+                            <td class="FBP_STATUS fiber">Fiber Pull</td>
+                            <td class="FBS_STATUS fiber">Fiber Splicing</td>
+
+                            <td class="SRA_STATUS nodeinstalls">Shroud/Antenna</td>
+                            <td class="PMS_STATUS nodeinstalls">PIM'S & Sweeps</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="completedTR">
+                            <td class="completed">Completed</td>
+                            <td class="CTZ_STATUS section-border">0</td>
+                            <td class="APP_STATUS">0</td>
+                            <td class="FDW_STATUS">0</td>
+                            <td class="PLW_STATUS section-border">0</td>
+                            <td class="FBD_STATUS">0</td>
+                            <td class="PWD_STATUS">0</td>
+                            <td class="UGM_STATUS section-border">0</td>
+                            <td class="FBP_STATUS">0</td>
+                            <td class="FBS_STATUS section-border">0</td>
+                            <td class="SRA_STATUS">0</td>
+                            <td class="PMS_STATUS">0</td>
+                        </tr>
+                        <tr id="pendingTR">
+                            <td class="pending">Pending</td>
+                            <td class="CTZ_STATUS section-border">0</td>
+                            <td class="APP_STATUS">0</td>
+                            <td class="FDW_STATUS">0</td>
+                            <td class="PLW_STATUS section-border">0</td>
+                            <td class="FBD_STATUS">0</td>
+                            <td class="PWD_STATUS">0</td>
+                            <td class="UGM_STATUS section-border">0</td>
+                            <td class="FBP_STATUS">0</td>
+                            <td class="FBS_STATUS section-border">0</td>
+                            <td class="SRA_STATUS">0</td>
+                            <td class="PMS_STATUS">0</td>
+                        </tr>
+                        <tr id="notNeededTR">
+                            <td class="notneeded">Not Needed</td>
+                            <td class="CTZ_STATUS section-border">0</td>
+                            <td class="APP_STATUS">0</td>
+                            <td class="FDW_STATUS">0</td>
+                            <td class="PLW_STATUS section-border">0</td>
+                            <td class="FBD_STATUS">0</td>
+                            <td class="PWD_STATUS">0</td>
+                            <td class="UGM_STATUS section-border">0</td>
+                            <td class="FBP_STATUS">0</td>
+                            <td class="FBS_STATUS section-border">0</td>
+                            <td class="SRA_STATUS">0</td>
+                            <td class="PMS_STATUS">0</td>
+                        </tr>
+                        <tr id="onHoldTR">
+                            <td class="onhold">On Hold</td>
+                            <td class="CTZ_STATUS section-border">0</td>
+                            <td class="APP_STATUS">0</td>
+                            <td class="FDW_STATUS">0</td>
+                            <td class="PLW_STATUS section-border">0</td>
+                            <td class="FBD_STATUS">0</td>
+                            <td class="PWD_STATUS">0</td>
+                            <td class="UGM_STATUS section-border">0</td>
+                            <td class="FBP_STATUS">0</td>
+                            <td class="FBS_STATUS section-border">0</td>
+                            <td class="SRA_STATUS">0</td>
+                            <td class="PMS_STATUS">0</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    form.k-filter-menu.k-popup.k-group.k-reset.k-state-border-up {
+        font-family: 'Source Sans Pro Regular', sans-serif !important;
+    }
+
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top: -10px !important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content: none;
+    }
+</style>
+
+<style type="text/css">
+    .k-pdf-export .k-grid-toolbar{
+        display:block !important
+    }
+    #tskMatrixToolbar {
+        background:none !important;
+        background-color:#ffffff !important;
+        border:none !important;
+    }
+    .summary-table {
+        border-radius: 2px;
+        font-family: "Source Sans Pro", sans-serif !important;
+        font-size: 12px;
+        width: 97% !important;
+        margin: 0px 10px 10px 10px !important;
+    }
+
+        .summary-table, .summary-table thead tr td, .summary-table tbody tr td {
+            border: 1px solid #d5d5d5;
+            border-left: none;
+        }
+
+            .summary-table tbody tr td {
+                border-top: none;
+            }
+
+            .summary-table tbody tr:nth-child(odd) td {
+                background-color: #FDFFF7;
+            }
+
+            .summary-table tbody tr:nth-child(even) td {
+                background-color: #F7FBFB;
+            }
+
+    .summary-cell {
+        /*background-color:#fe9c15 !important;*/
+        background-color: #000000 !important;
+        color: #ffffff;
+    }
+
+
+
+    .summary-table td {
+        padding: 3px !important;
+    }
+
+    .completed, .pending, .notneeded, .onhold {
+        font-family: "Source Sans Pro Bold", sans-serif !important;
+        text-transform: uppercase;
+        text-align: left !important;
+        background-color: #677077 !important;
+        color: #ffffff;
+    }
+
+    .summary-table thead td {
+        font-family: "Source Sans Pro Bold", sans-serif !important;
+        text-transform: uppercase;
+        text-align: center !important;
+    }
+
+    #completedTR td, #pendingTR td, #notNeededTR td, #onHoldTR td {
+        text-align: center;
+    }
+
+
+
+    /*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif !important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right: 0px;
+    }
+    /*----------setting the flter border-------------*/
+
+    div.k-grid-header-locked table th:nth-child(6),
+    div.k-grid-header-wrap table th:nth-child(1),
+    div.k-grid-header-wrap table th:nth-child(4),
+    div.k-grid-header-wrap table th:nth-child(7),
+    div.k-grid-header-wrap table th:nth-child(9),
+    div.k-grid-header-wrap table th:nth-child(11) {
+        border-right-width: 1px !important;
+    }
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top: 2px;
+    }
+</style>

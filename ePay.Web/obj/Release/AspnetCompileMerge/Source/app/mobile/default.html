@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="styles/kendo.common.min.css" />
+    <link rel="stylesheet" href="styles/kendo.default.min.css" />
+    <link rel="stylesheet" href="styles/kendo.mobile.all.min.css" />
+    <link rel="stylesheet" href="styles/kendo.nmart.css" />
+    <link rel="stylesheet" href="styles/nmart.mobile.css" />
+    <!--<link href="../../Content/custom.css" rel="stylesheet" />-->
+    <link href="styles/jquery-ui.css" rel="stylesheet" />
+
+    <script src="js/jquery-1.10.2.js" type="text/javascript"></script>
+    <script src="../../Scripts/underscore-min.js" type="text/javascript"></script>
+    <script src="js/kendo.all.min.js" type="text/javascript"></script>
+    <script src="js/kendo.ui.core.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/moment.min.js" type="text/javascript"></script>
+    <script src="../../Scripts/moment-timezone-data.js" type="text/javascript"></script>
+    <script src="../../Scripts/common.js" type="text/javascript"></script>
+    <script src="../../Scripts/vanilla-masker.min.js" type="text/javascript"></script>
+    <script src="../core/AppSettings.js" type="text/javascript"></script>
+    <script src="../core/globals.js" type="text/javascript"></script>
+    <script src="js/mobile.common.js" type="text/javascript"></script>
+    <script src="js/mobile.templates.js"></script>
+    <script src="js/mobile.core.js"></script>
+</head>
+<body>
+    <div data-role="view" data-layout="default" id="blankPage">
+        <header data-role="header">
+            <div id="navBar" data-role="navbar" class="NavBar Shadow">
+                <a id="navAppDrawer" data-role="button" data-rel="drawer" href="#applicationDrawer" data-align="left" class="button menubutton"></a>
+            </div>
+        </header>
+        <img src="../../Content/images/logo-client.png" /><br /><br />
+        <span class="heading2" style="padding-top:15%;">Welcome to</span><br />
+        <span class="heading2" style="color: #101010;">Hylan Job Mangement System (HJMS)</span>
+        <style type="text/css">
+            #blankPage {
+                width: 100%;
+                text-align: center;
+            }
+
+                #blankPage .km-content {
+                    padding-top: 10%;
+                }
+        </style>
+    </div>
+
+    <div data-role="layout" data-id="default">
+        <header data-role="header">
+            <div data-role="navbar">
+                <a data-role="button" href="#applicationDrawer" data-rel="drawer">Menu</a>
+                <span data-role="view-title">Default</span>
+            </div>
+        </header>
+    </div>
+    <div id="applicationDrawer" data-role="drawer" style="width: 275px;" data-swipe-to-open="false">
+        <div class="header">
+            <img src="images/clientlogo.png" />
+            <div class="profile">
+                <label id="lblUserName" class="heading2"></label>
+            </div>
+        </div>
+        <ul>
+            <li id="liManageEvents"><a data-align="left" onclick="RouteTo('event.html');">Manage Events</a></li>
+            <li id="liManageRequests"><a data-align="left" onclick="RouteTo('page.html?type=Request');">Manage Requests</a></li>
+            <li id="liManageResponses"><a data-align="left" onclick="RouteTo('page.html?type=Response');">Manage Responses</a></li>
+            <li><a id="btnLogout" data-role="button" data-click="Globals.MobileLogout" data-align="left" class="LogOut">Log-out</a></li>
+        </ul>
+        <span id="spnNotification" style="display:none;"></span>
+    </div>
+    <div id="divkendoprogress" class="k-loading-mask" style="width:100%;height:100%;display:none;">
+        <span class="k-loading-text"></span>
+        <div class="k-loading-image">
+            <div class="k-loading-color" style="background-color:transparent;filter:none;"></div>
+        </div>
+    </div>
+
+    <span class="k-icon k-i-close" style="display:none"></span>
+    <script>
+        var defaultPage = undefined;
+        Globals.CurrentUser = getCachedItem(CachedKeys.CURRENT_USER);
+        if (Globals.CurrentUser != null && Globals.CurrentUser.USER_SCREENS != null && Globals.CurrentUser.USER_SCREENS.length > 0) {
+            if (_.contains(Globals.CurrentUser.USER_SCREENS, Globals.Screens.MANAGE_EVENTS.ID) == false) {
+                $('#liManageEvents').addClass('disabledLink').html('<label>Manage Events</label>');
+            }
+            else {
+                defaultPage = 'event.html';
+            }
+            if (_.contains(Globals.CurrentUser.USER_SCREENS, Globals.Screens.REQUESTS.ID) == false) {
+                $('#liManageRequests').addClass('disabledLink').html('<label>Manage Requests</label>');
+            }
+            if (_.contains(Globals.CurrentUser.USER_SCREENS, Globals.Screens.RESPONSES.ID) == false) {
+                $('#liManageResponses').addClass('disabledLink').html('<label>Manage Responses</label>');
+            }
+        }
+        else {
+            $('#liManageEvents').addClass('disabledLink').html('<label>Manage Events</label>');
+            $('#liManageRequests').addClass('disabledLink').html('<label>Manage Requests</label>');
+            $('#liManageResponses').addClass('disabledLink').html('<label>Manage Responses</label>');
+        }
+        var app = new kendo.mobile.Application(document.body,
+             {
+                 initial: defaultPage,
+                 transition: 'slide',
+                 platform: 'ios7',
+                 useNativeScrolling: false,
+                 navigate: storePreviousView,
+                 browserHistory: false,
+                 hideAddressBar: true,
+                 init: function (e) {
+                     Globals.CurrentUser = getCachedItem(CachedKeys.CURRENT_USER);
+                     if (Globals.CurrentUser == null) {
+                         document.cookie = "";
+                         Globals.MobileLogout();
+                     }
+                     else {
+                         $("#lblUserName").text(Globals.CurrentUser.USER_NAME);
+                         Globals.AttachUnloadEventHandlers();
+                     }
+                 }
+             });
+
+        function storePreviousView(e) {
+            var curView = app.view();
+            if (curView) {
+                app.options.prevView = previousView;
+            }
+            previousView = e.url;
+        }
+        var notifyType = {
+            INFO: "info",
+            SUCCESS: "success",
+            WARNING: "warning",
+            ERROR: "error"
+        };
+        var popupNotification = $("#spnNotification").kendoNotification({
+            position: {
+                top: 5,
+                left: 0
+            },
+            width: "100%",
+            autoHideAfter: 0,
+            button: true,
+            appendTo: "#container"
+        }).data("kendoNotification");
+
+
+        if (Globals.CurrentUser && Globals.CurrentUser != null &&
+            Globals.CurrentUser.ROLE != null && Globals.CurrentUser.ROLE.ROLE_ID) {
+            var api = "Roles/LoadRoleDetails?id=" + Globals.CurrentUser.ROLE.ROLE_ID;
+            Globals.Get(api, null, false).then(function (result) {
+                Globals.ROLE = result.objResult;
+            });
+            //if (Globals.UserCompanies === undefined || Globals.UserCompanies == null) {
+            //    Globals.GetUserCompanies(Globals.CurrentUser.USER_ID, "COMPANY").then(function (result) {
+            //        Globals.UserCompanies = result.objResultList;
+            //    });
+            //}
+            createCookie("username", Globals.CurrentUser.USER_NAME);
+        }
+       
+        function RouteTo(state) {
+            if (navigator.onLine)
+                app.navigate(state);
+            else
+                onError({ statusText: "NetworkError" });
+        }
+    </script>
+</body>
+</html>

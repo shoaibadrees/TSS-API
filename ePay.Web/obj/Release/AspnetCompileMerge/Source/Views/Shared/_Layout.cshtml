@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html id="ng-app" ng-app="HylanApp">
+<head>
+    <meta name="viewport" content="width=device-width, height=device-height,  initial-scale=1.0, user-scalable=0" />
+    <meta http-equiv="Content-Type" content="text/html, charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title ng-bind="title">Hylan</title>   
+    <link id="linkRoot" href="~/" rel="stylesheet" />
+    @Styles.RenderFormat("<link href='{0}' rel='stylesheet' type='text/css' media='all' />", "~/Content/bootstrap")
+    @Styles.RenderFormat("<link href='{0}' rel='stylesheet' type='text/css' media='all' />", "~/Content/kendo/css")
+    @Styles.RenderFormat("<link href='{0}' rel='stylesheet' type='text/css' media='all' />", "~/Content/css")
+    @*<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/codemirror.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/htmlembedded/htmlembedded.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/xml/xml.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/codemirror/4.8.0/mode/javascript/javascript.min.js"></script>*@
+
+</head>
+<body>
+    @Scripts.Render("~/Scripts/vendor_scripts")
+    @RenderBody()
+    @Scripts.Render("~/Scripts/hylan_scripts")
+
+    <script type="text/javascript">
+        ////$('#BodyContent').height($(window).height());
+        ////$('#BodyContent').width($(window).width());
+        var isMobile = Globals.CheckIfMobileDevice();
+        if (isMobile == false) {
+            Globals.AttachUnloadEventHandlers();
+        }
+    </script>
+
+</body>
+</html>

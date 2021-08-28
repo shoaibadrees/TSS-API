@@ -1,0 +1,132 @@
+﻿<div class="col-sm-12 no-padding">
+    <!-- Logo head and Search-->
+    <div class="col-sm-12 main-head clear">
+        <div class="col-sm-4 no-padding">MANAGE <span>JOBS</span></div>
+        <div class="col-sm-3 col-md-2 pull-right top-search no-padding">
+            <form class="navbar-form" role="search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="q" ng-model="searchValue" ng-change="applySearch();">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit" ng-click="applySearch()"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Event Selector -->
+    <div class="col-sm-12 col-md-12 col-lg-12 event-select clear">
+        <div class="col-sm-12 col-md-12 col-lg-12" style="margin-bottom:10px;">
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Project ID</label>
+                <div id="divMultiSelProjects"                      
+                     options="MSProjects.options" 
+                     selected-model="MSProjects.selectedList" 
+                     extra-settings="MSProjects.settings" 
+                     events="MSProjects.events" 
+                     title="All"                      
+                     ng-dropdown-multiselect="" 
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" 
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">DOITT NTP Status</label>
+                <div id="divMultiSelDOITTNTPStatus" title="All"  control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="ntpStatusOptions" selected-model="selectedDOITTNTPStatusList" extra-settings="ntpStatusSettings" events="DOITTNTPStatusEvents" checkboxes="true"></div>                
+            </div>
+
+            <div class="clearfix visible-sm-block"></div>
+
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding" id="lblFilterRmag">Job Category</label>
+                <div id="divMultiSelJobCategory" title="All"  control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="jobCategoryLU" selected-model="selectedJobCategoryList" extra-settings="jobCategorySettings" events="JobCategoriesEvents" checkboxes="true"></div>                
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Job Status</label>
+                <div id="divMultiSelJobStatus" title="All" control="multiSelectControl"
+                     ng-dropdown-multiselect="" translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}" options="jobStatusLU" selected-model="selectedJobStatusList" extra-settings="jobStatusSettings" events="JobStatusEvents" checkboxes="true"></div>               
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding">Client</label>
+                <div id="divMultiSelClients"
+                     options="MSClients.options"
+                     selected-model="MSClients.selectedList"
+                     extra-settings="MSClients.settings"
+                     events="MSClients.events"
+                     title="All"
+                     ng-dropdown-multiselect=""
+                     translation-texts="{buttonDefaultText: 'All',uncheckAll: 'All'}"
+                     checkboxes="true"></div>
+            </div>
+            <div class="col-sm-6 col-md-2 col-lg-2">
+                <label class="control-label nopadding" id="lblReset">&nbsp;</label>
+                <div class="nav-buttons clear">
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">                            
+                            <li><a ng-click="ResetFilter()">Reset Filters</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>               
+    </div>
+
+    <!-- Responsive Table starts -->
+    <div id="responsive-tables" class="resource-requests manage-co col-sm-12 no-padding clear" style="overflow:hidden;">
+        <div id="grid1" kendo-grid="grid" k-options="gridOptions"></div>
+    </div>
+    <!-- Responsive Table ends -->
+</div>
+
+<style>
+    .multiselect-parent.btn-group.dropdown-multiselect {
+        width: 100%;
+    }
+
+    .multiselect-parent .dropdown-toggle {
+        width: 100%;
+        text-align: left;
+    }
+
+    .multiselect-parent .dropdown-menu {
+        width: 100%;
+    }
+
+    .caret {
+        float: right !important;
+        margin-top: 10px;
+    }
+
+    @-moz-document url-prefix() {
+        .caret {
+            margin-top:-10px!important;
+        }
+    }
+
+    .glyphicon-remove::before {
+        content:none;
+    }
+
+    /*-------------for filters settings ----------*/
+
+    .k-filter-row th {
+        padding: 4px 5px;
+        border-right-width: 0px;
+        font-family: 'Source Sans Pro', sans-serif!important;
+    }
+
+    .k-filtercell > .k-operator-hidden {
+        padding-right:0px;
+    
+    }
+    /*----------setting the flter border-----------*/
+    div.k-grid-header-locked table th:nth-child(6) {
+        border-right-width: 1px !important;
+    }     
+
+    /*-------Filters' yellow cross button--------*/
+    button.k-button.k-button-icon {
+        top:2px;
+    }
+</style>

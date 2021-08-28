@@ -1,0 +1,60 @@
+D:\Projects\ePay\nMart.Common\bin\Debug\Hylan.Common.dll
+D:\Projects\ePay\nMart.Common\bin\Debug\Hylan.Common.pdb
+D:\Projects\ePay\nMart.Common\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\ePay\nMart.Common\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\ePay\nMart.Common\obj\Debug\Hylan.Common.dll
+D:\Projects\ePay\nMart.Common\obj\Debug\Hylan.Common.pdb
+D:\Projects\ePay\ePay.Common\bin\Debug\EPay.Common.dll
+D:\Projects\ePay\ePay.Common\bin\Debug\EPay.Common.pdb
+D:\Projects\ePay\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+D:\Projects\ePay\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+D:\Projects\ePay\ePay.Common\obj\Debug\EPay.Common.dll
+D:\Projects\ePay\ePay.Common\obj\Debug\EPay.Common.pdb
+E:\saqib\ePay\ePay.Common\bin\Debug\EPay.Common.dll
+E:\saqib\ePay\ePay.Common\bin\Debug\EPay.Common.pdb
+E:\saqib\ePay\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+E:\saqib\ePay\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+E:\saqib\ePay\ePay.Common\obj\Debug\EPay.Common.csproj.CoreCompileInputs.cache
+E:\saqib\ePay\ePay.Common\obj\Debug\EPay.Common.csproj.CopyComplete
+E:\saqib\ePay\ePay.Common\obj\Debug\EPay.Common.dll
+E:\saqib\ePay\ePay.Common\obj\Debug\EPay.Common.pdb
+D:\Projects\ePay\ePay.Common\obj\Debug\EPay.Common.csproj.CoreCompileInputs.cache
+D:\Projects\ePay\ePay.Common\obj\Debug\EPay.Common.csprojAssemblyReference.cache
+D:\Projects\ePay\ePay.Common\obj\Debug\EPay.Common.csproj.CopyComplete
+D:\Angular project\Epay\ePay.Common\bin\Debug\EPay.Common.dll
+D:\Angular project\Epay\ePay.Common\bin\Debug\EPay.Common.pdb
+D:\Angular project\Epay\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+D:\Angular project\Epay\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+D:\Angular project\Epay\ePay.Common\obj\Debug\EPay.Common.dll
+D:\Angular project\Epay\ePay.Common\obj\Debug\EPay.Common.pdb
+D:\Angular project\Epay\ePay.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\obj\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Common\obj\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\bin\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\bin\Debug\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\obj\Debug\EPay.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Common\obj\Debug\EPay.Common.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Common\bin\Debug\EPay.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Common\bin\Debug\EPay.Common.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Common\obj\Debug\EPay.Common.csprojResolveAssemblyReference.cache
+E:\Projects\TSS angular\TSS_Api\ePay.Common\obj\Debug\EPay.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Common\obj\Debug\EPay.Common.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\bin\Debug\EPay.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\bin\Debug\EPay.Common.pdb
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\bin\Debug\Newtonsoft.Json.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\bin\Debug\Newtonsoft.Json.xml
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\obj\Debug\EPay.Common.csprojAssemblyReference.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\obj\Debug\EPay.Common.csproj.CoreCompileInputs.cache
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\obj\Debug\EPay.Common.csproj.CopyComplete
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\obj\Debug\EPay.Common.dll
+E:\Angular Development\Projects\Angular Projects\TSS\TSS_Api\TSS_Api\ePay.Common\obj\Debug\EPay.Common.pdb

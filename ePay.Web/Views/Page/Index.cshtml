@@ -1,0 +1,630 @@
+﻿<div class="col-sm-12 no-padding alert-box">
+    <span class="type"></span>:
+    <span class="message"></span>
+    <img class="close" src="Content/images/close.png" />
+</div>
+<div ng-if="!isUserLoggedIn" class="ng-cloak divLoginBodyContent">
+    <div id="BodyContent" ui-view="BodyContent"></div>
+    <script type="text/javascript">
+        $('.alert-box').css("width", "");
+    </script>
+</div>
+<div class="container-fluid ng-cloak" ng-if="isUserLoggedIn">
+    <div id="divBaseController" class="row" ng-controller="BaseController">
+        <div id="menu" class="toggle-left-content-wrap" style="padding-bottom:0px;display:none;">
+            <div id="divkendoprogress" class="k-loading-mask" style="width:100%;height:100%;display:none;"><span class="k-loading-text"></span><div class="k-loading-image"><div class="k-loading-color" style="background-color:transparent;filter:none;"></div></div></div>
+            <!-------------- sidebar.html starts --------------->
+            <div id="panel1" class="toggle-left-content">
+                <div class="heading">
+                    <div><h3>NOTIFICATIONS<img src="Content/images/left-toggle-icon.png" width="10" height="6" alt=""><span style="padding-left:200px;width:100%;text-align:right;"><img id="spanNewNotification" src="Content/images/newnotification.png" width="14" height="14" alt=""> </span></h3></div>
+                </div>
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <p>Event</p>
+                        </li>
+                        <li>
+                            <select id="ddlEvents" onchange="GetNotificationsByEventAndType(1);"></select>
+                        </li>
+                        <li>
+                            <p>Notifications Type</p>
+                        </li>
+                        <li>
+                            <select id="ddlNotiType" onchange="GetNotificationsByEventAndType(1);"></select>
+                        </li>
+                    </ul>
+                    <table class="scrollNotification" border="0" cellspacing="0" cellpadding="0">
+                        <thead class="heading-titles">
+                            <tr>
+                                <th id="thDate">DATE</th>
+                                <th id="thType">TYPE</th>
+                                <th id="thNotification">NOTIFICATION</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div id="bdNotification" style="overflow-x: auto; overflow-y: auto;">
+                        <table id="tblNotifications" border="0" cellpadding="0" cellspacing="0">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!--Inner Table Wrap Ends-->
+                </div>
+                <!--Inner Ends Here-->
+            </div>
+            <!--Toggle Left Content Ends-->
+            <div class="clearfix"></div>
+            <div id="panel2" class="toggle-left-content">
+                <div class="heading">
+                    <h3>LOGGED IN USERS<img src="Content/images/left-toggle-icon.png" width="10" height="6" alt=""></h3>
+                </div>
+                <div class="inner">
+                    <ul>
+                        <li>
+                            <p>RMAG</p>
+                        </li>
+                        <li>
+                            <select id="ddlRMAGSB" onchange="FillCompanies();"></select>
+                        </li>
+                        <li>
+                            <p>Client</p>
+                        </li>
+                        <li>
+                            <select id="ddlCompanySB" onchange="FilterUsers();"></select>
+                        </li>
+
+                    </ul>
+                    <table class="scrollNotification" border="0" cellspacing="0" cellpadding="0">
+                        <thead class="heading-titles">
+                            <tr>
+                                <th id="thName">NAME</th>
+                                <th id="thCompany">CLIENT</th>
+                                <th id="thEmail">EMAIL</th>
+                                <th id="thLastLogin">LAST LOGIN</th>
+                            </tr>
+                        </thead>
+                    </table>
+                    <div id="bdLoggedUsers" style="overflow-x: hidden; overflow-y: auto;">
+                        <table id="tblLoggedUsers" border="0" cellpadding="0" cellspacing="0">
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <!--Inner Table Wrap Ends-->
+                </div>
+                <!--Inner Ends Here-->
+            </div>
+            <!--Toggle Left Content Ends-->
+            <!--<script src="/signalr/hubs"></script>-->
+            <script type="text/javascript">
+                var notificationcount = 0;
+                var isnotificationupdate = false;
+
+                var users = '';
+                function getloggedInUsers() {
+                    ////Globals.GetLoggedUsers().then(function (response) {
+                    ////    $('#tblLoggedUsers tbody').empty();
+                    ////    users = JSON.parse(response);
+                    ////    var i = 0;
+                    ////    $(users).each(function (index, value) {
+                    ////        var username = value.Key;
+                    ////        var value = value.Value.split('_-_-_');
+                    ////        //////debugger;
+                    ////        var companyDpName = value[0].replace(/~~/g, ', ');
+                    ////        var companyDisplayName = companyDpName.slice(1);
+                    ////        $('#tblLoggedUsers tbody').append('<tr><td  id="tdUname' + i + '" class="word-break">' + username + '</td><td id="tdCname' + i + '"  class="word-break">' + companyDisplayName + '</td><td  id="tdEmail" class="word-break">' + value[1] + '</td><td id="tdLastLogin" class="word-break">' + kendo.toString(new Date(value[2]), "dd-MM-yy HH:mm") + '</td></tr>');
+                    ////        i++;
+                    ////    });
+                    ////    setTimeout(function () {
+                    ////        $('#thName').css('width', $('td[id*=tdUname]').width());
+                    ////        $('#thCompany').css('width', $('td[id*=tdCname]').width());
+                    ////        $('#thEmail').css('width', $('#tdEmail').width());
+                    ////        $('#thLastLogin').css('width', $('#tdLastLogin').width());
+                    ////    }, 1000);
+                    ////});
+                }
+
+                function FillRmags() {
+
+                    ////Globals.GetRMAGS(false).then(function (result) {
+                    ////    _RMAGDS = result.objResultList;
+                    ////    var ddlRMAGS = document.getElementById("ddlRMAGSB");
+                    ////    if ($(ddlRMAGS).length > 0) {
+                    ////        $(ddlRMAGS).empty();
+                    ////    }
+                    ////    $(ddlRMAGS).append($("<option />").val(0).text("All"));
+                    ////    $.each(_RMAGDS, function () {
+                    ////        $(ddlRMAGS).append($("<option title='" + this.RMAG_NAME + "' />").val(this.RMAG_ID).text(this.RMAG_NAME));
+                    ////    });
+                    ////});
+                }
+
+                function FillCompanies() {
+                    //debugger;
+                    ////var rmagIds = document.getElementById("ddlRMAGSB").value;
+                    ////if (rmagIds == 0) {
+                    ////    Globals.GetCompanies(false).then(function (result) {
+                    ////        _Companies = result.objResultList;
+                    ////        var ddlCompany = document.getElementById("ddlCompanySB");
+                    ////        $(ddlCompany).empty();
+                    ////        $(ddlCompany).append($("<option />").val(0).text("All"));
+                    ////        $.each(_Companies, function () {
+                    ////            $(ddlCompany).append($("<option title='" + this.COMPANY_NAME + "' />").val(this.COMPANY_ID).text(this.COMPANY_NAME));
+                    ////        });
+                    ////    });
+                    ////}
+                    ////else {
+                    ////    Globals.GetCompaniesByRmags(rmagIds).then(function (result) {
+                    ////        Companies = result.objResultList;
+                    ////        var ddlCompanies = document.getElementById("ddlCompanySB");
+                    ////        $(ddlCompanies).empty();
+                    ////        $(ddlCompanies).append($("<option />").val(0).text("All"));
+                    ////        $.each(Companies, function () {
+                    ////            $(ddlCompanies).append($("<option title='" + this.COMPANY_NAME + "' />").val(this.COMPANY_ID).text(this.COMPANY_NAME));
+                    ////        });
+
+                    ////    });
+
+                    ////}
+                    ////FilterUsers();
+                    ////$("#divkendoprogress").hide();
+                }
+
+                function FillNotificationType() {
+                    ////$('#ddlNotiType').empty();
+                    ////_NOTITYPEDS = Globals.GetNOTIFICATIONTYPES();
+                    ////var ddlNOTITYPE = document.getElementById("ddlNotiType");
+                    ////$(ddlNOTITYPE).append($("<option />").val(0).text("All"));
+                    ////$.each(_NOTITYPEDS, function () {
+                    ////    $(ddlNOTITYPE).append($("<option title='" + this.LU_NAME + "' />").val(this.LOOK_UP_ID).text(this.LU_NAME));
+                    ////});
+                }
+
+                function FillEvents() {
+                    ////$('#ddlEvents').empty();
+                    ////var ddlEVENTS = document.getElementById("ddlEvents");
+                    ////$(ddlEVENTS).append($("<option />").val(0).text("All"));
+                    ////Globals.GetAllEventsofLoggedUser(true).then(function (result) {
+                    ////    result.objResultList = ChangeEventName(result.objResultList);
+                    ////    $('#ddlEvents').empty();
+                    ////    _EVENTSDS = result.objResultList;
+                    ////    var ddlEVENTS = document.getElementById("ddlEvents");
+                    ////    $(ddlEVENTS).append($("<option />").val(0).text("All"));
+
+                    ////    $.each(_EVENTSDS, function () {
+                    ////        $(ddlEVENTS).append($("<option  title='" + this.EVENT_NAME + "' />").val(this.EVENT_ID).text(this.EVENT_NAME));
+                    ////    });
+                    ////});
+                    //////-- IE8 Hack: new options does not show up
+                    ////$(ddlEVENTS).hide().show();
+                }
+                function GetNotificationsByEventAndType(pageno, isFromPage) {
+                    ////--- Temporary disable the call
+                    ////var ismorebtnvisible = false;
+                    ////notificationpageno = pageno;
+                    ////$('#tblNotifications tbody').empty();
+                    ////if (isFromPage == null) {
+                    ////    eventid = $("#ddlEvents option:selected").val();
+                    ////    GetNotificationsByEventAndType_Resume(eventid, notificationpageno);
+                    ////} else {
+                    ////    if (Cookies.get("selectedEvent") === undefined) {
+                    ////        Globals.GetNotificationsByEventAndType(0, 0, 1).then(function (response) {
+                    ////            if (response.objResultList.length > 0) {
+                    ////                eventid = response.objResultList[0].EVENT_ID;
+                    ////                $("#ddlEvents").val(eventid);
+                    ////                GetNotificationsByEventAndType_Resume(eventid, notificationpageno);
+                    ////            }
+                    ////        });
+                    ////    }
+                    ////    else {
+                    ////        eventid = Cookies.get("selectedEvent");
+                    ////        $("#ddlEvents").val(eventid);
+                    ////        GetNotificationsByEventAndType_Resume(eventid, notificationpageno);
+                    ////    }
+                    ////}
+
+                }
+
+                function GetNotificationsByEventAndType_Resume(eventid, notificationpageno) {
+                    var typeid = $("#ddlNotiType option:selected").val();
+                    Globals.GetNotificationsByEventAndType(eventid, typeid, notificationpageno).then(function (response) {
+                        //  $("#lnkmore").hide();
+                        var notifications = response.objResultList;
+                        ////  if (notificationcount != notifications.length) {
+                        //      isnotificationupdate = true;
+                        //      notificationcount = notifications.length;
+                        //  } else
+                        //      isnotificationupdate = false;
+                        //if (notifications && notifications != null && notifications.length > 0) {
+                        //    notifications = CheckPermissions(notifications);
+                        //}
+
+                        for (var i = 0; i < notifications.length; i++) {
+                            if (notifications[i].TYPE_NAME != 'Matching Complete')
+                                notifications[i].NOTIFICATION = notifications[i].NOTIFICATION.replace('TimeZoneSpecificDateTime', kendo.toString(TimeZoneSpecificDate(new Date(moment(notifications[i].CREATED_DATE, moment.ISO_8601)), (notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE), notifications[i].DST_APPLIED_CREATED_DATE, false), 'MM/dd/yyyy HH:mm') + GetTimeZonePostFix((notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE)));
+                            else {
+                                var startdate = notifications[i].NOTIFICATION.indexOf('@@');
+                                var enddate = notifications[i].NOTIFICATION.indexOf('#');
+                                var caldate = notifications[i].NOTIFICATION.substr(startdate + 1, enddate - startdate - 1);
+                                var replacepor = notifications[i].NOTIFICATION.substr(startdate, enddate - startdate + 1);
+
+                                notifications[i].NOTIFICATION = notifications[i].NOTIFICATION.replace(replacepor, kendo.toString(TimeZoneSpecificDate(new Date(moment(caldate, moment.ISO_8601)), (notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE), notifications[i].DST_APPLIED_CREATED_DATE, false), 'MM/dd/yyyy HH:mm') + GetTimeZonePostFix((notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE)));
+                            }
+                            try {
+                                if (notifications[i].EVENT_ID &&
+                                    notifications[i].EVENT_ID != null && notifications[i].EVENT_ID != '') {
+                                    var api = "Events/Get?id=" + notifications[i].EVENT_ID;
+                                    Globals.Get(api, null, false).then(function (result) {
+                                        if (result.objResult) {
+                                            var oldEventName = $("span.Notification_Header:first-child", "<div>" + notifications[i].NOTIFICATION + "</div>").html();
+                                            var newEventName = MakeEventName(result.objResult);
+                                            notifications[i].NOTIFICATION = notifications[i].NOTIFICATION.replace(oldEventName, newEventName);
+                                        }
+                                    });
+                                }
+                            } catch (e) {
+
+                            }
+                            $('#tblNotifications tbody').append('<tr><td id="col1" >' + ((notifications[i].TIME_ZONE == null || notifications[i].TIME_ZONE == '') ? notifications[i].CREATED_DATE_STRING : kendo.toString(TimeZoneSpecificDate(new Date(moment(notifications[i].CREATED_DATE, moment.ISO_8601)), notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE, notifications[i].DST_APPLIED_CREATED_DATE, false), 'MM/dd/yyyy HH:mm') + GetTimeZonePostFix((notifications[i].TIME_ZONE == null ? '' : notifications[i].TIME_ZONE))) + '</td><td id="col2" >' + notifications[i].TYPE_NAME + '</td><td id="col3" style="text-align:left;padding-left:3px;"><div>' + notifications[i].NOTIFICATION + '</div></td></tr>');
+                        }
+
+                        if (notifications.length > 0) {
+                            if ((notifications[0].NO_OF_NOTIFICATIONS - (notificationpageno * 10)) > 0) {
+                                $('#tblNotifications tbody').append('<tr style="height:40px"><td colspan="3" style="width: 30px; word-wrap: break-word;"><div style="width:100%;text-align:center;"><a id="lnkmore" onclick="GetNotificationsByEventAndType(++notificationpageno);">See More Notifications</a></div></td></tr>');
+                            }
+                        }
+                    });
+
+                    $('#thDate').css('width', $('#col1').css('width'));
+                    $('#thType').css('width', $('#col2').css('width'));
+                    $('#thNotification').css('width', $('#col3').css('width'));
+                }
+
+                function FilterUsers() {
+                    /// compare each TR of LOGGEDINUSER with COMPANY dropdown's text to filter users
+                    ////var selectedCompany = document.getElementById("ddlCompanySB").value;
+                    ////var ddlCompanies = document.getElementById("ddlCompanySB");
+                    ////var rmagIdscheck = document.getElementById("ddlRMAGSB").value;
+                    ////var $rows = $('#tblLoggedUsers tbody tr');
+                    ////var companyName = ddlCompanies.options[ddlCompanies.selectedIndex].text;
+                    //////users = JSON.parse(response);
+
+                    //////-- default - hide all rows
+                    ////$rows.hide();
+
+                    ////var i = 0;
+                    ////$(users).each(function (userindex, value) {
+                    ////    var username = value.Key;
+                    ////    var uservalue = users[userindex].Value.split('_-_-_');
+                    ////    if (companyName == "All" || selectedCompany == 0 && ddlCompanies.options.length > 1) {
+
+
+                    ////        var preCompExists = false;
+                    ////        var companies = uservalue[0];
+
+                    ////        $.each(ddlCompanies, function (index, value) {
+                    ////            if (ddlCompanies.options[index].value != "0") {
+                    ////                var splitCompanies = companies.split('~~');
+
+                    ////                $.each(splitCompanies, function (splitIndex, splitValue) {
+                    ////                    var spValue = ddlCompanies.options[index].text.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;');
+                    ////                    var splitVal = splitValue.replace(/~/g, '');
+                    ////                    if (splitVal != spValue) {
+                    ////                        if (!preCompExists)
+                    ////                            $($rows[userindex]).hide();
+                    ////                    }
+                    ////                    else {
+                    ////                        $($rows[userindex]).show();
+                    ////                        preCompExists = true;
+                    ////                    }
+                    ////                });
+
+                    ////                if (preCompExists)
+                    ////                    return false;
+                    ////            }
+                    ////        });
+
+                    ////    }
+                    ////    else {
+                    ////        var selectedCompany = ddlCompanies.options[ddlCompanies.selectedIndex].text;
+
+                    ////        var preCompExists = false;
+                    ////        var companies = uservalue[0];
+                    ////        var splitCompanies = companies.split('~~');
+                    ////        $.each(splitCompanies, function (splitIndex, splitValue) {
+                    ////            var spValue = selectedCompany.replace(/&/g, '&amp;').replace(/>/g, '&gt;').replace(/</g, '&lt;').replace(/~/g, '');
+                    ////            var splitVal = splitValue.replace(/~/g, '');
+                    ////            if (splitVal != spValue) {
+                    ////                if (!preCompExists)
+                    ////                    $($rows[userindex]).hide();
+                    ////            }
+                    ////            else {
+                    ////                $($rows[userindex]).show();
+                    ////                preCompExists = true;
+                    ////            }
+                    ////        });
+                    ////        if (preCompExists)
+                    ////            return false;
+                    ////    }
+                    ////    i++;
+                    ////});
+                }
+
+                function CheckPermissions(notifications) {
+                    try {
+                        if (Globals.EventType && Globals.ROLE && Globals.ROLE.PERMISSIONS) {
+                            var filteredNotifications = [];
+                            var toKeep = true;
+                            $.each(notifications, function (index, item) {
+                                toKeep = false;
+
+                                if (item.EVENT_ID != null && item.EVENT_ID != 0 && item.TYPE != 57) {
+                                    var evtType = _.findWhere(Globals.EventType, { LOOK_UP_ID: item.EVENT_TYPE });
+                                    var perm = _.findWhere(Globals.ROLE.PERMISSIONS, { PERMISSION_TYPE: "NOTIFICATION", PERMISSION_TYPE_ID: item.TYPE });
+                                    if (evtType && perm) {
+                                        toKeep = (evtType.LU_NAME == "NRE" && perm.VIEW_ACCESS_NRE) || (evtType.LU_NAME == "RMAG" && perm.VIEW_ACCESS_RMAG);
+                                    }
+                                }
+                                else {
+                                    toKeep = true;
+                                }
+                                if (toKeep) {
+                                    filteredNotifications.push(item);
+                                }
+                            });
+                            notifications = filteredNotifications;
+                        }
+                    } catch (e) {
+
+                    }
+
+                    return notifications;
+                }
+                //# sourceURL=dynamicScript.js
+            </script>
+            <!-------------- sidebar.html ends ------------------->
+        </div>
+        <div id="BodyContentContainer" style="height:100%">
+            <!--Sidebar Navigation -->
+            <div class="no-padding side-bar" style="width:57px;display:block;">
+                <div class="sidebar-nav">
+                    <div class="first-menu"></div>
+                    <div class="notification">
+                        <div class="navbar">
+                            <ul>
+                                <li class="notifications" style="display:none;">
+                                    <a id="lnksidebar" class="left-push-icon"></a>
+                                </li>
+                                <li class="menu">
+                                    <a class="push-icon" onclick="ShowHideMainMenu()"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div id="MainMenu" class="toggle-menu-main first-menu">
+                        <!-------------- mainmenu.html starts --------------->
+                        <style type="text/css">
+                            .toggle-menu-main .row.alternate {
+                                background-color: #3f535d;
+                            }
+
+                            .first-menu {
+                                margin-top: 15px;
+                            }
+
+                            .toggle-menu-main a {
+                                background: none;
+                                color: #ffffff;
+                                text-transform: uppercase;
+                                font-size: 14px;
+                                display: inline-block;
+                                position: relative;
+                                text-decoration: none;
+                                line-height: 15px;
+                                font-family: 'Source Sans Pro Regular', sans-serif;
+                                padding: 12px 0px 12px 0px;
+                            }
+
+                            .section-header {
+                                background: #283943;
+                                text-align: right;
+                                border-right: 1px solid #e2f4f2;
+                            }
+
+                                .section-header span {
+                                    background: none;
+                                    color: #8eaaba;
+                                    text-transform: uppercase;
+                                    font-size: 12px;
+                                    display: inline-block;
+                                    position: relative;
+                                    text-decoration: none;
+                                    line-height: 15px;
+                                    font-family: 'Source Sans Pro Bold', sans-serif;
+                                    width: 155px;
+                                    padding: 12px 20px;
+                                }
+
+                                    .section-header span.high {
+                                        line-height: 30px;
+                                    }
+
+                            .user-section {
+                                background: #495d68;
+                                border-left: #e2f4f2 solid 1px;
+                                text-align: center;
+                                height: 54px;
+                            }
+
+                                .user-section.top-section {
+                                    background-image: url(Content/images/client-logo-menu.png);
+                                    background-position: 95% 5px;
+                                    background-repeat: no-repeat;
+                                }
+
+                            .user-image {
+                                margin-top: -44px;
+                                margin-right: -20px;
+                            }
+
+                            .logout {
+                                margin-top: 17px;
+                            }
+
+                            .disabledLink {
+                                padding-right: 0px !important; 
+                                padding-top: 0px !important;
+                                padding-bottom: 0px !important;
+                            }
+
+                            #MainMenu .col-sm-4, #MainMenu .col-md-3 {
+                                padding-left: 5px !important;
+                                padding-right: 5px !important;
+                            }
+                        </style>
+                        <div class="row no-padding">
+                            <div class="col-sm-2  col-md-2 section-header"><span>PROJECTS &<br/>ATTACHMENTS</span></div>
+                            <div class="col-sm-8 col-md-8">
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="Projects" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_PROJECTS.ID)">{{Screens.MANAGE_PROJECTS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_PROJECTS.ID)">{{Screens.MANAGE_PROJECTS.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="Attachments" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_ATTACHMENTS.ID)">Manage Attachments</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_ATTACHMENTS.ID)">{{Screens.MANAGE_ATTACHMENTS.TITLE}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 user-section top-section"></div>
+                        </div>
+
+                        <div class="row alternate no-padding">
+                            <div class="col-sm-2 col-md-2 section-header"><span class="high">Jobs</span></div>
+                            <div  class="col-sm-8 col-md-8">
+                                <div class="col-sm-3 col-md-3">
+                                    <a ui-sref="Jobs" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_JOBS.ID)">{{Screens.MANAGE_JOBS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_JOBS.ID)">{{Screens.MANAGE_JOBS.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-3 col-md-3">
+                                    <a ui-sref="TasksRoster" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_TASKS.ID)">{{Screens.MANAGE_TASKS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_TASKS.ID)">{{Screens.MANAGE_TASKS.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-3 col-md-3">
+                                    <a ui-sref="Permits" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_PERMITS.ID)">{{Screens.MANAGE_PERMITS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_PERMITS.ID)">{{Screens.MANAGE_PERMITS.TITLE}}</label>
+
+                                </div>
+                                <div class="col-sm-3 col-md-3">
+                                    <a ui-sref="Dailies" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_DAILIES.ID)">{{Screens.MANAGE_DAILIES.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_DAILIES.ID)">{{Screens.MANAGE_DAILIES.TITLE}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 user-section"></div>
+                        </div>
+
+                        <div class="row no-padding">
+                            <div class="col-sm-2  col-md-2 section-header"><span class="high">DASHBOARDS</span></div>
+                            <div class="col-sm-8 col-md-8">
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="TaskMatrixDashboard" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.TASK_MATRIX.ID)">{{Screens.TASK_MATRIX.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.TASK_MATRIX.ID)">{{Screens.TASK_MATRIX.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="OnHoldDashboard" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.TASK_ON_HOLD.ID)">{{Screens.TASK_ON_HOLD.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.TASK_ON_HOLD.ID)">{{Screens.TASK_ON_HOLD.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="PermitDashboard" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.PERMIT_DASHBOARD.ID)">{{Screens.PERMIT_DASHBOARD.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.PERMIT_DASHBOARD.ID)">{{Screens.PERMIT_DASHBOARD.TITLE}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 user-section">
+                                <span style="color: #8eaaba; font-size: 10px; font-family: 'Source Sans Pro Bold', sans-serif; ">MY PROFILE</span><br /><a ng-click="openDialog('USER-PROFILE')">{{currentUser.USER_NAME}}</a>
+                            </div>
+                        </div>
+
+                        <div class="row alternate no-padding">
+                            <div class="col-sm-2  col-md-2 section-header"><span class="high">Map View</span></div>
+                            <div class="col-sm-8 col-md-8">
+                                <div class="col-sm-3 col-md-3">
+                                    <a ui-sref="JobMap" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.JOB_MAP.ID)">{{Screens.JOB_MAP.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.JOB_MAP.ID)">{{Screens.JOB_MAP.TITLE}}</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 col-md-2 user-section"></div>
+                        </div>
+                        <div class="row no-padding">
+                            <div class="col-sm-2  col-md-2 section-header"><span class="high">ADMINISTRATION</span></div>
+                            <div class="col-sm-8 col-md-8">
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="Companies" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_CLIENTS.ID)">{{Screens.MANAGE_CLIENTS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_CLIENTS.ID)">{{Screens.MANAGE_CLIENTS.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+
+
+                                    <a ui-sref="UserRoles" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_USER_ROLES.ID)">{{Screens.MANAGE_USER_ROLES.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_USER_ROLES.ID)">{{Screens.MANAGE_USER_ROLES.TITLE}}</label>
+                                </div>
+                                <div class="col-sm-4 col-md-3">
+                                    <a ui-sref="Users" ui-sref-opts="{reload: true}" ng-show="isScreenVisible(Screens.MANAGE_USERS.ID)">{{Screens.MANAGE_USERS.TITLE}}</a>
+                                    <label class="disabledLink" ng-show="!isScreenVisible(Screens.MANAGE_USERS.ID)">{{Screens.MANAGE_USERS.TITLE}}</label>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2 col-md-2 user-section bottom-section">
+                                <a ng-click="logout()" class="logout">LOGOUT</a>
+                                <img class="hidden-sm user-image" src="Content/images/user-photo.png" class="user-image" width="55" height="52" alt="" />
+                            </div>
+                        </div>
+                        <!-------------- mainmenu.html ends ------------------>
+                    </div>
+                    <div class="other-actions-menu">
+                        <div class="navbar">
+                            <ul id="PageButtons" ui-view="PageButtons"></ul>
+                            <ul class="GlobalButtons ng-hide" ng-show="showGlobalButtons">
+                                <li>
+                                    <a ng-click="exportToExcel()" class="export to-excel">
+                                        EXPORT
+                                        <br />
+                                        TO EXCEL
+                                    </a>
+                                </li>
+                                <li>
+                                    <a ng-click="exportToPdf();" class="export to-excel">
+                                        EXPORT
+                                        <br />
+                                        TO PDF
+                                    </a>
+                                </li>
+                                <li><a ng-click="printGrid();" class="print">PRINT</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="BodyContent" ui-view="BodyContent" onload="MainMenuLoaded();"></div>
+        </div>
+        <style type="text/css">
+            #BodyContent {
+                padding-left: 57px;
+            }
+
+            .word-break {
+                /* These are technically the same, but use both */
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                -ms-word-break: break-all;
+                /* This is the dangerous one in WebKit, as it breaks things wherever */
+                word-break: break-all;
+                /* Instead use this non-standard one:
+            word-break: break-word;*/
+                /* Adds a hyphen where the word breaks, if supported (No Blink)
+            -ms-hyphens: auto;
+            -moz-hyphens: auto;
+            -webkit-hyphens: auto;
+            hyphens: auto;*/
+            }
+        </style>
+    </div>
+    <script type="text/javascript">
+        $('.alert-box').css("width", $(window).width() - 57);
+    </script>
+</div>

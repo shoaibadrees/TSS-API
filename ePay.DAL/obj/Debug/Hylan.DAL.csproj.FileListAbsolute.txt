@@ -1,0 +1,14 @@
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Hylan.DAL.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Hylan.DAL.pdb
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Hylan.Common.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+D:\RODTFS\Hylan\nMart.DAL\bin\Debug\Hylan.Common.pdb
+D:\RODTFS\Hylan\nMart.DAL\obj\Debug\Hylan.DAL.csprojResolveAssemblyReference.cache
+D:\RODTFS\Hylan\nMart.DAL\obj\Debug\Hylan.DAL.dll
+D:\RODTFS\Hylan\nMart.DAL\obj\Debug\Hylan.DAL.pdb

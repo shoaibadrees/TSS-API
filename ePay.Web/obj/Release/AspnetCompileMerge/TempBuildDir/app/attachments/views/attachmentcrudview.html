@@ -1,0 +1,118 @@
+﻿
+
+<form id="frmAttachments" name="form.formAttachments" novalidate style="overflow: hidden;">
+    <div id="window" style="overflow: hidden;">
+        <div class="col-sm-12 col-md-12 col-lg-12 no-padding-drop-box">
+            <div class="col-sm-12 col-md-12 col-lg-12 no-padding alert-boxpopup">
+                <span class="type"></span>:
+                <span class="message"></span>
+                <img class="close" src="Content/images/close.png" />
+            </div>
+            <div id="upHeader" class="col-sm-12 col-md-12 col-lg-12 main-head clear dialog-header" style="border-bottom: solid 1px #b9b9b9;">
+                <div class="col-sm-4 col-md-4 col-lg-4 no-padding">{{vm.ScreenTitle}} <span>ATTACHMENTS</span></div>
+                <div class="clearfix visible-sm-block"></div>
+                <div class="col-sm-4 col-md-4 col-lg-4 no-padding HeadNote">
+                    <sup><img src="Content/images/red_asterisk.png" alt=""></sup>Please do not leave these fields empty.
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4 pull-right no-padding">
+                    <div class="col-sm-12 nav-buttons clear">
+                        <div id="navbar" class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <button class="k-button k-button-icontext" id="btnCancel" style="text-decoration:none" ng-click="vm.CloseModalWindow(vm.gridAttachments)">
+                                        <span class="k-icon k-update  k-i-close"></span>
+                                        Close
+                                    </button>
+                                </li>
+                                <li ng-show="AllowToEdit">
+                                    <button class="k-button k-button-icontext k-grid-destroyRecord" id="btnDelete" ng-click="vm.DestroyRecords(e, vm.gridAttachments)">
+                                        <span class="k-icon k-i-delete"></span>
+                                        Delete
+                                    </button>
+                                </li>
+                                <li ng-show="AllowToEdit">
+                                    <button class="k-button k-button-icontext k-grid-save-changes" id="btnSave" ng-disabled="isSaving" ng-click="vm.Save(form.formAttachments, vm.gridAttachments)">
+                                        <span class="k-icon k-update k-i-check"></span>
+                                        Save
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                        <div ng-if="ngDialogData.SCREEN_ID == 2 || ngDialogData.SCREEN_ID == 3 || ngDialogData.SCREEN_ID == 5 || ngDialogData.SCREEN_ID == 6" class="short-div alert-danger text-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h5><b>Project ID:</b>{{ngDialogData.HYLAN_PROJECT_ID}}</h5>
+                        </div>
+                        <div ng-if="ngDialogData.SCREEN_ID == 3 || ngDialogData.SCREEN_ID == 5 || ngDialogData.SCREEN_ID == 6" class="short-div alert-warning text-left col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <h5><b>Job File Number: </b>{{ngDialogData.JOB_NUMBER_ID || ngDialogData.JOB_FILE_NUMBER || "Unknown"}}</h5>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 col-lg-offset-1 col-sm-offset-1 col-offset-1">
+                        <label class="btn btn-default btn-file" style="background-color: #f1f1f1; width: 300px; float: left">
+                            <div class="label-warning" ng-click="vm.HideWarningMessage()">Select One Or More Files</div>
+                            <input type="file" style="display: none;" ngf-select multiple ng-model="files" name="file"
+                                   ngf-accept="vm.AllowedAttachments"
+                                   ngf-pattern="vm.AllowedAttachments"
+                                   ngf-max-size="500MB"
+                                   ngf-model-invalid="errorFile"/>
+                            <input type="text" class="form-control" ng-model="files[0].name" name="file" class="form-control" readonly>
+                            <div ng-if="files.length">{{files.length}} File Selected</div>
+                        </label>
+                        <a class="k-button k-button-icontext k-grid-save-changes" style="float: left; margin-top: 35px; margin-left: 15px;" name="fileUpload" id="fileUpload" ng-disabled="!form.formAttachments.$valid"
+                           ng-click="vm.Upload(files)" uib-tooltip="Only media, txt, microsoft word, microsoft excel, pdf files are allowed to upload">
+                            <span class="k-icon k-update k-i-check"></span>
+                            Upload
+                        </a>
+                        <span class="col-sm-12 col-md-12 col-lg-12 no-padding HeadNote" style="text-align: left">
+                            <sup><img src="Content/images/red_asterisk.png" alt=""></sup>
+                            If your browser does not support file drag/drop, you can manually upload files from above
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container col-lg-6 col-sm-6 col-6" style="float: right;"></div>
+
+            <div id="responsive-tables" class="resource-requests manage-co col-sm-12 col-md-12 col-lg-12 no-padding clear drop-box-inner-expansion" style="overflow: hidden;" uib-tooltip="Only media, txt, microsoft word, microsoft excel, pdf files are allowed to upload">
+                <div ngf-drop="vm.Upload($files)" ng-model="droppedFiles" class="drop-box drop-box-inner-expansion"
+                     ngf-drag-over-class="dragover" ngf-multiple="true"
+                     ngf-accept="vm.AllowedAttachments"
+                     ngf-pattern="vm.AllowedAttachments"
+                     ngf-max-size="500MB" style="overflow: hidden;">
+                    <label class="control-label">Drop your files here</label>
+                    <div class="row" ng-show="vm.uploadPercentage && vm.uploadPercentage !== 100">
+                        <br />
+                        <div class="col-sm-4 text-center col-md-offset-4">
+                            <uib-progressbar class="progress-striped active" value="vm.uploadPercentage" type="success">Uploaded {{vm.uploadPercentage}}%</uib-progressbar>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="vm.uploadPercentage == 100">
+                        <div class="alert alert-success col-sm-4 text-center col-md-offset-4" role="alert">
+                            <strong>Files(s) uploaded successfully</strong>
+                        </div>
+                    </div>
+
+                    <div id="gridattachments" kendo-grid="vm.gridAttachments" k-options="vm.gridOptions"></div>
+                </div>
+                <div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<style>
+    form.k-filter-menu.k-popup.k-group.k-reset.k-state-border-up {
+        font-family: 'Source Sans Pro Regular', sans-serif !important;
+    }
+
+    .k-grid-header {
+        border-bottom: 1px solid #000 !important;
+        border-top: 1px solid #c5c5c5 !important;
+    }
+</style>

@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPay.API", "ePay.API\EPay.API.csproj", "{B1F68D18-8B51-4831-B7AB-CB51894B4895}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPay.BusinessLayer", "ePay.BusinessLayer\EPay.BusinessLayer.csproj", "{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPay.Common", "ePay.Common\EPay.Common.csproj", "{601E1D6D-3ED6-49A8-9465-D617CDFB7C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPay.DAL", "ePay.DAL\EPay.DAL.csproj", "{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EPay.Web", "ePay.Web\EPay.Web.csproj", "{7E4A71DE-63EA-4399-B9CF-BF6DAB3BFE28}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EPay.Angular", "EPay.Angular", "{FEFADA63-EE9B-49BF-BEF6-73B3CBBACDC1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50746"
+		Debug.AspNetCompiler.PhysicalPath = "EPay.Angular\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50746\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50746"
+		Release.AspNetCompiler.PhysicalPath = "EPay.Angular\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50746\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50746"
+		SlnRelativePath = "EPay.Angular\"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1F68D18-8B51-4831-B7AB-CB51894B4895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F68D18-8B51-4831-B7AB-CB51894B4895}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F68D18-8B51-4831-B7AB-CB51894B4895}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F68D18-8B51-4831-B7AB-CB51894B4895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EEBC2D3-F22A-4549-88DD-8A7676AF02FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{601E1D6D-3ED6-49A8-9465-D617CDFB7C84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{601E1D6D-3ED6-49A8-9465-D617CDFB7C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{601E1D6D-3ED6-49A8-9465-D617CDFB7C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{601E1D6D-3ED6-49A8-9465-D617CDFB7C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76B78EAE-5B25-4A3B-89C8-9561EDA418E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E4A71DE-63EA-4399-B9CF-BF6DAB3BFE28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E4A71DE-63EA-4399-B9CF-BF6DAB3BFE28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E4A71DE-63EA-4399-B9CF-BF6DAB3BFE28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E4A71DE-63EA-4399-B9CF-BF6DAB3BFE28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEFADA63-EE9B-49BF-BEF6-73B3CBBACDC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFADA63-EE9B-49BF-BEF6-73B3CBBACDC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEFADA63-EE9B-49BF-BEF6-73B3CBBACDC1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEFADA63-EE9B-49BF-BEF6-73B3CBBACDC1}.Release|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F850B55B-EE87-41F9-B96C-4DDCC82667E0}
+	EndGlobalSection
+EndGlobal

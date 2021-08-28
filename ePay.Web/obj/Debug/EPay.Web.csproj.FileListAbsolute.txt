@@ -1,0 +1,350 @@
+D:\Projects\ePay\ePay.Web\obj\Debug\EPay.Web.csprojResolveAssemblyReference.cache
+D:\Projects\ePay\ePay.Web\bin\Hylan.Web.dll.config
+D:\Projects\ePay\ePay.Web\bin\Hylan.Web.dll
+D:\Projects\ePay\ePay.Web\bin\Hylan.Web.pdb
+D:\Projects\ePay\ePay.Web\bin\Antlr3.Runtime.dll
+D:\Projects\ePay\ePay.Web\bin\EPay.BusinessLayer.dll
+D:\Projects\ePay\ePay.Web\bin\EPay.Common.dll
+D:\Projects\ePay\ePay.Web\bin\EPay.DAL.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.Security.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\ePay\ePay.Web\bin\Newtonsoft.Json.dll
+D:\Projects\ePay\ePay.Web\bin\Owin.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.Helpers.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.Mvc.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.Optimization.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.Razor.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.dll
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.Razor.dll
+D:\Projects\ePay\ePay.Web\bin\WebGrease.dll
+D:\Projects\ePay\ePay.Web\bin\EPPlus.dll
+D:\Projects\ePay\ePay.Web\bin\NPOI.OOXML.dll
+D:\Projects\ePay\ePay.Web\bin\NPOI.dll
+D:\Projects\ePay\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+D:\Projects\ePay\ePay.Web\bin\NPOI.OpenXmlFormats.dll
+D:\Projects\ePay\ePay.Web\bin\NPOI.OpenXml4Net.dll
+D:\Projects\ePay\ePay.Web\bin\ICSharpCode.SharpZipLib.dll
+D:\Projects\ePay\ePay.Web\bin\EPay.BusinessLayer.pdb
+D:\Projects\ePay\ePay.Web\bin\EPay.Common.pdb
+D:\Projects\ePay\ePay.Web\bin\EPay.DAL.pdb
+D:\Projects\ePay\ePay.Web\bin\Antlr3.Runtime.pdb
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Projects\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.xml
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Projects\ePay\ePay.Web\bin\Microsoft.Owin.Security.xml
+D:\Projects\ePay\ePay.Web\bin\Newtonsoft.Json.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.Helpers.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.Mvc.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.Optimization.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.Razor.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Projects\ePay\ePay.Web\bin\System.Web.WebPages.Razor.xml
+D:\Projects\ePay\ePay.Web\bin\EPPlus.xml
+D:\Projects\ePay\ePay.Web\obj\Debug\Hylan.Web.dll
+D:\Projects\ePay\ePay.Web\obj\Debug\Hylan.Web.pdb
+E:\saqib\ePay\ePay.Web\bin\Hylan.Web.dll.config
+E:\saqib\ePay\ePay.Web\bin\Hylan.Web.dll
+E:\saqib\ePay\ePay.Web\bin\Hylan.Web.pdb
+E:\saqib\ePay\ePay.Web\bin\Antlr3.Runtime.dll
+E:\saqib\ePay\ePay.Web\bin\EPay.BusinessLayer.dll
+E:\saqib\ePay\ePay.Web\bin\EPay.Common.dll
+E:\saqib\ePay\ePay.Web\bin\EPay.DAL.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.Security.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+E:\saqib\ePay\ePay.Web\bin\Newtonsoft.Json.dll
+E:\saqib\ePay\ePay.Web\bin\Owin.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.Helpers.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.Mvc.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.Optimization.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.Razor.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.dll
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.Razor.dll
+E:\saqib\ePay\ePay.Web\bin\WebGrease.dll
+E:\saqib\ePay\ePay.Web\bin\EPPlus.dll
+E:\saqib\ePay\ePay.Web\bin\NPOI.OOXML.dll
+E:\saqib\ePay\ePay.Web\bin\NPOI.dll
+E:\saqib\ePay\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+E:\saqib\ePay\ePay.Web\bin\NPOI.OpenXmlFormats.dll
+E:\saqib\ePay\ePay.Web\bin\NPOI.OpenXml4Net.dll
+E:\saqib\ePay\ePay.Web\bin\ICSharpCode.SharpZipLib.dll
+E:\saqib\ePay\ePay.Web\bin\EPay.BusinessLayer.pdb
+E:\saqib\ePay\ePay.Web\bin\EPay.Common.pdb
+E:\saqib\ePay\ePay.Web\bin\EPay.DAL.pdb
+E:\saqib\ePay\ePay.Web\bin\Antlr3.Runtime.pdb
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\saqib\ePay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.xml
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\saqib\ePay\ePay.Web\bin\Microsoft.Owin.Security.xml
+E:\saqib\ePay\ePay.Web\bin\Newtonsoft.Json.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.Helpers.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.Mvc.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.Optimization.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.Razor.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+E:\saqib\ePay\ePay.Web\bin\System.Web.WebPages.Razor.xml
+E:\saqib\ePay\ePay.Web\bin\EPPlus.xml
+E:\saqib\ePay\ePay.Web\obj\Debug\EPay.Web.csprojAssemblyReference.cache
+E:\saqib\ePay\ePay.Web\obj\Debug\EPay.Web.csproj.CoreCompileInputs.cache
+E:\saqib\ePay\ePay.Web\obj\Debug\EPay.Web.csproj.CopyComplete
+E:\saqib\ePay\ePay.Web\obj\Debug\Hylan.Web.dll
+E:\saqib\ePay\ePay.Web\obj\Debug\Hylan.Web.pdb
+D:\Angular project\Epay\ePay.Web\bin\Hylan.Web.dll.config
+D:\Angular project\Epay\ePay.Web\bin\Hylan.Web.dll
+D:\Angular project\Epay\ePay.Web\bin\Hylan.Web.pdb
+D:\Angular project\Epay\ePay.Web\bin\Antlr3.Runtime.dll
+D:\Angular project\Epay\ePay.Web\bin\EPay.BusinessLayer.dll
+D:\Angular project\Epay\ePay.Web\bin\EPay.Common.dll
+D:\Angular project\Epay\ePay.Web\bin\EPay.DAL.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.Security.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\Angular project\Epay\ePay.Web\bin\Newtonsoft.Json.dll
+D:\Angular project\Epay\ePay.Web\bin\Owin.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Helpers.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Mvc.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Optimization.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Razor.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.dll
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.Razor.dll
+D:\Angular project\Epay\ePay.Web\bin\WebGrease.dll
+D:\Angular project\Epay\ePay.Web\bin\EPPlus.dll
+D:\Angular project\Epay\ePay.Web\bin\NPOI.OOXML.dll
+D:\Angular project\Epay\ePay.Web\bin\NPOI.dll
+D:\Angular project\Epay\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+D:\Angular project\Epay\ePay.Web\bin\EPay.BusinessLayer.pdb
+D:\Angular project\Epay\ePay.Web\bin\EPay.Common.pdb
+D:\Angular project\Epay\ePay.Web\bin\EPay.DAL.pdb
+D:\Angular project\Epay\ePay.Web\bin\Antlr3.Runtime.pdb
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.xml
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Angular project\Epay\ePay.Web\bin\Microsoft.Owin.Security.xml
+D:\Angular project\Epay\ePay.Web\bin\Newtonsoft.Json.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Helpers.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Mvc.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Optimization.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.Razor.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+D:\Angular project\Epay\ePay.Web\bin\System.Web.WebPages.Razor.xml
+D:\Angular project\Epay\ePay.Web\bin\EPPlus.xml
+D:\Angular project\Epay\ePay.Web\obj\Debug\EPay.Web.csprojResolveAssemblyReference.cache
+D:\Angular project\Epay\ePay.Web\obj\Debug\Hylan.Web.dll
+D:\Angular project\Epay\ePay.Web\obj\Debug\Hylan.Web.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Hylan.Web.dll.config
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Hylan.Web.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Hylan.Web.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Antlr3.Runtime.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.Security.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Owin.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Helpers.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Mvc.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Optimization.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Razor.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.Razor.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\WebGrease.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPPlus.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\NPOI.OOXML.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\NPOI.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Antlr3.Runtime.pdb
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Microsoft.Owin.Security.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Helpers.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Mvc.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Optimization.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.Razor.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\System.Web.WebPages.Razor.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\bin\EPPlus.xml
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\obj\Debug\EPay.Web.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\obj\Debug\Hylan.Web.dll
+E:\Projects\Angular\EPay Api\ePay1\ePay.Web\obj\Debug\Hylan.Web.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Hylan.Web.dll.config
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Hylan.Web.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Hylan.Web.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Antlr3.Runtime.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.BusinessLayer.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.DAL.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.Security.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Newtonsoft.Json.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Owin.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Helpers.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Mvc.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Optimization.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Razor.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.Razor.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\WebGrease.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPPlus.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\NPOI.OOXML.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\NPOI.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.BusinessLayer.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.Common.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPay.DAL.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Antlr3.Runtime.pdb
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Microsoft.Owin.Security.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\Newtonsoft.Json.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Helpers.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Mvc.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Optimization.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.Razor.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\System.Web.WebPages.Razor.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\bin\EPPlus.xml
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\obj\Debug\EPay.Web.csprojResolveAssemblyReference.cache
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\obj\Debug\Hylan.Web.dll
+E:\Projects\Angular\EPay Api\EPayApi\ePay.Web\obj\Debug\Hylan.Web.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Hylan.Web.dll.config
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Hylan.Web.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Hylan.Web.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Antlr3.Runtime.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.BusinessLayer.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.DAL.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.Security.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.EnterpriseLibrary.Logging.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Practices.ObjectBuilder2.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Web.Infrastructure.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Newtonsoft.Json.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Owin.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Helpers.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Mvc.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Optimization.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Razor.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.Deployment.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.Razor.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\WebGrease.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPPlus.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\NPOI.OOXML.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\NPOI.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\MigraDoc.DocumentObjectModel.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.BusinessLayer.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.Common.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPay.DAL.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Antlr3.Runtime.pdb
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.Client.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Microsoft.Owin.Security.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\Newtonsoft.Json.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Helpers.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Mvc.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Optimization.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.Razor.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.Deployment.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\System.Web.WebPages.Razor.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\bin\EPPlus.xml
+E:\Projects\TSS angular\TSS_Api\ePay.Web\obj\Debug\EPay.Web.csprojResolveAssemblyReference.cache
+E:\Projects\TSS angular\TSS_Api\ePay.Web\obj\Debug\Hylan.Web.dll
+E:\Projects\TSS angular\TSS_Api\ePay.Web\obj\Debug\Hylan.Web.pdb
